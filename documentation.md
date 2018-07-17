@@ -1,0 +1,8 @@
+- ## Introduction
+    - [About Boost](/docs/{{version}}/about-boost)
+    - [Release Notes](/docs/{{version}}/releases)
+- ## Getting Started
+    - [Installation](/docs/{{version}}/installat    ion)
+    - [Directory Structure](/docs/{{version}}/structure)
+    - [Configuration](/docs/{{version}}/configuration)
+    - [Hometown](/docs/{{version}}/hometown)
