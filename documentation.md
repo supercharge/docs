@@ -2,7 +2,19 @@
     - [About Boost](/docs/{{version}}/about-boost)
     - [Release Notes](/docs/{{version}}/releases)
 - ## Getting Started
-    - [Installation](/docs/{{version}}/installat    ion)
+    - [Installation](/docs/{{version}}/installation)
     - [Directory Structure](/docs/{{version}}/structure)
-    - [Configuration](/docs/{{version}}/configuration)
+    - [Configuration and Env](/docs/{{version}}/configuration)
     - [Hometown](/docs/{{version}}/hometown)
+- ## Basics
+    - [Routing](/docs/{{version}}/handlebars)
+    - [Session](/docs/{{version}}/handlebars-helpers)
+    - [CSRF Protection](/docs/{{version}}/handlebars-helpers)
+- ## Frontend
+    - [Handlebars](/docs/{{version}}/handlebars)
+    - [Helpers](/docs/{{version}}/handlebars-helpers)
+- ## Utilities
+    - [Mailer](/docs/{{version}}/pagination)
+    - [Hashing](/docs/{{version}}/pagination)
+    - [Pagination](/docs/{{version}}/pagination)
+    - [Logger](/docs/{{version}}/pagination)
