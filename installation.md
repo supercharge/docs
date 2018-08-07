@@ -3,7 +3,7 @@ Installation
 
 
 ### Example Code Block
-Text
+What do you think about the code block theme?
 
 ```js
 class Documentation {
@@ -27,4 +27,4 @@ class Documentation {
 }
 ```
 
-More text.
+Do you like it?
