@@ -14,6 +14,7 @@ module.exports = {
       Installation: 'installation',
       'Directory Structure': 'directory-structure',
       Configuration: 'configuration',
+      Development: 'development',
       Globals: 'globals',
       Hometown: 'hometown'
     }
@@ -50,7 +51,15 @@ module.exports = {
       'Mailer and Mailable': 'mailer-and-mailable',
       Hashinator: 'hashinator',
       Encryptor: 'encryptor',
-      Logger: 'logger'
+      Logger: 'logger',
+      Request: 'request-utilities',
+      Response: 'response-utilities'
+    }
+  },
+  'In the Universe': {
+    slug: 'in-the-universe',
+    sections: {
+      'Rate Limiting': 'rate-limiting'
     }
   }
 }
