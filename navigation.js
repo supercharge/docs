@@ -12,11 +12,11 @@ module.exports = {
     slug: 'getting-started',
     sections: {
       Installation: 'installation',
-      'Directory Structure': 'directory-structure',
       Configuration: 'configuration',
-      Development: 'development',
+      'Directory Structure': 'directory-structure',
       Globals: 'globals',
-      Hometown: 'hometown'
+      Development: 'development',
+      Deployment: 'deployment'
     }
   },
   Basics: {
@@ -59,6 +59,7 @@ module.exports = {
   'In the Universe': {
     slug: 'in-the-universe',
     sections: {
+      Hometown: 'hometown',
       'Rate Limiting': 'rate-limiting'
     }
   }
