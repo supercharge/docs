@@ -33,6 +33,7 @@ module.exports = {
     slug: 'database',
     sections: {
       'MongoDB and Mongoose': 'mongodb-and-mongoose',
+      Connectors: 'database-connectors',
       Paginator: 'paginator'
     }
   },
