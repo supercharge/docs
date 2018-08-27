@@ -47,11 +47,12 @@ module.exports = {
   Utilities: {
     slug: 'utilities',
     sections: {
+      Events: 'events',
+      Logger: 'logger',
+      Mails: 'mails',
       Filesystem: 'filesystem',
-      'Mailer and Mailable': 'mailer-and-mailable',
       Hashinator: 'hashinator',
       Encryptor: 'encryptor',
-      Logger: 'logger',
       Request: 'request-utilities',
       Response: 'response-utilities'
     }
