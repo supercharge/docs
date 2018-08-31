@@ -32,7 +32,7 @@ module.exports = {
   Database: {
     slug: 'database',
     sections: {
-      'MongoDB and Mongoose': 'mongodb-and-mongoose',
+      'MongoDB with Mongoose': 'mongodb-with-mongoose',
       Connectors: 'database-connectors',
       Paginator: 'paginator'
     }
@@ -40,9 +40,9 @@ module.exports = {
   Frontend: {
     slug: 'frontend',
     sections: {
+      Assets: 'frontend-assets',
       Handlebars: 'handlebars',
-      'Built-in Helpers': 'handlebars-helpers',
-      Assets: 'frontend-assets'
+      'Built-in Helpers': 'handlebars-helpers'
     }
   },
   Utilities: {
