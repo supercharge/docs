@@ -32,7 +32,7 @@ module.exports = {
   Database: {
     slug: 'database',
     sections: {
-      'MongoDB with Mongoose': 'mongodb-with-mongoose',
+      'MongoDB Preset': 'mongodb-preset',
       Connectors: 'database-connectors',
       Paginator: 'paginator'
     }
