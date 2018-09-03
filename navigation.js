@@ -12,6 +12,7 @@ module.exports = {
     slug: 'getting-started',
     sections: {
       Installation: 'installation',
+      'First Steps': 'first-steps',
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
       Globals: 'globals',
