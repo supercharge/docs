@@ -59,6 +59,14 @@ module.exports = {
       Response: 'response-utilities'
     }
   },
+  Testing: {
+    slug: 'testing',
+    sections: {
+      'Getting Started': 'testing',
+      'HTTP Tests': 'http-tests',
+      'Unit Tests': 'unit-tests'
+    }
+  },
   'In the Universe': {
     slug: 'in-the-universe',
     sections: {
