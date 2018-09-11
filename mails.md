@@ -36,3 +36,8 @@ More text.
 await Mailer.send(new WelcomeEmail(user))
 ```
 
+## Preview Mails
+Mail Templates von `.hbs` auf `.html` umbenennen. So kann man sie im Browser öffnen.
+
+## Add Images to Mails
+Internetpfad benutzen!
