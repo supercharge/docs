@@ -28,3 +28,16 @@ class Documentation {
 ```
 
 Do you like it?
+
+```info
+This is my tasty info block that is quite long. **Goodness, here's a lot of text**. But sometimes it's important to run `npm install` first. From here, it might work for you.
+In case everything goes south, check out the [config docs](#) over here.
+```
+
+```warning
+Short.
+```
+
+```success
+End the day with a success.
+```
