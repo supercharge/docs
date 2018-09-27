@@ -1,5 +1,6 @@
 # HTTP Tests
-Tba.
+Boost provides a convenient testing utility that makes it
+
 
 ## Introduction
 Text
@@ -20,6 +21,12 @@ class LoginTest extends BaseTest {
 ```
 
 Text
+
+```info
+The CSRF middleware is automatically disabled when running HTTP tests through Boost’s base test utility.
+```
+
+If you’re composing your tests without the `base-test` utility, make sure to exclude the CSRF middleware.
 
 
 ## Inject Requests
