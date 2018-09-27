@@ -64,7 +64,9 @@ module.exports = {
     sections: {
       'Getting Started': 'testing',
       'HTTP Tests': 'http-tests',
-      'Unit Tests': 'unit-tests'
+      'Unit Tests': 'unit-tests',
+      Fakes: 'testing-fakes',
+      Database: 'database-testing'
     }
   },
   'In the Universe': {
