@@ -78,9 +78,7 @@ Each test method has access to the test context via the `t` parameter. The conte
 
 
 ### Assertions
-Text
-
-[Assertions](https://github.com/avajs/ava#assertions)
+Each test method receives the `t` parameter which makes [assertions](https://github.com/avajs/ava#assertions) directly available.
 
 ```js
 const BaseTest = util('base-test')
@@ -96,11 +94,32 @@ class Assertions extends BaseTest {
 }
 ```
 
-Text
+Here’s a list of available assertions:
+
+- `t.pass()`: passing assertion
+- `t.fail()`: failing assertion
+- `t.truthy(value)`: assert that `value` is truthy
+- `t.falsy(value)`: assert that `value` is falsy
+- `t.true(value)`: assert that `value` is `true`
+- `t.false(value)`: assert that `value` is `false`
+- `t.is(value, expected)`: assert that `value` is the same as `expected`
+- `t.not(value, expected)`: assert that `value` is not the same as `expected`
+- `t.deepEqual(value, expected)`: assert that `value` is deeply equal to `expected`
+- `t.notDeepEqual(value, expected)`: assert that `value` is not deeply equal to `expected`
+- `t.throws(fn, [expected])`: assert that an error is thrown
+- `t.throwsAsync(thrower, [expected])`: assert that an error is thrown
+- `t.notThrows(fn)`: assert that no error is thrown.
+- `t.notThrowsAsync(nonThrower)`: assert that no error is thrown. Like the `.throwsAsync()` assertion, you must wait for the assertion to complete
+- `t.regex(contents, regex)`: assert that `contents` matches `regex`
+- `t.notRegex(contents, regex)`: assert that `contents` does not match `regex`
+- `t.snapshot(expected)`:
+- `t.snapshot(expected, [options])`:
+
+Each assertion accepts (an optional) `message` as the last parameter. The message is a nice way if you need to print an additional message for an assertion. Use it like this: `t.pass('Successful assertion.')`, `t.is(1, 1, 'Yep, 1 matches 1.')`, etc.
 
 
 ### Run Specific Tests
-Text
+If you have a large test class where you only want to run a subset of all test cases, you can prefix them with `only`. Prefixing test methods with `only` will run only these methods.
 
 ```js
 const BaseTest = util('base-test')
@@ -116,7 +135,7 @@ class Only extends BaseTest {
 }
 ```
 
-Text
+**Notice**: the “only” prefix is applicable in a single test file. Using `npm test` will run all your tests and pick only those in the individual files that are prefixed with `only`. If you want to run a single test, you should use the NPM command [`npm run test-single <testCase>`](/docs/master/testing#run-a-single-test).
 
 
 ### Skip Tests
