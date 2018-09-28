@@ -11,9 +11,9 @@ The default Boost application comes with a `test` directory. Put all your test f
 
 
 ## Environment
-Text
+Running tests in Boost will automatically set up a testing environment. Boost sets the `NODE_ENV=testing` environment variable and also initializes the [global helper functions](/docs/{{version}}/globals). All globals are available in your tests as they are during application development.
 
-`.env.testing`
+In the `testing` environment, Boost tries to load the configuration from an `.env.testing` file. The `.env.testing` file should be located in the root of your project. Notice that Boost won't load the `.env` file in the testing environment.
 
 
 ## Run Tests
@@ -23,7 +23,7 @@ To test your application run the following command from your terminal:
 npm test
 ```
 
-The `npm test` command is defined in the `package.json` file that is located in Boost’s root directory. If you don’t want to rely on the default testing setup using AVA, update the script accordingly.
+The `npm test` command is defined in the `package.json` file. This file is located in Boost’s root directory. If you want to use another Node.js test runner, go ahead and update the command to your needs.
 
 
 ### Run a Single Test
@@ -34,129 +34,3 @@ npm run test-single <testMethodName>
 ```
 
 The `<testMethodName>` represents the class method that you want to test. AVA compares the given parameter value against the registered tests and only runs the match.
-
-
-## Create Tests
-Text
-
-
-### Lifecycle Hooks
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class TestWithLifecycleHooks extends BaseTest {
-  async before (t) {}
-  async beforeEach (t) {}
-
-  async afterEach (t) {}
-  async after (t) {}
-
-  async alwaysAfter (t) {}
-}
-```
-
-Text
-
-
-### Assertions
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class Assertions extends BaseTest {
-  async assertions (t) {
-    t.is(1, 1)
-
-    // many more assertions
-
-    t.pass()
-  }
-}
-```
-
-Text
-
-
-### Run Tests Serially
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class Serial extends BaseTest {
-  async serialFirst (t) {
-    // runs first
-  }
-
-  async serialSecond (t) {
-    // runs second, after first finished
-  }
-}
-```
-
-Text
-
-
-### Run Specific Tests
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class Only extends BaseTest {
-  async onlyTest (t) {
-    // processed
-  }
-
-  async anotherTest (t) {
-    // not processed
-  }
-}
-```
-
-Text
-
-
-### Skip Tests
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class Skip extends BaseTest {
-  async skipTest (t) {
-    // skipped
-  }
-
-async doNotSkip (t) {
-    // not skipped
-  }
-}
-```
-
-Text
-
-
-### Tests as “Todo”
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class Todo extends BaseTest {
-  async todoTest (t) {
-    // marked as TODO
-  }
-}
-```
-
-Text
-
-
-## Debug Tests
-AVA runs tests in parallel using child processes. That’s why you need a workaround to attach a debugger to code in your tests.
-
-Please follow the [advice on debugging with AVA](https://github.com/avajs/ava#debugging) given in the readme. You’ll find tips for populare IDEs and editors, like WebStorm and Visual Studio Code.
