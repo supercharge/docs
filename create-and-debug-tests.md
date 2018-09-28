@@ -28,11 +28,11 @@ Export a new instance of the `TestCase` class so that Boost knows how to handle 
 ### Lifecycle Hooks
 Lifecycle hooks are a powerful way to run methods before or after test cases. The supported lifecycle methods in Boost are:
 
-- **`before`**: runs before all tests in the suite
-- **`beforeEach`**: runs before each test case
-- **`afterEach`**: runs after each test case
-- **`after`**: runs after all tests in the suite
-- **`alwaysAfter`**: runs after all tests in the suite, even if a test fails
+- `before`: runs before all tests in the suite
+- `beforeEach`: runs before each test case
+- `afterEach`: runs after each test case
+- `after`: runs after all tests in the suite
+- `alwaysAfter`: runs after all tests in the suite, even if a test fails
 
 Implement the lifecycle hoook as a method in your test class:
 
