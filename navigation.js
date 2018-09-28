@@ -63,6 +63,7 @@ module.exports = {
     slug: 'testing',
     sections: {
       'Getting Started': 'testing',
+      'Create & Debug Tests': 'create-and-debug-tests',
       'HTTP Tests': 'http-tests',
       'Unit Tests': 'unit-tests',
       Fakes: 'testing-fakes',
