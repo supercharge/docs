@@ -66,6 +66,7 @@ class ContextData extends BaseTest {
 
   async testMethod (t) {
     const user = t.context.user
+    t.pass()
   }
 
   async alwaysAfter (t) {
@@ -115,27 +116,31 @@ Here’s a list of available assertions:
 - `t.snapshot(expected)`:
 - `t.snapshot(expected, [options])`:
 
-Each assertion accepts (an optional) `message` as the last parameter. The message is a nice way if you need to print an additional message for an assertion. Use it like this: `t.pass('Successful assertion.')`, `t.is(1, 1, 'Yep, 1 matches 1.')`, etc.
+Each assertion accepts (an optional) `message` as the last parameter. The message is a nice way if you need to print an additional message for an assertion.
+
+Here are examples for custom messages: `t.pass('Successful assertion')` or `t.is(1, 1, 'Yep, 1 is 1')`.
 
 
 ### Run Specific Tests
-If you have a large test class where you only want to run a subset of all test cases, you can prefix them with `only`. Prefixing test methods with `only` will run only these methods.
+In large test class you might want to run only a subset of all test cases.
+
+Prefix test methods with **`only`** to run only these methods.
 
 ```js
 const BaseTest = util('base-test')
 
 class Only extends BaseTest {
   async onlyTest (t) {
-    // processed
+    // this runs
   }
 
   async anotherTest (t) {
-    // not processed
+    // this won’t
   }
 }
 ```
 
-**Notice**: the “only” prefix is applicable in a single test file. Using `npm test` will run all your tests and pick only those in the individual files that are prefixed with `only`. If you want to run a single test, you should use the NPM command [`npm run test-single <testCase>`](/docs/master/testing#run-a-single-test).
+**Notice**: the “only” prefix is applicable in a single test file. Using `npm test` will run all your test files which might cause a lot more tests to run than you want. If you want to run a single test, you should use the NPM command [`npm run test-single <testCase>`](/docs/master/testing#run-a-single-test).
 
 
 ### Skip Tests
