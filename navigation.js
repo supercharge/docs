@@ -73,7 +73,7 @@ module.exports = {
   'In the Universe': {
     slug: 'in-the-universe',
     sections: {
-      Hometown: 'hometown',
+      Hercules: 'hercules',
       'Rate Limiting': 'rate-limiting'
     }
   }
