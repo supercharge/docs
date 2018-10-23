@@ -34,3 +34,7 @@ npm run test-single <testMethodName>
 ```
 
 The `<testMethodName>` represents the class method that you want to test. AVA compares the given parameter value against the registered tests and only runs the match.
+
+
+## Ignored Files and Folders
+Boost will ignore the directories named `fixtures`, `helper` and `node_modules` when running tests. Boost also ignores all files if the file name starts with an underscore `_`. This convention lets you put helper files in the same directory as your test files.
