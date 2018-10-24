@@ -31,13 +31,16 @@ More text.
 
 
 ## Sending Mails
+Text
 
 ```js
 await Mailer.send(new WelcomeEmail(user))
 ```
 
+
 ## Preview Mails
-Mail Templates von `.hbs` auf `.html` umbenennen. So kann man sie im Browser öffnen.
+Rename template file endings from `.hbs` to `.html` and open them in the browser.
+
 
 ## Add Images to Mails
-Internetpfad benutzen!
+Use Internet links.

@@ -17,4 +17,4 @@ Text
 ## Rate Limiting
 Text
 
-Link zu Rate Limiting (Kategorie: In the Universe)
+Link Rate Limiting (Category: In the Universe)

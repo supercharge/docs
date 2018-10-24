@@ -1,7 +1,5 @@
 # Future Studio Hercules
 
-
-
 ## Introduction
 Web applications become powerful and require multiple dependencies. ercules makes it simple to have your tooling dependencies locally available. Hercules uses [Vagrant](https://www.vagrantup.com/) to gracefully provision virtual machine.
 
@@ -120,7 +118,7 @@ The configurations in this file are key-value pairs and Vagrant takes them into 
 Install the MongoDB community edition by updating your `hercules.yaml` file and set the configuration to:
 
 ```bash
-mongodb: true  
+mongodb: true
 ```
 
 Hercules will not set up any default database in MongoDB.
@@ -130,7 +128,7 @@ Hercules will not set up any default database in MongoDB.
 Install Elasticsearch by updating your `hercules.yaml` file and set the configuration to:
 
 ```bash
-elasticsearch: true  
+elasticsearch: true
 ```
 
 This will install the latest `6.x` version of Elasticsearch.
@@ -142,7 +140,7 @@ Hercules will not set up any default index in Elasticsearch.
 Install the CockroachDB core edition by updating your `hercules.yaml` file and set the configuration to:
 
 ```bash
-cockroachdb: true  
+cockroachdb: true
 ```
 
 Hercules will not set up any default database in CockroachDB.
@@ -152,7 +150,7 @@ Hercules will not set up any default database in CockroachDB.
 Install the RabbitMQ message broker by updating your `hercules.yaml` file and set the configuration to:
 
 ```bash
-rabbitmq: true  
+rabbitmq: true
 ```
 
 Hercules will not set up any default queue in RabbitMQ.
@@ -162,7 +160,7 @@ Hercules will not set up any default queue in RabbitMQ.
 Install RethinkDB by updating your `hercules.yaml` file and set the configuration to:
 
 ```bash
-rethinkdb: true  
+rethinkdb: true
 ```
 
 Hercules will not set up any default database in RethinkDB.
