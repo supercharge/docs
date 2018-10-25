@@ -1,11 +1,12 @@
 # Future Studio Hercules
 
 ## Introduction
-Web applications become powerful and require multiple dependencies. ercules makes it simple to have your tooling dependencies locally available. Hercules uses [Vagrant](https://www.vagrantup.com/) to gracefully provision virtual machine.
+Web applications become powerful and require multiple dependencies. ercules makes it simple to have your tooling dependencies locally available. Hercules uses [Vagrant](https://www.vagrantup.com/) to gracefully provision virtual machines.
 
 A typical application consists of multiple tools. For example, your project may need a database to store the application data and a second data store for caching. Another project may require another tool, and so on.
 
-Hercules gives your a same named CLI `hercules` to manage the Vagrant box. The box runs on any MacOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis, and many more services preinstalled.
+Hercules is a Vagrant box providing popular tooling for easy usage. The box runs on any MacOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis and many more services preinstalled.
+
 
 ### Included Software
 
@@ -25,8 +26,6 @@ Hercules gives your a same named CLI `hercules` to manage the Vagrant box. The b
 
 
 ## Installation
-You need to perform setup steps on your host machine before creating and starting your Hercules box.
-
 
 ### Preparation
 You must install [Vagrant](https://www.vagrantup.com/) and a virtualization provider, like [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Hyper-V](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v), or [Parallels](https://www.parallels.com/products/desktop/). You’ll find the installation instructions for all providers on the linked pages. The providers are supported on all commonly used operating systems.
@@ -35,7 +34,7 @@ We have good experience with the VirtualBox provider. It has first-class support
 
 
 ### Installing Hercules
-Hercules is available as an NPM package. Install the package globally on your system using Node’s package manager (NPM). Of course, you can use Yarn as well.
+The Hercules Vagrant box will be created through the `hercules` CLI. The CLI is available as an NPM package. Install the package globally on your system using Node’s package manager (NPM). Of course, you can use Yarn as well.
 
 ```bash
 npm i -g @futurestudio/hercules
