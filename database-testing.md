@@ -49,3 +49,10 @@ class FakeUserTest extends BaseTest {
 
 module.exports = new FakeUserTest()
 ```
+
+
+## Delete Fake Users
+
+- by instance
+- by Id
+- all
