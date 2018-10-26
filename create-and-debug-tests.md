@@ -22,7 +22,7 @@ module.exports = new TestCase()
 
 Each test method accepts the `t` parameter from AVA. Use `t` for assertions or to store context data for the test suite.
 
-Export a new instance of the `TestCase` class so that Boost knows how to handle it. Boost will pick up all test methods and pass them through to AVA for test runs. The following section shows you how to modify the handling of each test method using keywords.
+Export a new instance of the `TestCase` class so that Boost knows how to handle it. Boost will pick up all test methods and pass them down to AVA for test runs. The following section shows you how to modify the handling of each test method using keywords.
 
 
 ### Lifecycle Hooks
@@ -122,7 +122,7 @@ Here are examples for custom messages: `t.pass('Successful assertion')` or `t.is
 
 
 ### Run Specific Tests
-In large test class you might want to run only a subset of all test cases.
+In a large test class you might want to run only a subset of all test cases.
 
 Prefix test methods with **`only`** to run only these methods.
 
@@ -144,7 +144,9 @@ class Only extends BaseTest {
 
 
 ### Skip Tests
-Text
+Skipping tests allows you you to simply ignore these (failing) test cases.
+
+Prefix test methods with **`skip`** to skip these methods.
 
 ```js
 const BaseTest = util('base-test')
@@ -160,11 +162,15 @@ async doNotSkip (t) {
 }
 ```
 
-Text
+Skipped tests are reported in the test result.
+
+**Notice:** you cannot skip tests from inside the test method.
 
 
 ### Tests as “Todo”
-Text
+Planning out test cases (without writing them yet) can be easily with the “todo” modifier.
+
+Prefix test methods with **`todo`** to mark them as placeholders.
 
 ```js
 const BaseTest = util('base-test')
@@ -176,11 +182,13 @@ class Todo extends BaseTest {
 }
 ```
 
-Text
+Test cases marked “todo” are reported in the test result.
 
 
 ### Run Tests Serially
-Text
+Tests in Boost run concurrently by default. Test cases that can't run concurrently can be marked to run serially.
+
+Prefix test methods with **`serial`** to run them sequentially before the concurrent test cases run.
 
 ```js
 const BaseTest = util('base-test')
@@ -195,8 +203,6 @@ class Serial extends BaseTest {
   }
 }
 ```
-
-Text
 
 
 ## Debug Tests
