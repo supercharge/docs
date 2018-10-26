@@ -169,7 +169,7 @@ Hercules will not set up any default database in RethinkDB.
 ### Network Configuration
 The network configuration in the `hercules.yaml` is reduced to a minimum. You can only change the IP address that will be assigned to your Hercules box. The default IP address is
 
-```yaml
+```js
 ip: "192.168.33.10"
 ```
 
