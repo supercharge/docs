@@ -5,7 +5,7 @@ Web applications become powerful and require multiple dependencies. ercules make
 
 A typical application consists of multiple tools. For example, your project may need a database to store the application data and a second data store for caching. Another project may require another tool, and so on.
 
-Hercules is a Vagrant box providing popular tooling for easy usage. The box runs on any MacOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis and many more services preinstalled.
+Hercules is a Vagrant box providing popular tooling for easy usage. The box runs on any MacOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis, and many more services preinstalled.
 
 
 ### Included Software
@@ -40,7 +40,7 @@ The Hercules Vagrant box will be created through the `hercules` CLI. The CLI is 
 npm i -g @futurestudio/hercules
 ```
 
-As soon as the installation finished, the `hercules` CLI command is available on your machine.
+As soon as the installation has finished, the `hercules` CLI command is available on your machine.
 
 This CLI is a wrapper around Vagrant and handles the interaction with your Hercules box. Run the `hercules` command in your terminal to receive an overview of supported commands:
 
@@ -116,7 +116,7 @@ The configurations in this file are key-value pairs and Vagrant takes them into 
 ### Install MongoDB
 Install the MongoDB community edition by updating your `hercules.yaml` file and set the configuration to:
 
-```bash
+```yaml
 mongodb: true
 ```
 
@@ -126,7 +126,7 @@ Hercules will not set up any default database in MongoDB.
 ### Install Elasticsearch
 Install Elasticsearch by updating your `hercules.yaml` file and set the configuration to:
 
-```bash
+```yaml
 elasticsearch: true
 ```
 
@@ -138,7 +138,7 @@ Hercules will not set up any default index in Elasticsearch.
 ### Install CockroachDB
 Install the CockroachDB core edition by updating your `hercules.yaml` file and set the configuration to:
 
-```bash
+```yaml
 cockroachdb: true
 ```
 
@@ -148,7 +148,7 @@ Hercules will not set up any default database in CockroachDB.
 ### Install RabbitMQ
 Install the RabbitMQ message broker by updating your `hercules.yaml` file and set the configuration to:
 
-```bash
+```yaml
 rabbitmq: true
 ```
 
@@ -158,7 +158,7 @@ Hercules will not set up any default queue in RabbitMQ.
 ### Install RethinkDB
 Install RethinkDB by updating your `hercules.yaml` file and set the configuration to:
 
-```bash
+```yaml
 rethinkdb: true
 ```
 
@@ -169,8 +169,8 @@ Hercules will not set up any default database in RethinkDB.
 ### Network Configuration
 The network configuration in the `hercules.yaml` is reduced to a minimum. You can only change the IP address that will be assigned to your Hercules box. The default IP address is
 
-```bash
-192.168.33.10
+```yaml
+ip: "192.168.33.10"
 ```
 
 Configure your custom IP address by changing the `ip` property in the `hercules.yaml` file:
