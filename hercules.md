@@ -243,5 +243,22 @@ Hercules forwards the following ports from your host system to the box. The sour
   - 29015 → 29015 (cluster communication)
 
 ```warning
-Hercules uses and forwards the default service ports. This might cause port collisions when running the same services locally on your host machine. For example, if you want to start a Redis server on your host, you cannot use the default port `6379` locally, because it's blocked by Hercules.
+Hercules uses and forwards the default service ports. This might cause port collisions with a running Hercules box and starting the same services locally on your host machine. For example, if you want to start a Redis server on your host, you cannot use the default port `6379` locally, because it's already in use by an active Hercules box.
 ```
+
+
+## Connecting to Databases
+Hercules creates MySQL and PostgreSQL users with username `hercules` and password `secret`. The `hercules` user has full access rights on MySQL and PostgreSQL. Create your desired databases with this user, e.g. from command line or your favorite GUI.
+
+
+### PostgreSQL
+A default database `hercules` is created when provising the box. Point your application to the PostgreSQL `hercules` database on `127.0.0.1` with port `5432`.
+
+
+## Manage Hercules Through Vagrant
+The `hercules` CLI gives you a convenient wrapper to start, suspend, restart, and update your box. The provisioning process will install the selected services on your box.
+
+In case you want or need to manually check the configuration in your box, navigate a terminal to `~/hercules`. The "hercules" folder in your user's home directory contains the Hercules box and related `Vagrantfile`.
+
+From the hercules directory, you can run all Vagrant commands. To SSH into the Hercules box, execute `vagrant ssh` in your terminal. This connects you directly into the Hercules box. Customize the configuration to your needs. Remember that the Hercules box runs the Ubuntu operating system.
+
