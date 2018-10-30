@@ -34,7 +34,9 @@ Lifecycle hooks are a powerful way to run methods before or after test cases. Th
 - `after`: runs after all tests in the suite
 - `alwaysAfter`: runs after all tests in the suite, even if a test fails
 
-Implement the lifecycle hoook as a method in your test class:
+The order of the lifecycle hooks above matches the execution plan in AVA.
+
+Implement lifecycle hoooks as methods in your test class:
 
 ```js
 const BaseTest = util('base-test')
@@ -50,7 +52,7 @@ class TestWithLifecycleHooks extends BaseTest {
 }
 ```
 
-The order of the lifecycle hooks above matches the execution plan in AVA. The `alwaysAfter` hook will always run as soon as your tests complete. It will also run if your suite includes failing tests and makes it a good place for cleanup tasks.
+The `alwaysAfter` hook will always run as soon as your tests complete. It will also run if your suite includes failing tests and makes it a good place for cleanup tasks.
 
 
 ### Test Context
@@ -113,10 +115,10 @@ Here’s a list of available assertions:
 - `t.notThrowsAsync(nonThrower)`: assert that no error is thrown. Like the `.throwsAsync()` assertion, you must wait for the assertion to complete
 - `t.regex(contents, regex)`: assert that `contents` matches `regex`
 - `t.notRegex(contents, regex)`: assert that `contents` does not match `regex`
-- `t.snapshot(expected)`:
-- `t.snapshot(expected, [options])`:
+- `t.snapshot(expected)`: compare `expected` with a previously recorded snapshot
+- `t.snapshot(expected, [options])`: snapshots are stored and assigned to a single test which requires unique test names. You can pass in a custom identifier via the `options` object: { id: 'my-snapshot-id' }. Find our more details on [snapshot testing in the AVA docs](https://github.com/avajs/ava#snapshot-testing)
 
-Each assertion accepts (an optional) `message` as the last parameter. The message is a nice way if you need to print an additional message for an assertion.
+Each assertion accepts a `message` as the last parameter. The message is a nice way if you need to print an additional message for an assertion.
 
 Here are examples for custom messages: `t.pass('Successful assertion')` or `t.is(1, 1, 'Yep, 1 is 1')`.
 
@@ -203,6 +205,8 @@ class Serial extends BaseTest {
   }
 }
 ```
+
+Unfortunately, you can’t combine the `skip`, `todo` and `serial` modifier for a test. You can only use one of them. This method name is currently not available: `serialTodoOnlyTest`.
 
 
 ## Debug Tests

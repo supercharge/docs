@@ -3,11 +3,13 @@ Testing is an important aspect of every application. Manually testing new featur
 
 
 ## Introduction
-Boost includes a testing utility called `base-test`. This testing utility is an implementation on top of [AVA](https://github.com/avajs/ava). AVA is a test runner taking advantage of parallel test runs through Node.js’ async nature.
+Boost includes a testing utility called `base-test`. This testing utility is an implementation on top of [AVA](https://github.com/avajs/ava). AVA is a test runner taking advantage of parallel test runs through Node.js’s async nature.
 
 The `base-test` abstracts the common AVA callback-style testing to a class-based testing. The benefit of class-based testing in Boost is that you can built your tests with helpers provided by the framework.
 
-The default Boost application comes with a `test` directory. Put all your test files into this directory. The `test` directory contains the `integration` and `unit` folders. Unit tests focus on a small piece of your code, mostly on a single method. Integration tests in contrast test a multiple aspects of your code and how they interact with each other. Imagine an integration test like a request from an end user against your application.
+The default Boost application comes with a `test` directory. The `test` directory is the place where you put all your test files. Inside of `test`, you’ll find the `integration` and `unit` directories. Put your files in one of the two folders, depending on the type of test you write.
+
+Unit tests focus on a small piece of your code, mostly on a single method. Integration tests in contrast test a multiple aspects of your code and how they interact with each other. Imagine an integration test like a request from an end user against your application.
 
 
 ## Environment
@@ -33,7 +35,7 @@ Running `npm test` from your terminal will process all existing test files. Use 
 npm run test-single <testMethodName>
 ```
 
-The `<testMethodName>` represents the class method that you want to test. AVA compares the given parameter value against the registered tests and only runs the match.
+The `<testMethodName>` represents the class method that you want to test. AVA compares the given parameter value with the registered tests and only runs the matches.
 
 
 ## Ignored Files and Folders
