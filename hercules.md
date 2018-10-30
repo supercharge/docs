@@ -227,19 +227,19 @@ Hercules forwards the following ports from your host system to the box. The sour
 - **PostgreSQL:** 5432 → 5432
 - **Redis:** 6379 → 6379
 - **CockroachDB:**
-  - 26257 → 26257
   - 8090 → 8090 (admin console)
+  - 26257 → 26257
 - **Elasticsearch:**
   - 9200 → 9200
   - 9300 → 9300 (cluster communication)
 - **MongoDB:** 27017 → 27017
 - **RabbitMQ:**
   - 5672 → 5672
-  - 15672 → 15672 (HTTP/management)
   - 15671 → 15671 (HTTPS/management)
+  - 15672 → 15672 (HTTP/management)
 - **RethinkDB:**
-  - 28015 → 28015
   - 8080 → 8080 (admin console)
+  - 28015 → 28015
   - 29015 → 29015 (cluster communication)
 
 ```warning
