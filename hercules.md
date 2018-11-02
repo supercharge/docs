@@ -5,7 +5,7 @@ Web applications become powerful and require multiple dependencies. ercules make
 
 A typical application consists of multiple tools. For example, your project may need a database to store the application data and a second data store for caching. Another project may require another tool, and so on.
 
-Hercules is a Vagrant box providing popular tooling for easy usage. The box runs on any MacOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis, and many more services preinstalled.
+Hercules is a Vagrant box providing popular tooling for easy usage. The box runs on any macOS, Linux, and Windows machine and comes with Node.js, NPM, Yarn, MariaDB, PostgreSQL, Redis, and many more services preinstalled.
 
 
 ### Included Software
