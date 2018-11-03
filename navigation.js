@@ -49,6 +49,7 @@ module.exports = {
   Utilities: {
     slug: 'utilities',
     sections: {
+      'Craft CLI': 'craft-cli',
       Events: 'events',
       Logger: 'logger',
       Mails: 'mails',
