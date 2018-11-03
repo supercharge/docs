@@ -25,7 +25,7 @@ npm install
 
 Please wait until the dependency installation succeeds.
 
-Use Boost’s [`Craft` command line utility](/docs/{{version}}/craft-cli) to finish the setup:
+Use Boost’s [Craft command line utility](/docs/{{version}}/craft-cli) to finish the setup:
 
 ```bash
 node craft setup
