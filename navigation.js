@@ -66,7 +66,6 @@ module.exports = {
       'Getting Started': 'testing',
       'Create & Debug Tests': 'create-and-debug-tests',
       'HTTP Tests': 'http-tests',
-      'Unit Tests': 'unit-tests',
       Fakes: 'testing-fakes',
       Database: 'database-testing'
     }

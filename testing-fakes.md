@@ -1,5 +1,5 @@
 # Testing Fakes
-Complex setups should be as easy to test as possible. In unit tests, you may need to stub out methods from used library to ensure the correct behavior of individual methods. Here is where Boost's `base-test` comes in: it wraps [Sinon.js](https://sinonjs.org/) to easily access Sinon itself or create mocks, stubs, and spies.
+Complex setups should be as easy to test as possible. In unit tests, you may need to stub out methods from third-party libraries to mock behavior of individual methods. Boost's `base-test` wraps [Sinon.js](https://sinonjs.org/) to easily  create mocks, stubs, and spies or access Sinon itself.
 
 
 ## Sinon
@@ -7,7 +7,7 @@ Sinon is a powerful library and Boost's `base-test` does not expose all Sinon me
 
 
 ## Stubs
-Boost lets you quickly stub out methods via `this.stub(args)`. This method uses Sinon to create the stub and passes all arguments down to Sinon. It returns the stub instance.
+Boost lets you quickly stub out methods via `this.stub(args)`. This method uses Sinon to create the stub and passes all arguments down to Sinon. It returns the stub instance:
 
 ```js
 const BaseTest = util('base-test')
@@ -29,7 +29,7 @@ You need to manually restore created stubs. You can either call `stub.restore()`
 
 
 ## Mocks
-Create a mock in Boost's tests using `this.mock(args)`. It uses Sinon to create the mock and passes all arguments down to Sinon. It returns the mock instance.
+Create a mock in test methods using `this.mock(args)`. It uses Sinon to create the mock and passes all arguments down to Sinon. It returns the mock instance:
 
 ```js
 const BaseTest = util('base-test')
@@ -52,11 +52,11 @@ class MockTest extends BaseTest {
 module.exports = new MockTest()
 ```
 
-Make sure to manually restore created mocks. You can either call `mock.restore()` on the mock instance or `.restore()` on the mocked method.
+Make sure to manually restore mocks. You can either call `mock.restore()` on the mock instance or `.restore()` on the mocked method.
 
 
 ## Spies
-Create a spy in Boost's tests using `this.spy(args)`. It uses Sinon to create the spy and passes all arguments down to Sinon. It returns the spy instance.
+Create a spy in tests using `this.spy(args)`. It uses Sinon to create the spy and passes all arguments down to Sinon. It returns the spy instance:
 
 ```js
 const BaseTest = util('base-test')
@@ -75,11 +75,11 @@ class SpyTest extends BaseTest {
 module.exports = new SpyTest()
 ```
 
-Make sure to manually restore created spies. Either call `spy.restore()` on the spy instance or `.restore()` on the spied method.
+Make sure to manually restore spies. Either call `spy.restore()` on the spy instance or `.restore()` on the spied method.
 
 
 ## Random Key
-You most likely need random strings in your test cases, for example to generate random usernames. However, Boost provides you the `randomKey(length)` method that generates a random String.
+You most likely need random keys in your test cases, for example to generate random usernames. Boost provides you the `randomKey(length)` method that generates a random string value.
 
 ```js
 const BaseTest = util('base-test')

@@ -1,9 +1,10 @@
 # HTTP Tests
-Boost provides a convenient testing utility that makes it
 
 
 ## Introduction
-Text
+Boost’s `base-test` utility provides a convenient interface to inject HTTP requests to your application which return a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests.
+
+The following code snippet outlines a basic HTTP test:
 
 ```js
 const BaseTest = util('base-test')
@@ -12,15 +13,15 @@ class LoginTest extends BaseTest {
   /**
    * Basic HTTP test example.
    */
-  async showsLoginPage (t) {
-    const response = await this.get('/login')
+  async getUsers (t) {
+    const response = await this.get('/users')
 
     t.is(response.statusCode, 200)
   }
 }
 ```
 
-Text
+Calling `get(url)` injects a `GET` request to the given URL. The `response` is an actual response object that you can inspect and run assertions on.
 
 ```info
 The CSRF middleware is automatically disabled when running HTTP tests through Boost’s base test utility.
@@ -30,36 +31,84 @@ If you’re composing your tests without the `base-test` utility, make sure to e
 
 
 ## Inject Requests
-Text
+The HTTP testing example above shows an injected `GET` request.  Boost supports the `get`, `post`, `put`, `patch`, and `delete` methods to inject requests that match the HTTP verb.
+
+Calling either of the methods should be the last method in the request building process. Compose a request by using the fluent API to customize request headers, payload, cookies, server middleware and the authenticated user.
 
 
-### GET Requests
-Text
+## Inject Request Headers
+Customize a request’s headers using the `withHeader(name, value)` or the `withHeaders(object)` methods before injecting it to the application:
+
+```js
+const BaseTest = util('base-test')
+
+class BasicTest extends BaseTest {
+  async withHeader (t) {
+    const withHeader = await
+      this.header('x-api-token', 'token')
+          .get('/users')
+
+    t.is(withHeader.statusCode, 200)
+    
+    // or 
+    
+    const withHeaders = await 
+      this.headers({
+             'x-api-token': 'token',
+             'content-type': 'application/json'
+           })
+          .get('/users')
+
+    t.is(withHeaders.statusCode, 200)
+  }
+}
+```
 
 
-### POST Requests
-Text
+## Inject Request Payload
+Inject payload with a request using the `withPayload(object)` method:
+
+```js
+const BaseTest = util('base-test')
+
+class BasicTest extends BaseTest {
+  async withPayload (t) {
+    const response = await
+      this
+        .withPayload({
+          'username': 'marcus',
+          'password': 'secret'
+        })
+        .post('/signup')
+
+    t.is(response.statusCode, 201)
+  }
+}
+```
 
 
-### PUT Requests
-Text
+## Inject Request Cookies
+Inject payload with a request using the `withCookie(name, value)` method:
+
+```js
+const BaseTest = util('base-test')
+
+class BasicTest extends BaseTest {
+  async withCookie (t) {
+    const response = await
+      this.cookie('name', 'Marcus')
+          .get('/profile')
+
+    t.is(response.statusCode, 200)
+  }
+}
+```
+
+You must chain the `withCookie` method if you want to inject multiple cookies.
 
 
-### DELETE Requests
-Text
-
-
-### PATCH Requests
-Text
-
-
-
-## Customize the Request
-Text
-
-
-### Create a Session/Authenticate a User
-Text
+## Authenticated Requests
+Inject authenticated requests if you want to test routes that require authentication using the `actAs(user)` method:
 
 ```js
 const BaseTest = util('base-test')
@@ -68,85 +117,34 @@ class BasicTest extends BaseTest {
   async authenticateAsUser (t) {
     const user = await this.fakeUser()
 
-    const response = await this.actAs(user).get('/login')
+    const response = await 
+      this.actAs(user)
+          .get('/me')
 
     t.is(response.statusCode, 200)
   }
 }
 ```
 
-Text
+Acting as a user will bypass the route’s authentication strategies and assign the given `user` as the authenticated credentials.
 
 
-### Customize Headers
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class BasicTest extends BaseTest {
-  async withHeader (t) {
-    const response = await this.header('x-api-token', 'token').get('/login')
-
-    t.is(response.statusCode, 200)
-  }
-}
-```
-
-Text
-
-```js
-const BaseTest = util('base-test')
-
-class BasicTest extends BaseTest {
-  async withHeaders (t) {
-    const response = await this.headers({
-        'x-api-token': 'token',
-        'content-type': 'application/json'
-      })
-      .get('/login')
-
-    t.is(response.statusCode, 200)
-  }
-}
-```
-
-Text
-
-
-### Customize Cookies
-Text
-
-
-```js
-const BaseTest = util('base-test')
-
-class BasicTest extends BaseTest {
-  async withCookie (t) {
-    const response = await this.cookie('name', 'Marcus').get('/login')
-
-    t.is(response.statusCode, 200)
-  }
-}
-```
-
-Text
-
-
-### Customize Middleware
-Text
+## Customize Middleware
+Boost automatically disables the middleware that verifies CSRF token. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
 
 ```js
 const BaseTest = util('base-test')
 
 class BasicTest extends BaseTest {
   async withoutMiddleware (t) {
-    const response = await this.withoutMiddleware('verify-csrf-token').get('/login')
+    const response = await 
+      this.withoutMiddleware('verify-csrf-token')
+          .get('/profile')
 
     t.is(response.statusCode, 200)
   }
 }
 ```
 
-Text
+A middleware is identified by its file or folder name in `app/http/middleware`. For example, you may disable a “check for maintenance mode” middleware located in `app/http/middleware/maintenance` via `this.withoutMiddlware('maintenance')`.
 
