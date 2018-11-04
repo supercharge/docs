@@ -2,19 +2,19 @@
 
 
 ## Introduction
-Boost helps you to test your database-driven application. When using Boost's `base-test` utility, it will automatically call connect your default database connection. This ensures an active database connection throughout each test.
+Boost helps you to test your database-driven application. When using Boost's `base-test` utility, it will automatically connect to your default database connection. This ensures an active database connection throughout each test case.
 
-Boost closes open database connections after finishing all test cases in a test file. You don't need to care about database connection handling.
+Boost closes open database connections after finishing the test runs. You don’t need to care about database connection handling.
 
 
-## Reset the Database after Each Test
-Boost will not automatically clean up your database after tests. This is a manual task and left in your hands. You need manually delete test entries and [fake data](/docs/{{version}}/testing-fakes) created while running your tests.
+## Manually Reset the Database after Test Runs
+Boost will not automatically clean up your database after tests. This task and left in your hands. You need manually delete test entries and [fake data](/docs/{{version}}/testing-fakes) created while running your tests.
 
-The [testing lifecycle hooks](/docs/{{version}}/create-and-debug-tests#lifecycle-hooks) are well-suited methods to clean up your test data.
+The [testing lifecycle hooks](/docs/{{version}}/create-and-debug-tests#lifecycle-hooks) are well-suited to clean up your test data.
 
 
 ## Fake Users
-Some of your test cases may rely on existing database entries. Boost provides the `async fakeUser()` method to conveniently create a fake user. This user will be stored in the database. You may want to delete it after your test runs.
+Some of your test cases may rely on existing database entries. Boost provides the `async fakeUser()` method to conveniently create a fake user in the database. You may want to delete it after your test runs.
 
 ```js
 const BaseTest = util('base-test')
@@ -52,7 +52,44 @@ module.exports = new FakeUserTest()
 
 
 ## Delete Fake Users
+You need to manually delete test data from your database. Boost exposes convenience methods to remove fake users from the database.
 
-- by instance
-- by Id
-- all
+
+### Delete User
+Deleting a single user in Boost tests can be done using the  `deleteUser(user)` or ´deleteUserById(id)` methods:
+
+```js
+const BaseTest = util('base-test')
+
+class FakeUserTest extends BaseTest {
+  async deleteUser (t) {
+    const user = await this.fakeUser()
+    
+    await this.deleteUser(user)
+    // or
+    await this.deleteUserById(user.id)
+    
+    t.pass()
+  }
+}
+
+module.exports = new FakeUserTest()
+```
+
+
+### Delete All Users
+Instead of deleting users one by one, you can delete all entries at once using the `deleteUsers()` method:
+
+```js
+const BaseTest = util('base-test')
+
+class FakeUserTest extends BaseTest {
+  async deleteAllUsers (t) {
+    await this.deleteUsers()
+    
+    t.pass()
+  }
+}
+
+module.exports = new FakeUserTest()
+```
