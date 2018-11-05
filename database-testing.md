@@ -7,7 +7,7 @@ Boost helps you to test your database-driven application. When using Boost's `ba
 Boost closes open database connections after finishing the test runs. You don’t need to care about database connection handling.
 
 
-## Manually Reset the Database after Test Runs
+## Manually Reset the Database After Test Runs
 Boost will not automatically clean up your database after tests. This task and left in your hands. You need manually delete test entries and [fake data](/docs/{{version}}/testing-fakes) created while running your tests.
 
 The [testing lifecycle hooks](/docs/{{version}}/create-and-debug-tests#lifecycle-hooks) are well-suited to clean up your test data.
@@ -93,3 +93,4 @@ class FakeUserTest extends BaseTest {
 
 module.exports = new FakeUserTest()
 ```
+

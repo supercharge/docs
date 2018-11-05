@@ -1,13 +1,15 @@
 # Testing Fakes
-Complex setups should be as easy to test as possible. In unit tests, you may need to stub out methods from third-party libraries to mock behavior of individual methods. Boost's `base-test` wraps [Sinon.js](https://sinonjs.org/) to easily  create mocks, stubs, and spies or access Sinon itself.
+Complex setups should be as easy to test as possible. You may need to stub out methods to not actually execute them when running tests. "Mocking" certain aspects of your application isolates the functionality to test. For example, the user signup may send a welcome email once the registration finished. You may want to mock the mail sending process in tests to not send a mail. This helps you to only test the desired functionality and control side-effects. Sending mails is part of another test case.
+
+Boost’s `base-test` wraps [Sinon.js](https://sinonjs.org/) to easily  create mocks, stubs, and spies or access Sinon itself. Find more details about "mocks, stubs, and spies" in [Sinon’s  documentation](https://sinonjs.org/releases/latest/). If you don't know what these terms are, it’s a good reference to start with.  
 
 
 ## Sinon
-Sinon is a powerful library and Boost's `base-test` does not expose all Sinon methods. It exposes the Sinon instance in your test cases via `this.sinon()` to quickly configure testing helpers in your test methods.
+Sinon is a powerful library and Boost’s `base-test` does not expose all Sinon methods. It exposes the Sinon instance in your test cases via `this.sinon()` to conveniently configure testing helpers in your test methods.
 
 
 ## Stubs
-Boost lets you quickly stub out methods via `this.stub(args)`. This method uses Sinon to create the stub and passes all arguments down to Sinon. It returns the stub instance:
+Boost lets you stub out methods via `this.stub(args)`. This method uses Sinon to create the stub and passes all arguments down to Sinon. It returns the stub instance:
 
 ```js
 const BaseTest = util('base-test')
