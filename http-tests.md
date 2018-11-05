@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Boost’s `base-test` utility provides a convenient interface to inject HTTP requests to your application which return a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests.
+Boost’s `base-test` utility provides a convenient interface to inject HTTP requests to your application. Each injected request returns a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests in your application.
 
 The following code snippet outlines a basic HTTP test:
 
@@ -21,19 +21,19 @@ class LoginTest extends BaseTest {
 }
 ```
 
-Calling `get(url)` injects a `GET` request to the given URL. The `response` is an actual response object that you can inspect and run assertions on.
+Calling `get(<url>)` injects a `GET` request to the given URL. The `response` is an actual response object from the framework that you can inspect and run assertions on.
 
 ```info
 The CSRF middleware is automatically disabled when running HTTP tests through Boost’s base test utility.
-```
 
-If you’re composing your tests without the `base-test` utility, make sure to exclude the CSRF middleware.
+If you’re composing your tests without the `base-test` utility, make sure to exclude the CSRF middleware when injecting requests into the application.
+```
 
 
 ## Inject Requests
 The HTTP testing example above shows an injected `GET` request.  Boost supports the `get`, `post`, `put`, `patch`, and `delete` methods to inject requests that match the HTTP verb.
 
-Calling either of the methods should be the last method in the request building process. Compose a request by using the fluent API to customize request headers, payload, cookies, server middleware and the authenticated user.
+Calling either of the methods must be the last method in the request building process. Compose a request by using the fluent API to customize request headers, payload, cookies, server middleware, and the authenticated user.
 
 
 ## Inject Request Headers
@@ -66,7 +66,7 @@ class BasicTest extends BaseTest {
 
 
 ## Inject Request Payload
-Inject payload with a request using the `withPayload(object)` method:
+Inject a request payload along the testing request using the `withPayload(object)` method:
 
 ```js
 const BaseTest = util('base-test')
@@ -88,7 +88,7 @@ class BasicTest extends BaseTest {
 
 
 ## Inject Request Cookies
-Inject payload with a request using the `withCookie(name, value)` method:
+Inject cookies with a request using the `withCookie(name, value)` method:
 
 ```js
 const BaseTest = util('base-test')
@@ -104,7 +104,7 @@ class BasicTest extends BaseTest {
 }
 ```
 
-You must chain the `withCookie` method if you want to inject multiple cookies.
+Chain the `withCookie` method multiple times if you want to inject multiple cookies.
 
 
 ## Authenticated Requests
@@ -119,7 +119,7 @@ class BasicTest extends BaseTest {
 
     const response = await 
       this.actAs(user)
-          .get('/me')
+          .get('/me')  // this route requires authentication
 
     t.is(response.statusCode, 200)
   }
