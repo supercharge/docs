@@ -81,7 +81,7 @@ Make sure to manually restore spies. Either call `spy.restore()` on the spy inst
 
 
 ## Random Key
-You most likely need random keys in your test cases, for example to generate random usernames. Boost provides you the `randomKey(length)` method that generates a random string value.
+You most likely need random keys in your test cases, for example to generate random usernames. Boost provides the `randomKey(length)` method that generates a random string value.
 
 ```js
 const BaseTest = util('base-test')

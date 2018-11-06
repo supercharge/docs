@@ -8,7 +8,7 @@ Boost closes open database connections after finishing the test runs. You don’
 
 
 ## Manually Reset the Database After Test Runs
-Boost will not automatically clean up your database after tests. This task and left in your hands. You need manually delete test entries and [fake data](/docs/{{version}}/testing-fakes) created while running your tests.
+Boost will not automatically clean up your database after tests. You need manually delete test entries and [fake data](/docs/{{version}}/testing-fakes) created while running your tests.
 
 The [testing lifecycle hooks](/docs/{{version}}/create-and-debug-tests#lifecycle-hooks) are well-suited to clean up your test data.
 

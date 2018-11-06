@@ -2,7 +2,7 @@
 
 
 ## System Requirements
-The Boost framework has some system requires. Ensure that your system has `Node.js` and `NPM` installed and runs at least Node.js `>= 8.0.0`.
+The Boost framework has some system requirements. Ensure that your system has `Node.js` and `NPM` installed and runs at least Node.js `>= 8.0.0`.
 
 Version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
 
@@ -26,7 +26,7 @@ Use Boost’s [Craft command line utility](/docs/{{version}}/craft-cli) to finis
 node craft setup
 ```
 
-This setup command will create a `.env` file in your project root, generate and set an application key and optionally set the application name. The application name is an optional argument. Head over to the Craft docs for more details.
+This setup command will create an `.env` file in your project root, generate and set an application key and optionally set the application name. Head over to the Craft docs for more details.
 
 Have a look at the generated `.env` file and adjust the values to your needs.
 
