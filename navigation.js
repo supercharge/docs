@@ -4,7 +4,7 @@ module.exports = {
   Introduction: {
     slug: 'introduction',
     sections: {
-      'What is Boost?': 'what-is-boost',
+      'About Boost': 'about-boost',
       Contribute: 'contribute'
     }
   },
@@ -12,7 +12,6 @@ module.exports = {
     slug: 'getting-started',
     sections: {
       Installation: 'installation',
-      'First Steps': 'first-steps',
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
       Globals: 'globals',
