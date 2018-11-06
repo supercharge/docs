@@ -1,11 +1,11 @@
 # Contribute to Boost
-We highly value your contribution to Boost. Don’t hesitate to propose feature requests, send in bug reports or pull requests. Any collaboration is welcome in the project.
+We highly value your contribution to Boost. Don’t hesitate to send in feature requests, open bug reports or pull requests. Any collaboration is welcome in the project.
 
 
 ## Bug Reports
-As any software product, Boost will include bugs and we appreciate your help in finding them. If you want to file a bug report, please head over to the related repository and create a new issue. Please provide a clear title and description, steps to reproduce and as much details as possible.
+As any software product, Boost will include bugs and we appreciate your help in finding them. If you want to file a bug report, head over to the related repository and create a new issue. Please provide a clear title and description, steps to reproduce and as much details as possible.
 
-A way to report a bug is sending it in as a failing test that outlines the problem. Even better wouuld be a pull request that shows and fixes the bug.
+A way to report a bug is sending a failing test that outlines the problem. Even better: open a pull request that solves the the bug.
 
 Boost’s source code is managed and hosted on GitLab:
 
