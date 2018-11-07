@@ -104,7 +104,7 @@ class BasicTest extends BaseTest {
 }
 ```
 
-Chain the `withCookie` method multiple times if you want to inject multiple cookies.
+At this point, Boost does not offer you to pass in an object with key-value-pairs. Chain the `withCookie` method if you want to inject two or more cookies.
 
 
 ## Authenticated Requests
@@ -130,7 +130,7 @@ Acting as a user will bypass the route’s authentication strategies and assign 
 
 
 ## Customize Middleware
-Boost automatically disables the middleware that verifies CSRF token. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
+Boost automatically disables the middleware that verifies CSRF token during testing. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
 
 ```js
 const BaseTest = util('base-test')
