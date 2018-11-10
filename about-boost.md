@@ -7,7 +7,7 @@ The Boost framework builds on [hapi.js](https://hapijs.com/) to handle the reque
 
 Boost offers a lot more than just a routing layer and thin middleware layer, like Express does. Boost gives you full control over your application by managing the environment and configuration of your app. Out-of-the-box utilities like event dispatching, hashing, encryption, mailing, and logging are part of the framework. You can use them right away when working with Boost.
 
-A common Node.js web framework let’s you register routes and the related route handlers. As soon as you need to run actions besides the request lifecycle, it gets hard to manage. Imagine a route handler for user registration that should send a welcome email to the user that recently signed up. Boost let’s you easily move the mail handling to a background process (like an event listener) and not clutter your route handler with mail sending tasks.
+A common Node.js web framework let’s you register routes and the related route handlers. As soon as you need to run actions besides the request lifecycle, it becomes hard to manage. Imagine a route handler for user registration that should send a welcome email to the user that recently signed up. Boost let’s you easily move the mail handling to a background process (like an event listener) and not clutter your route handler with mail sending tasks.
 
 
 ## Stay in Touch

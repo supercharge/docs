@@ -3,7 +3,7 @@ We highly value your contribution to Boost. Don’t hesitate to send in feature 
 
 
 ## Bug Reports
-As any software product, Boost will include bugs and we appreciate your help in finding them. If you want to file a bug report, head over to the related repository and create a new issue. Please provide a clear title and description, steps to reproduce and as much details as possible.
+As any software product, Boost may comes with bugs and we appreciate your help in finding them. If you want to file a bug report, head over to the related repository and create a new issue. Please provide a clear title and description, steps to reproduce and as many details as possible.
 
 A way to report a bug is sending a failing test that outlines the problem. Even better: open a pull request that solves the the bug.
 
