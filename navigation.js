@@ -25,6 +25,7 @@ module.exports = {
       Routing: 'routing',
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
+      Authorization: 'authorization',
       'CSRF Protection': 'csrf-protection',
       Validations: 'validations'
     }
@@ -51,7 +52,7 @@ module.exports = {
       'Craft CLI': 'craft-cli',
       Events: 'events',
       Logger: 'logger',
-      Mails: 'mails',
+      Mailer: 'mailer',
       Filesystem: 'filesystem',
       Hashinator: 'hashinator',
       Encryptor: 'encryptor',

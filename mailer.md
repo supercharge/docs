@@ -1,4 +1,4 @@
-# Tba.
+# Mailer
 Tba.
 
 ## Creating Mailables

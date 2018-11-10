@@ -1,2 +1,2 @@
-# Tba.
+# Hashinator
 Tba.

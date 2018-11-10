@@ -1,2 +1,2 @@
-# Tba.
+# Globals
 Tba.

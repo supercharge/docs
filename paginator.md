@@ -1,2 +1,2 @@
-# Tba.
+# Paginator
 Tba.

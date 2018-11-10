@@ -1,4 +1,4 @@
-# Tba.
+# Frontend Assets
 Tba.
 
 ## CSS
@@ -11,3 +11,7 @@ Text
 
 ## Images
 Text
+
+
+## Compile Assets in a Build Pipeline
+Tba
