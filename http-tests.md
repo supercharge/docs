@@ -45,15 +45,15 @@ const BaseTest = util('base-test')
 class BasicTest extends BaseTest {
   async withHeader (t) {
     const withHeader = await
-      this.header('x-api-token', 'token')
+      this.withHeader('x-api-token', 'token')
           .get('/users')
 
     t.is(withHeader.statusCode, 200)
-    
-    // or 
-    
-    const withHeaders = await 
-      this.headers({
+
+    // or
+
+    const withHeaders = await
+      this.withHeaders({
              'x-api-token': 'token',
              'content-type': 'application/json'
            })
@@ -96,7 +96,7 @@ const BaseTest = util('base-test')
 class BasicTest extends BaseTest {
   async withCookie (t) {
     const response = await
-      this.cookie('name', 'Marcus')
+      this.withCookie('name', 'Marcus')
           .get('/profile')
 
     t.is(response.statusCode, 200)
@@ -117,7 +117,7 @@ class BasicTest extends BaseTest {
   async authenticateAsUser (t) {
     const user = await this.fakeUser()
 
-    const response = await 
+    const response = await
       this.actAs(user)
           .get('/me')  // this route requires authentication
 
@@ -137,7 +137,7 @@ const BaseTest = util('base-test')
 
 class BasicTest extends BaseTest {
   async withoutMiddleware (t) {
-    const response = await 
+    const response = await
       this.withoutMiddleware('verify-csrf-token')
           .get('/profile')
 
