@@ -9,7 +9,7 @@ A way to report a bug is sending a failing test that outlines the problem. Even 
 
 Boost’s source code is managed and hosted on GitLab:
 
-- [Boost Framework](https://gitlab.com/futurestudio-boost/boost)
+- [Boost Framework](https://gitlab.com/futurestudio-boost/boost) *(not public yet, planned release: January 2019)*
 - [Boost Docs](https://gitlab.com/futurestudio-boost/docs)
 
 
