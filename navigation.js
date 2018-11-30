@@ -74,7 +74,8 @@ module.exports = {
     slug: 'in-the-universe',
     sections: {
       Hercules: 'hercules',
-      'Rate Limiting': 'rate-limiting'
+      'Rate Limiting': 'rate-limiting',
+      'Geo Locating': 'geo-locating'
     }
   }
 }
