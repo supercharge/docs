@@ -1,3 +1,8 @@
+<!-- Review by ContentBot: OK -->
+
+<!-- https://trello.com/c/QXVifRXm/1020-boost-docs-request-utilities -->
+
+
 # Request Utilities
 
 
@@ -5,10 +10,6 @@
 Boost uses the [hapi web framework](https://hapijs.com) as the core for routing and request handling. Hapi comes with the handy feature of decorating the request object. Decorations allow you to add your own properties or functions on the `request` object.
 
 Boost’s request utilities are available for everyone on GitHub and NPM. It’s publicly available as open source and you can freely install it in your app: [`hapi-request-utilities`](https://github.com/fs-opensource/hapi-request-utilities). Enjoy!
-
-
-## Contribute
-Did we miss a helpful decoration? Please send in a [pull request](https://github.com/fs-opensource/hapi-request-utilities).
 
 
 ## Decorations
@@ -46,6 +47,14 @@ const noSecrets = request.except(['token', 'password', 'secret'])
 
 // alternative with single key
 const noToken = request.except('token')
+```
+
+
+#### `request.bearerToken()`
+Returns the bearer token from the `Authorization` request header. This method will strip the `Bearer ` prefix and only return the token value.
+
+```js
+const token = request.bearerToken()
 ```
 
 
@@ -111,3 +120,7 @@ Returns a boolean value indicating whether the selected cookie is present on the
 ```js
 const hasUserId = request.hasCookie('userId')
 ```
+
+
+## Contribute
+Did we miss a helpful decoration? Please send in a [pull request](https://github.com/fs-opensource/hapi-request-utilities).
