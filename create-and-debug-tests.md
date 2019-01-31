@@ -1,9 +1,9 @@
 # Create and Debug Tests
-Testing can be a complex system itself. Depending on your test case, you may need to set up data before running each test or the test suite. A setup step can be creating a test user. Another step may be the cleanup after test runs. This document shows you how to create useful tests in Boost.
+Testing can be a complex system itself. Depending on your test case, you may need to set up data before running each test or the test suite. A setup step can be creating a test user. Another step may be the cleanup after test runs. This document shows you how to create useful tests in Supercharge.
 
 
 ## Create Tests
-Boost comes with a `base-test` utility that is a class you can build on. The suggested way to create tests in Boost is to write a class that extends the `base-test`. A base test example looks like this:
+Supercharge comes with a `base-test` utility that is a class you can build on. The suggested way to create tests in Supercharge is to write a class that extends the `base-test`. A base test example looks like this:
 
 ```js
 const BaseTest = util('base-test')
@@ -22,11 +22,11 @@ module.exports = new TestCase()
 
 Each test method accepts the `t` parameter from AVA. Use `t` for assertions or to store context data for the test suite.
 
-Export a new instance of the `TestCase` class so that Boost knows how to handle it. Boost will pick up all test methods and pass them down to AVA for test runs. The following section shows you how to modify the handling of each test method using keywords.
+Export a new instance of the `TestCase` class so that Supercharge knows how to handle it. Supercharge will pick up all test methods and pass them down to AVA for test runs. The following section shows you how to modify the handling of each test method using keywords.
 
 
 ### Lifecycle Hooks
-Lifecycle hooks are a powerful way to run methods before or after test cases. The supported lifecycle methods in Boost are:
+Lifecycle hooks are a powerful way to run methods before or after test cases. The supported lifecycle methods in Supercharge are:
 
 - `before`: runs before all tests in the suite
 - `beforeEach`: runs before each test case
@@ -188,7 +188,7 @@ Test cases marked “todo” are reported in the test result.
 
 
 ### Run Tests Serially
-Tests in Boost run concurrently by default. Test cases that can't run concurrently can be marked to run serially.
+Tests in Supercharge run concurrently by default. Test cases that can't run concurrently can be marked to run serially.
 
 Prefix test methods with **`serial`** to run them sequentially before the concurrent test cases run.
 

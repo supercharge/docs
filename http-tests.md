@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Boost’s `base-test` utility provides a convenient interface to inject HTTP requests to your application. Each injected request returns a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests in your application.
+Supercharge’s `base-test` utility provides a convenient interface to inject HTTP requests to your application. Each injected request returns a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests in your application.
 
 The following code snippet outlines a basic HTTP test:
 
@@ -24,14 +24,14 @@ class LoginTest extends BaseTest {
 Calling `get(<url>)` injects a `GET` request to the given URL. The `response` is an actual response object from the framework that you can inspect and run assertions on.
 
 ```info
-The CSRF middleware is automatically disabled when running HTTP tests through Boost’s base test utility.
+The CSRF middleware is automatically disabled when running HTTP tests through Supercharge’s base test utility.
 
 If you’re composing your tests without the `base-test` utility, make sure to exclude the CSRF middleware when injecting requests into the application.
 ```
 
 
 ## Inject Requests
-The HTTP testing example above shows an injected `GET` request.  Boost supports the `get`, `post`, `put`, `patch`, and `delete` methods to inject requests that match the HTTP verb.
+The HTTP testing example above shows an injected `GET` request.  Supercharge supports the `get`, `post`, `put`, `patch`, and `delete` methods to inject requests that match the HTTP verb.
 
 Calling either of the methods must be the last method in the request building process. Compose a request by using the fluent API to customize request headers, payload, cookies, server middleware, and the authenticated user.
 
@@ -104,7 +104,7 @@ class BasicTest extends BaseTest {
 }
 ```
 
-At this point, Boost does not offer you to pass in an object with key-value-pairs. Chain the `withCookie` method if you want to inject two or more cookies.
+At this point, Supercharge does not offer you to pass in an object with key-value-pairs. Chain the `withCookie` method if you want to inject two or more cookies.
 
 
 ## Authenticated Requests
@@ -130,7 +130,7 @@ Acting as a user will bypass the route’s authentication strategies and assign 
 
 
 ## Customize Middleware
-Boost automatically disables the middleware that verifies CSRF token during testing. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
+Supercharge automatically disables the middleware that verifies CSRF token during testing. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
 
 ```js
 const BaseTest = util('base-test')

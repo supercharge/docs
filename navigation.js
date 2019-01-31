@@ -4,7 +4,7 @@ module.exports = {
   Introduction: {
     slug: 'introduction',
     sections: {
-      'About Boost': 'about-boost',
+      'About Supercharge': 'about-supercharge',
       Contribute: 'contribute'
     }
   },
