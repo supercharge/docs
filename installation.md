@@ -2,7 +2,10 @@
 
 
 ## System Requirements
-The Supercharge framework has some system requirements. Ensure that your system has `Node.js` and `NPM` installed and runs at least Node.js `>= 8.0.0`.
+The Supercharge framework has some system requirements. Ensure that your system has the following dependencies installed:
+
+- Node.js `>= 8.9.0`
+- NPM or Yarn for package management
 
 Version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
 
