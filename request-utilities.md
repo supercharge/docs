@@ -15,6 +15,17 @@ Enjoy!
 Here’s the list of available `request` decorations. The decrations are available whenever you’ve access to the request object (typically in lifecycle methods: route handlers, extension points, and so on).
 
 
+#### `request.user()`
+Returns the authenticated credentials.
+
+Remember that calling `request.user()` before `onPostAuth` in the request lifecycle will result in an `undefined` value. Credentials are available as soon as the request is authenticated.
+
+```js
+const credentials = request.user()
+// shortcut for request.auth.credentials
+```
+
+
 #### `request.all()`
 Returns an object of merged request payload, path and query parameter data.
 
