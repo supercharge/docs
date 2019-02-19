@@ -6,7 +6,7 @@ Supercharge uses the [hapi web framework](https://hapijs.com) as the core for ro
 
 Supercharge’s request utilities are available for everyone on GitHub and NPM. It’s publicly available as open source and you can freely install it in your app:
 
-- [`hapi-request-utilities`](https://github.com/fs-opensource/hapi-request-utilities)
+- [`hapi-request-utilities`](https://github.com/futurestudio/hapi-request-utilities)
 
 Enjoy!
 
@@ -122,4 +122,4 @@ const hasUserId = request.hasCookie('userId')
 
 
 ## Contribute
-Did we miss a helpful decoration? Please send in a [pull request](https://github.com/fs-opensource/hapi-request-utilities).
+Did we miss a helpful decoration? Please send in a [pull request](https://github.com/futurestudio/hapi-request-utilities).
