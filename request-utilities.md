@@ -1,15 +1,14 @@
-<!-- Review by ContentBot: OK -->
-
-<!-- https://trello.com/c/QXVifRXm/1020-boost-docs-request-utilities -->
-
-
 # Request Utilities
 
 
 ## Introduction
-Boost uses the [hapi web framework](https://hapijs.com) as the core for routing and request handling. Hapi comes with the handy feature of decorating the request object. Decorations allow you to add your own properties or functions on the `request` object.
+Supercharge uses the [hapi web framework](https://hapijs.com) as the core for routing and request handling. Hapi comes with the handy feature of decorating the request object. Decorations allow you to add your own properties or functions on the `request` object.
 
-Boost’s request utilities are available for everyone on GitHub and NPM. It’s publicly available as open source and you can freely install it in your app: [`hapi-request-utilities`](https://github.com/fs-opensource/hapi-request-utilities). Enjoy!
+Supercharge’s request utilities are available for everyone on GitHub and NPM. It’s publicly available as open source and you can freely install it in your app:
+
+- [`hapi-request-utilities`](https://github.com/fs-opensource/hapi-request-utilities)
+
+Enjoy!
 
 
 ## Decorations
