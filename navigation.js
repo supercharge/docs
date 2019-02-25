@@ -14,7 +14,7 @@ module.exports = {
       Installation: 'installation',
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
-      Globals: 'globals',
+      // Globals: 'globals',
       Development: 'development',
       Deployment: 'deployment'
     }
