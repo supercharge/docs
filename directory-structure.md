@@ -42,20 +42,34 @@ This directory contains the important files of your application, like `routes`, 
 When starting a Supercharge server, it will automatically look folders in the `app` directory to auto-load.
 
 
+### The “routes“ Directory
+This directory contains all your HTTP server’s [routes](/docs/{{version}}/routing). When starting the server, Supercharge will load all files from the `routes` directory and register them to the server.
+
+
+### The “plugins“ Directory
+Supercharge uses hapi as the HTTP core and hapi uses plugins to isolate functionality in reusable components. Compose your own [plugins](/docs/{{version}}/plugins) and place them into the `plugins` directory. Supercharge will auto-load them when starting the HTTP server.
+
+
+### The “middleware“ Directory
+This directory includes all your [HTTP middleware](/docs/{{version}}/middleware). Supercharge auto-loads all files in this directory and registers them as middleware to the HTTP core.
+
+
 ### The “events“ Directory
-You may guess what this directory contains (and you’re right): event classes. Use events to notify listeners about an action. Events are a great way to decouple logic into separate parts. For example, Supercharge ships with a `UserRegistered` event that fires on user sign-up.
+You may guess what this directory contains (and you’re right): event classes. Use events to notify listeners about an action. Events are a great way to decouple logic into separate parts. For example, [scaffolding authentication in Supercharge](/docs/{{version}}/authentication) will create a `UserRegistered` event that fires on user sign-up.
+
+Add event listeners to, for example, send a welcome email to the newly registered user.
 
 
 ### The “listeners“ Directory
-This directory contains all your event listeners. The listeners are classes that wait for a specific event to fire and then handle it. For example, Supercharge ships with the `SendWelcomeMail` listener that waits for the `UserRegistered` event to fire and then send out a welcome email.
+This directory contains all your event listeners. The listeners are classes that wait for a specific event to fire and then handle it. For example, you can add a `SendWelcomeMail` listener that waits for the `UserRegistered` event to fire and then send out a welcome email.
 
 
 ### The “mails“ Directory
-[Mailables](/docs/{{version}}/mailer) in Supercharge are JavaScript classes. Create all the emails you want to send out as a class. Supercharge ships with a `WelcomeMail` that will send warm hugs and a welcome message to the newly signed up user.
+[Mailables](/docs/{{version}}/mailer) in Supercharge are JavaScript classes. Create all the emails you want to send out as a class.
 
 
 ### The “models“ Directory
-The `models` directory stores all your application models. Supercharge ships with a `User` model that you may extend or update to your needs.
+The `models` directory stores all your application models. Supercharge will create a `User` model when [scaffolding authentication](/docs/{{version}}/authentication). You can use and extend and update this model to your needs.
 
 
 Supercharge’s default application structure gives you a solid starting point for development. If you feel like there’s something missing or in the wrong place, go ahead and create additional directories or move them around. Don’t hesitate to change the structure.
