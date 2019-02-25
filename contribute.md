@@ -7,10 +7,13 @@ As any software product, Supercharge may comes with bugs and we appreciate your 
 
 A way to report a bug is sending a failing test that outlines the problem. Even better: open a pull request that solves the the bug.
 
-Supercharge’s source code is managed and hosted on GitLab:
+Supercharge’s source code is managed and hosted on GitHub:
 
-- [Supercharge Framework](https://gitlab.com/futurestudio-Supercharge/Supercharge) *(not public yet, planned release: January 2019)*
-- [Supercharge Docs](https://gitlab.com/futurestudio-Supercharge/docs)
+- [Supercharge Application](https://github.com/superchargejs/supercharge)
+- [Supercharge Installer](https://github.com/superchargejs/installer)
+- [Supercharge Framework](https://github.com/superchargejs/framework)
+- [Supercharge Documentation](https://github.com/superchargejs/docs)
+- [Supercharge Documentation](https://github.com/superchargejs/superchargejs.com)
 
 
 ## Coding Style
