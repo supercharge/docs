@@ -9,33 +9,26 @@ The Supercharge framework has some system requirements. Ensure that your system 
 
 Version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
 
-By default, Supercharge interacts with a MongoDB database. When not running a MongoDB instance on your machine, the Supercharge server will still work, but not connect to the database. When navigating to the default Supercharge pages in the browser, you may hit an endpoint that will crash the Supercharge server because of the unavailable database.
-
-The [Hercules](/docs/{{version}}/hercules) virtual machine fulfills Supercharge’s database requirement. We highly recommend to use the Hercules box for your local development setup.
-
 
 ## Installing Supercharge
-Unpack your downloaded Supercharge package to a location of your choice. Install all project dependencies using NPM:
+Supercharge has a convenient installer to scaffold a new application. Install the Supercharge installer on your system to quickly create a new project:
 
 ```bash
-npm install
+npm install -g @supercharge/installer
 ```
 
-Please wait until the dependency installation succeeds.
-
-Use Supercharge’s [Craft command line utility](/docs/{{version}}/craft-cli) to finish the setup:
+The installer will add the `supercharge` command to your system. Scaffold a new application like this:
 
 ```bash
-node craft setup
+supercharge new blog
 ```
 
-This setup command will create an `.env` file in your project root, generate and set an application key and optionally set the application name. Head over to the Craft docs for more details.
+The Supercharge installer will create a `.env` file in your project and automatically generate an application key.
 
-Have a look at the generated `.env` file and adjust the values to your needs.
+## Application Key
+When building your applicatin with Supercharge, you should set an application key in your `.env` file to a random string. If you installed Supercharge with the installer, the key is already set for you.
 
-```warning
-We don’t use Yarn in our development setup and cannot guarantee that it works as expected. The compatibility to NPM should make sure that you’re fine with Yarn.
-```
+If you want to set an app key manually, use the `node craft key:generate` command.
 
 
 ## Running Supercharge
