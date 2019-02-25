@@ -14,4 +14,4 @@ A common Node.js web framework let’s you register routes and the related route
 Stay up-to-date with the latest development and updates on Supercharge:
 
 - Website: [superchargejs.com](https://superchargejs.com)
-- Twitter: follow [@marcuspoehls](https://twitter.com/marcuspoehls) or [@futurestud_io](https://twitter.com/futurestud_io) for updates
+- Twitter: follow [@marcuspoehls](https://twitter.com/marcuspoehls) or [@superchargejs](https://twitter.com/superchargejs) for updates
