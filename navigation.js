@@ -24,12 +24,12 @@ module.exports = {
     sections: {
       Routing: 'routing',
       Middleware: 'middleware',
+      Plugins: 'plugins',
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
       Authorization: 'authorization',
       'CSRF Protection': 'csrf-protection',
-      Validations: 'validations',
-      Plugins: 'plugins'
+      Validations: 'validations'
     }
   },
   Database: {
