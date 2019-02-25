@@ -23,11 +23,13 @@ module.exports = {
     slug: 'basics',
     sections: {
       Routing: 'routing',
+      Middleware: 'middleware',
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
       Authorization: 'authorization',
       'CSRF Protection': 'csrf-protection',
-      Validations: 'validations'
+      Validations: 'validations',
+      Plugins: 'plugins'
     }
   },
   Database: {
