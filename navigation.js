@@ -15,7 +15,7 @@ module.exports = {
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
       Application: 'application',
-      Development: 'development',
+      // Development: 'development',
       Deployment: 'deployment'
     }
   },
