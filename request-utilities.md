@@ -23,29 +23,29 @@ Remember that calling `request.user()` before `onPostAuth` in the request lifecy
 ```js
 const credentials = request.user()
 // shortcut for request.auth.credentials
+// Example: { id: 1 }
 ```
 
 
 #### `request.all()`
-Returns an object of merged request payload, path and query parameter data.
-
-If a key is present in all three inputs, query parameters prioritize over path parameters and payload.
+Returns an object of merged request `payload`, `path` and `query` parameter data.
 
 ```js
 const all = request.all()
+// Example: { searchTerm: 'Super Charge', page: 3}
 ```
+
+When merging the input from all three inputs, query parameters prioritize over path parameters and path parameters prioritize over payload.
 
 
 #### `request.only(keys)`
 Returns an object containing only the selected `keys` from the request payload, path and query parameters.
 
 ```js
-const credentials = request.only(['email', 'password'])
-// or
-const { email, password } = request.only(['email', 'password'])
+const { username } = request.only('username')
 
-// works with a single key
-const username = request.only('username')
+// or an array
+const { email, password } = request.only(['email', 'password'])
 ```
 
 
@@ -53,10 +53,11 @@ const username = request.only('username')
 Returns an object containing all attributes from the request payload, path and query parameters except the given `keys`.
 
 ```js
-const noSecrets = request.except(['token', 'password', 'secret'])
-
-// alternative with single key
 const noToken = request.except('token')
+// Example: { email: 'email@example.com', secret: 'psssst', password: 'super1' }
+
+const noSecrets = request.except(['token', 'password', 'secret'])
+// Example: { email: 'email@example.com' }
 ```
 
 
@@ -65,6 +66,7 @@ Returns the bearer token from the `Authorization` request header. This method wi
 
 ```js
 const token = request.bearerToken()
+// Example: token = eyJhbGciOiJIUzI…
 ```
 
 
@@ -73,11 +75,12 @@ Returns the selected request header by name.
 
 ```js
 const accept = request.header('accept')
+// Example: accept = 'application/json'
 ```
 
 
 #### `request.hasHeader(name)`
-Returns a boolean value indicating whether the selected header is present on the request.
+Returns a `boolean` value indicating whether the selected header is present on the request.
 
 ```js
 const hasAccept = request.hasHeader('accept')
@@ -85,7 +88,7 @@ const hasAccept = request.hasHeader('accept')
 
 
 #### `request.isJson()`
-Returns a boolean value indicating whether the request has a `content-type` header that indicates JSON.
+Returns a `boolean` value indicating whether the request has a `content-type` header includes `/json` or `+json`.
 
 ```js
 const isJson = request.isJson()
@@ -93,7 +96,7 @@ const isJson = request.isJson()
 
 
 #### `request.wantsJson()`
-Returns a boolean value indicating whether the response should be a JSON string. It checks the `accept` header to indicate JSON.
+Returns a `boolean` value indicating whether the response should be a JSON string. It checks the `accept` header to indicate JSON.
 
 ```js
 const wantsJson = request.wantsJson()
@@ -101,7 +104,7 @@ const wantsJson = request.wantsJson()
 
 
 #### `request.wantsHtml()`
-Returns a boolean value indicating whether the response should be HTML. It checks the `accept` header to indicate HTML.
+Returns a `boolean` value indicating whether the response should be HTML. It checks the `accept` header to indicate HTML.
 
 ```js
 const wantsHtml = request.wantsHtml()
@@ -113,6 +116,7 @@ Returns the selected request cookie by name.
 
 ```js
 const userId = request.cookie('userId')
+// Example: userId = 1
 ```
 
 
@@ -121,15 +125,51 @@ Returns all request cookies.
 
 ```js
 const cookies = request.cookies()
+// Example: { userId: 1, username: 'supercharge' }
 ```
 
 
 #### `request.hasCookie(name)`
-Returns a boolean value indicating whether the selected cookie is present on the request.
+Returns a `boolean` value indicating whether the selected cookie is present on the request.
 
 ```js
 const hasUserId = request.hasCookie('userId')
 ```
+
+
+#### `request.has(keys)`
+Returns a `boolean` value indicating whether the request includes the given input `keys`.
+
+```js
+if (request.has('email')) {
+    //
+}
+
+// or check an array
+if (request.has(['username', 'email'])) {
+    //
+}
+```
+
+When checking an array of keys, the `has` method will return true if all of the keys are present.
+
+
+#### `request.filled(keys)`
+Returns a `boolean` value indicating whether the request includes a non-empty value for the input `keys`.
+
+```js
+if (request.filled('email')) {
+    //
+}
+
+// or check an array
+if (request.filled(['username', 'email'])) {
+    //
+}
+```
+
+You can check an array of keys and `filled` will return true if all of the keys have non-empty values.
+
 
 
 ## Contribute
