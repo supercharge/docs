@@ -14,7 +14,7 @@ module.exports = {
       Installation: 'installation',
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
-      // Globals: 'globals',
+      Application: 'application',
       Development: 'development',
       Deployment: 'deployment'
     }
@@ -25,6 +25,7 @@ module.exports = {
       Routing: 'routing',
       Middleware: 'middleware',
       Plugins: 'plugins',
+      'App Lifecycle': 'app-lifecycle',
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
       Authorization: 'authorization',
