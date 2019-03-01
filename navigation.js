@@ -8,6 +8,7 @@ module.exports = {
       Contribute: 'contribute'
     }
   },
+
   'Getting Started': {
     slug: 'getting-started',
     sections: {
@@ -19,36 +20,22 @@ module.exports = {
       Deployment: 'deployment'
     }
   },
+
   Basics: {
     slug: 'basics',
     sections: {
       Routing: 'routing',
       Middleware: 'middleware',
       Plugins: 'plugins',
+      'CSRF Protection': 'csrf-protection',
       'App Lifecycle': 'app-lifecycle',
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
       Authorization: 'authorization',
-      'CSRF Protection': 'csrf-protection',
       Validations: 'validations'
     }
   },
-  Database: {
-    slug: 'database',
-    sections: {
-      'MongoDB Preset': 'mongodb-preset',
-      Connectors: 'database-connectors',
-      Paginator: 'paginator'
-    }
-  },
-  Frontend: {
-    slug: 'frontend',
-    sections: {
-      Assets: 'frontend-assets',
-      Handlebars: 'handlebars',
-      'Built-in Helpers': 'handlebars-helpers'
-    }
-  },
+
   Utilities: {
     slug: 'utilities',
     sections: {
@@ -63,6 +50,25 @@ module.exports = {
       Response: 'response-utilities'
     }
   },
+
+  Database: {
+    slug: 'database',
+    sections: {
+      'MongoDB Preset': 'mongodb-preset',
+      Connectors: 'database-connectors',
+      Paginator: 'paginator'
+    }
+  },
+
+  Frontend: {
+    slug: 'frontend',
+    sections: {
+      Assets: 'frontend-assets',
+      Handlebars: 'handlebars',
+      'Built-in Helpers': 'handlebars-helpers'
+    }
+  },
+
   Testing: {
     slug: 'testing',
     sections: {
@@ -73,6 +79,7 @@ module.exports = {
       Database: 'database-testing'
     }
   },
+
   'In the Universe': {
     slug: 'in-the-universe',
     sections: {
