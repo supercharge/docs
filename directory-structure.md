@@ -25,7 +25,7 @@ This directory contains the web views and raw asset files. Put all your JavaScri
 
 
 ### The “bootstrap” Directory
-This directory contains all files related to Supercharge’s application lifecylce. It contains the `lifecycle.js` file that allows you to intercept the application start and stop procedures.
+This directory contains all files related to Supercharge’s application lifecycle. It contains the `lifecycle.js` file that allows you to intercept the application start and stop procedures.
 
 
 ### The “storage” Directory
