@@ -26,7 +26,26 @@ The route handler is the core of each route, it performs the main logic. Every r
 ## Creating Routes
 Put all your route files in the `app/routes` directory.
 
-The framework will automatically load all files in this directory when starting the HTTP server.
+The framework will automatically load all files in this directory when starting the HTTP server. Your route directory may look like this:
+
+<div class="file-tree">
+  <div class="item">app</div>
+  <div class="children">
+    <div class="item">routes</div>
+    <div class="children">
+      <div class="item">welcome.js</div>
+      <div class="item">404.js</div>
+      <div class="item">auth</div>
+      <div class="children">
+        <div class="item">login.js</div>
+        <div class="item">logout.js</div>
+        <div class="item">signup.js</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+Organize your route files the way you want. Supercharge recursively looks for route files in the `app/routes` directory.
 
 Every route file must export a single object or an array of objects describing a route:
 
@@ -51,8 +70,6 @@ module.exports = [
   }
 ]
 ```
-
-Organize your route files the way you want. Supercharge recursively looks for route files in the `app/routes` directory.
 
 
 ### Ignored Files and Folders
