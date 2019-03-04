@@ -16,13 +16,13 @@ module.exports = {
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
       Application: 'application',
-      // Development: 'development',
+      Development: 'development',
       Deployment: 'deployment'
     }
   },
 
-  Basics: {
-    slug: 'basics',
+  Essentials: {
+    slug: 'essentials',
     sections: {
       Routing: 'routing',
       Middleware: 'middleware',
@@ -36,8 +36,8 @@ module.exports = {
     }
   },
 
-  Utilities: {
-    slug: 'utilities',
+  Amplifier: {
+    slug: 'amplifier',
     sections: {
       'Craft CLI': 'craft-cli',
       Events: 'events',
@@ -46,8 +46,8 @@ module.exports = {
       Filesystem: 'filesystem',
       Hashinator: 'hashinator',
       Encryptor: 'encryptor',
-      Request: 'request-utilities',
-      Response: 'response-utilities'
+      Request: 'request',
+      Response: 'response'
     }
   },
 
