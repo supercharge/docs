@@ -40,14 +40,14 @@ module.exports = {
     slug: 'amplifier',
     sections: {
       'Craft CLI': 'craft-cli',
-      Events: 'events',
-      Logger: 'logger',
+      Request: 'request',
+      Response: 'response',
       Mailer: 'mailer',
       Filesystem: 'filesystem',
       Hashinator: 'hashinator',
       Encryptor: 'encryptor',
-      Request: 'request',
-      Response: 'response'
+      Events: 'events',
+      Logger: 'logger'
     }
   },
 
