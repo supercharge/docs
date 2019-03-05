@@ -216,7 +216,7 @@ module.exports = {
 
 
 ### Redirects
-If you define routes that should redirect to another URI, make use of the `h.redirect()` method. This method expects the destination URI as a parameter. You can either path a relative path or a full qualified domain:
+If you define routes that should redirect to another URI, make use of the `h.redirect()` method. This method expects the destination URI as a parameter. You can either pass a relative path or a full qualified domain:
 
 ```js
 module.exports = {
