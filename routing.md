@@ -49,7 +49,7 @@ Organize your route files the way you want. Supercharge recursively looks for ro
 
 
 ### Scaffold a Route with the Craft CLI
-A way to create a new route is the `make:route` Craft command. This command will scaffold
+A way to create a new route is the `make:route` Craft command. This command will scaffold a new route in your application:
 
 ```bash
 node craft make:route posts
@@ -284,14 +284,15 @@ module.exports = {
 
 You‘re not limited to single route parameters. If required, add more route parameters like this:
 
-
 ```js
 module.exports = {
   method: 'GET',
   path: '/team/{teamId}/player/{playerId}',
   options: {
     handler: async (request, h) => {
-      //
+      const { teamId, playerId } = request.params
+
+      return `Requested player ${playerId} from team ${teamId}`
     }
   }
 }

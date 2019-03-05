@@ -32,7 +32,7 @@ module.exports = {
       'Request Lifecycle': 'request-lifecycle',
       Authentication: 'authentication',
       Authorization: 'authorization',
-      Validations: 'validations'
+      Validation: 'validation'
     }
   },
 
@@ -44,8 +44,8 @@ module.exports = {
       Response: 'response',
       Mailer: 'mailer',
       Filesystem: 'filesystem',
-      Hashinator: 'hashinator',
-      Encryptor: 'encryptor',
+      Hashing: 'hashing',
+      Encryption: 'encryption',
       Events: 'events',
       Logger: 'logger'
     }

@@ -1,2 +1,0 @@
-# Hashinator
-Tba.

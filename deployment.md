@@ -52,17 +52,17 @@ Serving this documentation as fast as possible in “always on” manner is impo
 
 **Application**
 - ensure `NODE_ENV=production`
-- enable error logging or use an error tracking service (e.g. [Sentry](https://sentry.io))
+- enable error logging or use an error tracking service (e.g., [Sentry](https://sentry.io))
 - use an LTS or stable Node.js release
 - check if your server has sufficient resources
 - ensure you’re not using `JSON.parse()` for large data (large is `1 MB` or more)
 
 
 **Performance**
-- use a process manager to run your application (e.g. [PM2](http://pm2.keymetrics.io/))
+- use a process manager to run your application (e.g., [PM2](http://pm2.keymetrics.io/))
 - remove unused dependencies from your `package.json`
 - minify static assets: CSS and JavaScript
-- minify your images (e.g. [tinypng.com](https://tinypng.com))
+- minify your images (e.g., [tinypng.com](https://tinypng.com))
 
 
 **Security**
