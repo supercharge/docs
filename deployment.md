@@ -2,40 +2,11 @@
 
 
 ## Introduction
-At some point you want to deploy your Supercharge application to production. When “going live”, you want to serve your application as best as possible to your audience .
-
-
-## Deployment Checklist
-Precisely, serving this documentation as fast as possible in “always on” manner is important. Therefore, we collected a list of deployment tips. Use this checklist as a reference when deploying your app to the public:
-
-
-**Application**
-- ensure `NODE_ENV=production`
-- enable error logging or use an error tracking service (e.g. [Sentry](https://sentry.io))
-- use an LTS or stable Node.js release
-- check if your server has sufficient resources
-- ensure you’re not using `JSON.parse()` for large data (large is `1 MB` or more)
-
-
-**Performance**
-- use a process manager to run your application (e.g. [PM2](http://pm2.keymetrics.io/))
-- remove unused dependencies from your `package.json`
-- minify static assets: CSS and JavaScript
-- minify your images (e.g. [tinypng.com](https://tinypng.com))
-
-
-**Security**
-- use SSL
-- all tests pass
-- the `.env` file is not checked-in to your source control
-- no sensitve data (API keys, passwords) in the configuration files
-- check your depencencies for securiy concerns with `npm audit`
-- enable rate limiting whenever possible
-- run your application as a non-root user
+At some point you want to deploy your Supercharge application to production. When “going live” you want to serve your application as best as possible to your audience. This documentation page will point you to different deployment ideas.
 
 
 ## Asset Pipeline
-At this point, Supercharge doesn’t ship with an pipeline to minify your client-side CSS and JS assets. You’re free to choose your favorite build tool to create your custom setup.
+At this point, Supercharge doesn’t ship with an pipeline to minify your client-side CSS and JS assets. Please choose your favorite build tool and create your custom setup.
 
 
 ## Zero-Downtime Deployments
@@ -73,3 +44,34 @@ Ensure your application uses HTTPS in production. At this point, Supercharge wil
 You should deploy a reverse proxy (like nginx) to terminate Internet traffic and pass requests through to your application.
 
 [Let's Encrypt](https://letsencrypt.org/) offers free SSL certificates to protect your applications. The [Certbot](https://certbot.eff.org/) command line utility generates Let's Encrypt SSL certificates and integrates with nginx. It updates the nginx configurations for your domains to support HTTPS.
+
+
+## Deployment Checklist
+Serving this documentation as fast as possible in “always on” manner is important to let you read it whenever you want. Therefore, we collected a list of deployment tips. Use this checklist as a reference when deploying your app to the public:
+
+
+**Application**
+- ensure `NODE_ENV=production`
+- enable error logging or use an error tracking service (e.g. [Sentry](https://sentry.io))
+- use an LTS or stable Node.js release
+- check if your server has sufficient resources
+- ensure you’re not using `JSON.parse()` for large data (large is `1 MB` or more)
+
+
+**Performance**
+- use a process manager to run your application (e.g. [PM2](http://pm2.keymetrics.io/))
+- remove unused dependencies from your `package.json`
+- minify static assets: CSS and JavaScript
+- minify your images (e.g. [tinypng.com](https://tinypng.com))
+
+
+**Security**
+- use SSL
+- all tests pass
+- the `.env` file is not checked-in to your source control
+- no sensitve data (API keys, passwords) in the configuration files
+- check your depencencies for securiy concerns with `npm audit`
+- enable rate limiting whenever possible
+- run your application as a non-root user
+
+
