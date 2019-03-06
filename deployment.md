@@ -56,6 +56,7 @@ Serving this documentation as fast as possible in “always on” manner is impo
 - use an LTS or stable Node.js release
 - check if your server has sufficient resources
 - ensure you’re not using `JSON.parse()` for large data (large is `1 MB` or more)
+- validate request input values
 
 
 **Performance**
@@ -72,9 +73,12 @@ Serving this documentation as fast as possible in “always on” manner is impo
 
 **Security**
 - use SSL
+- [check your SSL configuration](https://www.ssllabs.com/ssltest/)
 - all tests pass
 - the `.env` file is not checked-in to your source control
 - no sensitve data (API keys, passwords) in the configuration files
 - check your depencencies for securiy concerns with `npm audit`
 - enable rate limiting whenever possible
 - run your application as a non-root user
+- use HTTPS when requesting external links
+- [check your HTTP headers](https://securityheaders.com/)
