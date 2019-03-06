@@ -59,10 +59,13 @@ Serving this documentation as fast as possible in “always on” manner is impo
 
 
 **Performance**
+- activate HTTP/2 (nginx or your Node.js server)
 - use a process manager to run your application (e.g., [PM2](http://pm2.keymetrics.io/))
 - remove unused dependencies from your `package.json`
 - minify static assets: CSS and JavaScript
 - minify your images (e.g., [tinypng.com](https://tinypng.com))
+- offload computational intensive operations from route handlers/controllers to worker threads
+- prefer asynchronous operations to not block the Node.js event-loop
 
 
 **Security**
