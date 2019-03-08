@@ -8,6 +8,8 @@ In most application you’ll find configurations spread across files. For exampl
 
 This is different in Supercharge because the `config` directory acts as a central place for all your configurations.
 
+![How to use Supercharge Config and Env](/images/docs/config-env.png)
+
 
 ## Retrieving Configuration Values
 Supercharge loads all your configuration values into memory when starting the Node.js server. You can access the config values anywhere in your application using the `Config` class.
@@ -33,7 +35,6 @@ const appName = Env.get('APP_NAME', 'Supercharge')
 ```
 
 Retrieve values from environment variables by using the `Env.get()` method. The second argument passed to `Env.get()` is the default value. Supercharge will use the default value if no environment variable exists for the given key.
-
 
 ```info
 The idea in Supercharge is to feed your configuration from environment variables. We recommend to use the `Env` class in your config files and not directly in any application logic.
