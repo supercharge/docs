@@ -56,7 +56,7 @@ module.exports = {
     sections: {
       'MongoDB Preset': 'mongodb-preset',
       Connectors: 'database-connectors',
-      Paginator: 'paginator'
+      Pagination: 'pagination'
     }
   },
 
