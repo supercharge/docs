@@ -12,6 +12,8 @@ At first, import the Pagination utility from the Supercharge framework. Creating
 2. `totalCount` (required): the total amount of entries in your collection
 3. `perPage` (optional): the amount of items you want to display per page; the default value is `8` items per page
 
+Pagination in Supercharge requires you to have a **query parameter called `page`** on your request to determine the current page. Pagination based on path parameters doesn’t work at this point.
+
 Here’s a code snippet illustrating pagination:
 
 ```js
@@ -39,6 +41,26 @@ module.exports = {
 ```
 
 Depending on whether you paginate data sets in a web app or an API, your response is different. You must handle situations yourself where a user requests a page that exceeds the last page of the paginated collection. Supercharge will not throw an error or assign the last page’s value to the requested page.
+
+
+## Example
+Imagine a request to `https://superchargejs.com?page=2`. The returned object from `new Paginator({ request, totalCount })` may look like this:
+
+```js
+{
+  total: 26,
+  perPage: 8,
+  currentPage: 2,
+  lastPage: 4,
+  first: 'https://superchargejs.com?page=1',
+  prev: 'https://superchargejs.com?page=1',
+  next: 'https://superchargejs.com?page=3',
+  last: 'https://superchargejs.com?page=4',
+  from: 8,
+  to: 16,
+  link: '<https://superchargejs.com?page=1>; rel="first", <https://superchargejs.com?page=1>; rel="prev", <https://superchargejs.com?page=3>; rel="next", <https://superchargejs.com?page=4>; rel="last"'
+}
+```
 
 
 ## Displaying Results
