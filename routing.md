@@ -128,7 +128,6 @@ To ignore a `_documentation` directory, structure your files like this:
 </div>
 
 
-
 ## Response Toolkit
 Route handlers accept two arguments: `request` and `h`. The `h` parameter is the response toolkit providing you with the functionality to respond requests with HTML views or create custom responses.
 
