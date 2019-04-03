@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Middleware are an essential mechanism in your application to filter HTTP requests. A common example is an authentication middleware letting requests proceed the request lifecycle which meet the authentication requirements. In contrast, a request that is unauthenticated will be redirected to the login screen.
+Middlewares are an essential mechanism in your application to filter HTTP requests. A common example is an authentication middleware letting requests proceed the request lifecycle which meet the authentication requirements. In contrast, a request that is unauthenticated will be redirected to the login screen.
 
 Based on certain conditions, requests may proceed or terminate early in the request lifecycle.
 
@@ -16,7 +16,7 @@ Middleware in Supercharge are located in the `app/middleware` directory. This di
 Supercharge uses [hapi](https://hapijs.com), a Node.js web framework, as the HTTP layer. A benefit of using hapi is the extensive request lifecycle.
 
 ### Extension Points
-Supercharge provides you seven extension points along the request lifecycle:
+Supercharge provides seven extension points along the request lifecycle:
 
 - `onRequest`
 - `onPreAuth`
@@ -26,7 +26,7 @@ Supercharge provides you seven extension points along the request lifecycle:
 - `onPostHandler`
 - `onPreResponse`
 
-Middleware in Supercharge must extend one of the listed extension points. Notice that you have five extension points before hitting the route handler and two after the route handler. Every response (no matter if success and failure) will go through the `onPreResponse` extension point. This is the right place for use cases where you want to intercept all your responses.
+Middleware in Supercharge must extend one of the listed extension points. Notice that you have five extension points before hitting the route handler and two after the route handler. Every response (no matter if success or failure) will go through the `onPreResponse` extension point. This is the right place for use cases where you want to intercept all your responses.
 
 
 ### Request Lifecycle Cheat Sheet
@@ -69,7 +69,7 @@ Every file located in `app/middleware` is a global middleware. Precisely, every 
 ### Registering Middleware on Routes
 You can create middleware and assign it to [individual routes](/docs/{{version}}/routing). In this case, you should locate the route-level middleware next to your route file. To tell Supercharge to skip your route-level middleware when loading route file (because it’s not a route), prefix the file with an underscore `_`.
 
-Skipping middleware files isn’t available in Supercharge yet. That’s the reason to you’ll put route-level middleware in the routes folder. [Want to PR this feature, please don’t hesitate!](https://github.com/superchargejs/framework/blob/master/src/foundation/http/bootstrap/load-middleware.js)
+Skipping middleware files isn’t available in Supercharge yet. That’s the reason you have to put route-level middleware in the routes folder. If you [want to PR this feature, please don’t hesitate!](https://github.com/superchargejs/framework/blob/master/src/foundation/http/bootstrap/load-middleware.js)
 
 
 #### Example
