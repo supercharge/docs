@@ -27,6 +27,7 @@ module.exports = {
       Routing: 'routing',
       Middleware: 'middleware',
       Plugins: 'plugins',
+      Decorations: 'decorations',
       'CSRF Protection': 'csrf-protection',
       'App Lifecycle': 'app-lifecycle',
       'Request Lifecycle': 'request-lifecycle',
