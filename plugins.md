@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Supercharge supports [hapi’s](https://hapijs.com/tutorials/plugins) powerful plugin system. A plugin isolates functionality into a reusable utility. A plugin gives you access to the HTTP server instance. Make use of plugins if you want to extend the HTTP server.
+Supercharge supports [hapi’s](https://hapijs.com/tutorials/plugins) powerful plugin system. A plugin isolates functionality into a reusable utility. A plugin provides access to the HTTP server instance. Make use of plugins if you want to extend the HTTP server.
 
 Plugins in Supercharge are located in the `app/plugins` directory. This directory already exists in a default app installation.
 
@@ -60,4 +60,4 @@ module.exports = {
 }
 ```
 
-That the `hapi-dev-errors` plugin supports individual options and you can leverage the [configuration](/docs/{{version}}/configuration) utility to pass in your app’s configs.
+The `hapi-dev-errors` plugin supports individual options and you can leverage the [configuration](/docs/{{version}}/configuration) utility to pass in your app’s configs.

@@ -49,7 +49,7 @@ module.exports = {
 }
 ```
 
-Please notice that the `this` context in your deocration methods binds to the decorated object. Here, `this` binds to the `toolkit` and it’s methods. That’s the reason you can create a response from the toolkit decoration.
+Please notice that the `this` context in your decoration methods binds to the decorated object. Here, `this` binds to the `toolkit` and it’s methods. That’s the reason you can create a response from the toolkit decoration.
 
 Go ahead and use the decoration in your application. Here’s an example of a route handler for this documentation searching for the requested page. In case the page isn’t available, the 404 response is a quick call to the decorated method:
 
@@ -69,7 +69,7 @@ The benefit here is that you compose a repeated response once and use it through
 
 
 ### Example 2: Object Decoration
-This example illustrates how to decorate the `server` instance with the `app` property. The `app` property is an object including details about your application. Here’s what a decoration my look like:
+This example illustrates how to decorate the `server` instance with the `app` property. The `app` property is an object including details about your application. Here’s what a decoration may look like:
 
 ```js
 const { version } = require('../package.json')
@@ -81,4 +81,5 @@ module.exports = {
 }
 ```
 
-Throughout your appplication, you can use your application by accessing `server.app.version`. In lifecycle methods (request handler, middleware), you may access the decorated object via `request.server.app.version`.
+Throughout your application, you can use your decoration by accessing `server.app.version`. In lifecycle methods (request handler, middleware), you may access the decorated object via `request.server.app.version`.
+
