@@ -37,7 +37,7 @@ Here’s a sample route for a Braintree webhook with disabled `crumb` plugin:
 ```js
 module.exports = {
   method: 'POST',
-  path: '/webhooks/braintree,
+  path: '/webhooks/braintree',
   config: {
     plugins: {
       crumb: false
@@ -78,7 +78,7 @@ First, you need to configure the crumb plugin or individual routes to fetch the 
 ```js
 module.exports = {
   method: 'PUT',
-  path: '/profile,
+  path: '/profile',
   config: {
     plugins: {
       crumb: {
