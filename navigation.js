@@ -5,7 +5,8 @@ module.exports = {
     slug: 'introduction',
     sections: {
       'About Supercharge': 'about-supercharge',
-      Contribute: 'contribute'
+      Contribute: 'contribute',
+      'Upgrade Guide': 'upgrade'
     }
   },
 
