@@ -13,7 +13,7 @@ Supercharge’s source code is managed and hosted on GitHub:
 - [Supercharge Installer](https://github.com/superchargejs/installer)
 - [Supercharge Framework](https://github.com/superchargejs/framework)
 - [Supercharge Documentation](https://github.com/superchargejs/docs)
-- [Supercharge.com Website](https://github.com/superchargejs/superchargejs.com)
+- [Supercharge Website](https://github.com/superchargejs/superchargejs.com)
 
 
 ## Coding Style
