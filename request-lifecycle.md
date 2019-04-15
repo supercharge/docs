@@ -2,21 +2,21 @@
 
 
 ## Introduction
-Starting a Supercharge application via the `server.js` file serves an HTTP server. This HTTP server handles web requests. Each HTTP request to your application goes through a pre-defined lifecycle.
+Starting a Supercharge application via the `server.js` file serves an HTTP server. This HTTP server handles web requests. Each HTTP request to your application goes through a predefined lifecycle.
 
-It's important to understand the request lifecycle. Supercharge uses the [hapi](https://hapijs.com) Node.js framework as it's HTTP layer. A benefit of using hapi: the granular request lifecycle with extension points at various lifecycle steps.
+It’s important to understand the request lifecycle. Supercharge uses the [hapi](https://hapijs.com) Node.js framework as its HTTP layer. A benefit of using hapi: a granular request lifecycle with extension points at individual lifecycle steps.
 
-At this point, only the Supercharge HTTP server supports a request lifecycle. Craft CLI commands don't have a request lifecycle.
+At this point, only the Supercharge HTTP server supports a request lifecycle. Craft CLI commands don’t have a request lifecycle.
 
 
 ## Lifecycle Extension Points
-Supercharge supports multiple extension points throughout the request lifecycle. Use the following extension points to intercept the request's procesing:
+Supercharge supports multiple extension points throughout the request lifecycle. Use the following extension points to intercept the request’s processing:
 
 - `onRequest`: always called for incoming requests, the route is not determined yet
 - `onPreAuth`: called regardless of authentication; route available, JSONP and cookies parsed
 - `onCredentials`: called for successfully authenticated requests
 - `onPostAuth`: called regardless of authentication; authorization based on access configuration
-- `onPreHandler`: called if validations pass for payload, header, query and path params, cookies
+- `onPreHandler`: called if validations pass for payload, header, query and path parameters, cookies
 - `onPostHandler`: response is defined and can be modified
 - `onPreResponse`: always called unless the request is aborted
 
@@ -30,7 +30,6 @@ A picture says more than a thousand words. This quote fits perfectly for the req
 
 
 ## Request vs. Application Lifecycle
-This documentation's navigation has a page for the request lifecycle and an application lifecycle. The difference between both lifecycles is that the request lifecycle describes how an HTTP request is handled within a running application. The application lifecycle describes the start and shutdown of your application.
+This documentation’s navigation has a page for the request lifecycle and an application lifecycle. The difference between both lifecycles is that the request lifecycle describes how an HTTP request is handled within a running application. The application lifecycle describes the start and shutdown of your application.
 
 You can intercept the application shutdown at three extension points. Find more details in the [application lifecycle docs](/docs/{{version}}/app-lifecycle).
-
