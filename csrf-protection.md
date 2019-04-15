@@ -2,11 +2,11 @@
 
 
 ## Introduction
-Supercharge has support for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) protection. A Cross-site request forgery is a type of malicious exploit where unauthorized commands are transmitted on behalf of an authenticated user.
+Supercharge has support for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) protection. A cross-site request forgery is a malicious exploit where unauthorized commands are transmitted on behalf of an authenticated user.
 
 Supercharge ships with CSRF protection out-of-the-box. It generates a “CSRF token” for active user sessions. Supercharge will verify the CSRF token for `POST`, `PUT`, `PATCH`, and `DELETE` requests to your application.
 
-Supercharge provides you a Handlerbars helper to seamlessly add the CSRF token to your forms. Make use of the `{{csrf}}` helper inside your forms. This helper generates and adds a hidden input field to your form. Use the helper like this:
+Supercharge provides you a Handlebars helper to seamlessly add the CSRF token to your forms. Make use of the `{{csrf}}` helper inside your HTML forms. This helper generates and adds a hidden input field to your form. Use the helper like this:
 
 ```html
 <form method="POST" action="/login">
@@ -16,7 +16,9 @@ Supercharge provides you a Handlerbars helper to seamlessly add the CSRF token t
 </form>
 ```
 
-Supercharge uses the [crumb](https://github.com/hapijs/crumb) plugin to verify the CSRF token. The crumb plugin checks incoming requests whether they may contain a CSRF token based on the HTTP method. In case the HTTP method matches `POST`, `PUT`, `PATCH`, or `DELETE`, the CSRF token must be present. If it doesn’t contain a token, requests will fail with an `403 Forbidden` error.
+Supercharge uses the [crumb](https://github.com/hapijs/crumb) plugin to verify the CSRF token. Crumb checks incoming requests whether they contain a CSRF token based on the HTTP method.
+
+In case the HTTP method matches `POST`, `PUT`, `PATCH`, or `DELETE`, the CSRF token must be present. If it doesn’t contain a CSRF token, requests will fail with an `403 Forbidden` error.
 
 ```warning
 Supercharge won’t automatically disable CSRF protection when running tests.
@@ -66,12 +68,11 @@ module.exports = {
     }
   }
 }
-
 ```
 
 
 ## X-CSRF-Token for Restful Routes
-Sometimes you want to send the CSRF token in a request headers instead of the request payload. To achieve this, you need to configure crumb to use a restful configuration and then send the CSRF token along in the request headers.
+Sometimes you want to send the CSRF token in a request header instead of the request payload. To achieve this, you need to configure crumb to use a restful configuration and then send the CSRF token along in the request headers.
 
 First, you need to configure the crumb plugin or individual routes to fetch the CSRF token from the request headers:
 
@@ -90,7 +91,6 @@ module.exports = {
     }
   }
 }
-
 ```
 
 Supercharge provides the `csrfToken` Handlebars helper which returns the CSRF token value. You could then add a meta tag to your HTML and insert the value like this:
@@ -100,7 +100,6 @@ Supercharge provides the `csrfToken` Handlebars helper which returns the CSRF to
 ```
 
 Then you may fetch the CSRF token from the HTML source:
-
 
 ```js
 const token = document.head.querySelector('meta[name="csrf-token"]');
