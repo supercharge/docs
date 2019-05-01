@@ -2,8 +2,12 @@
 Tba.
 
 
-## New Features
 
+## Breaking Changes
+- [Filesystem: `.access()` becomes `.canAccess()`](#filesystem-code-access-code-becomes-code-canaccess-code-)
+
+
+## New Features
 - [Class-based Middleware](#class-based-middleware)
 - [New Handlebars helpers](#new-handlebars-helpers)
     - [`csrfToken`](#-code-csrftoken-code-)
@@ -14,6 +18,26 @@ Text
 
 ### Updating Dependencies
 Update the `@supercharge/framework` dependency in your `package.json` file to `1.0-beta1`.
+
+
+## Review Breaking Changes
+
+### Filesystem: `.access()` becomes `.canAccess()`
+Text
+
+```js
+const Fs = require('@supercharge/framework/filesystem')
+
+// before
+if (await Fs.access(file)) {
+    //
+}
+
+// after
+if (await Fs.canAccess(file)) {
+    //
+}
+```
 
 
 ### Class-based Middleware
