@@ -8,9 +8,11 @@ Tba.
 
 
 ## New Features
+- [Server-Side Sessions](#server-side-sessions)
 - [Class-based Middleware](#class-based-middleware)
+- [New Filesystem methods](#new-filesystem-methods)
 - [New Handlebars helpers](#new-handlebars-helpers)
-    - [`csrfToken`](#-code-csrftoken-code-)
+
 
 ## Upgrading from `1.0-beta0` to `1.0-beta1`
 Text
@@ -21,6 +23,8 @@ Update the `@supercharge/framework` dependency in your `package.json` file to `1
 
 
 ## Review Breaking Changes
+Text
+
 
 ### Filesystem: `.access()` becomes `.canAccess()`
 Text
@@ -38,6 +42,14 @@ if (await Fs.canAccess(file)) {
     //
 }
 ```
+
+
+## New Features
+Text
+
+
+### Server-Side Sessions
+Text
 
 
 ### Class-based Middleware
@@ -58,6 +70,17 @@ class Middleware {
 
 module.exports = Middleware
 ```
+
+
+### New Filesystem Methods
+Text
+
+- `canAccess()`
+- `lastAccessed()`
+- `lastModified()`
+- `updateTimestamps()`
+
+Text
 
 
 ### New Handlebars Helpers
