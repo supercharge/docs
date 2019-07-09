@@ -3,7 +3,7 @@ Tba.
 
 
 ## Available Methods
-Text
+Here’s a list of available methods in the collections package:
 
 <style>
     #collection-method-list > p {
@@ -27,12 +27,19 @@ Text
 [forEachSeries](#forEachSeries)
 [map](#map)
 [mapSeries](#mapSeries)
+[reduce](#reduce)
 [some](#some)
 
 </div>
 
 
 ## Methods
+The upcoming examples use the `Collect` function which is the imported `@supercharge/collections` package:
+
+```js
+const Collect = require('@supercharge/collections')
+```
+
 
 #### collapse
 Text
@@ -99,6 +106,14 @@ Text
 
 
 #### mapSeries
+Text
+
+```js
+
+```
+
+
+#### reduce
 Text
 
 ```js
