@@ -1,5 +1,39 @@
 # Collections
-Tba.
+
+
+## Introduction
+Node.js itself is an event-driven platform, handling most of its processing asynchronously. In contrast, the JavaScript Array class has no built-in support for asynchronous operations. That's the reason working with arrays in Node.js can be cumbersome.
+
+The `@supercharge/collections` package fills this gap. This `Collection` class provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
+
+The following example takes an array of IDs and fetches the related users from the database to filter them based on the user's name:
+
+```js
+await Collect([ 1, 2, 3, 4, 5 ])
+  .map(async id => {
+    return User.findById(id)
+  })
+  .filter(user => user.name === 'supercharge')
+  .all()
+
+// result: [{
+//  id: 1,
+//  name: 'supercharge',
+//  description: 'Powerful Node.js framework — not just a web-framework'
+// }]
+```
+
+You can chain various methods for fluent processing, like mapping and filtering of the underlying array. Typically, the collection methods are immutable and return a new collection instance without changing the original input array.
+
+
+## Creating Collection
+Creating a collection is as simple as importing the `@supercharge/collections` package and passing an array to the imported function:
+
+```js
+const Collect = require('@supercharge/collections')
+
+const collection = Collect([ 'Supercharge', 'Collection' ])
+```
 
 
 ## Available Methods
@@ -18,6 +52,7 @@ Here’s a list of available methods in the collections package:
 
 <div id="collection-method-list" markdown="1">
 
+[all](#all)
 [collapse](#collapse)
 [compact](#compact)
 [every](#every)
@@ -36,16 +71,21 @@ Here’s a list of available methods in the collections package:
 
 
 ## Methods
-The upcoming examples use the `Collect` function which is the imported `@supercharge/collections` package:
+
+
+#### all
+The `all` method returns the collections underlying array:
 
 ```js
-const Collect = require('@supercharge/collections')
+await Collect([1, 2, 3])
+  .all()
+
+// [1, 2, 3]
 ```
 
-#### Calling `.run()`
-Some of the methods return are chainable and return another collection, for example `map`, `filter`, `collapse`, `compact`.
+Some of the methods (like `map`, `filter`, `collapse`, or `compact`) return the collection instance allowing you to chain additional methods to this pipeline.
 
-You must explicitely start processing by calling `.run()` if one of these methods is the last item in your collection pipeline.
+To retrieve the results of these operations, you must explicitely end your collection pipeline with `.all()`.
 
 
 #### collapse
@@ -54,7 +94,7 @@ The `collapse` method collapses a collection of arrays into a single, flat colle
 ```js
 await Collect([[1], [{}, 'Marcus', true], [22]])
   .collapse()
-  .run()
+  .all()
 
 // [1, {}, 'Marcus', true, 22]
 ```
@@ -66,75 +106,126 @@ The `compact` method removes all falsy values from the collection. For example, 
 ```js
 await Collect([0, null, undefined, 1, false, 2, '', 3, NaN])
   .collapse()
-  .run()
+  .all()
 
 // [1, 2, 3]
 ```
 
 
 #### every
-Text
+The `every` method determines whether  all items in the collection satisfy testing function:
 
 ```js
+await Collect([1, 2, 3])
+  .every(item => item > 2)
 
+// false
+```
+
+The `every` method supports async callbacks:
+
+```js
+await Collect([1, 2, 3])
+  .every(async id => {
+    const user = await User.findById(id)
+
+    return !!user
+  })
+
+// true
 ```
 
 
 #### filter
-Text
+The `filter` method keeps all items in the collection satisfying the (async) testing function:
 
 ```js
+await Collect([1, 2, 3])
+  .filter(async id => {
+    const user = await User.findById(id)
 
+    return user.scope === 'admin'
+  })
+  .all()
+
+// [ 1 ]
 ```
 
 
 #### find
-Text
+The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise.
 
 ```js
+const usernames = ['marcus', 'norman', 'christian']
 
+await Collect(usernames)
+  .find(async name => {
+    // check if a user with the given `name` exists
+    const user = await User.findByName(name)
+
+    return !!user
+  })
+
+// 'marcus'
 ```
 
 
 #### flatMap
-Text
+The `flatMap` method invokes the (async) callback on each collection item. The callback can modify and return the item resulting in a new collection of modified items. Ultimately, `flatMap` flattens the mapped results:
 
 ```js
+await Collect([1, 2, 3])
+  .flatMap(async item => {
+    return [item, item]
+  })
+  .all()
 
+// [1, 1, 2, 2, 3, 3]
 ```
 
 
 #### forEach
-Text
+The `forEach` method invokes the (async) callback on each collection item. This method has no return value.
 
 ```js
-
+await Collect(await queue.getActive())
+  .forEach(async job => {
+    await job.finished()
+  })
 ```
 
 
 #### forEachSeries
-Text
+The `forEachSeries` method invokes the (async) callback on each collection item **in sequence*. This method has no return value.
 
 ```js
+const files = [
+  { tenantId: 1, name: '01-this-must-be-the-first-file.txt' },
+  { tenantId: 1, name: '02-this-must-go-second.txt' }
+]
 
+await Collect(files)
+  .forEach(async ({ tenantId, name }) => {
+    await Fs.writeFile(`./files/${tenantId}/${name}`)
+  })
 ```
 
 
 #### map
-The `map` method runs the given (async) callback on each collection item and returns an array of transformed items. Because `map` returns another collection, you could chain further operations. You must explicitely start processing by calling `.run()`:
+The `map` method invokes the (async) callback on each collection item and returns an array of transformed items. Because `map` return a collection instance, you could chain further operations. You must explicitely start processing by calling `.all()`:
 
 ```js
 await Collect([1, 2, 3])
   .map(async item => {
     return item * 10
   })
-  .run()
+  .all()
 
 // [ 10, 20, 30 ]
 ```
 
 ```info
-`map` runs all transformations in parallel. If you want to run them in sequence, use [`mapSeries`](#mapseries).
+`map` invokes all transformations in parallel. If you want to run them in sequence, use [`mapSeries`](#mapseries).
 ```
 
 
@@ -142,26 +233,38 @@ await Collect([1, 2, 3])
 The `mapSeries` method is like `map` running the given (async) callback on each collection item **in sequence**:
 
 ```js
-await Collect([1, 2, 3])
-  .mapSeries(async item => {
-    return item * 10
-  })
-  .run()
+const logfiles = [
+  '2019-07-15.log',
+  '2019-07-16.log',
+  '2019-07-17.log'
+]
 
-// [ 10, 20, 30 ]
+await Collect(logfiles)
+  .mapSeries(async file => {
+    return { file, content: await Fs.readFile(file) }
+  })
+  .all()
+
+// [ { file: '2019-07-15.log', content: '…' }, … ]
 ```
+
+Consider the `mapSeries` method to ensure sequential processing of your items. The processing keeps the item order as present in the collection.
+
+The example of reading the content of log files is a good candidate for sequential processing because it minimizes the disk load. Imagine the load on your file system when reading all log files in parallel (using `map`).
 
 ```info
-`mapSeries` runs all transformations in sequence. If you want to run them in parallel, use [`map`](#map).
+`mapSeries` invokes all transformations in sequence. If you want to run them in parallel, use [`map`](#map).
 ```
 
+
 #### reduce
-The `reduce` method runs a(n async) reducer function on each array item, passing the result of each iteration to the subsequent iteration. The result is a reduced collection to a single value:
+The `reduce` method invokes a(n async) reducer function on each array item, passing the result of each iteration to the subsequent iteration. The result is a reduced collection to a single value:
 
 ```js
-await Collect([1, 2, 3]).reduce(async (carry, item) => {
+await Collect([1, 2, 3])
+  .reduce(async (carry, item) => {
     return carry + item
-}, 0)
+  }, 0)
 
 // 6
 ```
@@ -169,21 +272,23 @@ await Collect([1, 2, 3]).reduce(async (carry, item) => {
 The `reduce` method takes the initial value as a second argument. In the code snippet above, the initial value is `0`. Using `5` as the initial value returns a different result:
 
 ```js
-await Collect([1, 2, 3]).reduce((carry, item) => {
+await Collect([1, 2, 3])
+  .reduce((carry, item) => {
     return carry + item
-}, 5)
+  }, 5)
 
 // 11
 ```
 
 
 #### reduceRight
-The `reduceRight` method is simular to `reduce`, reducing a collection to a single value. It runs a(n async) reducer function on each array item **from right-to-left**, passing the result of each iteration to the subsequent iteration:
+The `reduceRight` method is simular to `reduce`, reducing a collection to a single value. It invokes a(n async) reducer function on each array item **from right-to-left**, passing the result of each iteration to the subsequent iteration:
 
 ```js
-await Collect([1, 2, 3]).reduceRight(async (carry, item) => {
+await Collect([1, 2, 3])
+  .reduceRight(async (carry, item) => {
     return carry.concat(item)
-}, [])
+  }, [])
 
 // [3, 2, 1]
 ```
@@ -195,9 +300,10 @@ The `reduceRight` method takes the initial value as a second argument.
 The `some` method determines whether at least one item from the collection satisfies the testing function:
 
 ```js
-await Collect([1, 2, 3]).some(item => {
+await Collect([1, 2, 3])
+  .some(item => {
     return item > 10
-})
+  })
 
 // false
 ```
@@ -206,13 +312,13 @@ Notice that you have to `await` the result of `some()`, because it also supports
 
 ```js
 await Collect([
-    'https://superchargejs.com',
-    'https://futurestud.io'
+  'https://superchargejs.com',
+  'https://futurestud.io'
 ]).some(async uri => {
-    // imagine `fetch` as a function sending a request to `uri`
-    const { status } = await fetch(uri)
+  // imagine `fetch` as a function sending a request to `uri`
+  const { status } = await fetch(uri)
 
-    return status === 200
+  return status === 200
 })
 
 // true
