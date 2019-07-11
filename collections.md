@@ -2,11 +2,11 @@
 
 
 ## Introduction
-Node.js itself is an event-driven platform, handling most of its processing asynchronously. In contrast, the JavaScript Array class has no built-in support for asynchronous operations. That's the reason working with arrays in Node.js can be cumbersome.
+Node.js is an event-driven platform, handling most of its processing asynchronously. The JavaScript Array class has no built-in support for asynchronous operations. That’s the reason working with arrays in Node.js can be cumbersome.
 
-The `@supercharge/collections` package fills this gap. This `Collection` class provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
+The [`@supercharge/collections`](https://github.com/superchargejs/collections) package fills this gap. This package provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
 
-The following example takes an array of IDs and fetches the related users from the database to filter them based on the user's name:
+The following example takes an array of IDs and fetches the related users from the database to filter them based on a user’s name:
 
 ```js
 await Collect([ 1, 2, 3, 4, 5 ])
@@ -17,13 +17,23 @@ await Collect([ 1, 2, 3, 4, 5 ])
   .all()
 
 // result: [{
-//  id: 1,
-//  name: 'supercharge',
-//  description: 'Powerful Node.js framework — not just a web-framework'
+//   id: 1,
+//   name: 'supercharge',
+//   description: 'Powerful Node.js framework — not just a web-framework'
 // }]
 ```
 
-You can chain various methods for fluent processing, like mapping and filtering of the underlying array. Typically, the collection methods are immutable and return a new collection instance without changing the original input array.
+You can chain methods for fluent processing, like mapping and filtering of the underlying array. Typically, the collection methods are immutable and return a new collection instance without changing the original input array.
+
+
+## Installation
+The `@supercharge/collections` package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+
+```bash
+npm i @supercharge/collections
+```
+
+Of course, you can use this collections package with every project other than Supercharge. Enjoy!
 
 
 ## Creating Collection
