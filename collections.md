@@ -77,6 +77,8 @@ Here’s a list of available methods in the collections package:
 [mapSeries](#mapseries)
 [reduce](#reduce)
 [reduceRight](#reduceright)
+[reject](#reject)
+[size](#size)
 [some](#some)
 
 </div>
