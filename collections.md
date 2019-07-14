@@ -71,6 +71,8 @@ Here’s a list of available methods in the collections package:
 [flatMap](#flatmap)
 [forEach](#foreach)
 [forEachSeries](#foreachseries)
+[isEmpty](#isempty)
+[isNotEmpty](#isnotempty)
 [map](#map)
 [mapSeries](#mapseries)
 [reduce](#reduce)
@@ -161,6 +163,8 @@ await Collect([1, 2, 3])
 // [ 1 ]
 ```
 
+See the [`reject`](#reject) method for the inverse of `filter`.
+
 
 #### find
 The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
@@ -220,6 +224,26 @@ await Collect(files)
   .forEachSeries(async ({ tenantId, name }) => {
     await Fs.writeFile(`./files/${tenantId}/${name}`)
   })
+```
+
+
+#### isEmpty
+The `isEmpty` method returns `true` when the collection is empty, otherwise `false`:
+
+```js
+await Collect([]).isEmpty()
+
+// true
+```
+
+
+#### isNotEmpty
+The `isNotEmpty` method returns `true` when the collection is not empty, otherwise `false`:
+
+```js
+await Collect([]).isNotEmpty()
+
+// false
 ```
 
 
@@ -306,6 +330,32 @@ await Collect([1, 2, 3])
 ```
 
 The `reduceRight` method takes the initial value as a second argument.
+
+
+#### reject
+The `reject` method removes all items from the collection satisfying the (async) testing function:
+
+```js
+await Collect([1, 2, 3, 4, 5])
+  .reject(async item => {
+    return item % 2 === 1 // true when odd
+  })
+  .all()
+
+// [2, 4]
+```
+
+See the [`filter`](#filter) method for the inverse of `reject`.
+
+
+#### size
+The `size` method returns the number of items in the collection:
+
+```js
+await Collect([1, 2, 3]).size()
+
+// 3
+```
 
 
 #### some
