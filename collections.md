@@ -1,8 +1,3 @@
-<!-- https://trello.com/c/PpVHXIzO/1176-supercharge-collections -->
-
-<!-- Review by ContentBot: OK -->
-
-
 # Collections
 
 
@@ -66,6 +61,7 @@ Here’s a list of available methods in the collections package:
 </style>
 
 <div id="collection-method-list" markdown="1">
+
 [all](#all)
 [collapse](#collapse)
 [compact](#compact)
@@ -212,7 +208,7 @@ await Collect(await queue.getActive())
 
 
 #### forEachSeries
-The `forEachSeries` method invokes the (async) callback on each collection item **in sequence*. This method has no return value.
+The `forEachSeries` method invokes the (async) callback on each collection item **in sequence**. This method has no return value.
 
 ```js
 const files = [
@@ -221,7 +217,7 @@ const files = [
 ]
 
 await Collect(files)
-  .forEach(async ({ tenantId, name }) => {
+  .forEachSeries(async ({ tenantId, name }) => {
     await Fs.writeFile(`./files/${tenantId}/${name}`)
   })
 ```
