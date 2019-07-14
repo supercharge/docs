@@ -1,8 +1,13 @@
+<!-- https://trello.com/c/PpVHXIzO/1176-supercharge-collections -->
+
+<!-- Review by ContentBot: OK -->
+
+
 # Collections
 
 
 ## Introduction
-Node.js is an event-driven platform, handling most of its processing asynchronously. The JavaScript Array class has no built-in support for asynchronous operations. That’s the reason working with arrays in Node.js can be cumbersome.
+Node.js is an event-driven platform, handling most of its processing asynchronously. The JavaScript Array class has no built-in support for asynchronous operations. That’s one reason working with arrays in Node.js can be cumbersome.
 
 The [`@supercharge/collections`](https://github.com/superchargejs/collections) package fills this gap. This package provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
 
@@ -33,7 +38,7 @@ The `@supercharge/collections` package lives independently from the Supercharge 
 npm i @supercharge/collections
 ```
 
-Of course, you can use this collections package with every project other than Supercharge. Enjoy!
+You can use this collections package with every project even if it’s not build on Supercharge. Enjoy!
 
 
 ## Creating Collection
@@ -61,7 +66,6 @@ Here’s a list of available methods in the collections package:
 </style>
 
 <div id="collection-method-list" markdown="1">
-
 [all](#all)
 [collapse](#collapse)
 [compact](#compact)
@@ -95,7 +99,7 @@ await Collect([1, 2, 3])
 
 Some of the methods (like `map`, `filter`, `collapse`, or `compact`) return the collection instance allowing you to chain additional methods to this pipeline.
 
-To retrieve the results of these operations, you must explicitely end your collection pipeline with `.all()`.
+To retrieve the results of these operations, you must explicitly end your collection pipeline with `.all()`.
 
 
 #### collapse
@@ -123,7 +127,7 @@ await Collect([0, null, undefined, 1, false, 2, '', 3, NaN])
 
 
 #### every
-The `every` method determines whether  all items in the collection satisfy testing function:
+The `every` method determines whether all items in the collection satisfy the testing function:
 
 ```js
 await Collect([1, 2, 3])
@@ -163,7 +167,7 @@ await Collect([1, 2, 3])
 
 
 #### find
-The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise.
+The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
 
 ```js
 const usernames = ['marcus', 'norman', 'christian']
@@ -178,6 +182,8 @@ await Collect(usernames)
 
 // 'marcus'
 ```
+
+Hint: the `!!` operator converts any data type to boolean by using a “doubled negation”. If the value of `user` is `undefined`, it will return `false`, otherwise `true`.
 
 
 #### flatMap
@@ -222,7 +228,7 @@ await Collect(files)
 
 
 #### map
-The `map` method invokes the (async) callback on each collection item and returns an array of transformed items. Because `map` return a collection instance, you could chain further operations. You must explicitely start processing by calling `.all()`:
+The `map` method invokes the (async) callback on each collection item and returns an array of transformed items. Because `map` return a collection instance, you could chain further operations. You must explicitly start processing by calling `.all()`:
 
 ```js
 await Collect([1, 2, 3])
@@ -292,7 +298,7 @@ await Collect([1, 2, 3])
 
 
 #### reduceRight
-The `reduceRight` method is simular to `reduce`, reducing a collection to a single value. It invokes a(n async) reducer function on each array item **from right-to-left**, passing the result of each iteration to the subsequent iteration:
+The `reduceRight` method is similar to `reduce`, reducing a collection to a single value. It invokes a(n async) reducer function on each array item **from right-to-left**, passing the result of each iteration to the subsequent iteration:
 
 ```js
 await Collect([1, 2, 3])
