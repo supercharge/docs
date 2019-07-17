@@ -67,6 +67,7 @@ Here’s a list of available methods in the collections package:
 [compact](#compact)
 [every](#every)
 [filter](#filter)
+[filterSeries](#filterseries)
 [find](#find)
 [flatMap](#flatmap)
 [forEach](#foreach)
@@ -78,7 +79,10 @@ Here’s a list of available methods in the collections package:
 [reduce](#reduce)
 [reduceRight](#reduceright)
 [reject](#reject)
+[rejectSeries](#rejectseries)
 [size](#size)
+[slice](#slice)
+[splice](#splice)
 [some](#some)
 
 </div>
@@ -166,6 +170,24 @@ await Collect([1, 2, 3])
 ```
 
 See the [`reject`](#reject) method for the inverse of `filter`.
+
+
+#### filterSeries
+The `filterSeries` method keeps all items in the collection satisfying the (async) testing function. It runs each check **in sequence**:
+
+```js
+await Collect([1, 2, 3])
+  .filterSeries(async id => {
+    const user = await User.findById(id)
+
+    return user.scope === 'admin'
+  })
+  .all()
+
+// [ 1 ]
+```
+
+See the [`rejectSeries`](#rejectseries) method for the inverse of `filterSeries`.
 
 
 #### find
@@ -350,6 +372,25 @@ await Collect([1, 2, 3, 4, 5])
 See the [`filter`](#filter) method for the inverse of `reject`.
 
 
+#### rejectSeries
+The `rejectSeries` method removes all items from the collection satisfying the (async) testing function. It runs each check **in sequence**:
+
+```js
+await Collect([1, 2, 3, 4, 5])
+  .rejectSeries(async id => {
+    const user = await User.findById(id)
+
+    // remove users already subscribed to the newsletter
+    return user.subscribedToNewsletter()
+  })
+  .all()
+
+// [2, 3]
+```
+
+See the [`filterSeries`](#filterseries) method for the inverse of `rejectSeries`.
+
+
 #### size
 The `size` method returns the number of items in the collection:
 
@@ -357,6 +398,81 @@ The `size` method returns the number of items in the collection:
 await Collect([1, 2, 3]).size()
 
 // 3
+```
+
+
+#### slice
+The `slice` method returns a slice of the collection starting at the given index without changing the collection:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5, 6, 7])
+const chunk = collection.slice(2)
+
+chunk.all()
+
+// [3, 4, 5, 6, 7]
+
+collection.all()
+
+// [1, 2, 3, 4, 5, 6, 7]
+```
+
+You can limit the size of the slice by passing a second argument to the `slice` method:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5, 6, 7])
+const chunk = collection.slice(2, 2)
+
+chunk.all()
+
+// [3, 4]
+```
+
+
+#### splice
+The `splice` method removes abd returns a slice of items from the collection starting at the given index:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.splice(2)
+
+chunk.all()
+
+// [3, 4, 5]
+
+collection.all()
+
+// [1, 2]
+```
+
+You can limit the size of the slice by passing a second argument:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.splice(2, 2)
+
+chunk.all()
+
+// [3, 4]
+
+collection.all()
+
+// [1, 2, 5]
+```
+
+You can replace the removed items by passing an array as the third argument:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.splice(2, 2, [10, 11])
+
+chunk.all()
+
+// [3, 4]
+
+collection.all()
+
+// [1, 2, 10, 11, 5]
 ```
 
 
