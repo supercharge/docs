@@ -63,12 +63,14 @@ Here’s a list of available methods in the collections package:
 <div id="collection-method-list" markdown="1">
 
 [all](#all)
+[chunk](#chunk)
 [collapse](#collapse)
 [compact](#compact)
 [every](#every)
 [filter](#filter)
 [filterSeries](#filterseries)
 [find](#find)
+[findSeries](#findseries)
 [flatMap](#flatmap)
 [forEach](#foreach)
 [forEachSeries](#foreachseries)
@@ -83,7 +85,10 @@ Here’s a list of available methods in the collections package:
 [size](#size)
 [slice](#slice)
 [splice](#splice)
+[size](#size)
 [some](#some)
+[take](#take)
+[takeAndRemove](#takeandremove)
 
 </div>
 
@@ -104,6 +109,18 @@ await Collect([1, 2, 3])
 Some of the methods (like `map`, `filter`, `collapse`, or `compact`) return the collection instance allowing you to chain additional methods to this pipeline.
 
 To retrieve the results of these operations, you must explicitly end your collection pipeline with `.all()`.
+
+
+#### chunk
+The `chunk` method.
+
+```js
+await Collect([1, 2, 3, 4, 5, 6, 7, 8])
+  .chunk(3)
+  .all()
+
+// [[1, 2, 3], [4, 5, 6], [7, 8]]
+```
 
 
 #### collapse
@@ -208,6 +225,13 @@ await Collect(usernames)
 ```
 
 Hint: the `!!` operator converts any data type to boolean by using a “doubled negation”. If the value of `user` is `undefined`, it will return `false`, otherwise `true`.
+
+
+#### findSeries
+The `findSeries` method.
+
+```js
+```
 
 
 #### flatMap
@@ -502,4 +526,38 @@ await Collect([
 })
 
 // true
+```
+
+
+#### take
+The `take` method.
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.take(3)
+
+chunk.all()
+
+// [1, 2, 3]
+
+collection.all()
+
+[1, 2, 3, 4, 5]
+```
+
+
+#### takeAndRemove
+The `takeAndRemove` method.
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.takeAndRemove(3)
+
+chunk.all()
+
+// [1, 2, 3]
+
+collection.all()
+
+// [4, 5]
 ```
