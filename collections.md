@@ -112,7 +112,7 @@ To retrieve the results of these operations, you must explicitly end your collec
 
 
 #### chunk
-The `chunk` method.
+The `chunk` method splits the collection into multiple, smaller collections of a given size:
 
 ```js
 await Collect([1, 2, 3, 4, 5, 6, 7, 8])
@@ -228,10 +228,21 @@ Hint: the `!!` operator converts any data type to boolean by using a “doubled 
 
 
 #### findSeries
-The `findSeries` method.
+The `findSeries` method returns the first item in the collection satisfying the (async) testing function, `undefined` otherwise. It runs all checks **in sequence**:
 
 ```js
+const usernames = ['marcus', 'norman', 'christian']
+
+await Collect(usernames)
+  .findSeries(async name => {
+    // imagine `fetchFromAPI` as function sending a request to an API
+    return fetchFromAPI(name)
+  })
+
+// 'marcus'
 ```
+
+The `findSeries` limits the number of parallel requests to the API.
 
 
 #### flatMap
@@ -530,7 +541,7 @@ await Collect([
 
 
 #### take
-The `take` method.
+The `take` method returns a new Collection containing the specified number of items:
 
 ```js
 const collection = Collect([1, 2, 3, 4, 5])
@@ -542,12 +553,27 @@ chunk.all()
 
 collection.all()
 
-[1, 2, 3, 4, 5]
+// [1, 2, 3, 4, 5]
+```
+
+Use a negative integer to `take` items from the end of the collection:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.take(-2)
+
+chunk.all()
+
+// [4, 5]
+
+collection.all()
+
+// [1, 2, 3, 4, 5]
 ```
 
 
 #### takeAndRemove
-The `takeAndRemove` method.
+The `takeAndRemove` method removes the specified number of items from the collection and returns them as a new Collection:
 
 ```js
 const collection = Collect([1, 2, 3, 4, 5])
@@ -561,3 +587,19 @@ collection.all()
 
 // [4, 5]
 ```
+
+Use a negative integer to `takeAndRemove` items from the end of the collection:
+
+```js
+const collection = Collect([1, 2, 3, 4, 5])
+const chunk = collection.takeAndRemove(-2)
+
+chunk.all()
+
+// [4, 5]
+
+collection.all()
+
+// [1, 2, 3]
+```
+
