@@ -66,6 +66,7 @@ Here’s a list of available methods in the collections package:
 [chunk](#chunk)
 [collapse](#collapse)
 [compact](#compact)
+[concat](#concat)
 [every](#every)
 [filter](#filter)
 [filterSeries](#filterseries)
@@ -78,14 +79,15 @@ Here’s a list of available methods in the collections package:
 [isNotEmpty](#isnotempty)
 [map](#map)
 [mapSeries](#mapseries)
+[push](#push)
 [reduce](#reduce)
 [reduceRight](#reduceright)
 [reject](#reject)
 [rejectSeries](#rejectseries)
+[shift](#shift)
 [size](#size)
 [slice](#slice)
 [splice](#splice)
-[size](#size)
 [some](#some)
 [take](#take)
 [takeAndRemove](#takeandremove)
@@ -142,6 +144,23 @@ The `compact` method removes all falsy values from the collection. For example, 
 await Collect([0, null, undefined, 1, false, 2, '', 3, NaN])
   .collapse()
   .all()
+
+// [1, 2, 3]
+```
+
+
+#### concat
+The `concat` method merges two or more collections. It returns a new collection with the concatenated items without changing the original collection:
+
+```js
+const collection = Collect([1, 2, 3])
+const concat = collection.concat([4, 5])
+
+await concat.all()
+
+// [1, 2, 3, 4, 5]
+
+await collection.all()
 
 // [1, 2, 3]
 ```
@@ -352,6 +371,23 @@ The example of reading the content of log files is a good candidate for sequenti
 ```
 
 
+#### push
+The `push` method appends one or more items to the end of the collection. It returns a new collection with the pushed items without changing the original collection:
+
+```js
+const collection = Collect([1, 2, 3])
+const pushed = collection.push(4, 5)
+
+await pushed.all()
+
+// [1, 2, 3, 4, 5]
+
+await collection.all()
+
+// [1, 2, 3]
+```
+
+
 #### reduce
 The `reduce` method invokes a(n async) reducer function on each array item, passing the result of each iteration to the subsequent iteration. The result is a reduced collection to a single value:
 
@@ -424,6 +460,22 @@ await Collect([1, 2, 3, 4, 5])
 ```
 
 See the [`filterSeries`](#filterseries) method for the inverse of `rejectSeries`.
+
+
+#### shift
+The `shift` method removes and returns the first item from the collection. It changes the original collection:
+
+```js
+const collection = Collect([1, 2, 3])
+
+await collection.shift()
+
+// 1
+
+await collection.all()
+
+// [2, 3]
+```
 
 
 #### size
