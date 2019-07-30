@@ -14,7 +14,7 @@ Each Supercharge application has a dedicated hashing configuration, located in `
 ## Usage
 
 
-### Hashing Values
+#### Hashing Values
 Use the `Hash.make()` method to create a from the given plain-text password:
 
 ```js
@@ -22,7 +22,7 @@ const hash = await Hash.make(user.plainTextPassword)
 ```
 
 
-### Verify a Password Against a Hash
+#### Verify a Password Against a Hash
 Use the `Hash.check()` method to verify that a plain text value matches a given hash:
 
 ```js
@@ -36,7 +36,7 @@ Notice the parameter order. When calling `Hash.check()`, the first argument must
 Also, this method returns a boolean value. It returns `true` if the plain-text value matches the hashed value, otherwise `false`.
 
 
-### MD5 Hashing
+#### MD5 Hashing
 The hashing utility also supports MD5 hashing. Please don’t use the MD5 hashing algorithm for user passwords. However, in some cases you may want to create an MD5 hash.
 
 For example, when requesting a profile picture from Gravatar, you may create an MD5 hash like this:
