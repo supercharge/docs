@@ -18,7 +18,8 @@ module.exports = {
       'Directory Structure': 'directory-structure',
       Application: 'application',
       Development: 'development',
-      Deployment: 'deployment'
+      Deployment: 'deployment',
+      Bootstrappers: 'bootstrappers'
     }
   },
 
@@ -50,6 +51,7 @@ module.exports = {
       Encryption: 'encryption',
       Events: 'events',
       Logger: 'logger',
+      Session: 'session',
       Collections: 'collections'
     }
   },
