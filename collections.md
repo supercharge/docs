@@ -89,6 +89,7 @@ Here’s a list of available methods in the collections package:
 [slice](#slice)
 [splice](#splice)
 [some](#some)
+[someSeries](#someseries)
 [take](#take)
 [takeAndRemove](#takeandremove)
 
@@ -564,7 +565,7 @@ collection.all()
 
 
 #### some
-The `some` method determines whether at least one item from the collection satisfies the testing function:
+The `some` method determines whether at least one item from the collection satisfies the (async) testing function:
 
 ```js
 await Collect([1, 2, 3])
@@ -589,6 +590,27 @@ await Collect([
 })
 
 // true
+```
+
+
+#### someSeries
+The `someSeries` method determines whether at least one item from the collection satisfies, running the (async) testing function **in sequence**:
+
+```js
+const logfiles = [
+  '2019-07-15.log',
+  '2019-07-16.log',
+  '2019-07-17.log'
+]
+
+await Collect(logfiles)
+  .someSeries(async file => {
+    const content = await Fs.readFile(file)
+
+    return content.includes('youtube-bot')
+  })
+
+// false
 ```
 
 
