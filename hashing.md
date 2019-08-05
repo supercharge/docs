@@ -36,7 +36,23 @@ Notice the parameter order. When calling `Hash.check()`, the first argument must
 Also, this method returns a boolean value. It returns `true` if the plain-text value matches the hashed value, otherwise `false`.
 
 
-#### MD5 Hashing
+#### SHAx
+The hashing utility ships with shortcuts for `SHA256` and `SHA512` hashing. Conveniently hash values like this:
+
+```js
+const sha256 = Hash.sha256('my-value')
+
+const sha512 = Hash.sha512('my-value')
+```
+
+By default, SHA256 and SHA512 use `hex` encoding when creating the digest. If you want another encoding, pass it as the second argument:
+
+```js
+const base64 = Hash.sha256('my-value', 'base64')
+```
+
+
+#### MD5
 The hashing utility also supports MD5 hashing. Please don’t use the MD5 hashing algorithm for user passwords. However, in some cases you may want to create an MD5 hash.
 
 For example, when requesting a profile picture from Gravatar, you may create an MD5 hash like this:
