@@ -496,11 +496,11 @@ The `slice` method returns a slice of the collection starting at the given index
 const collection = Collect([1, 2, 3, 4, 5, 6, 7])
 const chunk = collection.slice(2)
 
-chunk.all()
+await chunk.all()
 
 // [3, 4, 5, 6, 7]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 3, 4, 5, 6, 7]
 ```
@@ -511,7 +511,7 @@ You can limit the size of the slice by passing a second argument to the `slice` 
 const collection = Collect([1, 2, 3, 4, 5, 6, 7])
 const chunk = collection.slice(2, 2)
 
-chunk.all()
+await chunk.all()
 
 // [3, 4]
 ```
@@ -524,11 +524,11 @@ The `splice` method removes abd returns a slice of items from the collection sta
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.splice(2)
 
-chunk.all()
+await chunk.all()
 
 // [3, 4, 5]
 
-collection.all()
+await collection.all()
 
 // [1, 2]
 ```
@@ -539,11 +539,11 @@ You can limit the size of the slice by passing a second argument:
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.splice(2, 2)
 
-chunk.all()
+await chunk.all()
 
 // [3, 4]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 5]
 ```
@@ -554,11 +554,11 @@ You can replace the removed items by passing an array as the third argument:
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.splice(2, 2, [10, 11])
 
-chunk.all()
+await chunk.all()
 
 // [3, 4]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 10, 11, 5]
 ```
@@ -621,11 +621,11 @@ The `take` method returns a new Collection containing the specified number of it
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.take(3)
 
-chunk.all()
+await chunk.all()
 
 // [1, 2, 3]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 3, 4, 5]
 ```
@@ -636,11 +636,11 @@ Use a negative integer to `take` items from the end of the collection:
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.take(-2)
 
-chunk.all()
+await chunk.all()
 
 // [4, 5]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 3, 4, 5]
 ```
@@ -653,11 +653,11 @@ The `takeAndRemove` method removes the specified number of items from the collec
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.takeAndRemove(3)
 
-chunk.all()
+await chunk.all()
 
 // [1, 2, 3]
 
-collection.all()
+await collection.all()
 
 // [4, 5]
 ```
@@ -668,11 +668,11 @@ Use a negative integer to `takeAndRemove` items from the end of the collection:
 const collection = Collect([1, 2, 3, 4, 5])
 const chunk = collection.takeAndRemove(-2)
 
-chunk.all()
+await chunk.all()
 
 // [4, 5]
 
-collection.all()
+await collection.all()
 
 // [1, 2, 3]
 ```
