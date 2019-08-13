@@ -89,6 +89,7 @@ module.exports = {
     slug: 'in-the-universe',
     sections: {
       Hercules: 'hercules',
+      'Promise Pool': 'promise-pool',
       'Rate Limiting': 'rate-limiting',
       'Geo Locating': 'geo-locating'
     }

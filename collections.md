@@ -36,7 +36,7 @@ npm i @supercharge/collections
 You can use this collections package with every project even if it’s not build on Supercharge. Enjoy!
 
 
-## Creating Collection
+## Creating Collections
 Creating a collection is as simple as importing the `@supercharge/collections` package and passing an array to the imported function:
 
 ```js
