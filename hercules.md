@@ -1,4 +1,4 @@
-# Future Studio Hercules
+# Hercules
 
 ## Introduction
 Web applications become powerful and require multiple dependencies. ercules makes it simple to have your tooling dependencies locally available. Hercules uses [Vagrant](https://www.vagrantup.com/) to gracefully provision virtual machines.
