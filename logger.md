@@ -27,7 +27,7 @@ Supercharge uses a driver-based approach for logging. A driver represents a sing
 At this point, you can’t configure the stacked logger to exclude a specific channel. It will log to all available channels. This is very likely to change in future releases.
 ```
 
-## Writing Log Messages
+## Using the Logger
 The logging utility is part of the Supercharge framework. It provides methods for seven different log levels:
 
 ```js
