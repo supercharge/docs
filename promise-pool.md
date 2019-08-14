@@ -94,16 +94,7 @@ const users = [
 
 const pool = new PromisePool().withConcurrency(5).for(users)
 
-await pool.process(async (user) => {
+const { results, errors } = await pool.process(async (user) => {
   await User.createIfNotExisting(user)
 })
 ```
-
-Text
-
-```js
-const {result, errors } = await pool.process(async (user) => {
-  await User.createIfNotExisting(user)
-})
-```
-
