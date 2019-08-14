@@ -2,32 +2,15 @@
 
 
 ## Introduction
-Text
+Running an asynchronous function on a list of items in Node.js can be done in different ways: in sequence, in parallel, or in batches. The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package solves the problems of running a number of async operations in batches. It also ensures processing the maximum number of functions concurrently.
 
-```js
-const PromisePool = require('@supercharge/promise-pool')
+Imagine this example: you’re importing a list of 500 email addresses to your application and you want to create a user if it doesn’t exist. To reduce performance issues and database bottlenecks, you’re using a promise pool with a concurrency of 5. The concurrency describes how many items will be processed **at most** parallely.
 
-const users = [
-  { name: 'Marcus' },
-  { name: 'Norman' },
-  { name: 'Christian' }
-]
-
-const { results, errors } = await new PromisePool()
-  .for(users)
-  .withConcurrency(2)
-  .process(async data => {
-    const user = await User.createIfNotExisting(data)
-
-    return user
-  })
-```
-
-Text
+Each task in the promise pool is individual from the others, meaning that the pool starts processing the next task as soon as one finishes. This way it tries to ensure the parallel processing using the defined concurrency.
 
 
 ## Installation
-The `@supercharge/promise-pool` package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
 
 ```bash
 npm i @supercharge/promise-pool
@@ -57,6 +40,14 @@ const { results, errors } = await new PromisePool()
     return user
   })
 ```
+
+The code describes the following: at first, create a new promise pool instance which then allows you to chain the `.for()`, `.withConcurrency()`, and `.process()` methods. The `.process()` method is an async function starting the actual processing. Be sure to call this as the last item in the chain.
+
+The return values for the promise pool is an object containing two properties: `results` and `errors`
+
+
+## Error Handling
+The promise pool won’t throw when running into an error while processing an item. It saves the error to be inspected later. You’ve access to the item causing the error using `error.item`.
 
 
 ## API
