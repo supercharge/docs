@@ -12,7 +12,7 @@ This scaffolds the necessary routes, route handlers, user model, authentication 
 
 Have a look at the authentication configuration located at `config/auth.js`. This file contains the documented authentication options which you can tweak to adjust the authentication handling.
 
-Supercharge uses [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie) to provide cookie-based authentication. The login route handler authenticates a user and creates a session. At this point, only authenticated users can have a session.
+Supercharge provides you an authentication strategy for cookie-based authentication. The login route handler authenticates a user and creates a session. At this point, only authenticated users can have a session.
 
 Authenticating users in Supercharge is built on “strategies”. An authentication strategy validates whether a request is authenticated or not. Imagine an authentication strategy as a middleware that authenticates a request (if possible/required).
 
@@ -94,10 +94,10 @@ module.exports = {
   path: '/profile',
   options: {
     handler: (request, h) => {
-      const user = request.user()
+      const user = request.user
 
       // or destructure the properties of interest
-      const { id, email } = request.user()
+      const { id, email } = request.user
 
       return user
     }
@@ -109,12 +109,12 @@ module.exports = {
 #### Is the Current User Authenticated
 Determine whether the current request is authenticated either by checking
 
-- if `request.user()` has the user’s credentials or
+- if `request.user` has the user’s credentials or
 - if `request.auth.isAuthenticated` is `true`
 
 ```js
 handler: (request, h) => {
-  if (request.user()) {
+  if (request.user) {
     // user is logged in
   }
 
@@ -126,7 +126,7 @@ handler: (request, h) => {
 }
 ```
 
-The return value of `request.auth.isAuthenticated` is always a boolean. With `request.user()`, you’ll receive an object with credentials if the user is authenticated, `undefined` otherwise.
+The return value of `request.auth.isAuthenticated` is always a boolean. With `request.user`, you’ll receive an object with credentials if the user is authenticated, `undefined` otherwise.
 
 
 ## Require Authentication on Routes
