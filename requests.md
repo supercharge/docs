@@ -1,4 +1,4 @@
-# Request Utilities
+# HTTP Requests
 
 
 ## Introduction
