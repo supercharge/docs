@@ -10,7 +10,7 @@ At this point, Supercharge doesn’t ship with an pipeline to minify your client
 
 
 ## Zero-Downtime Deployments
-You want to minize downtimes when running your application in production. Supercharge supports zero-downtime deployments out-of-the-box. Any processing that you want to run while your HTTP server stops should be part of the [application lifecycle](/docs/{{version}}/app-lifecycle).
+You want to minimize downtimes when running your application in production. Supercharge supports zero-downtime deployments out-of-the-box. Any processing that you want to run while your HTTP server stops should be part of the [application lifecycle](/docs/{{version}}/app-lifecycle).
 
 Supercharge uses [hapi-pulse](https://github.com/futurestudio/hapi-pulse) to gracefully stop the HTTP server and run your lifecycle methods. It listens for the `SIGINT` and `SIGTERM` events to gracefully shut down.
 

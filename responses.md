@@ -24,7 +24,7 @@ Supercharge uses the `hapi` web framework as the HTTP core. Each route handler r
 
 The `request` object describes the incoming request containing details like the request parameter, payload, header, and more.
 
-The `h` argument is the response toolkit where `h` just represents the first letter from “hapi”.
+The `h` argument is the [response toolkit](https://hapi.dev/api/#response-toolkit) where `h` just represents the first letter from “hapi”.
 
 ```js
 module.exports = {

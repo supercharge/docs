@@ -104,7 +104,7 @@ module.exports = [
 ### Ignored Files and Folders
 Sometimes you want to extract functionality from your route files into dedicated files. The framework will ignore all files and folders starting with an underscore `_`.
 
-For example, rendering this Supercharge documentation uses two non-route classes, `Documentation` and `Renderer`, to show this documentation. This separation of functionality into files keeps the code base clean.
+For example, rendering this [Supercharge documentation](https://github.com/superchargejs/superchargejs.com/tree/master/app/routes) uses two non-route classes, `Documentation` and `Renderer`, to show this documentation. This separation of functionality into files keeps the code base clean.
 
 To ignore a `_documentation` directory, structure your files like this:
 

@@ -8,11 +8,18 @@ Of course, you’re free to modify the application structure, but make sure to u
 
 Supercharge’s directory structure is inspired by the [Laravel](https://laravel.com) PHP framework. At first, it may overwhelm due to all the existing directories. You’ll quickly understand their use-case and value. It becomes a predictable and extensible architecture that is a joy to work with.
 
+```info
+New Supercharge applications don’t contain all folder by default to reduce noise. When extending your application by scaffolding files with [Craft](/docs/{{version}}/craft-cli), they are created for you automatically.
+```
 
 ## Supercharge’s Application Directory
 
 ### The “app” Directory
 The `app` directory is the core of your application. Everything related to your application should go in there. This directory contains subdirectories that we’ll explore soon.
+
+
+### The “bootstrap” Directory
+This directory contains all files related to Supercharge’s application lifecycle. It contains the `app.js` file allowing you to extend Supercharge with packages from the community by registering the related [bootstrappers](/docs/{{version}}/bootstrappers). It also contains the `lifecycle.js` file that allows you to intercept the application start and stop procedures.
 
 
 ### The “config” Directory
@@ -25,10 +32,6 @@ This directory includes all your asset files, like JavaScript, CSS, and images.
 
 ### The “resources” Directory
 This directory contains the web views and raw asset files. Put all your JavaScript or CSS files in the `resources` directory if you create a build pipeline. Reference the final build output to the `public`folder, because Supercharge serves assets in your web views from there.
-
-
-### The “bootstrap” Directory
-This directory contains all files related to Supercharge’s application lifecycle. It contains the `lifecycle.js` file that allows you to intercept the application start and stop procedures.
 
 
 ### The “storage” Directory
@@ -45,16 +48,8 @@ This directory contains the important files of your application, like `routes`, 
 When starting a Supercharge server, it will automatically look folders in the `app` directory to auto-load.
 
 
-### The “routes“ Directory
-This directory contains all your HTTP server’s [routes](/docs/{{version}}/routing). When starting the server, Supercharge will load all files from the `routes` directory and register them to the server.
-
-
-### The “plugins“ Directory
-Supercharge uses hapi as the HTTP core and hapi uses plugins to isolate functionality in reusable components. Compose your own [plugins](/docs/{{version}}/plugins) and place them into the `plugins` directory. Supercharge will auto-load them when starting the HTTP server.
-
-
-### The “middleware“ Directory
-This directory includes all your [HTTP middleware](/docs/{{version}}/middleware). Supercharge auto-loads all files in this directory and registers them as middleware to the HTTP core.
+### The “auth“ Directory
+This directory contains all your authentication related schemes and strategies. For example, an authentication strategy can be session-based authenticating requests using a session. You can read more on authentication and how it’s handled in Supercharge in the related [authentication docs](/docs/{{version}}/authentication).
 
 
 ### The “events“ Directory
@@ -71,8 +66,20 @@ This directory contains all your event listeners. The listeners are classes that
 [Mailables](/docs/{{version}}/mailer) in Supercharge are JavaScript classes. Create all the emails you want to send out as a class.
 
 
+### The “middleware“ Directory
+This directory includes all your [HTTP middleware](/docs/{{version}}/middleware). Supercharge auto-loads all files in this directory and registers them as middleware to the HTTP core.
+
+
 ### The “models“ Directory
 The `models` directory stores all your application models. Supercharge will create a `User` model when [scaffolding authentication](/docs/{{version}}/authentication). You can use and extend and update this model to your needs.
+
+
+### The “plugins“ Directory
+Supercharge uses hapi as the HTTP core and hapi uses plugins to isolate functionality in reusable components. Compose your own [plugins](/docs/{{version}}/plugins) and place them into the `plugins` directory. Supercharge will auto-load them when starting the HTTP server.
+
+
+### The “routes“ Directory
+This directory contains all your HTTP server’s [routes](/docs/{{version}}/routing). When starting the server, Supercharge will load all files from the `routes` directory and register them to the server.
 
 
 Supercharge’s default application structure gives you a solid starting point for development. If you feel like there’s something missing or in the wrong place, go ahead and create additional directories or move them around. Don’t hesitate to change the structure.
