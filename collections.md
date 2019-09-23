@@ -94,6 +94,7 @@ Here’s a list of available methods in the collections package:
 [someSeries](#someseries)
 [take](#take)
 [takeAndRemove](#takeandremove)
+[unshift](#unshift)
 
 </div>
 
@@ -726,3 +727,14 @@ await collection.all()
 // [1, 2, 3]
 ```
 
+
+#### unshift
+The `unshift` method adds one or more elements to the beginning of the collection. It returns the new collection containing the added items:
+
+```js
+await Collect([1, 2, 3])
+  .unshift(5, 6)
+  .all()
+
+// [5, 6, 1, 2, 3]
+```
