@@ -72,11 +72,13 @@ Here’s a list of available methods in the collections package:
 [filterSeries](#filterseries)
 [find](#find)
 [findSeries](#findseries)
+[first](#first)
 [flatMap](#flatmap)
 [forEach](#foreach)
 [forEachSeries](#foreachseries)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
+[has](#has)
 [map](#map)
 [mapSeries](#mapseries)
 [push](#push)
@@ -265,6 +267,25 @@ await Collect(usernames)
 The `findSeries` limits the number of parallel requests to the API.
 
 
+#### first
+The `first` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
+
+```js
+await Collect([
+  { id: 1, name: 'marcus' },
+  { id: 3, name: 'marcus' }
+]).first(async ({ name }) => {
+  return await User.findByName(name)
+})
+
+// { id: 1, name: 'marcus' }
+```
+
+```info
+The `first` method is an alias for [`find`](#find).
+```
+
+
 #### flatMap
 The `flatMap` method invokes the (async) callback on each collection item. The callback can modify and return the item resulting in a new collection of modified items. Ultimately, `flatMap` flattens the mapped results:
 
@@ -323,6 +344,34 @@ The `isNotEmpty` method returns `true` when the collection is not empty, otherwi
 await Collect([]).isNotEmpty()
 
 // false
+```
+
+
+#### has
+The `has` method returns `true` when the collection an item satisfying the argument or a callback function, otherwise `false`:
+
+```js
+await Collect([1, 2, 3]).has(1)
+
+// true
+```
+
+You can also use a callback function to iterate through the list of items:
+
+```js
+await Collect([1, 2, 3]).has(item => item === 10)
+
+// false
+
+await Collect([
+  { id: 1, name: 'Marcus' },
+  { id: 2, name: 'Norman' },
+  { id: 3, name: 'Christian' }
+]).has(item => {
+  return item.id === 1
+})
+
+// true
 ```
 
 
