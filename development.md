@@ -2,30 +2,15 @@
 
 
 ## Accessing Supercharge Classes
-The Supercharge framework provides a solid core for your application. You may pull out classes from the framework and use them into your app.
-
-You have two options to access Supercharge framework classes:
-
-1. Destructure the needed classes
-2. Import “namespace-like” each class individually
+The Supercharge framework provides a solid core for your application. You may pull out classes from the framework and use them into your app. For example, you can access Supercharge’s configuration utility like this:
 
 ```js
-const { Config } = require('@supercharge/framework')
-
 const Config = require('@supercharge/framework/config')
 ```
 
-When using destructuring, you may pull out multiple classes at once:
-
-```js
-const { Config, Database, Mailer } = require('@supercharge/framework')
-```
-
-There’s no advantage for one method over the other. Choose your imports the way you like it.
-
 
 ## Debugging
-It’s common during development to debug individual pieces of your code. Here are some tips we noticed to be helpful while debugging Supercharge apps.
+It’s common during development to debug individual pieces of your code. Here are some tips we noticed being helpful while debugging Supercharge apps.
 
 
 ### Visual Studio Code
