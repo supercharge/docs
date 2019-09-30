@@ -6,7 +6,7 @@ At some point you want to deploy your Supercharge application to production. Whe
 
 
 ## Asset Pipeline
-At this point, Supercharge doesn’t ship with an pipeline to minify your client-side CSS and JS assets. Please choose your favorite build tool and create your custom setup.
+At this point, Supercharge doesn’t ship with an asset pipeline to minify your client-side CSS and JS assets. Please choose your favorite build tool and bundler and create your custom setup. We’ve good experience using [Webpack](https://webpack.js.org) or [Parcel](https://parceljs.org).
 
 
 ## Zero-Downtime Deployments
