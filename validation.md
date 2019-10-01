@@ -84,8 +84,10 @@ In situations where a user registers for your application, you're interested in 
 ```
 
 
-### Allow Unknown Properties
-As soon as you define a validation rule for a single property on either `query`, `params`, `payload`, or `headers`, you must validate all the related properties. If not, the request will fail with a validation error. To soften this restriction, you can define `allowUnknown: true` in your `validate` config:
+### Overriding the Default Error Handling
+Supercharge extracts the error messages from failed validations and appends them to the response. The response payload then contains an object of the failed property as the key and the validation error message as the value.
+
+You can control the validation error handling yourself using the `failAction` method:
 
 ```js
 {
@@ -93,7 +95,9 @@ As soon as you define a validation rule for a single property on either `query`,
   path: '/',
   options: {
     validate: {
-      allowUnknown: true
+      failAction: async (request, h, error) => {
+        // your validation error handling
+      }
       payload: {
         name: Joi.string().required()
       }
@@ -102,11 +106,13 @@ As soon as you define a validation rule for a single property on either `query`,
 }
 ```
 
-The payload validation for the setup above ensures that a `name` property is a valid string. It also allows requests to contain properties besides the name and not only the name.
 
+### Strip Unknown Properties
+As soon as you define a validation rule for a single property on either `query`, `params`, `payload`, or `headers`, you must validate all related properties you're interested in. Once you apply validation, Supercharge automatically removes incoming request input that is not present in the validation rules.
 
-### Stop Validation on First Error
-The default validation process stops validation on the first error. Sometimes, you may want to present all validation errors at once. To validate the request input against all your rules and also proceed if a validation error occurs, use `abortEarly: false`.
+Here's an example: let's say you're only validating the `name` property of the request payload. An incoming request has two properties in the request payload, `name` and `age`. Supercharge will then remove `age` because you're not validating it.
+
+To soften this restriction, you can define `stripUnknown: false` in your `validate` config options to allow non-validated properties:
 
 ```js
 {
@@ -114,7 +120,31 @@ The default validation process stops validation on the first error. Sometimes, y
   path: '/',
   options: {
     validate: {
-      abortEarly: false
+      options: {
+        stripUnknown: false
+      },
+      payload: {
+        name: Joi.string().required()
+      }
+    }
+  }
+}
+```
+
+
+### Stop Validation on First Error
+The default validation processes all request inputs before proceeding with the error handling. Sometimes, you may want to stop on the first error and not present all validation errors at once. To fail request input validation early and proceed as soon as a validation error occurs, use `abortEarly: true`.
+
+```js
+{
+  method: 'POST',
+  path: '/',
+  options: {
+    validate: {
+      options: {
+        abortEarly: true
+      }
+
       // …
     }
   }
