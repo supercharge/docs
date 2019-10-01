@@ -10,7 +10,7 @@ Supercharge uses `hapi v18` which has limited support for `joi v16`. At this poi
 
 
 ## Validation Overview
-The upcoming code samples use the Joi library to define validation rules for request input. If you want to know more details about the used validation methods, please refer to [Joi's documentation outlining their API](https://github.com/hapijs/joi/blob/master/API.md).
+The upcoming code samples use the Joi library to define validation rules for request input. If you want to know more details about the used validation methods, please refer to [Joi’s documentation outlining their API](https://github.com/hapijs/joi/blob/master/API.md).
 
 
 ## Validate Incoming Request Data
@@ -21,7 +21,7 @@ Each route in Supercharge supports an additional `options` object. The route opt
 - payload
 - headers
 
-Here's a sample route outlining a validation setup:
+Here’s a sample route outlining a validation setup:
 
 ```js
 {
@@ -47,13 +47,13 @@ Here's a sample route outlining a validation setup:
 }
 ```
 
-In most situations, you don't need to validate all the request input. Typically, you'll define the validation rules for expected parameters and ignore the other ones. The example below shows this in more detail.
+In most situations, you don’t need to validate all the request input. Typically, you’ll define the validation rules for expected parameters and ignore the other ones. The example below shows this in more detail.
 
 
 ### Sample Validation for Signups
-Imagine this signup route only validating the request payload. There's no validation for query parameters, path parameters, and request headers.
+Imagine this signup route only validating the request payload. There’s no validation for query parameters, path parameters, and request headers.
 
-In situations where a user registers for your application, you're interested in a combination of email/username and password. Most of the time, you're ignoring the query parameters and therefore don't need to validate them:
+In situations where a user registers for your application, you’re interested in a combination of email/username and password. Most of the time, you’re ignoring the query parameters and therefore don’t need to validate them:
 
 ```js
 {
@@ -108,9 +108,9 @@ You can control the validation error handling yourself using the `failAction` me
 
 
 ### Strip Unknown Properties
-As soon as you define a validation rule for a single property on either `query`, `params`, `payload`, or `headers`, you must validate all related properties you're interested in. Once you apply validation, Supercharge automatically removes incoming request input that is not present in the validation rules.
+As soon as you define a validation rule for a single property on either `query`, `params`, `payload`, or `headers`, you must validate all related properties you’re interested in. Once you apply validation, Supercharge automatically removes incoming request input that is not present in the validation rules.
 
-Here's an example: let's say you're only validating the `name` property of the request payload. An incoming request has two properties in the request payload, `name` and `age`. Supercharge will then remove `age` because you're not validating it.
+Here’s an example: let’s say you’re only validating the `name` property of the request payload. An incoming request has two properties in the request payload, `name` and `age`. Supercharge will then remove `age` because you’re not validating it.
 
 To soften this restriction, you can define `stripUnknown: false` in your `validate` config options to allow non-validated properties:
 
