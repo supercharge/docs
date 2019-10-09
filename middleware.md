@@ -47,6 +47,20 @@ class MyMiddleware {
 }
 ```
 
+Supercharge automatically instantiates the middleware instances and passes the HTTP `server` instance as the only parameter to the constructor:
+
+```js
+class MyMiddleware {
+  constructor(server) {
+    this.server = server
+  }
+
+  async onPreHandler(request, h) {
+    // …
+  }
+}
+```
+
 You can surely create other methods besides the extension points to split the responsibility:
 
 ```js
