@@ -4,7 +4,9 @@
 ## Introduction
 Supercharge has support for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) protection. A cross-site request forgery is a malicious exploit where unauthorized commands are transmitted on behalf of an authenticated user.
 
-Supercharge ships with CSRF protection out-of-the-box. It generates a “CSRF token” for active user sessions. Supercharge will verify the CSRF token for `POST`, `PUT`, `PATCH`, and `DELETE` requests to your application.
+Supercharge ships with CSRF protection out-of-the-box. It generates a “CSRF token” for active user sessions. To use CSRF protection, you must register the session [bootstrapper](/docs/{{version}}/bootstrappers).
+
+Supercharge will verify the CSRF token for all request methods except `GET`, `HEAD`, `OPTIONS`.
 
 Supercharge provides you a Handlebars helper to seamlessly add the CSRF token to your forms. Make use of the `{{csrf}}` helper inside your HTML forms. This helper generates and adds a hidden input field to your form. Use the helper like this:
 
@@ -16,84 +18,52 @@ Supercharge provides you a Handlebars helper to seamlessly add the CSRF token to
 </form>
 ```
 
-Supercharge uses the [crumb](https://github.com/hapijs/crumb) plugin to verify the CSRF token. Crumb checks incoming requests whether they contain a CSRF token based on the HTTP method.
+Typically when submitting forms, you’ll use a `POST` request with requires the CSRF token to be present. If the form request doesn’t contain a CSRF token, requests will fail with an `403 Forbidden` error.
 
-In case the HTTP method matches `POST`, `PUT`, `PATCH`, or `DELETE`, the CSRF token must be present. If it doesn’t contain a CSRF token, requests will fail with an `403 Forbidden` error.
-
-```warning
-Supercharge won’t automatically disable CSRF protection when running tests.
+```info
+Supercharge automatically disables CSRF protection when running tests.
 ```
 
 
 ## Exclude Routes from CSRF Protection
 At some point, you may want to exclude URIs from CSRF protection. Common use cases are external platforms calling your application via webhooks.
 
-For example, if you’re integrating payment processing via [Braintree](https://www.braintreegateway.com/) you may wish to disable CSRF protection for the related routes. Braintree won’t have a valid CSRF token to send along with the request.
+For example, if you’re integrating payment processing via [Stripe](https://stripe.com) or [Braintree](https://www.braintreegateway.com/) you may wish to disable CSRF protection for the related routes. Neither of the platforms will have a valid CSRF token to send along with the request. In these situations, you typically have another form of integrety check for incoming requests.
 
-
-### Disable the Crumb Plugin on Routes
-You can disable individual plugins on routes via the `plugins` object. Because Supercharge relies on the crumb plugin to handle CSRF protection, you should set `crumb: false` on the route where you want to disable it.
-
-Here’s a sample route for a Braintree webhook with disabled `crumb` plugin:
+You may exclude individual routes from CSRF verification by adding them to the `exclude` property in the `verify-csrf-token` middleware:
 
 ```js
-module.exports = {
-  method: 'POST',
-  path: '/webhooks/braintree',
-  config: {
-    plugins: {
-      crumb: false
-    },
-    handler: async (request, h) => {
-      // process webhook
-    }
+'use strict'
+
+const Middleware = require('@supercharge/framework/http/middleware/verify-csrf-token')
+
+class VerifyCsrfToken extends Middleware {
+  /**
+   * Returns an array of URIs that should
+   * be excluded from CSRF verfication.
+   *
+   * @returns {Array}
+   */
+  get exclude() {
+    return [
+      '/braintree/*',
+      '/my/secret/endpoint
+    ]
   }
 }
-```
 
-Notice that the configuration disables CSRF verification for this single route. If you want to disable CSRF verification on another route, you need to configure it separately.
-
-
-### Use Crumb’s Skip Function
-Another way to skip CSRF verification is the plugins `skip` function. Navigate your IDE or editor to the `verify-csrf-token` plugin in `app/plugins` and add this option. The `skip` function has the `asyc (request, h)` signature.
-
-To skip CSRF verification, return `true` from the skip function, `false` otherwise. The following example will skip CSRF protection for all routes having a URI that includes “/webhooks”:
-
-```js
-module.exports = {
-  plugin: require('crumb'),
-  options: {
-    skip: async (request, h) => {
-      return request.path.includes('/webhooks')
-    }
-  }
-}
+module.exports = VerifyCsrfToken
 ```
 
 
 ## X-CSRF-Token for Restful Routes
-Sometimes you want to send the CSRF token in a request header instead of the request payload. To achieve this, you need to configure crumb to use a restful configuration and then send the CSRF token along in the request headers.
+Supercharge appends an encrypted `XSRF-Token` cookie to responses. This cookie contains the CSRF token. HTTP libraries like [Axios](https://github.com/axios/axios) automatically pick up this cookie and append it to requests.
 
-First, you need to configure the crumb plugin or individual routes to fetch the CSRF token from the request headers:
+Appending the `XSRF-Token` cookie to requests is helpful when using client-side frameworks in combination with Axios. You can then send authenticated requests from the client-side with an existing cookie.
 
-```js
-module.exports = {
-  method: 'PUT',
-  path: '/profile',
-  config: {
-    plugins: {
-      crumb: {
-        restful: true // this requires the 'X-CSRF-Token' request header
-      }
-    },
-    handler: async (request, h) => {
-      // update profile
-    }
-  }
-}
-```
 
-Supercharge provides the `csrfToken` Handlebars helper which returns the CSRF token value. You could then add a meta tag to your HTML and insert the value like this:
+### Manually Appending the CSRF-Token
+If you want to manually grab the CSRF-Token and append it to requests, you may grab it from an HTML meta tag:
 
 ```html
 <meta name="csrf-token" content="{{csrfToken}}">
