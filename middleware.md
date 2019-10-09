@@ -15,6 +15,7 @@ Middleware in Supercharge are located in the `app/middleware` directory. This di
 ## Request Lifecycle
 Supercharge uses [hapi](https://hapijs.com), a Node.js web framework, as the HTTP layer. A benefit of using hapi is the extensive request lifecycle.
 
+
 ### Extension Points
 Supercharge provides seven extension points along the request lifecycle:
 
@@ -34,28 +35,39 @@ We’ve created a [request lifecycle cheat sheet](https://futurestud.io/download
 
 
 ## Creating Middleware
-A middleware in Supercharge is a so called “lifecycle function” with the signature `async (request, h)`. The term lifecycle function is related to being a function in the request lifecycle.
+A middleware in Supercharge is a so called “lifecycle function”. The term lifecycle function is related to being a function in the request lifecycle. A middleware that touches every incoming request is a “global” lifecycle extension located in the `app/middlewar directory.
 
-Create a Supercharge middleware by exporting an object with two properties:
-
-1. `type`: must be one of the listed extension points
-2. `method`: the lifecycle method
+Create middleware in Supercharge using a class and implementing at least one of the request lifecycle extension points. Each extension function has the signature `async (request, h)`:
 
 ```js
-module.exports = {
-  type: 'onPostAuth',
-  method: async (request, h) => {
-    // your middleware code
-
-    // here’s an example:
-    if (request.auth.isAuthenticated) {
-      console.log(`Authenticated user passing by: ${request.user().id}`)
-    }
+class MyMiddleware {
+  async onPreHandler(request, h) {
+    // …
   }
 }
 ```
 
-Middlewares can remove duplicated code from your route handlers. Remember global and route-level middleware whenever you think that functionality should live outside of route handlers.
+You can surely create other methods besides the extension points to split the responsibility:
+
+```js
+const Env = require('@supercharge/framework/env')
+
+class MyMiddleware {
+  async onPreHandler(request, h) {
+    if (this.isTesting()) {
+      return h.continue
+    }
+
+    // further processing
+  }
+
+  isTesting() {
+    return Env.isTesting()
+  }
+}
+```
+
+A middleware can remove duplicated code from your route handlers. Remember global and route-level middleware whenever you think that functionality should live outside of route handlers.
 
 
 ## Using Middleware
