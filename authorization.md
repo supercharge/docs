@@ -26,7 +26,7 @@ Authorizing users on resources requires you to implement a `scope` property in a
 
 The `scope` property can be a string or an array of strings. We recommend to use an array to keep your scopes extensible.
 
-When HTTP requests hit your server, you’ll [authenticate](/docs/{{version}}/authenticate) the user. These authenticated credentials are then available to the underlying hapi HTTP server for authorization against routes.
+When HTTP requests hit your server, you’ll [authenticate](/docs/{{version}}/authentication) the user. These authenticated credentials are then available to the underlying hapi HTTP server for authorization against routes.
 
 
 ## Require Scopes on Routes

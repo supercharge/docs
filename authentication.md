@@ -16,7 +16,7 @@ Supercharge provides you an authentication strategy for cookie-based authenticat
 
 Authenticating users in Supercharge is built on “strategies”. An authentication strategy validates whether a request is authenticated or not. Imagine an authentication strategy as a middleware that authenticates a request (if possible/required).
 
-Scaffolding the authentication with `node craft make:auth` creates the user model file `app/models/user.js`. The user model is a [Mongoose model](/docs/{{version}}/mongodb-preset#mongoose-orm). This predefined model is configured so that you can support authentication without additional configuration. If you want to change something, please go ahead and adjust the model.
+Scaffolding the authentication with `node craft make:auth` creates the user model file `app/models/user.js`. The user model is a [Mongoose model](/docs/{{version}}/database-connectors#mongoose-connector-for-mongodb). This predefined model is configured so that you can support authentication without additional configuration. If you want to change something, please go ahead and adjust the model.
 
 
 ## Authentication
