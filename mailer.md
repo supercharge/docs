@@ -1,5 +1,22 @@
 # Mailer
-Tba.
+
+
+## Introduction
+Text
+
+
+## Configuration
+Text `config/mail.js`
+
+The mailer is built on top of the sophisticated [nodemailer](https://nodemailer.com/) package.
+
+Available transports (drivers):
+
+- `mailgun`
+- `postmark`
+- `ses`
+- `sparkpost`
+- `smtp`
 
 ## Creating Mailables
 Text
@@ -7,7 +24,6 @@ Text
 ```js
 'use strict'
 
-const Config = util('config')
 const Mailable = util('mailable')
 
 class WelcomeMail extends Mailable {
@@ -17,9 +33,10 @@ class WelcomeMail extends Mailable {
   }
 
   create() {
-    this.to(this.user.email)
+    this
+      .to(this.user.email)
       .view('emails.welcome')
-      .subject(`Welcome to ${Config.get('app.name')}!`)
+      .subject(`Welcome to Supercharge!`)
       .with('name', this.user.name || this.user.username || this.user.email)
   }
 }
@@ -34,6 +51,8 @@ More text.
 Text
 
 ```js
+const Mailer = require('@supercharge/framework/mailer')
+
 await Mailer.send(new WelcomeEmail(user))
 ```
 
