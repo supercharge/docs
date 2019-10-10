@@ -103,7 +103,7 @@ Here’s a list of available methods in the collections package:
 [sum](#sum)
 [take](#take)
 [takeAndRemove](#takeandremove)
-[toJSON](#toJSON)
+[toJSON](#tojson)
 [union](#union)
 [unshift](#unshift)
 
