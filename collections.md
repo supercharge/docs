@@ -63,10 +63,12 @@ Here’s a list of available methods in the collections package:
 <div id="collection-method-list" markdown="1">
 
 [all](#all)
+[avg](#avg)
 [chunk](#chunk)
 [collapse](#collapse)
 [compact](#compact)
 [concat](#concat)
+[diff](#diff)
 [every](#every)
 [filter](#filter)
 [filterSeries](#filterseries)
@@ -76,24 +78,33 @@ Here’s a list of available methods in the collections package:
 [flatMap](#flatmap)
 [forEach](#foreach)
 [forEachSeries](#foreachseries)
+[has](#has)
+[intersect](#intersect)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
-[has](#has)
+[join](#join)
 [map](#map)
 [mapSeries](#mapseries)
+[max](#max)
+[min](#min)
 [push](#push)
 [reduce](#reduce)
 [reduceRight](#reduceright)
 [reject](#reject)
 [rejectSeries](#rejectseries)
+[reverse](#reverse)
 [shift](#shift)
 [size](#size)
 [slice](#slice)
 [splice](#splice)
 [some](#some)
 [someSeries](#someseries)
+[sort](#sort)
+[sum](#sum)
 [take](#take)
 [takeAndRemove](#takeandremove)
+[toJSON](#toJSON)
+[union](#union)
 [unshift](#unshift)
 
 </div>
@@ -115,6 +126,17 @@ await Collect([1, 2, 3])
 Some of the methods (like `map`, `filter`, `collapse`, or `compact`) return the collection instance allowing you to chain additional methods to this pipeline.
 
 To retrieve the results of these operations, you must explicitly end your collection pipeline with `.all()`.
+
+
+#### avg
+The `avg` method returns the average of all collection items:
+
+```js
+await Collect([1, 2, 3, 4])
+  .avg()
+
+// 2,5
+```
 
 
 #### chunk
@@ -167,6 +189,18 @@ await concat.all()
 await collection.all()
 
 // [1, 2, 3]
+```
+
+
+#### diff
+The `diff` method removes all values from the `collection` that are present in the given `array`.
+
+```js
+await Collect([1, 2, 3])
+  .diff([2, 3, 4, 5])
+  .all()
+
+// [1]
 ```
 
 
@@ -247,7 +281,9 @@ await Collect(usernames)
 // 'marcus'
 ```
 
-Hint: the `!!` operator converts any data type to boolean by using a “doubled negation”. If the value of `user` is `undefined`, it will return `false`, otherwise `true`.
+```info
+The `!!` operator converts any data type to boolean by using a “doubled negation”. If the value of `user` is `undefined`, it will return `false`, otherwise `true`.
+```
 
 
 #### findSeries
@@ -328,26 +364,6 @@ await Collect(files)
 ```
 
 
-#### isEmpty
-The `isEmpty` method returns `true` when the collection is empty, otherwise `false`:
-
-```js
-await Collect([]).isEmpty()
-
-// true
-```
-
-
-#### isNotEmpty
-The `isNotEmpty` method returns `true` when the collection is not empty, otherwise `false`:
-
-```js
-await Collect([]).isNotEmpty()
-
-// false
-```
-
-
 #### has
 The `has` method returns `true` when the collection an item satisfying the argument or a callback function, otherwise `false`:
 
@@ -373,6 +389,51 @@ await Collect([
 })
 
 // true
+```
+
+
+#### intersect
+The `isEmpty` method removes all values from the `collection` that are not present in the given `array`.
+
+```js
+await Collect([1, 2, 3])
+  .intersect([2, 3, 4, 5])
+  .all()
+
+// [2, 3]
+```
+
+
+#### isEmpty
+The `isEmpty` method returns `true` when the collection is empty, otherwise `false`:
+
+```js
+await Collect([]).isEmpty()
+
+// true
+```
+
+
+#### isNotEmpty
+The `isNotEmpty` method returns `true` when the collection is not empty, otherwise `false`:
+
+```js
+await Collect([]).isNotEmpty()
+
+// false
+```
+
+
+#### join
+The `join` method joins all items in the collection using the given `str` and returns the resulting string value:
+
+**Example**
+
+```js
+await Collect([10, 2, 3, 4])
+  .join('-')
+
+// '10-2-3-4'
 ```
 
 
@@ -419,6 +480,28 @@ The example of reading the content of log files is a good candidate for sequenti
 
 ```info
 `mapSeries` invokes all transformations in sequence. If you want to run them in parallel, use [`map`](#map).
+```
+
+
+#### max
+The `max` method returns the max value in the collection:
+
+```js
+await Collect([1, 20, 3, 4])
+  .max()
+
+// 20
+```
+
+
+#### min
+The `min` method returns the min value in the collection:
+
+```js
+await Collect([10, 2, 3, 4])
+  .min()
+
+// 2
 ```
 
 
@@ -511,6 +594,18 @@ await Collect([1, 2, 3, 4, 5])
 ```
 
 See the [`filterSeries`](#filterseries) method for the inverse of `rejectSeries`.
+
+
+#### reverse
+The `reverse` method reverses the collection. The first item becomes the last one, the second item becomes the second to last, and so on:
+
+```js
+await Collect([4, 6, 8, 9])
+  .reverse()
+  .all()
+
+// [9, 8, 6, 4]
+```
 
 
 #### shift
@@ -664,6 +759,41 @@ await Collect(logfiles)
 ```
 
 
+#### sort
+The `sort` method returns the sorted collection:
+
+```js
+await Collect([4, 1, 37, 2, 1])
+  .sort()
+  .all()
+
+// [1, 1, 2, 4, 37]
+```
+
+The `sort` method accepts an optional comparator for custom sort operations:
+
+```js
+await Collect([4, 1, 37, 2, 1])
+  .sort((a, b) => {
+    return b - a
+  })
+  .all()
+
+// [37, 4, 2, 1, 1]
+```
+
+
+#### sum
+The `sum` method returns the sum of all collection items:
+
+```js
+await Collect([1, 2, 3, 4])
+  .sum()
+
+// 10
+```
+
+
 #### take
 The `take` method returns a new Collection containing the specified number of items:
 
@@ -725,6 +855,34 @@ await chunk.all()
 await collection.all()
 
 // [1, 2, 3]
+```
+
+
+#### toJSON
+The `toJSON` method creates a JSON string from the values of the collection:
+
+```js
+await Collect([1, 2, 3])
+  .toJSON()
+
+// "[1,2,3]"
+
+await Collect([{ name: 'Marcus'}])
+  .toJSON()
+
+// "[{"name":"Marcus"}]"
+```
+
+
+#### union
+The `union` method adds all values from the array to the underlying collection and removes duplicates:
+
+```js
+await Collect([1, 2, 3])
+  .union([2, 3, 4, 5])
+  .all()
+
+// [1, 2, 3, 4, 5]
 ```
 
 
