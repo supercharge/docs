@@ -168,6 +168,19 @@ await Mailer
 ```
 
 
+### Fire And Forget
+Sometimes, you don’t want to worry about the success or failure of the email sending process. You may accept that mails not going out as a valid scenario. In these situations, you can use the `Mailer.fireAndForget` method.
+
+The `fireAndForget` method catches application errors like “unable connecting to InsertMailServiceHere”. It still, throws implementation/system errors, like `undefined is not a function`:
+
+```js
+const WelcomeEmail = require('../mails/welcome')
+const Mailer = require('@supercharge/framework/mailer')
+
+Mailer.fireAndForget(new WelcomeEmail(user))
+```
+
+
 ## Preview Mails
 Previewin Handlebars layouts requires a rendering step. This can be cumbersome when creating email templates.
 
