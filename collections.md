@@ -86,6 +86,7 @@ Here’s a list of available methods in the collections package:
 [map](#map)
 [mapSeries](#mapseries)
 [max](#max)
+[median](#median)
 [min](#min)
 [push](#push)
 [reduce](#reduce)
@@ -491,6 +492,22 @@ await Collect([1, 20, 3, 4])
   .max()
 
 // 20
+```
+
+
+#### median
+The `median` method returns the [median](https://en.wikipedia.org/wiki/Median) value of the collection:
+
+```js
+await Collect([4, 1, 37, 2, 1])
+  .median()
+
+// 2
+
+await Collect([1, 2, 3, 4, 5, 6])
+  .median()
+
+// 3.5
 ```
 
 
