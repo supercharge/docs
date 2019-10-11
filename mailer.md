@@ -109,7 +109,7 @@ class WelcomeMail extends Mailable {
 }
 ```
 
-The `.view(emails/welcome)` call references an email template located at `resources/views/emails/welcome.hbs`. Supercharge expects email templates to be [Handlebars](/docs/{{version}}/handlebars) templates and renders them the same way as your [web views](/docs//{{version}}/views).
+The `.view(emails/welcome)` call references an email template located at `resources/views/emails/welcome.hbs`. Supercharge expects email templates to be [Handlebars](/docs/{{version}}/handlebars) templates and renders them the same way as your [web views](/docs/{{version}}/views).
 
 
 ### Configure View Data
