@@ -89,6 +89,7 @@ Here’s a list of available methods in the collections package:
 [max](#max)
 [median](#median)
 [min](#min)
+[pop](#pop)
 [push](#push)
 [reduce](#reduce)
 [reduceRight](#reduceright)
@@ -548,6 +549,22 @@ await Collect([10, 2, 3, 4])
   .min()
 
 // 2
+```
+
+
+#### pop
+The `pop` method removes and returns the last item from the collection. It changes the original collection:
+
+```js
+const collection = Collect([1, 2, 3])
+
+await collection.pop()
+
+// 3
+
+await collection.all()
+
+// [1, 2]
 ```
 
 
