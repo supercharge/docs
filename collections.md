@@ -83,6 +83,7 @@ Here’s a list of available methods in the collections package:
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [join](#join)
+[last](#last)
 [map](#map)
 [mapSeries](#mapseries)
 [max](#max)
@@ -306,7 +307,7 @@ The `findSeries` limits the number of parallel requests to the API.
 
 
 #### first
-The `first` method returns the first item in the collection:
+The `first` method returns the first item in the collection. It won’t remove the item from the original collection:
 
 ```js
 await Collect([ 1, 2, 3 ]).first()
@@ -439,6 +440,30 @@ await Collect([10, 2, 3, 4])
   .join('-')
 
 // '10-2-3-4'
+```
+
+
+#### last
+The `last` method returns the last item in the collection, otherwise `undefined`. It won’t remove the item from the original collection:
+
+```js
+await Collect([ 1, 2, 3 ]).last()
+
+// 3
+```
+
+You can also pass an (async) testing function as a parameter to the `last` method:
+
+```js
+await Collect([
+  { id: 1, name: 'norman' },
+  { id: 3, name: 'christian' }
+  { id: 3, name: 'marcus' }
+]).last(async ({ name }) => {
+  return name === 'marcus'
+})
+
+// { id: 3, name: 'marcus' }
 ```
 
 
