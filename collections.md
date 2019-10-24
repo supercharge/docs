@@ -306,7 +306,15 @@ The `findSeries` limits the number of parallel requests to the API.
 
 
 #### first
-The `first` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
+The `first` method returns the first item in the collection:
+
+```js
+await Collect([ 1, 2, 3 ]).first()
+
+// 1
+```
+
+You can also pass an (async) testing function as a parameter to the `first` method:
 
 ```js
 await Collect([
@@ -317,10 +325,6 @@ await Collect([
 })
 
 // { id: 1, name: 'marcus' }
-```
-
-```info
-The `first` method is an alias for [`find`](#find).
 ```
 
 
