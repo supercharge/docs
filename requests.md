@@ -47,7 +47,7 @@ When merging the input from all three inputs, query parameters prioritize over p
 
 
 #### Retrieve an Input Item
-Retrieve a single input item identified by `key`. The request input is the request payload, path and query parameters. Internally, this method fetches the `key` from `request.all()`.
+Retrieve a single input item identified by `key`. The request input is the request payload, path and query parameters. Internally, this method fetches the `key` from [`request.all()`](/docs/{{version}}/requests#retrieve-all-request-data).
 
 ```js
 const username = request.input('username')
@@ -81,7 +81,7 @@ const withoutSecrets = request.except(['token', 'password', 'secret'])
 
 
 #### Determine If an Input Is Present
-Use `has` to determine whether the request includes an input `key` or a list of `keys`.
+Use `.has(keys)` to determine whether the request includes an input `key` or a list of `keys`.
 
 ```js
 if (request.has('email')) {
@@ -111,6 +111,21 @@ if (request.filled(['username', 'email'])) {
 ```
 
 You can check an array of keys and `filled` will return true if all of the keys have non-empty values.
+
+
+#### Determine If an Input Is Missing
+Use `.missing(keys)` to determine whether the request missing an input `key` or a list of `keys`.
+
+```js
+if (request.missing('email')) {
+    //
+}
+
+// or check an array
+if (request.missing(['username', 'email'])) {
+    //
+}
+```
 
 
 ### Headers
@@ -205,3 +220,29 @@ const wantsHtml = request.wantsHtml()
 // true
 ```
 
+
+## Retrieve Request URLs
+You can also retrieve the reuqest URL or parts of the request URL from the `request` object. The folllowing code snippets use a request against `https://sub.domain.com/path/second-path?query=string#hashtag` to illustrate the results.
+
+Use the `.root()` method to retrieve the request’s root domain:
+
+```js
+const root = request.root()
+// https://sub.domain.com
+```
+
+You may retrieve the domain including path parameter using the `.uri()` method:
+
+```js
+const root = request.uri()
+// https://sub.domain.com/path/second-path
+```
+
+Please notice that `request.url` is a property of the hapi framework providing a WHATWG URL instance.
+
+You can also retrieve the full request domain including all parameters using `.fullUri()` method. You may also use `.fullUrl()` which is an alias for `.fullUri()`.
+
+```js
+const root = request.fullUri()
+// https://sub.domain.com/path/second-path?query=string#hashtag
+```
