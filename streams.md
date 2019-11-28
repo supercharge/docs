@@ -153,7 +153,7 @@ await Stream(emails)
 ```
 
 
-#### `.filter(callback)`
+#### `.filter(async callback)`
 Filters all items that are piped through the stream satisfying the given async `callback` function. A transform stream will be created under the hood to run the callback function.
 
 ```js
