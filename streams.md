@@ -27,17 +27,24 @@ You can use the streams package with every project even if it’s not build on S
 ```
 
 ## Using Streams
-Using the ...
+Imagine streams in Node.js as a list of items available over time. In contrast to a list that is available in memory, you may consume a huge file with a stream providing each item to one or many function in sequence. The benefit of streams is the nearly-constant memory usage. You never load every piece of data into memory and instead process one chunk after another.
+
+Create a streaming pipeline like this:
 
 ```js
 const Fs = require('fs')
 const Stream = require('@supercharge/streams')
 
 await Stream(
-  Fs.createReadStream('./my-huge-list-of-users.csv')
-).through((user) => {
-
-}).into()
+    Fs.createReadStream('./list-of-emails.csv')  // notice: you probably need a CSV parser :)
+  )
+  .inObjectMode()
+  .map(async email => {
+    return User.findOne({ email })
+  })
+  .into(
+    Fs.createWriteStream('./users-in-database.csv')
+  )
 ```
 
 
@@ -61,7 +68,7 @@ Errors will be thrown as soon as they appear. The stream will stop and clean up 
 
 ## API
 
-#### `Stream(input)` constructor
+#### `Stream(input)`
 Creates a new stream wrapping the given `input` into a read stream if the `input` is not a stream already
 
 ```js
