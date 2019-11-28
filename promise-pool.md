@@ -60,15 +60,15 @@ const pool = new PromisePool({ concurrency: 2, items: [1, 2, 3] })
 ```
 
 
-#### `.withConcurrency(amount)`
+#### static `.withConcurrency(amount)`
 Set the maximum number of functions to process in parallel. Default `concurrency: 10`. Returns the promise pool instance.
 
 ```js
-const pool = new PromisePool().withConcurrency(5)
+const pool = PromisePool.withConcurrency(5)
 ```
 
 
-#### `.for(items)`
+#### static `.for(items)`
 Set the items to be processed in the promise pool. Returns the promise pool instance.
 
 ```js
@@ -78,7 +78,7 @@ const users = [
   { name: 'Christian' }
 ]
 
-const pool = new PromisePool().withConcurrency(5).for(users)
+const pool = PromisePool.for(users)
 ```
 
 
@@ -92,7 +92,7 @@ const users = [
   { name: 'Christian' }
 ]
 
-const pool = new PromisePool().withConcurrency(5).for(users)
+const pool = PromisePool.withConcurrency(5).for(users)
 
 const { results, errors } = await pool.process(async (user) => {
   await User.createIfNotExisting(user)
