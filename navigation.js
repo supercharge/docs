@@ -53,7 +53,8 @@ module.exports = {
       Logger: 'logger',
       Session: 'session',
       Collections: 'collections',
-      'Promise Pool': 'promise-pool'
+      'Promise Pool': 'promise-pool',
+      Streams: 'streams'
     }
   },
 
