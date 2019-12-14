@@ -23,6 +23,8 @@ Wrapping a string is as simple as importing the `@supercharge/strings` package a
 const Str = require('@supercharge/strings')
 
 const title = Str('  Supercharge is sweet! ').trim().title().get()
+
+// 'Supercharge Is Sweet!'
 ```
 
 For every method in the chain that would return a string, the package returns an instance of iteself. This way, you can chain further methods. Call `.get()` to retrieve the actual JavaScript string.
