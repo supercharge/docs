@@ -50,6 +50,8 @@ Here’s a list of available methods in the collections package:
 [camel](#camel)
 [contains](#contains)
 [includes](#includes)
+[isEmpty](#isEmpty)
+[isNotEmpty](#isNotEmpty)
 [isLower](#isLowercase)
 [lcFirst](#lcFirst)
 [length](#upper)
@@ -116,6 +118,42 @@ const includes = Str('Supercharge is awesome').includes('awesome')
 
 ```info
 The `includes` method works the same way as the [`contains`](#contains) method. They are basically just aliases for each other.
+```
+
+
+#### isEmpty
+The `isEmpty` method determines whether the given string has a length of 0:
+
+```js
+const isEmpty = Str('').isEmpty()
+
+// true
+
+const isEmpty = Str().isEmpty()
+
+// true
+
+const isEmpty = Str('Supercharge').isEmpty()
+
+// false
+```
+
+
+#### isNotEmpty
+The `isNotEmpty` method determines whether the given string has a length of 1 or greater:
+
+```js
+const isNotEmpty = Str('Supercharge').isNotEmpty()
+
+// true
+
+const isNotEmpty = Str('').isNotEmpty()
+
+// false
+
+const isNotEmpty = Str().isNotEmpty()
+
+// false
 ```
 
 
