@@ -9,8 +9,20 @@ Retrieve the filesystem package in Supercharge like this:
 ```js
 const Fs = require('@supercharge/framework/filesystem')
 ```
+### Regarding Paths
+In the documentation below, files are read from a 'path'.  This path is relative to the top-level directory of your Supercharge project.
 
+For example: assume you create a project named 'mysupersite'
 
+Supercharge will automatically create a subdirectory named 'public'.  Let's also assume **you** create another directory, below public, and name it 'my_downloadable_files'.
+
+Your path on a Unix-based file system would be this:  **../mysupersite/public/my_downloadable_files**
+
+But when writing JS code using Supercharge’s filesystem, you would reference that path like this:
+```js
+FS.readFile('public/my_downloadable_files/somefile.txt')
+```
+ 
 ## Retrieve Files & Directories
 Read files from the local disk using `Fs.readFile(path)`. This method returns the raw file content as string value:
 
