@@ -2,7 +2,7 @@
 
 
 ## Introduction
-Storing information across HTTP requests is one of the key requirements in web applications. A typical use-case is remembering a user after login. Supercharge ships with driver-based session, meaning that a driver provides a unified interface to interact with the session data.
+Storing information across HTTP requests is one of the key requirements in web applications. A typical use-case is remembering a user after login. Supercharge ships with driver-based sessions providing a unified interface to interact with the session data across all drivers.
 
 
 ## Configuration
@@ -26,6 +26,7 @@ Working and interacting with the session requires the `request` object which is 
 
 ### Retrieve Data
 Use the `request.session.get()` method to retrieve an item from the session:
+
 ```js
 module.exports = {
   method: 'GET',
@@ -75,7 +76,7 @@ Use the `set` method to store data in the session:
 request.session.set('key', 'value')
 ```
 
-The `session` instance provides a convenience method `remember()` with the same signature and functionality as `set()`.
+The `session` instance provides a convenience method `remember()` with the same signature and functionality as `set()`:
 
 ```js
 request.session.remember('key', 'value')
