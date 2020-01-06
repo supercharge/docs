@@ -51,7 +51,8 @@ module.exports = {
       Encryption: 'encryption',
       Events: 'events',
       Logger: 'logger',
-      Session: 'session'
+      Session: 'session',
+      Queues: 'queues'
     }
   },
 
