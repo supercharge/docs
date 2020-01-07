@@ -143,7 +143,9 @@ If you're looking for a place to put your Redis session driver, we recommend to 
 ```
 
 ### Register the Session Driver
-Once you finish the implementation of your session driver, you can register it to the Supercharge framework. The session bootstrapper located within `app/bootstrappers` already outlines how to register it. Basically, you need to call `Session.extend()` and pass the driver name and implementation as arguments:
+Once you finish the implementation of your session driver, you can register it to the Supercharge framework. If not existent, create the `app/bootstrappers` directory. There, you should create a new file `session.js` which extends the default session bootstrapper from the framework.
+
+you need to call `Session.extend()` and pass the driver name and implementation as arguments:
 
 ```js
 'use strict'
@@ -153,7 +155,7 @@ const RedisSessionDriver = require('../extensions/redis-session-driver')
 const Bootstrapper = require('@supercharge/framework/session/bootstrapper')
 
 class SessionBootstrapper extends Bootstrapper {
-  constructor (server) {
+  constructor ({ server }) {
     super()
 
     this.server = server
@@ -171,4 +173,24 @@ module.exports = SessionBootstrapper
 
 
 ### Configure the Session Driver
-Ultimately, tell Supercharge to use the Redis session driver by using `redis` as the driver in your `config/session.js`.
+Ultimately, tell Supercharge to use the Redis session driver by defining `'redis'` as the default driver in your `config/session.js` or use the `SESSION_DRIVER` environment variable:
+
+```js
+module.exports = {
+  /**
+   * --------------------------------------------------------------------------
+   * Session Driver
+   * --------------------------------------------------------------------------
+   *
+   * This defines the default session “driver” that will be used on
+   * requests. The default “cookie” driver is straightforward to
+   * use because it has no dependencies.
+   *
+   * Supported drivers: "file", "cookie"
+   *
+   */
+  driver: Env.get('SESSION_DRIVER', 'redis'),
+
+  …
+}
+```
