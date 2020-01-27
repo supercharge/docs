@@ -50,18 +50,20 @@ Here’s a list of available methods in the collections package:
 [camel](#camel)
 [contains](#contains)
 [includes](#includes)
-[isEmpty](#isEmpty)
-[isNotEmpty](#isNotEmpty)
-[isLower](#isLowercase)
-[lcFirst](#lcFirst)
+[isEmpty](#isempty)
+[isNotEmpty](#isnotempty)
+[isLower](#islowercase)
+[lcFirst](#lcfirst)
 [length](#upper)
 [lower](#lower)
 [random](#random)
+[replaceAll](#replaceall)
 [split](#split)
 [strip](#strip)
 [studly](#studly)
 [title](#title)
 [trim](#trim)
+[ucFirst](#ucfirst)
 [upper](#upper)
 [isUpper](#isUppercase)
 [uuid](#uuid)
@@ -211,6 +213,18 @@ const random = Str.random()
 ```
 
 
+#### replaceAll
+The `replaceAll` method replaces all occurrences of a given value in a string:
+
+```js
+const replaced = Str('Supercharge-is-super-awesome')
+    .replaceAll('-', '/')
+    .get()
+
+// 'Supercharge/is/super/awesome'
+```
+
+
 #### split
 The `split` method splits the given string at the given value and returns an array of the resulting strings:
 
@@ -260,6 +274,16 @@ The `trim` method removes all whitespace from the front and back of the given st
 const trimmed = Str('    Supercharge is sweet ').trim().get()
 
 // 'Supercharge is sweet'
+```
+
+
+#### ucFirst
+The `ucFirst` method uppercases the first character in the string:
+
+```js
+const ucFirst = Str('superCHARGE').ucFirst().get()
+
+// 'SuperCHARGE'
 ```
 
 
