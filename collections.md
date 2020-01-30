@@ -78,6 +78,7 @@ Here’s a list of available methods in the collections package:
 [flatMap](#flatmap)
 [forEach](#foreach)
 [forEachSeries](#foreachseries)
+[groupBy](#groupby)
 [has](#has)
 [intersect](#intersect)
 [isEmpty](#isempty)
@@ -368,6 +369,36 @@ await Collect(files)
   .forEachSeries(async ({ tenantId, name }) => {
     await Fs.writeFile(`./files/${tenantId}/${name}`)
   })
+```
+
+
+#### groupBy
+The `groupBy` method groups the items in the collection by a given `key` and returns an object of the grouped items:
+
+```js
+const products = [
+  { name: 'Macbook', price: 2500 },
+  { name: 'Macbook', price: 3000 },
+  { name: 'iPhone', price: 1000 }
+]
+
+const grouped = await Collect(products).groupBy('name')
+
+/*
+{
+  Macbook: [
+    { name: 'Macbook', price: 2500 },
+    { name: 'Macbook', price: 3000 }
+  ],
+  iPhone: [
+    { name: 'iPhone', price: 1000 }
+  ]
+}
+*/
+```
+
+```warning
+At this point, you can’t group by a nested key. I appreciate your support if you want to send a pull request! Head over to the [Collections repo on GitHub](https://github.com/supercharge/collections) to submit a PR. Thank you!
 ```
 
 
