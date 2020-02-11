@@ -90,6 +90,7 @@ Here’s a list of available methods in the collections package:
 [max](#max)
 [median](#median)
 [min](#min)
+[pluck](#pluck)
 [pop](#pop)
 [push](#push)
 [reduce](#reduce)
@@ -580,6 +581,47 @@ await Collect([10, 2, 3, 4])
   .min()
 
 // 2
+```
+
+
+#### pluck
+The `pluck` method retrieves all values from the collection for a given `key`:
+
+```js
+const users = [
+  { id: 1, name: 'Marcus', email: 'marcus@domain.com' },
+  { id: 2, name: 'Supercharge', email: 'supercharge@domain.com' }
+]
+
+const grouped = await Collect(users)
+  .pluck('name')
+  .all()
+
+// [ 'Marcus', 'Supercharge' ]
+```
+
+You can also pluck multiple keys by passing an array to the `pluck` method. The returned array will then contain objects with the related keys and values:
+
+```js
+const users = [
+  { id: 1, name: 'Marcus', email: 'marcus@domain.com' },
+  { id: 2, name: 'Supercharge', email: 'supercharge@domain.com' }
+]
+
+const grouped = await Collect(users)
+  .pluck(['name', 'email'])
+  .all()
+
+/*
+[
+  { name: 'Marcus', email: 'marcus@domain.com' },
+  { name: 'Supercharge', email: 'supercharge@domain.com' }
+]
+*/
+```
+
+```warning
+At this point, you can’t pluck by a nested key. I appreciate your support if you want to send a pull request! Head over to the [Collections repo on GitHub](https://github.com/supercharge/collections) to submit a PR. Thank you!
 ```
 
 
