@@ -32,7 +32,7 @@ The `npm test` command is defined in the `package.json` file. This file is locat
 Running `npm test` from your terminal will process all existing test files. Use the `npm run test-single` command to run a single test:
 
 ```bash
-npm run test-single <testMethodName>
+npm run test:method <testMethodName>
 ```
 
 The `<testMethodName>` represents the class method that you want to test. AVA compares the given parameter value with the registered tests and only runs the matches.

@@ -17,7 +17,7 @@ The [testing lifecycle hooks](/docs/{{version}}/create-and-debug-tests#lifecycle
 Some of your test cases may rely on existing database entries. Supercharge provides the `async fakeUser()` method to conveniently create a fake user in the database. You may want to delete it after your test runs.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class FakeUserTest extends BaseTest {
   async createFakeUser (t) {
@@ -33,7 +33,7 @@ module.exports = new FakeUserTest()
 You can also pass user data to `async fakeUser(data)`. This is helpful for test cases where you need to know the exact user data, e.g. for assertions.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class FakeUserTest extends BaseTest {
   async createFakeUser (t) {
@@ -59,7 +59,7 @@ You need to manually delete test data from your database. Supercharge exposes co
 Deleting a single user in Supercharge tests can be done using the  `deleteUser(user)` or ´deleteUserById(id)` methods:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class FakeUserTest extends BaseTest {
   async deleteUser (t) {
@@ -81,7 +81,7 @@ module.exports = new FakeUserTest()
 Instead of deleting users one by one, you can delete all entries at once using the `deleteUsers()` method:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class FakeUserTest extends BaseTest {
   async deleteAllUsers (t) {

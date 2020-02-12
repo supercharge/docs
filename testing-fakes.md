@@ -12,7 +12,7 @@ Sinon is a powerful library and Supercharge’s `base-test` does not expose all 
 Supercharge lets you stub out methods via `this.stub(args)`. This method uses Sinon to create the stub and passes all arguments down to Sinon. It returns the stub instance:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class StubTest extends BaseTest {
   async createStub (t) {
@@ -34,7 +34,7 @@ You need to manually restore created stubs. You can either call `stub.restore()`
 Create a mock in test methods using `this.mock(args)`. It uses Sinon to create the mock and passes all arguments down to Sinon. It returns the mock instance:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class MockTest extends BaseTest {
   async createMock (t) {
@@ -61,7 +61,7 @@ Make sure to manually restore mocks. You can either call `mock.restore()` on the
 Create a spy in tests using `this.spy(args)`. It uses Sinon to create the spy and passes all arguments down to Sinon. It returns the spy instance:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class SpyTest extends BaseTest {
   async createSpy (t) {
@@ -84,7 +84,7 @@ Make sure to manually restore spies. Either call `spy.restore()` on the spy inst
 You most likely need random keys in your test cases, for example to generate random usernames. Supercharge provides the `randomKey(length)` method that generates a random string value.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class RandomKeyTest extends BaseTest {
   async generateRandomKey (t) {

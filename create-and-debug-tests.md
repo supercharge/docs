@@ -6,7 +6,7 @@ Testing can be a complex system itself. Depending on your test case, you may nee
 Supercharge comes with a `base-test` utility that is a class you can build on. The suggested way to create tests in Supercharge is to write a class that extends the `base-test`. A base test example looks like this:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class TestCase extends BaseTest {
   /**
@@ -39,7 +39,7 @@ The order of the lifecycle hooks above matches the execution plan in AVA.
 Implement lifecycle hoooks as methods in your test class:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class TestWithLifecycleHooks extends BaseTest {
   async before (t) {}
@@ -59,7 +59,7 @@ The `alwaysAfter` hook will always run as soon as your tests complete. It will a
 Lifecycle hooks are a common place to create dummy data for your tests. For example, if you need a user instance in each test method, you can create a fake user before each test and save it in the test context. The test context is available at `t.context`.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class ContextData extends BaseTest {
   async beforeEach (t) {
@@ -84,7 +84,7 @@ Each test method has access to the test context via the `t` parameter. The conte
 Each test method receives the `t` parameter which makes [assertions](https://github.com/avajs/ava#assertions) directly available.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class Assertions extends BaseTest {
   async assertions (t) {
@@ -129,7 +129,7 @@ In a large test class you might want to run only a subset of all test cases.
 Prefix test methods with **`only`** to run only these methods.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class Only extends BaseTest {
   async onlyTest (t) {
@@ -151,7 +151,7 @@ Skipping tests allows you you to simply ignore these (failing) test cases.
 Prefix test methods with **`skip`** to skip these methods.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class Skip extends BaseTest {
   async skipTest (t) {
@@ -175,7 +175,7 @@ Planning out test cases (without writing them yet) can be easily with the “tod
 Prefix test methods with **`todo`** to mark them as placeholders.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class Todo extends BaseTest {
   async todoTest (t) {
@@ -193,7 +193,7 @@ Tests in Supercharge run concurrently by default. Test cases that can't run conc
 Prefix test methods with **`serial`** to run them sequentially before the concurrent test cases run.
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class Serial extends BaseTest {
   async serialFirst (t) {

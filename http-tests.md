@@ -7,7 +7,7 @@ Supercharge’s `base-test` utility provides a convenient interface to inject HT
 The following code snippet outlines a basic HTTP test:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class LoginTest extends BaseTest {
   /**
@@ -40,7 +40,7 @@ Calling either of the methods must be the last method in the request building pr
 Customize a request’s headers using the `withHeader(name, value)` or the `withHeaders(object)` methods before injecting it to the application:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class BasicTest extends BaseTest {
   async withHeader (t) {
@@ -69,7 +69,7 @@ class BasicTest extends BaseTest {
 Inject a request payload along the testing request using the `withPayload(object)` method:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class BasicTest extends BaseTest {
   async withPayload (t) {
@@ -91,7 +91,7 @@ class BasicTest extends BaseTest {
 Inject cookies with a request using the `withCookie(name, value)` method:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class BasicTest extends BaseTest {
   async withCookie (t) {
@@ -111,7 +111,7 @@ At this point, Supercharge does not offer you to pass in an object with key-valu
 Inject authenticated requests if you want to test routes that require authentication using the `actAs(user)` method:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class BasicTest extends BaseTest {
   async authenticateAsUser (t) {
@@ -133,7 +133,7 @@ Acting as a user will bypass the route’s authentication strategies and assign 
 Supercharge automatically disables the middleware that verifies CSRF token during testing. You can disable any other middleware located in the `app/http/middleware` folder using the `withoutMiddleware(name)` method:
 
 ```js
-const BaseTest = util('base-test')
+const BaseTest = require('@supercharge/framework/base-test')
 
 class BasicTest extends BaseTest {
   async withoutMiddleware (t) {

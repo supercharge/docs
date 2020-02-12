@@ -4,7 +4,7 @@
 ## Introduction
 Node.js is an event-driven platform, handling most of its processing asynchronously. The JavaScript Array class has no built-in support for asynchronous operations. That’s one reason working with arrays in Node.js can be cumbersome.
 
-The [`@supercharge/collections`](https://github.com/superchargejs/collections) package fills this gap. This package provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
+The [`@supercharge/collections`](https://github.com/supercharge/collections) package fills this gap. This package provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
 
 The following example takes an array of IDs and fetches the related users from the database to filter them based on a user’s name:
 
