@@ -2,20 +2,42 @@
 
 
 ## Introduction
-Working with the filesystem in Node.js can be cumbersome, especially in combination with a code base using async/await. That’s the reason Supercharge provides you a handy filesystem abstraction. This sparks developer joy because Supercharge’s `filesystem` package is fully async. Every method in the Supercharge filesystem package is async and returns a promise to keep the consistency.
+Working with the filesystem in Node.js can be cumbersome, especially in combination with asynchronous operations using `async/await`. That’s the reason Supercharge provides you a handy filesystem abstraction via the [`@supercharge/filesystem`](https://github.com/supercharge/filesystem) package.
 
-Retrieve the filesystem package in Supercharge like this:
+Supercharge’s `filesystem` package is fully async. Every method in the Supercharge filesystem package returns a promise to keep the consistency.
+
+
+## Installation
+The `@supercharge/filesystem` package lives independently from the Supercharge framework. For convenience, the Supercharge framework exports this package. Using it in your application requires you to install it as a project dependency:
+
+```bash
+npm i @supercharge/filesystem
+```
+
+You can use this filesystem package with every project even if it’s not build on Supercharge. Enjoy!
+
+
+## Usage
+Import the filesystem package in your application and eh voilà, that’s it:
+
+```js
+const Fs = require('@supercharge/filesystem')
+```
+
+For convenience, the Supercharge framework comes with an instance of the filesystem package. That means, if you already use the Supercharge framework, you don’t necessarily need to install the extra `@supercharge/filesystem` package.
+
+Retrieve the filesystem package in Supercharge framework like this:
 
 ```js
 const Fs = require('@supercharge/framework/filesystem')
 ```
 
 
-## Retrieve Files & Directories
+### Retrieve Files & Directories
 Read files from the local disk using `Fs.readFile(path)`. This method returns the raw file content as string value:
 
 ```js
-const Fs = require('@supercharge/framework/filesystem')
+const Fs = require('@supercharge/filesystem')
 
 const content = await Fs.readFile('file.text')
 ```
@@ -33,7 +55,7 @@ const nope = await Fs.notExists('file.text')
 ```
 
 
-### Retrieve Directories
+#### Retrieve Directories
 You can retrieve a list of files within a directory using `Fs.files(path)`. **Notice:** this won’t step into subdirectories that may exist within the given `path`:
 
 ```js
@@ -47,7 +69,7 @@ const allFiles = await Fs.allFiles(path)
 ```
 
 
-### File Metadata
+#### File Metadata
 Additinally to reading, storing, or deleting files and directories, you may retrieve metadata about the files themselves. Node.js ships with a [`Stats`](https://nodejs.org/docs/latest-v8.x/api/fs.html#fs_class_fs_stats) class providing a handful of properties about a file.
 
 Use `Fs.stat(file)` to retrieve a `Stats` instance of a file:
@@ -120,7 +142,7 @@ const date = await Fs.dirname('/storage/app/blog.md'))
 ```
 
 
-## Saving Files
+### Saving Files
 Writing content to a file requires a file handle to exist on the local file system. To ensure a file actually exists, you may use `Fs.ensureFile(path)` method. This creates a new file if it doesn’t already exists. It won’t override an existing file:
 
 ```js
@@ -177,7 +199,7 @@ await Fs.writeFile(tempAvatar, content)
 ```
 
 
-### Lock Files
+#### Lock Files
 You application may require file locks on your file system to ensure a correct processing flow. This may be helpful in setups using parallel processing.
 
 You may create a file lock using `Fs.lock(file)`:
@@ -199,7 +221,7 @@ await Fs.isLocked('tutorial-1.md')
 ```
 
 
-### Create Directories
+#### Create Directories
 Structuring files on your local hard drive may require directories. Create a new directory using `Fs.ensureDir(path)`. This creates a new directory at the given path if it doesn’t already exists. It won’t override an existing path:
 
 ```js
@@ -213,7 +235,7 @@ await Fs.tempDir('storage/avatars')
 ```
 
 
-## Deleting Files & Directories
+### Deleting Files & Directories
 Delete single files from the file system using `Fs.remove(path)`:
 
 ```js
