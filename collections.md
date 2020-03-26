@@ -110,6 +110,7 @@ Here’s a list of available methods in the collections package:
 [takeAndRemove](#takeandremove)
 [toJSON](#tojson)
 [union](#union)
+[unique](#unique)
 [unshift](#unshift)
 
 </div>
@@ -1019,6 +1020,60 @@ await Collect([1, 2, 3])
   .all()
 
 // [1, 2, 3, 4, 5]
+```
+
+
+#### unique
+The `unique` method returns all unique values in the collection:
+
+```js
+await Collect([1, 2, 2, 3, 4, 4, 4, 5])
+  .unique()
+  .all()
+
+// [1, 2, 3, 4, 5]
+```
+
+In real-world scenarios, you’re likely to work with more complex data structures like objects. The `unique` method accepts a string or callback function as an argument:
+
+```js
+await Collect([
+  { name: 'Marcus' },
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+])
+  .unique('name')
+  .all()
+
+/*
+[
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+]
+*/
+```
+
+```warning
+At this point, you can’t define a nested key as the identifier to make the collection unique. For example, you can only use `name` and not `user.name` as a value for a string `key`. Please use a callback function for nested properties.
+```
+
+```js
+await Collect([
+  { name: 'Marcus' },
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+])
+  .unique(async user => {
+    return user.name
+  })
+  .all()
+
+/*
+[
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+]
+*/
 ```
 
 
