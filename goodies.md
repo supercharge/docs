@@ -47,6 +47,7 @@ Here’s a list of available methods in the collections package:
 <div id="method-list" markdown="1">
 
 [tap](#tap)
+[upon](#upon)
 
 </div>
 
@@ -68,9 +69,30 @@ Using tap allows you to run a side-effect on the value and return the value:
 ```js
 const { tap } = require('@supercharge/goodies')
 
-const user = await tap(await User.findBy({ email }), async (user) => {
+const user = await tap(User.findBy({ email }), async (user) => {
     await user.subscribeToNewsletter()
 })
 
 // user = the found user for `email`
+```
+
+#### upon
+The `upon` method invokes a callback passing the given value as an argument to the callback. It accepts two arguments, a `value` and a `callback`. Returns the result of the callback:
+
+`upon` has the following signature:
+
+```js
+async upon(value, async callback)
+```
+
+Using upon allows you to change the return value using a closure function:
+
+```js
+const { upon } = require('@supercharge/goodies')
+
+const email = await upon(User.findBy({ email }), async (user) => {
+    return user.email
+})
+
+// email = the found user's email address
 ```
