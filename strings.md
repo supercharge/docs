@@ -48,24 +48,31 @@ Here’s a list of available methods in the collections package:
 
 [get](#get)
 [camel](#camel)
+[concat](#concat)
 [contains](#contains)
+[endsWith](#endswith)
+[equals](#equals)
 [includes](#includes)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
-[isLower](#islowercase)
+[isLower](#islower)
+[isString](#isstring)
 [lcFirst](#lcfirst)
-[length](#upper)
+[length](#length)
 [lower](#lower)
+[ltrim](#ltrim)
 [random](#random)
 [replaceAll](#replaceall)
+[rtrim](#rtrim)
 [split](#split)
+[startswith](#startswith)
 [strip](#strip)
 [studly](#studly)
 [title](#title)
 [trim](#trim)
 [ucFirst](#ucfirst)
 [upper](#upper)
-[isUpper](#isUppercase)
+[isUpper](#isupper)
 [uuid](#uuid)
 
 </div>
@@ -75,13 +82,12 @@ Here’s a list of available methods in the collections package:
 
 
 #### get
-The `get` method returns the underlying string value:
+The `get` method returns the underlying plain string value:
 
 ```js
-const str = Str('Supercharge')
-  .get()
+const str = Str('Supercharge is awesome').get()
 
-// 'Supercharge'
+// 'Supercharge is awesome'
 ```
 
 
@@ -92,6 +98,24 @@ The `camel` method returns the underlying string in camelCase:
 const camel = Str('Supercharge is awesome').camel().get()
 
 // 'superchargeIsAwesome'
+```
+
+
+#### concat
+The `concat` method returns a string that contains the concatenation of two or more strings:
+
+```js
+Str('Supercharge').concat('-is', '-great').get()
+
+// 'Supercharge-is-great'
+```
+
+You may also pass an array of strings as an argument to the `concat` method:
+
+```js
+Str('Supercharge').concat([' has', ' style']).get()
+
+// 'Supercharge has style'
 ```
 
 
@@ -106,6 +130,43 @@ const contains = Str('Supercharge is awesome').contains('awesome')
 
 ```info
 The `contains` method works the same way as the [`includes`](#includes) method. They are basically just aliases for each other.
+```
+
+
+#### endsWith
+The `endsWith` method determines whether the string ends with the given `needle`:
+
+```js
+const endsWith = Str('Supercharge').endsWith('charge')
+
+// true
+```
+
+Optionally, the `endsWith` method accepts a second argument `length` which is used as the string length.
+
+```js
+const endsWith = Str('Supercharge').endsWith('charge', 5)
+
+// false
+// -> because the length shortens the 'Supercharge' term to 5 letters ('Super') and compares it with 'charge'
+```
+
+
+#### equals
+The `equals` method determines whether the string equals the given `value`:
+
+```js
+const equals = Str('Supercharge').equals('Supercharge')
+
+// true
+```
+
+The `equals` method is case sensitive. Strings must be written the same way to be equal to each other:
+
+```js
+const equals = Str('Supercharge').equals('supercharge')
+
+// false
 ```
 
 
@@ -173,6 +234,20 @@ const isLower = Str('supercharge. sweet!').isLower()
 ```
 
 
+#### isString
+The `isString` method determines the given input is a string.:
+
+```js
+const isString = Str.isString('Supercharge is awesome')
+
+// true
+
+const isString = Str.isString(123)
+
+// false
+```
+
+
 #### lcFirst
 The `lcFirst` method lowercases the first character. It won’t change other symbols in the given string:
 
@@ -203,6 +278,16 @@ const lower = Str('Supercharge is SWEET!').lower().get()
 ```
 
 
+#### ltrim
+The `ltrim` method removes whitespace from the front of the string:
+
+```js
+const lower = Str('   Supercharge is nice  ').ltrim().get()
+
+// 'Supercharge is nice  '
+```
+
+
 #### random
 The `random` method is a static method creating a random, URL-friendly string. By default, the random string contains 21 symbols:
 
@@ -225,6 +310,16 @@ const replaced = Str('Supercharge-is-super-awesome')
 ```
 
 
+#### rtrim
+The `rtrim` method removes whitespace from the end of the string:
+
+```js
+const lower = Str('   Supercharge is nice  ').rtrim().get()
+
+// '   Supercharge is nice'
+```
+
+
 #### split
 The `split` method splits the given string at the given value and returns an array of the resulting strings:
 
@@ -232,6 +327,24 @@ The `split` method splits the given string at the given value and returns an arr
 const splitted = Str('Supercharge-is-sweet').split('-')
 
 // ['Supercharge', 'is', 'sweet']
+```
+
+
+#### startsWith
+The `startsWith` method determines whether the string starts with the given `needle`:
+
+```js
+const startsWith = Str('Supercharge').startsWith('charge')
+
+// false
+```
+
+Optionally, the `startsWith` method accepts a second argument `position` defining at which position in the string to begin searching for the `needle` (defaults to `0`).
+
+```js
+const startsWith = Str('Supercharge').startsWith('charge', 5)
+
+// true
 ```
 
 
