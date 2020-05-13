@@ -59,6 +59,7 @@ Here’s a list of available methods in the collections package:
 [isString](#isstring)
 [lcFirst](#lcfirst)
 [length](#length)
+[limit](#limit)
 [lower](#lower)
 [ltrim](#ltrim)
 [random](#random)
@@ -265,6 +266,24 @@ The `length` method returns the lengths of the given string:
 const length = Str('Supercharge').length()
 
 // 11
+```
+
+
+#### limit
+The `limit` method returns a limitted number of characters from the string:
+
+```js
+const lower = Str('Supercharge is SWEET!').limit(5).get()
+
+// 'Super'
+```
+
+You may also pass a second parameter to the `limit` method defining the ending characters. These `end` characters will be appended to the limitted string:
+
+```js
+const lower = Str('Supercharge is SWEET!').limit(5, '…').get()
+
+// 'Super…'
 ```
 
 
