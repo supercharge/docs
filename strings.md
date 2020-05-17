@@ -103,6 +103,8 @@ const camel = Str('Supercharge is awesome').camel().get()
 
 
 #### concat
+- *added in version `1.4`*
+
 The `concat` method returns a string that contains the concatenation of two or more strings:
 
 ```js
@@ -135,6 +137,8 @@ The `contains` method works the same way as the [`includes`](#includes) method. 
 
 
 #### endsWith
+- *added in version `1.3`*
+
 The `endsWith` method determines whether the string ends with the given `needle`:
 
 ```js
@@ -154,6 +158,8 @@ const endsWith = Str('Supercharge').endsWith('charge', 5)
 
 
 #### equals
+- *added in version `1.3`*
+
 The `equals` method determines whether the string equals the given `value`:
 
 ```js
@@ -186,6 +192,8 @@ The `includes` method works the same way as the [`contains`](#contains) method. 
 
 
 #### isEmpty
+- *added in version `1.1`*
+
 The `isEmpty` method determines whether the given string has a length of 0:
 
 ```js
@@ -204,6 +212,8 @@ const isEmpty = Str('Supercharge').isEmpty()
 
 
 #### isNotEmpty
+- *added in version `1.1`*
+
 The `isNotEmpty` method determines whether the given string has a length of 1 or greater:
 
 ```js
@@ -236,6 +246,8 @@ const isLower = Str('supercharge. sweet!').isLower()
 
 
 #### isString
+- *added in version `1.5`*
+
 The `isString` method determines the given input is a string.:
 
 ```js
@@ -270,6 +282,8 @@ const length = Str('Supercharge').length()
 
 
 #### limit
+- *added in version `1.6`*
+
 The `limit` method returns a limitted number of characters from the string:
 
 ```js
@@ -298,6 +312,8 @@ const lower = Str('Supercharge is SWEET!').lower().get()
 
 
 #### ltrim
+- *added in version `1.4`*
+
 The `ltrim` method removes whitespace from the front of the string:
 
 ```js
@@ -318,6 +334,8 @@ const random = Str.random()
 
 
 #### replaceAll
+- *added in version `1.2`*
+
 The `replaceAll` method replaces all occurrences of a given value in a string:
 
 ```js
@@ -330,6 +348,8 @@ const replaced = Str('Supercharge-is-super-awesome')
 
 
 #### rtrim
+- *added in version `1.4`*
+
 The `rtrim` method removes whitespace from the end of the string:
 
 ```js
@@ -340,6 +360,8 @@ const lower = Str('   Supercharge is nice  ').rtrim().get()
 
 
 #### split
+- *added in version `1.3`*
+
 The `split` method splits the given string at the given value and returns an array of the resulting strings:
 
 ```js
@@ -350,6 +372,8 @@ const splitted = Str('Supercharge-is-sweet').split('-')
 
 
 #### startsWith
+- *added in version `1.3`*
+
 The `startsWith` method determines whether the string starts with the given `needle`:
 
 ```js
@@ -410,6 +434,8 @@ const trimmed = Str('    Supercharge is sweet ').trim().get()
 
 
 #### ucFirst
+- *added in version `1.2`*
+
 The `ucFirst` method uppercases the first character in the string:
 
 ```js
