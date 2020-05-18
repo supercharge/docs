@@ -57,14 +57,17 @@ Here’s a list of available methods in the collections package:
 [isNotEmpty](#isnotempty)
 [isLower](#islower)
 [isString](#isstring)
+[kebab](#kebab)
 [lcFirst](#lcfirst)
 [length](#length)
 [limit](#limit)
 [lower](#lower)
 [ltrim](#ltrim)
+[pascal](#pascal)
 [random](#random)
 [replaceAll](#replaceall)
 [rtrim](#rtrim)
+[snake](#snake)
 [split](#split)
 [startswith](#startswith)
 [strip](#strip)
@@ -261,6 +264,16 @@ const isString = Str.isString(123)
 ```
 
 
+#### kebab
+The `kebab` method converts the given string to `kebab-case`:
+
+```js
+const kebab = Str('Supercharge is SWEET').kebab().get()
+
+// 'supercharge-is-sweet'
+```
+
+
 #### lcFirst
 The `lcFirst` method lowercases the first character. It won’t change other symbols in the given string:
 
@@ -323,6 +336,19 @@ const lower = Str('   Supercharge is nice  ').ltrim().get()
 ```
 
 
+#### pascal
+The `pascal` method is an alias for [`.studly()`](#studly) transformingthe given string into `PascalCase` aka `StudlyCase`:
+
+```js
+const pascal = Str('Supercharge is SWEET').pascal().get()
+
+// 'SuperchargeIsSweet'
+```
+
+PascalCase is like camelCase with the first symbol in uppercase.
+
+
+
 #### random
 The `random` method is a static method creating a random, URL-friendly string. By default, the random string contains 21 symbols:
 
@@ -356,6 +382,16 @@ The `rtrim` method removes whitespace from the end of the string:
 const lower = Str('   Supercharge is nice  ').rtrim().get()
 
 // '   Supercharge is nice'
+```
+
+
+#### snake
+The `snake` method converts the given string to `snake_case`:
+
+```js
+const snake = Str('Supercharge is SWEET').snake().get()
+
+// 'supercharge_is_sweet'
 ```
 
 
