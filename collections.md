@@ -69,6 +69,7 @@ Here’s a list of available methods in the collections package:
 [collapse](#collapse)
 [compact](#compact)
 [concat](#concat)
+[count](#count)
 [diff](#diff)
 [every](#every)
 [filter](#filter)
@@ -186,6 +187,22 @@ await concat
 await collection
 
 // [1, 2, 3]
+```
+
+
+#### count
+The `count` method counts all items in the collection satisfying the (async) testing function. Count behaves like `.size()` when not providing a callback function.
+
+```js
+await Collect([1, 2, 3]).count()
+
+// 3
+
+await Collect([1, 2, 3, 4]).count(async num => {
+  return num > 3
+})
+
+// 1
 ```
 
 
