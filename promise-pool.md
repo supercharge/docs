@@ -31,7 +31,7 @@ const users = [
   { name: 'Christian' }
 ]
 
-const { results, errors } = await new PromisePool()
+const { results, errors } = await PromisePool
   .for(users)
   .withConcurrency(2)
   .process(async data => {
@@ -41,7 +41,7 @@ const { results, errors } = await new PromisePool()
   })
 ```
 
-The code describes the following: at first, create a new promise pool instance which then allows you to chain the `.for()`, `.withConcurrency()`, and `.process()` methods. The `.process()` method is an async function starting the actual processing. Be sure to call this as the last item in the chain.
+The code describes the following: at first, create a new promise pool instance which then allows you to chain the `.for()`, `.withConcurrency()`, and `.process()` methods. The `.process()` method is an async function starting the actual processing. Be sure to call `.process()` as the last method in the chain.
 
 The return values for the promise pool is an object containing two properties: `results` and `errors`
 
@@ -82,7 +82,7 @@ const pool = PromisePool.for(users)
 ```
 
 
-#### `.process(callback)`
+#### `.process(async callback)`
 Starts processing the promise pool by iterating over the items and passing each item to the async mapper function. Returns an object containing the results and errors.
 
 ```js
