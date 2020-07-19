@@ -76,6 +76,7 @@ Here’s a list of available methods in the collections package:
 [find](#find)
 [first](#first)
 [flatMap](#flatmap)
+[flatten](#flatten)
 [forEach](#foreach)
 [groupBy](#groupby)
 [has](#has)
@@ -154,7 +155,7 @@ await Collect([1, 2, 3, 4, 5, 6, 7, 8]).chunk(3)
 
 
 #### collapse
-The `collapse` method collapses a collection of arrays into a single, flat collection.
+The `collapse` method collapses a collection of arrays one level deep into a single, flat collection.
 
 ```js
 await Collect([[1], [{}, 'Marcus', true], [22]]).collapse()
@@ -311,6 +312,16 @@ await Collect([1, 2, 3]).flatMap(async item => {
 })
 
 // [1, 1, 2, 2, 3, 3]
+```
+
+
+#### flatten
+The `flatten` method flattens the collection one level deep.
+
+```js
+await Collect([[1, [2]], [3], 22]).collapse()
+
+// [1, [2], 3, 22]
 ```
 
 
