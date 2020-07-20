@@ -2,11 +2,11 @@
 
 
 ## Introduction
-The [`@supercharge/strings`](https://github.com/superchargejs/strings) package provides chainable string utilities for Node.js and JavaScript. It’s a wrapper around JavaScript’s global `String` class providing a handful of useful methods.
+The [`@supercharge/strings`](https://github.com/supercharge/strings) package provides chainable string utilities for Node.js and JavaScript. It’s a wrapper around JavaScript’s global `String` class providing a handful of useful methods.
 
 
 ## Installation
-The [`@supercharge/strings`](https://github.com/superchargejs/strings) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+The [`@supercharge/strings`](https://github.com/supercharge/strings) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
 
 ```bash
 npm i @supercharge/strings
@@ -31,7 +31,7 @@ For every method in the chain that would return a string, the package returns an
 
 
 ## Available Methods
-Here’s a list of available methods in the collections package:
+Here’s a list of available methods in the strings package:
 
 <style>
     #collection-method-list > p {
