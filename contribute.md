@@ -9,11 +9,11 @@ A way to report a bug is sending a failing test that outlines the problem. Even 
 
 Supercharge’s source code is managed and hosted on GitHub:
 
-- [Supercharge Application](https://github.com/superchargejs/supercharge)
-- [Supercharge Installer](https://github.com/superchargejs/installer)
-- [Supercharge Framework](https://github.com/superchargejs/framework)
-- [Supercharge Documentation](https://github.com/superchargejs/docs)
-- [Supercharge Website](https://github.com/superchargejs/superchargejs.com)
+- [Supercharge Application](https://github.com/supercharge/supercharge)
+- [Supercharge Installer](https://github.com/supercharge/installer)
+- [Supercharge Framework](https://github.com/supercharge/framework)
+- [Supercharge Documentation](https://github.com/supercharge/docs)
+- [Supercharge Website](https://github.com/supercharge/superchargejs.com)
 
 
 ## Coding Style
