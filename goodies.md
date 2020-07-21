@@ -46,6 +46,9 @@ Here’s a list of available methods in the collections package:
 
 <div id="method-list" markdown="1">
 
+[ifNullish](#ifnullish)
+[isAsyncFunction](#isasyncfunction)
+[isPromise](#ispromise)
 [tap](#tap)
 [upon](#upon)
 
@@ -53,6 +56,52 @@ Here’s a list of available methods in the collections package:
 
 
 ## Methods
+
+
+#### ifNullish
+The `ifNullish` method invokes a callback if the given `predicate` is `null` or `undefined`. It returns the result of the callback:
+
+```js
+const { ifNullish } = require('@supercharge/goodies')
+
+const subscribedUser = ifNullish(await User.findById(1), async () => {
+    const user = await User.createBy({ email })
+
+    return user.subscribeToNewsletter()
+})
+```
+
+
+#### isAsyncFunction
+The `isAsyncFunction` method determines whether the given parameter is an async function:
+
+```js
+const { isAsyncFunction } = require('@supercharge/goodies')
+
+async function subscribe() { … }
+
+isAsyncFunction(subscribe)
+// true
+```
+
+
+#### isPromise
+The `isPromise` method determines whether the given parameter is a promise:
+
+```js
+const { isPromise } = require('@supercharge/goodies')
+
+async function subscribe() { … }
+
+isPromise(subscribe())
+// true
+
+isPromise(new Promise(() => {}))
+// true
+
+isPromise('promise')
+// false
+```
 
 
 #### tap
