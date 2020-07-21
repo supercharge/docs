@@ -108,6 +108,7 @@ Here’s a list of available methods in the collections package:
 [toJSON](#tojson)
 [union](#union)
 [unique](#unique)
+[uniqueBy](#uniqueby)
 [unshift](#unshift)
 
 </div>
@@ -921,16 +922,22 @@ await Collect([
 ```
 
 ```warning
-At this point, you can’t define a nested key as the identifier to make the collection unique. For example, you can only use `name` and not `user.name` as a value for a string `key`. Please use a callback function for nested properties.
+At this point, you can’t define a nested key as the identifier to make the collection unique. For example, you can only use `name` and not `user.name` as a value for a string `key`. Please use [uniqueBy](#uniqueby) for nested properties.
 ```
+
+
+#### uniqueBy
+The `uniqueBy` method returns all unique values in the collection identified by the given selector function. The selector should return the value identifying an item uniquely.
+
+For example, having a list of users you may return the  user ID or email address to identify distinct users.
 
 ```js
 await Collect([
   { name: 'Marcus' },
-  { name: 'Marcus' },
-  { name: 'Supercharge' }
+  { name: 'Supercharge' },
+  { name: 'Marcus' }
 ])
-  .unique(async user => {
+  .uniqueBy(async user => {
     return user.name
   })
 
