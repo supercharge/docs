@@ -62,6 +62,7 @@ module.exports = {
       Strings: 'strings',
       Collections: 'collections',
       'Promise Pool': 'promise-pool',
+      Maps: 'maps',
       Streams: 'streams',
       Goodies: 'goodies'
     }
