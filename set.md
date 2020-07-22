@@ -1,17 +1,17 @@
-# Sets
+# Set
 
 
 ## Introduction
-The [`@supercharge/sets`](https://github.com/supercharge/sets) package provides an extended JavaScript `Set` class providing methods like `.isEmpty()`, `.find(callback)`, `.map(callback)`, and many more.
+The [`@supercharge/set`](https://github.com/supercharge/set) package provides a Set class with helpful methods like `.isEmpty()`, `.find(callback)`, `.map(callback)`, `.filter(callback)`, and many more.
 
 You already know methods like `.map()` from arrays and having them available on sets improves your development experience. It’s also convenient to avoid all the `for..of` loops in your code.
 
 
 ## Installation
-The [`@supercharge/sets`](https://github.com/supercharge/sets) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+The [`@supercharge/set`](https://github.com/supercharge/set) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
 
 ```bash
-npm i @supercharge/sets
+npm i @supercharge/set
 ```
 
 ```success
@@ -19,10 +19,20 @@ You can use this package with every project even if it’s not build on Supercha
 ```
 
 ## Working With Sets
-Import the `@supercharge/sets` package and use it the same way you would use JavaScript’s `Set` class:
+Import the `@supercharge/set` package and use it the same way you would use JavaScript’s [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) class.
+
+```info
+**Please notice,** the `@supercharge/set` package is not a drop-in replacement for the native `Set` class shipped by JavaScript.
+
+```
+
+JavaScript aligned the `Set` and `Map` classes. Aligning sets and maps felt wrong for me. In my opinion, sets are more in line with arrays, not with maps. That’s why this package exists.
+
+**It’s the Set class JavaScript should have shipped.**
+
 
 ```js
-const Set = require('@supercharge/sets')
+const Set = require('@supercharge/set')
 
 const users = new Set()
 
@@ -37,9 +47,11 @@ users
 users.isNotEmpty()
 // true
 
-const usernamesArray = users.map(user => {
-  return user.name
-})
+const usernamesArray = users
+  .map(user => {
+    return user.name
+  })
+  .toArray()
 
 // [ 'Marcus', 'Norman', 'Christian' ]
 
@@ -70,7 +82,7 @@ Here’s a list of available methods on a set instance:
 [add](#add)
 [clear](#clear)
 [delete](#delete)
-[entries](#entries)
+[filter](#filter)
 [find](#find)
 [forEach](#foreach)
 [has](#has)
@@ -111,18 +123,18 @@ users
   .add('Supercharge')
   .add('Marcus')
 
-users.size
+users.size()
 // 2
 
 users.clear()
 
-cache.size
+users.size()
 // 0
 ```
 
 
 #### delete
-The `delete` method removes the entry identified by the given `key`:
+The `delete` method removes the entry identified by the given `value`:
 
 ```js
 const users = new Set()
@@ -138,50 +150,32 @@ users.has('Marcus')
 // false
 ```
 
-Calling `set.delete(key)` returns `true` if the given key is present in the set and has been removed. Returns `false` if the key isn’t present in the set.
+Calling `set.delete(value)` returns `true` if the given value is present in the set and has been removed. Returns `false` if the value isn’t present in the set.
 
 
-#### entries
-The `entries` method returns an iterator object containing a `[value, value]` pair for each item in the set (in insertion order).
+#### filter
+The `filter` method returns a set containing only items matching the given `predicate`.
 
-If you’re wondering about the `[value, value]` pair, sets don’t have a key like in `Map` objects. The API of sets is similar to maps and that’s why you’re receiving an array with two properties:
-
-```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
-
-const iterator = users.entries()
-
-iterator.next().value
-// ['Marcus', 'Marcus']
-
-iterator.next().value
-// ['Supercharge', 'Supercharge']
-```
-
-You may also iterate through the set entries using a `for..of` or loop:
+The predicate function will be called once for each entry in the set in insertion order. The `predicate` function receives the `value, set` arguments:
 
 ```js
 const users = new Set()
 
 users
-  .add('Marcus')
-  .add('Supercharge')
+  .add(1)
+  .add(2)
+  .add(3)
 
-for (const [value] of users.entries()) {
-  console.log(value)
-}
+const names = users.filter((value, set) => {
+  return value > 1
+})
 
-// 'Marcus'
-// 'Supercharge'
+// Set [2, 3]
 ```
 
 
 #### forEach
-The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, value, set` arguments:
+The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, set` arguments:
 
 ```js
 const users = new Set()
@@ -190,7 +184,7 @@ users
   .add('Marcus')
   .add('Supercharge')
 
-cache.forEach((value, value, set) => {
+cache.forEach((value, set) => {
   console.log(value)
 })
 
@@ -250,9 +244,9 @@ set.isNotEmpty()
 
 
 #### map
-The `map` method returns an array containing the results of the given `transform` function.
+The `map` method returns a new set instance containing the results of the given `transform` function.
 
-The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, value, set` arguments:
+The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
 
 ```js
 const users = new Set()
@@ -261,11 +255,11 @@ users
   .add('Marcus')
   .add('Supercharge')
 
-const names = users.map((value, value, set) => {
+const names = users.map((value, set) => {
   return value
 })
 
-// ['Marcus', 'Supercharge']
+// Set ['Marcus', 'Supercharge']
 ```
 
 
@@ -277,6 +271,33 @@ const set = Set.of(['Marcus', 'Supercharge'])
 
 set.has('Marcus')
 // true
+```
+
+
+#### size
+The `size` method returns the number of entries in the set:
+
+```js
+const set = new Set()
+
+set
+  .add('Marcus')
+  .add('Supercharge')
+
+const size = set.size()
+// 2
+```
+
+
+#### toArray
+The `toArray` method returns an array containing the items of the set.
+
+```js
+const set = Set.of([1, 2, 3, 4])
+
+const array = set.toArray()
+// [1, 2, 3, 4]
+
 ```
 
 
@@ -315,29 +336,3 @@ for (const value of users.values()) {
 // 'Marcus'
 // 'Supercharge'
 ```
-
-
-## Available Properties
-Here’s a list of available properties on a set instance:
-
-<div id="collection-method-list" markdown="1">
-
-[size](#size)
-
-</div>
-
-
-#### size
-The `size` property returns the number of entries in the set:
-
-```js
-const set = new Set()
-
-set
-  .add('Marcus')
-  .add('Supercharge')
-
-const size = set.size
-// 2
-```
-
