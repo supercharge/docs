@@ -64,8 +64,10 @@ Here’s a list of available methods in the collections package:
 <div id="collection-method-list" markdown="1">
 
 [all](#all)
+[any](#any)
 [avg](#avg)
 [chunk](#chunk)
+[clone](#clone)
 [collapse](#collapse)
 [compact](#compact)
 [concat](#concat)
@@ -73,6 +75,7 @@ Here’s a list of available methods in the collections package:
 [diff](#diff)
 [every](#every)
 [filter](#filter)
+[filterIf](#filterif)
 [find](#find)
 [first](#first)
 [flatMap](#flatmap)
@@ -80,6 +83,7 @@ Here’s a list of available methods in the collections package:
 [forEach](#foreach)
 [groupBy](#groupby)
 [has](#has)
+[hasDuplicates](#hasDuplicates)
 [intersect](#intersect)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
@@ -118,6 +122,8 @@ Here’s a list of available methods in the collections package:
 
 
 #### all
+- *added in version `1.0`*
+
 The `all` method returns the collections underlying array:
 
 ```js
@@ -135,7 +141,23 @@ await Collect([1, 2, 3])
 ```
 
 
+#### any
+- *added in version `1.12`*
+
+The `any` method determines whether at least one item from the collection satisfies the (async) testing function. It’s an alias for [some](#some):
+
+```js
+await Collect([1, 2, 3]).any(item => {
+  return item > 10
+})
+
+// false
+```
+
+
 #### avg
+- *added in version `1.6`*
+
 The `avg` method returns the average of all collection items:
 
 ```js
@@ -146,6 +168,8 @@ await Collect([1, 2, 3, 4]).avg()
 
 
 #### chunk
+- *added in version `1.2`*
+
 The `chunk` method splits the collection into multiple, smaller collections of a given size:
 
 ```js
@@ -155,7 +179,23 @@ await Collect([1, 2, 3, 4, 5, 6, 7, 8]).chunk(3)
 ```
 
 
+#### clone
+- *added in version `1.5`*
+
+The `clone` method creates a shallow copy of a collection. It keeps the current state of a collection. If you already chained some collection methods, those are also copied over to the clone:
+
+```js
+const original = Collect([1, 2, 3])
+const clone = original.clone()
+
+const identical = original === clone
+// false
+```
+
+
 #### collapse
+- *added in version `1.0`*
+
 The `collapse` method collapses a collection of arrays one level deep into a single, flat collection.
 
 ```js
@@ -166,6 +206,8 @@ await Collect([[1], [{}, 'Marcus', true], [22]]).collapse()
 
 
 #### compact
+- *added in version `1.0`*
+
 The `compact` method removes all falsy values from the collection. For example, falsy values are `null`, `undefined`, `''`, `false`, `0`, `NaN`.
 
 ```js
@@ -176,6 +218,8 @@ await Collect([0, null, undefined, 1, false, 2, '', 3, NaN]).compact()
 
 
 #### concat
+- *added in version `1.3`*
+
 The `concat` method merges two or more collections. It returns a new collection with the concatenated items without changing the original collection:
 
 ```js
@@ -193,6 +237,8 @@ await collection
 
 
 #### count
+- *added in version `2.1`*
+
 The `count` method counts all items in the collection satisfying the (async) testing function. Count behaves like `.size()` when not providing a callback function.
 
 ```js
@@ -209,6 +255,8 @@ await Collect([1, 2, 3, 4]).count(async num => {
 
 
 #### diff
+- *added in version `1.6`*
+
 The `diff` method removes all values from the `collection` that are present in the given `array`.
 
 ```js
@@ -219,6 +267,8 @@ await Collect([1, 2, 3]).diff([2, 3, 4, 5])
 
 
 #### every
+- *added in version `1.0`*
+
 The `every` method determines whether all items in the collection satisfy the testing function:
 
 ```js
@@ -241,6 +291,8 @@ await Collect([1, 2, 3]).every(async id => {
 
 
 #### filter
+- *added in version `1.0`*
+
 The `filter` method keeps all items in the collection satisfying the (async) testing function:
 
 ```js
@@ -258,7 +310,27 @@ See the [`reject`](#reject) method for the inverse of `filter`.
 - **Notice:** `filterSeries` became `filter` in version `2.0`
 
 
+#### filterIf
+- *added in version `2.2`*
+
+The `filterIf` method keeps all items in the collection satisfying the (async) testing function if the given `condition` is `true`:
+
+```js
+await Collect([1, 2, 3]).filterIf(condition, async id => {
+  const user = await User.findById(id)
+
+  return user.scope === 'admin'
+})
+
+// [ 1 ]
+```
+
+The `filterIf` method returns returns all items (it doesn’t filter) if the given predicate is `false`.
+
+
 #### find
+- *added in version `1.0`*
+
 The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
 
 ```js
@@ -282,6 +354,8 @@ The `!!` operator converts any data type to boolean by using a “doubled negati
 
 
 #### first
+- *added in version `1.5`*
+
 The `first` method returns the first item in the collection. It won’t remove the item from the original collection:
 
 ```js
@@ -305,6 +379,8 @@ await Collect([
 
 
 #### flatMap
+- *added in version `1.0`*
+
 The `flatMap` method invokes the (async) callback on each collection item. The callback can modify and return the item resulting in a new collection of modified items. Ultimately, `flatMap` flattens the mapped results:
 
 ```js
@@ -317,6 +393,8 @@ await Collect([1, 2, 3]).flatMap(async item => {
 
 
 #### flatten
+- *added in version `2.3`*
+
 The `flatten` method flattens the collection one level deep.
 
 ```js
@@ -327,6 +405,8 @@ await Collect([[1, [2]], [3], 22]).collapse()
 
 
 #### forEach
+- *added in version `1.0`*
+
 The `forEach` method invokes the (async) callback on each collection item. This method has no return value.
 
 ```js
@@ -340,6 +420,8 @@ await Collect(await queue.getActive()).forEach(async job => {
 
 
 #### groupBy
+- *added in version `1.11`*
+
 The `groupBy` method groups the items in the collection by a given `key` and returns an object of the grouped items:
 
 ```js
@@ -370,6 +452,8 @@ At this point, you can’t group by a nested key. I appreciate your support if y
 
 
 #### has
+- *added in version `1.5`*
+
 The `has` method returns `true` when the collection an item satisfying the argument or a callback function, otherwise `false`:
 
 ```js
@@ -399,8 +483,27 @@ await Collect([
 ```
 
 
+#### hasDuplicates
+- *added in version `1.10`*
+
+The `hasDuplicates` method returns `true` when the collection contains duplicate items, otherwise `false`:
+
+```js
+await Collect([1, 2, 3]).hasDuplicates()
+// false
+
+await Collect([1, 2, 3, 1]).hasDuplicates()
+// true
+```
+
+```info
+The `hasDuplicates` method doesn’t support a callback to identify unique items. I appreciate your support if you want to send a pull request adding callback support! Head over to the [Collections repo on GitHub](https://github.com/supercharge/collections) to submit a PR. Thank you!
+```
+
 #### intersect
-The `isEmpty` method removes all values from the `collection` that are not present in the given `array`.
+- *added in version `1.6`*
+
+The `intersect` method removes all values from the `collection` that are not present in the given `array`.
 
 ```js
 await Collect([1, 2, 3]).intersect([2, 3, 4, 5])
@@ -410,6 +513,8 @@ await Collect([1, 2, 3]).intersect([2, 3, 4, 5])
 
 
 #### isEmpty
+- *added in version `1.1`*
+
 The `isEmpty` method returns `true` when the collection is empty, otherwise `false`:
 
 ```js
@@ -420,6 +525,8 @@ await Collect([]).isEmpty()
 
 
 #### isNotEmpty
+- *added in version `1.1`*
+
 The `isNotEmpty` method returns `true` when the collection is not empty, otherwise `false`:
 
 ```js
@@ -430,6 +537,8 @@ await Collect([]).isNotEmpty()
 
 
 #### join
+- *added in version `1.6`*
+
 The `join` method joins all items in the collection using the given `str` and returns the resulting string value:
 
 **Example**
@@ -442,6 +551,8 @@ await Collect([10, 2, 3, 4]).join('-')
 
 
 #### last
+- *added in version `1.8`*
+
 The `last` method returns the last item in the collection, otherwise `undefined`. It won’t remove the item from the original collection:
 
 ```js
@@ -466,6 +577,8 @@ await Collect([
 
 
 #### map
+- *added in version `1.0`*
+
 The `map` method invokes the (async) callback on each collection item and returns an array of transformed items. Because `map` returns a collection instance, you could chain further operations:
 
 ```js
@@ -480,6 +593,8 @@ await Collect([1, 2, 3]).map(async item => {
 
 
 #### max
+- *added in version `1.6`*
+
 The `max` method returns the max value in the collection:
 
 ```js
@@ -490,6 +605,8 @@ await Collect([1, 20, 3, 4]).max()
 
 
 #### median
+- *added in version `1.7`*
+
 The `median` method returns the [median](https://en.wikipedia.org/wiki/Median) value of the collection:
 
 ```js
@@ -504,6 +621,8 @@ await Collect([1, 2, 3, 4, 5, 6]).median()
 
 
 #### min
+- *added in version `1.6`*
+
 The `min` method returns the min value in the collection:
 
 ```js
@@ -514,6 +633,8 @@ await Collect([10, 2, 3, 4]).min()
 
 
 #### pluck
+- *added in version `1.12`*
+
 The `pluck` method retrieves all values from the collection for a given `key`:
 
 ```js
@@ -551,6 +672,8 @@ At this point, you can’t pluck by a nested key. I appreciate your support if y
 
 
 #### pop
+- *added in version `1.9`*
+
 The `pop` method removes and returns the last item from the collection. It changes the original collection:
 
 ```js
@@ -567,6 +690,8 @@ await collection
 
 
 #### push
+- *added in version `1.3`*
+
 The `push` method appends one or more items to the end of the collection. It returns a new collection with the pushed items without changing the original collection:
 
 ```js
@@ -584,6 +709,8 @@ await collection
 
 
 #### reduce
+- *added in version `1.0`*
+
 The `reduce` method invokes a(n async) reducer function on each array item, passing the result of each iteration to the subsequent iteration. The result is a reduced collection to a single value:
 
 ```js
@@ -606,6 +733,8 @@ await Collect([1, 2, 3]).reduce((carry, item) => {
 
 
 #### reduceRight
+- *added in version `1.0`*
+
 The `reduceRight` method is similar to `reduce`, reducing a collection to a single value. It invokes a(n async) reducer function on each array item **from right-to-left**, passing the result of each iteration to the subsequent iteration:
 
 ```js
@@ -620,6 +749,8 @@ The `reduceRight` method takes the initial value as a second argument.
 
 
 #### reject
+- *added in version `1.1`*
+
 The `reject` method removes all items from the collection satisfying the (async) testing function:
 
 ```js
@@ -636,6 +767,8 @@ See the [`filter`](#filter) method for the inverse of `reject`.
 
 
 #### reverse
+- *added in version `1.6`*
+
 The `reverse` method reverses the collection. The first item becomes the last one, the second item becomes the second to last, and so on:
 
 ```js
@@ -646,6 +779,8 @@ await Collect([4, 6, 8, 9]).reverse()
 
 
 #### shift
+- *added in version `1.3`*
+
 The `shift` method removes and returns the first item from the collection. It changes the original collection:
 
 ```js
@@ -662,6 +797,8 @@ await collection
 
 
 #### size
+- *added in version `1.1`*
+
 The `size` method returns the number of items in the collection:
 
 ```js
@@ -672,6 +809,8 @@ await Collect([1, 2, 3]).size()
 
 
 #### slice
+- *added in version `1.2`*
+
 The `slice` method returns a slice of the collection starting at the given index without changing the collection:
 
 ```js
@@ -700,6 +839,8 @@ await chunk
 
 
 #### splice
+- *added in version `1.2`*
+
 The `splice` method removes abd returns a slice of items from the collection starting at the given index:
 
 ```js
@@ -747,6 +888,8 @@ await collection
 
 
 #### some
+- *added in version `1.0`*
+
 The `some` method determines whether at least one item from the collection satisfies the (async) testing function:
 
 ```js
@@ -777,6 +920,8 @@ await Collect([
 
 
 #### sort
+- *added in version `1.6`*
+
 The `sort` method returns the sorted collection:
 
 ```js
@@ -797,6 +942,8 @@ await Collect([4, 1, 37, 2, 1]).sort((a, b) => {
 
 
 #### sum
+- *added in version `1.6`*
+
 The `sum` method returns the sum of all collection items:
 
 ```js
@@ -807,6 +954,8 @@ await Collect([1, 2, 3, 4]).sum()
 
 
 #### take
+- *added in version `1.2`*
+
 The `take` method returns a new Collection containing the specified number of items:
 
 ```js
@@ -839,6 +988,8 @@ await collection
 
 
 #### takeAndRemove
+- *added in version `1.2`*
+
 The `takeAndRemove` method removes the specified number of items from the collection and returns them as a new Collection:
 
 ```js
@@ -871,6 +1022,8 @@ await collection
 
 
 #### toJSON
+- *added in version `1.6`*
+
 The `toJSON` method creates a JSON string from the values of the collection:
 
 ```js
@@ -885,6 +1038,8 @@ await Collect([{ name: 'Marcus'}]).toJSON()
 
 
 #### union
+- *added in version `1.6`*
+
 The `union` method adds all values from the array to the underlying collection and removes duplicates:
 
 ```js
@@ -895,6 +1050,8 @@ await Collect([1, 2, 3]).union([2, 3, 4, 5])
 
 
 #### unique
+- *added in version `1.13`*
+
 The `unique` method returns all unique values in the collection:
 
 ```js
@@ -927,6 +1084,8 @@ At this point, you can’t define a nested key as the identifier to make the col
 
 
 #### uniqueBy
+- *added in version `2.4`*
+
 The `uniqueBy` method returns all unique values in the collection identified by the given selector function. The selector should return the value identifying an item uniquely.
 
 For example, having a list of users you may return the  user ID or email address to identify distinct users.
@@ -951,6 +1110,8 @@ await Collect([
 
 
 #### unshift
+- *added in version `1.5`*
+
 The `unshift` method adds one or more elements to the beginning of the collection. It returns the new collection containing the added items:
 
 ```js
