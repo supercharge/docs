@@ -101,19 +101,20 @@ users.toArray()
 
 
 #### clear
-The `clear` method removes all entries from the map:
+The `clear` method removes all entries from the set:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
+  .add('Marcus')
 
-cache.size
+users.size
 // 2
 
-cache.clear()
+users.clear()
 
 cache.size
 // 0
@@ -124,270 +125,190 @@ cache.size
 The `delete` method removes the entry identified by the given `key`:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-cache.has('user:1')
+const removed = users.delete('Marcus')
 // true
 
-const removed = cache.delete('user:1')
-// true
-
-cache.has('user:1')
+users.has('Marcus')
 // false
 ```
 
-Calling `map.delete(key)` returns `true` if the given key is present in the map and has been removed. Returns `false` if the key isn’t present in the map.
+Calling `set.delete(key)` returns `true` if the given key is present in the set and has been removed. Returns `false` if the key isn’t present in the set.
 
 
 #### entries
-The `entries` method returns an iterator object containing the `[key, value]` pairs present in the map (in insertion order):
+The `entries` method returns an iterator object containing a `[value, value]` pair for each item in the set (in insertion order).
+
+If you’re wondering about the `[value, value]` pair, sets don’t have a key like in `Map` objects. The API of sets is similar to maps and that’s why you’re receiving an array with two properties:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-const iterator = cache.entries()
-
-iterator.next().value
-// ['user:1', 'Marcus']
+const iterator = users.entries()
 
 iterator.next().value
-// ['user:2', 'Supercharge']
+// ['Marcus', 'Marcus']
+
+iterator.next().value
+// ['Supercharge', 'Supercharge']
 ```
 
-You may also iterate through the `[key, value]` pairs using a `for..of` or loop:
+You may also iterate through the set entries using a `for..of` or loop:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-for (const [key, value] of cache.entries()) {
-  console.log(`"${key}" mapping to --> ${value}`)
+for (const [value] of users.entries()) {
+  console.log(value)
 }
 
-// "user:1" mapping to --> Marcus
-// "user:2" mapping to --> Supercharge
+// 'Marcus'
+// 'Supercharge'
 ```
 
 
 #### forEach
-The `forEach` method processes a given `callback` function once for each entry in the map in insertion order. The `callback` function receives the `value, key, map` arguments:
+The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, value, set` arguments:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-cache.forEach((value, key, map) => {
-  console.log(`"${key}" mapping to --> ${value}`)
+cache.forEach((value, value, set) => {
+  console.log(value)
 })
 
-// "user:1" mapping to --> Marcus
-// "user:2" mapping to --> Supercharge
-```
-
-
-#### get
-The `get` method returns the value stored identified by the given `key`. Returns `undefined` if the given `key` is not present in the map:
-
-```js
-const cache = new Map()
-
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
-
-cache.get('user:1')
 // 'Marcus'
-
-cache.get('user:5000')
-// undefined
-```
-
-
-#### getOrDefault
-The `getOrDefault` method returns the value stored identified by the given `key`, or the given `defaultValue` if the given `key` is not present in the map:
-
-```js
-const cache = new Map()
-
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
-
-cache.getOrDefault('user:1', 'Default-Username')
-// 'Marcus'
-
-cache.getOrDefault('user:5000', 'Default-Username')
-// 'Default-Username'
+// 'Supercharge'
 ```
 
 
 #### has
-The `has` method returns `true` if the given `key` is present in the map, otherwise `false`:
+The `has` method returns `true` if the given `value` is present in the set, otherwise `false`:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-cache.has('user:1')
+users.has('Marcus')
 // true
 
-cache.has('user:5000')
+users.has('not-existent')
 // false
 ```
 
 
 #### isEmpty
-The `isEmpty` method returns `true` if the map has no entries. Returns `false` if `key/value` pairs are present in the map:
+The `isEmpty` method returns `true` if the set has no entries. Returns `false` if entries are present in the set:
 
 ```js
-const cache = new Map()
+const set = new Set()
 
-cache.isEmpty()
+set.isEmpty()
 // true
 
-cache.set('user:1', 'Marcus')
+set.add('Marcus')
 
-cache.isEmpty()
+set.isEmpty()
 // false
 ```
 
 
 #### isNotEmpty
-The `isNotEmpty` method returns `true` if `key/value` pairs are present the map. Returns `false` if the map is empty:
+The `isNotEmpty` method returns `true` if entries are present the map. Returns `false` if the set is empty:
 
 ```js
-const cache = new Map()
+const set = new Set()
 
-cache.isNotEmpty()
+set.isNotEmpty()
 // false
 
-cache.set('user:1', 'Marcus')
+set.add('Marcus')
 
-cache.isNotEmpty()
+set.isNotEmpty()
 // true
-```
-
-
-#### keys
-The `keys` method returns an iterator object containing the keys present in the map (in insertion order):
-
-```js
-const cache = new Map()
-
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
-
-const keyIterator = cache.keys()
-
-keyIterator.next().value
-// 'user:1'
-
-keyIterator.next().value
-// 'user:2'
-```
-
-You may also iterate through the keys using a `for..of` or loop:
-
-```js
-const cache = new Map()
-
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
-
-for (const key of cache.keys()) {
-  console.log(`"${key}" mapping to --> ${cache.get(key)}`)
-}
-
-// "user:1" mapping to --> Marcus
-// "user:2" mapping to --> Supercharge
 ```
 
 
 #### map
-The `map` method returns an array containing the results of the given `transform` function. The transform function will be called once for each entry in the map in insertion order. The `transform` function receives the `value, key, map` arguments:
+The `map` method returns an array containing the results of the given `transform` function.
+
+The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, value, set` arguments:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-const users = cache.map((value, key, map) => {
-  return { [key]: value }
+const names = users.map((value, value, set) => {
+  return value
 })
 
-// [{ 'user:1': 'Marcus' }, { 'user:2': 'Supercharge' }]
+// ['Marcus', 'Supercharge']
 ```
 
 
 #### of
-The static `of` method creates a new map instance of the given key-value-pairs. It’s basically a shortcut for `new Map(entries)`:
+The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
 
 ```js
-const cache = Map.of([
-    ['user:1', 'Marcus'],
-    ['user:2', 'Supercharge']
-])
+const set = Set.of(['Marcus', 'Supercharge'])
 
-cache.get('user:1')
-// 'Marcus'
-
-cache.has('user:2')
+set.has('Marcus')
 // true
 ```
 
-**Notice** the list of lists. Each entry in the map represents a list of two items.
-
 
 #### values
-The `values` method returns an iterator object containing the values present in the map (in insertion order):
+The `values` method returns an iterator object containing the values present in the set (in insertion order):
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-const valueIterator = cache.values()
-
-valueIterator.next().value
-// 'user:1'
+const valueIterator = users.values()
 
 valueIterator.next().value
-// 'user:2'
+// 'Marcus'
+
+valueIterator.next().value
+// 'Supercharge'
 ```
 
 You may also iterate through the values using a `for..of` or loop:
 
 ```js
-const cache = new Map()
+const users = new Set()
 
-cache
-  .set('user:1', 'Marcus')
-  .set('user:2', 'Supercharge')
+users
+  .add('Marcus')
+  .add('Supercharge')
 
-for (const value of cache.values()) {
+for (const value of users.values()) {
   console.log(value)
 }
 
@@ -407,7 +328,7 @@ Here’s a list of available properties on a set instance:
 
 
 #### size
-The `size` property returns the number of items in the set:
+The `size` property returns the number of entries in the set:
 
 ```js
 const set = new Set()
