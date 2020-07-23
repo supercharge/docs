@@ -174,6 +174,25 @@ const names = users.filter((value, set) => {
 ```
 
 
+#### find
+The `find` method returns the first item in the set matching the given `predicate`.
+
+The `predicate` function receives the `value, set` arguments:
+
+```js
+const users = Set.of([
+  { id: 1, name: 'Marcus' },
+  { id: 2, name: 'Supercharge' }
+])
+
+const names = users.find((value, set) => {
+  return value.name === 'Supercharge'
+})
+
+// { id: 2, name: 'Supercharge' }
+```
+
+
 #### forEach
 The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, set` arguments:
 
