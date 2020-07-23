@@ -249,11 +249,7 @@ The `map` method returns a new set instance containing the results of the given 
 The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
+const users = Set.of(['Marcus', 'Supercharge'])
 
 const names = users.map((value, set) => {
   return value
@@ -278,11 +274,7 @@ set.has('Marcus')
 The `size` method returns the number of entries in the set:
 
 ```js
-const set = new Set()
-
-set
-  .add('Marcus')
-  .add('Supercharge')
+const set = Set.of(['Marcus', 'Supercharge'])
 
 const size = set.size()
 // 2
@@ -305,11 +297,7 @@ const array = set.toArray()
 The `values` method returns an iterator object containing the values present in the set (in insertion order):
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
+const users = Set.of(['Marcus', 'Supercharge'])
 
 const valueIterator = users.values()
 
@@ -323,11 +311,7 @@ valueIterator.next().value
 You may also iterate through the values using a `for..of` or loop:
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
+const users = Set.of(['Marcus', 'Supercharge'])
 
 for (const value of users.values()) {
   console.log(value)
