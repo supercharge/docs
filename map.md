@@ -21,6 +21,14 @@ You can use this package with every project even if it’s not build on Supercha
 ## Working With Maps
 Import the `@supercharge/map` package and use it the same way you would use JavaScript’s `Map` class:
 
+```info
+**Please notice,** the `@supercharge/map` package is not a drop-in replacement for the native `Map` class shipped by JavaScript.
+```
+
+JavaScript’s `Map` class provides a “wrong” parameter order in callback. JS gives you `value, key, map` which is aligning arrays, sets, and maps. And this feels wrong to me. It should be `key, value, map`. And this package does it “right”. That’s why this package exists.
+
+**This is the Map class JavaScript should have shipped.**
+
 ```js
 const Map = require('@supercharge/map')
 
