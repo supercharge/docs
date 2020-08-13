@@ -1,17 +1,17 @@
-# Maps
+# Map
 
 
 ## Introduction
-The [`@supercharge/maps`](https://github.com/supercharge/maps) package provides an extended JavaScript `Map` class providing methods like `.isEmpty()`, `.map(callback)`, and many more.
+The [`@supercharge/map`](https://github.com/supercharge/map) package provides an extended JavaScript `Map ` class. It comes with additional methods like `.isEmpty()`, `.map(callback)`, `.filter(callback)`, and many more.
 
 You already know methods like `.map()` from arrays and having them available on maps improves your development experience and makes your code more readable.
 
 
 ## Installation
-The [`@supercharge/maps`](https://github.com/supercharge/maps) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+The [`@supercharge/map`](https://github.com/supercharge/map) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
 
 ```bash
-npm i @supercharge/maps
+npm i @supercharge/map
 ```
 
 ```success
@@ -19,10 +19,10 @@ You can use this package with every project even if it’s not build on Supercha
 ```
 
 ## Working With Maps
-Import the `@supercharge/maps` package and use it the same way you would use JavaScript’s `Map` class:
+Import the `@supercharge/map` package and use it the same way you would use JavaScript’s `Map` class:
 
 ```js
-const Map = require('@supercharge/maps')
+const Map = require('@supercharge/map')
 
 const cache = new Map()
 
@@ -36,7 +36,7 @@ cache
 cache.isNotEmpty()
 // true
 
-const users = cache.map((value, key) => {
+const users = cache.map((key, value, map) => {
   return { [key]: value }
 })
 
@@ -63,6 +63,7 @@ Here’s a list of available methods in the package:
 [clear](#clear)
 [delete](#delete)
 [entries](#entries)
+[filter](#filter)
 [forEach](#foreach)
 [get](#get)
 [getOrDefault](#getordefault)
@@ -73,6 +74,7 @@ Here’s a list of available methods in the package:
 [map](#map)
 [of](#of)
 [set](#set)
+[size](#size)
 [values](#values)
 
 </div>
@@ -99,7 +101,10 @@ cache.size
 
 
 #### delete
-The `delete` method removes the entry identified by the given `key`:
+The `delete` method removes the entry identified by the given `key`.
+
+Calling `map.delete(key)` returns `true` if the given key is present in the map and has been removed. Returns `false` if the key isn’t present in the map:
+
 
 ```js
 const cache = new Map()
@@ -118,11 +123,9 @@ cache.has('user:1')
 // false
 ```
 
-Calling `map.delete(key)` returns `true` if the given key is present in the map and has been removed. Returns `false` if the key isn’t present in the map.
-
 
 #### entries
-The `entries` method returns an iterator object containing the `[key, value]` pairs present in the map (in insertion order):
+The `entries` method returns an iterator containing the `[key, value]` pairs present in the map (in insertion order):
 
 ```js
 const cache = new Map()
@@ -158,8 +161,40 @@ for (const [key, value] of cache.entries()) {
 ```
 
 
+#### filter
+The `filter` method returns a map containing only items matching the given `predicate`.
+
+The predicate function will be called once for each entry in the map (in insertion order). The `predicate` function receives the `key, value, map` arguments:
+
+```js
+const cache = new Map()
+
+cache
+  .set('user:1', 'Marcus')
+  .set('user:2', 'Supercharge')
+  .set('user:3', 'Norman')
+  .set('user:4', 'Christian')
+
+
+const filtered = cache.filter((key, value, map) => {
+  return key === 'user:1' || value === 'Supercharge'
+})
+
+filtered.forEach((key, value, map) => {
+  console.log(`"${key}" --> ${value}`)
+})
+
+// "user:1" --> Marcus
+// "user:2" --> Supercharge
+```
+
+```warning
+**Please notice:** the argument order `key, value, map` is different from the argument order of native a JavaScript Map `value, key, map`.
+```
+
+
 #### forEach
-The `forEach` method processes a given `callback` function once for each entry in the map in insertion order. The `callback` function receives the `value, key, map` arguments:
+The `forEach` method processes a given `action` callback function once for each entry in the map in insertion order. The `action` callback function receives the `key, value, map` arguments:
 
 ```js
 const cache = new Map()
@@ -168,7 +203,7 @@ cache
   .set('user:1', 'Marcus')
   .set('user:2', 'Supercharge')
 
-cache.forEach((value, key, map) => {
+cache.forEach((key, value, map) => {
   console.log(`"${key}" mapping to --> ${value}`)
 })
 
@@ -176,9 +211,13 @@ cache.forEach((value, key, map) => {
 // "user:2" mapping to --> Supercharge
 ```
 
+```warning
+**Please notice:** the argument order `key, value, map` is different from the argument order of native a JavaScript Map `value, key, map`.
+```
+
 
 #### get
-The `get` method returns the value stored identified by the given `key`. Returns `undefined` if the given `key` is not present in the map:
+The `get` method returns the value identified by the given `key`. Returns `undefined` if the given `key` is not present in the map:
 
 ```js
 const cache = new Map()
@@ -196,7 +235,7 @@ cache.get('user:5000')
 
 
 #### getOrDefault
-The `getOrDefault` method returns the value stored identified by the given `key`, or the given `defaultValue` if the given `key` is not present in the map:
+The `getOrDefault` method returns the value identified by the given `key` or the `defaultValue` if the given `key` is not present in the map:
 
 ```js
 const cache = new Map()
@@ -248,7 +287,7 @@ cache.isEmpty()
 
 
 #### isNotEmpty
-The `isNotEmpty` method returns `true` if `key/value` pairs are present the map. Returns `false` if the map is empty:
+The `isNotEmpty` method returns `true` if the map is empty. Returns `false` if key-value-pairs are present the map.
 
 ```js
 const cache = new Map()
@@ -264,7 +303,7 @@ cache.isNotEmpty()
 
 
 #### keys
-The `keys` method returns an iterator object containing the keys present in the map (in insertion order):
+The `keys` method returns an iterator containing the keys present in the map (in insertion order):
 
 ```js
 const cache = new Map()
@@ -301,7 +340,7 @@ for (const key of cache.keys()) {
 
 
 #### map
-The `map` method returns an array containing the results of the given `transform` function. The transform function will be called once for each entry in the map in insertion order. The `transform` function receives the `value, key, map` arguments:
+The `map` method returns an array containing the results of the given `transform` function. The transform function will be called once for each entry in the map in insertion order. The `transform` function receives the `key, value, map` arguments:
 
 ```js
 const cache = new Map()
@@ -310,11 +349,15 @@ cache
   .set('user:1', 'Marcus')
   .set('user:2', 'Supercharge')
 
-const users = cache.map((value, key, map) => {
+const users = cache.map((key, value, map) => {
   return { [key]: value }
 })
 
 // [{ 'user:1': 'Marcus' }, { 'user:2': 'Supercharge' }]
+```
+
+```warning
+**Please notice:** the argument order `key, value, map` is different from the argument order of native a JavaScript Map `value, key, map`.
 ```
 
 
@@ -334,7 +377,7 @@ cache.has('user:2')
 // true
 ```
 
-**Notice** the list of lists. Each entry in the map represents a list of two items.
+**Notice** the list of lists as the argument to create a new map instance. The lists with two items represent a key-value-pair.
 
 
 #### set
@@ -352,6 +395,21 @@ cache.get('user:1')
 
 cache.has('user:5000')
 // false
+```
+
+
+#### size
+The `size` method returns the number of key-value-pairs in the map:
+
+```js
+const map = new Map([
+  ['key', 'value'] // adding the first pair
+])
+
+map.set('name', 'Marcus') // adding the second pair
+
+const size = map.size()
+// 2
 ```
 
 
@@ -390,26 +448,3 @@ for (const value of cache.values()) {
 // 'Marcus'
 // 'Supercharge'
 ```
-
-
-## Available Properties
-Here’s a list of available properties in the package:
-
-<div id="collection-method-list" markdown="1">
-
-[size](#size)
-
-</div>
-
-
-#### size
-The `size` property returns the number of key/value pairs in the map:
-
-```js
-const map = new Map([['key', 'value']])
-map.set('name', 'Marcus')
-
-const size = map.size
-// 2
-```
-
