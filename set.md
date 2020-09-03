@@ -23,7 +23,6 @@ Import the `@supercharge/set` package and use it the same way you would use Java
 
 ```info
 **Please notice,** the `@supercharge/set` package is not a drop-in replacement for the native `Set` class shipped by JavaScript.
-
 ```
 
 JavaScript aligned the `Set` and `Map` classes. Aligning sets and maps felt wrong for me. In my opinion, sets are more in line with arrays, not with maps. That’s why this package exists.
@@ -84,6 +83,8 @@ Here’s a list of available methods on a set instance:
 [delete](#delete)
 [filter](#filter)
 [find](#find)
+[flatMap](#flatMap)
+[flatten](#flatten)
 [forEach](#foreach)
 [has](#has)
 [isEmpty](#isempty)
@@ -190,6 +191,32 @@ const names = users.find((value, set) => {
 })
 
 // { id: 2, name: 'Supercharge' }
+```
+
+
+#### flatMap
+The `flatMap` method returns a new set instance containing the results of applying the given `transform` function and ultimately collapsing the result (one level deep).
+
+The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
+
+```js
+const users = Set.of([ 'Marcus', ['Supercharge'] ])
+
+const names = users.map((value, set) => {
+  return value
+})
+
+// Set ['Marcus', 'Supercharge']
+```
+
+
+#### flattem
+The `flattem` method flatten the items in the set one level deep.
+
+```js
+const users = Set.of([ 'Marcus', ['Supercharge'] ]).flatten()
+
+// Set ['Marcus', 'Supercharge']
 ```
 
 
