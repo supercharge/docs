@@ -83,7 +83,7 @@ Here’s a list of available methods on a set instance:
 [delete](#delete)
 [filter](#filter)
 [find](#find)
-[flatMap](#flatMap)
+[flatMap](#flatmap)
 [flatten](#flatten)
 [forEach](#foreach)
 [has](#has)
