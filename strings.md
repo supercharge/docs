@@ -264,7 +264,9 @@ const isString = Str.isString(123)
 ```
 
 
-#### kebab
+####
+- *added in version `1.8`*
+
 The `kebab` method converts the given string to `kebab-case`:
 
 ```js
@@ -300,7 +302,7 @@ const length = Str('Supercharge').length()
 The `limit` method returns a limitted number of characters from the string:
 
 ```js
-const lower = Str('Supercharge is SWEET!').limit(5).get()
+const limit = Str('Supercharge is SWEET!').limit(5).get()
 
 // 'Super'
 ```
@@ -308,7 +310,7 @@ const lower = Str('Supercharge is SWEET!').limit(5).get()
 You may also pass a second parameter to the `limit` method defining the ending characters. These `end` characters will be appended to the limitted string:
 
 ```js
-const lower = Str('Supercharge is SWEET!').limit(5, '…').get()
+const limit = Str('Supercharge is SWEET!').limit(5, '…').get()
 
 // 'Super…'
 ```
@@ -326,17 +328,28 @@ const lower = Str('Supercharge is SWEET!').lower().get()
 
 #### ltrim
 - *added in version `1.4`*
+- *updated in version `1.9` to trim specific characters*
 
 The `ltrim` method removes whitespace from the front of the string:
 
 ```js
-const lower = Str('   Supercharge is nice  ').ltrim().get()
+const trimmed = Str('   Supercharge is nice  ').ltrim().get()
 
 // 'Supercharge is nice  '
 ```
 
+You can trim specific characters from the front of the string:
+
+```js
+const trimmed = Str('/supercharge/').ltrim('/').get()
+
+// 'supercharge/'
+```
+
 
 #### pascal
+- *added in version `1.8`*
+
 The `pascal` method is an alias for [`.studly()`](#studly) transformingthe given string into `PascalCase` aka `StudlyCase`:
 
 ```js
@@ -375,17 +388,28 @@ const replaced = Str('Supercharge-is-super-awesome')
 
 #### rtrim
 - *added in version `1.4`*
+- *updated in version `1.9` to trim specific characters*
 
 The `rtrim` method removes whitespace from the end of the string:
 
 ```js
-const lower = Str('   Supercharge is nice  ').rtrim().get()
+const trimmed = Str('   Supercharge is nice  ').rtrim().get()
 
 // '   Supercharge is nice'
 ```
 
+You can trim specific characters from the end of the string:
+
+```js
+const trimmed = Str('/supercharge/').rtrim('/').get()
+
+// '/supercharge'
+```
+
 
 #### snake
+- *added in version `1.8`*
+
 The `snake` method converts the given string to `snake_case`:
 
 ```js
@@ -460,12 +484,22 @@ const title = Str('A new Supercharge docs page would be nice').title().get()
 
 
 #### trim
+- *updated in version `1.9` to trim specific characters*
+
 The `trim` method removes all whitespace from the front and back of the given string:
 
 ```js
 const trimmed = Str('    Supercharge is sweet ').trim().get()
 
 // 'Supercharge is sweet'
+```
+
+You can trim specific characters from the string:
+
+```js
+const trimmed = Str('/supercharge/').trim('/').get()
+
+// 'supercharge'
 ```
 
 
