@@ -197,10 +197,19 @@ Str('Supercharge').concat([' has', ' style']).get()
 
 
 #### contains
+- *updated in version `1.15` supporting an array of needles from which one must be present in the string*
+
 The `contains` method determines whether the given string contains a given value:
 
 ```js
 const contains = Str('Supercharge is awesome').contains('awesome')
+// true
+```
+
+You can also pass an array of values to the `contains` method to determine whether the string contains any of the given values:
+
+```js
+const contains = Str('Supercharge is awesome').contains(['awesome', 'sweet'])
 // true
 ```
 
