@@ -574,6 +574,20 @@ const replaced = Str('Supercharge-is-super-awesome')
 ```
 
 
+#### reverse
+- *added in version `1.15`*
+
+The `reverse` method reverses the order of the string:
+
+```js
+const reversed = Str('Hello')
+    .reverse()
+    .get()
+
+// 'olleH'
+```
+
+
 #### rtrim
 - *added in version `1.4`*
 - *updated in version `1.14` to trim specific characters*
