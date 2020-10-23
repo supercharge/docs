@@ -560,6 +560,20 @@ const replaced = Str('Supercharge-is-super-awesome')
 ```
 
 
+#### replaceLast
+- *added in version `1.15`*
+
+The `replaceLast` method replaces the last occurrence of a given value in a string:
+
+```js
+const replaced = Str('Supercharge-is-super-awesome')
+    .replaceLast('-', '/')
+    .get()
+
+// 'Supercharge-is-super/awesome'
+```
+
+
 #### rtrim
 - *added in version `1.4`*
 - *updated in version `1.14` to trim specific characters*
