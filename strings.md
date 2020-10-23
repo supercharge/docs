@@ -77,6 +77,8 @@ Here’s a list of available methods in the strings package:
 [random](#random)
 [replace](#replace)
 [replaceAll](#replaceall)
+[replaceLast](#replacelast)
+[reverse](#reverse)
 [rtrim](#rtrim)
 [snake](#snake)
 [split](#split)
