@@ -291,7 +291,7 @@ const start = Str('https://api.github.com///').finish('/').get()
 // 'https://api.github.com///'
 ```
 
-If you want to achieve to end a string with a single instance of a given value, you may combine the `start` method with `rtrim`:
+If you want to achieve to end a string with a single instance of a given value, you may combine the `finish` and `rtrim` methods:
 
 ```js
 const start = Str('https://api.github.com///').rtrim('/').finish('/').get()
@@ -647,7 +647,7 @@ const start = Str('///repos/supercharge').start('/').get()
 // '///repos/supercharge'
 ```
 
-If you want to achieve to start a string with a single instance of a given value, you may combine the `start` method with `ltrim`:
+If you want to achieve to start a string with a single instance of a given value, you may combine the `start` and `ltrim` methods:
 
 ```js
 const start = Str('///repos/supercharge').ltrim('/').start('/').get()
