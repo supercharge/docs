@@ -372,7 +372,7 @@ const isString = Str.isString(123)
 ```
 
 
-####
+#### kebab
 - *added in version `1.8`*
 
 The `kebab` method converts the given string to `kebab-case`:
