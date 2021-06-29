@@ -19,7 +19,7 @@ module.exports = {
       Application: 'application',
       Development: 'development',
       Deployment: 'deployment',
-      Bootstrappers: 'bootstrappers'
+      // Bootstrappers: 'bootstrappers'
     }
   },
 
@@ -28,14 +28,12 @@ module.exports = {
     sections: {
       Routing: 'routing',
       Middleware: 'middleware',
-      Plugins: 'plugins',
-      Decorations: 'decorations',
       'CSRF Protection': 'csrf-protection',
       'App Lifecycle': 'app-lifecycle',
       'Request Lifecycle': 'request-lifecycle',
-      Authentication: 'authentication',
-      Authorization: 'authorization',
-      Validation: 'validation'
+      // Authentication: 'authentication',
+      // Authorization: 'authorization',
+      // Validation: 'validation'
     }
   },
 
@@ -45,27 +43,27 @@ module.exports = {
       'Craft CLI': 'craft-cli',
       Requests: 'requests',
       Responses: 'responses',
-      Mailer: 'mailer',
-      Filesystem: 'filesystem',
-      Hashing: 'hashing',
-      Encryption: 'encryption',
+      // Mailer: 'mailer',
+      // Hashing: 'hashing',
+      // Encryption: 'encryption',
       Events: 'events',
       Logger: 'logger',
-      Session: 'session',
-      Queues: 'queues'
+      // Session: 'session',
+      // Queues: 'queues'
     }
   },
 
   Packages: {
     slug: 'packages',
     sections: {
-      Strings: 'strings',
       Collections: 'collections',
-      'Promise Pool': 'promise-pool',
+      Filesystem: 'filesystem',
+      Goodies: 'goodies',
       Map: 'map',
+      'Promise Pool': 'promise-pool',
       Set: 'set',
       Streams: 'streams',
-      Goodies: 'goodies'
+      Strings: 'strings',
     }
   },
 
@@ -73,7 +71,7 @@ module.exports = {
     slug: 'database',
     sections: {
       Connectors: 'database-connectors',
-      Pagination: 'pagination'
+      // Pagination: 'pagination'
     }
   },
 
@@ -91,19 +89,10 @@ module.exports = {
     slug: 'testing',
     sections: {
       'Getting Started': 'testing',
-      'Create & Debug Tests': 'create-and-debug-tests',
-      'HTTP Tests': 'http-tests',
-      Fakes: 'testing-fakes',
-      Database: 'database-testing'
+      // 'Create & Debug Tests': 'create-and-debug-tests',
+      // 'HTTP Tests': 'http-tests',
+      // Fakes: 'testing-fakes',
+      // Database: 'database-testing'
     }
   },
-
-  'In the Universe': {
-    slug: 'in-the-universe',
-    sections: {
-      Hercules: 'hercules',
-      'Rate Limiting': 'rate-limiting',
-      'Geo Locating': 'geo-locating'
-    }
-  }
 }
