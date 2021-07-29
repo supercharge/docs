@@ -53,6 +53,7 @@ Here’s a list of available methods in the strings package:
 [before](#before)
 [beforeLast](#beforelast)
 [camel](#camel)
+[chars](#chars)
 [concat](#concat)
 [contains](#contains)
 [containsAll](#containsall)
@@ -60,10 +61,12 @@ Here’s a list of available methods in the strings package:
 [equals](#equals)
 [finish](#finish)
 [includes](#includes)
+[includesAll](#includesall)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [isLower](#islower)
 [isString](#isstring)
+[isUpper](#isupper)
 [kebab](#kebab)
 [lcFirst](#lcfirst)
 [length](#length)
@@ -71,8 +74,12 @@ Here’s a list of available methods in the strings package:
 [lower](#lower)
 [ltrim](#ltrim)
 [notContains](#notcontains)
+[notEquals](#notequals)
+[notIncludes](#notincludes)
 [padLeft](#padleft)
 [padRight](#padright)
+[parseCallback](#parseCallback)
+[pascal](#pascal)
 [prepend](#prepend)
 [random](#random)
 [replace](#replace)
@@ -80,6 +87,7 @@ Here’s a list of available methods in the strings package:
 [replaceLast](#replacelast)
 [reverse](#reverse)
 [rtrim](#rtrim)
+[slug](#slug)
 [snake](#snake)
 [split](#split)
 [start](#start)
@@ -87,11 +95,11 @@ Here’s a list of available methods in the strings package:
 [strip](#strip)
 [stripNums](#stripnums)
 [studly](#studly)
+[substr](#substr)
 [title](#title)
 [trim](#trim)
 [ucFirst](#ucfirst)
 [upper](#upper)
-[isUpper](#isupper)
 [uuid](#uuid)
 
 </div>
@@ -177,6 +185,20 @@ The `camel` method returns the underlying string in camelCase:
 ```js
 const camel = Str('Supercharge is awesome').camel().get()
 // 'superchargeIsAwesome'
+```
+
+
+#### chars
+- *added in version `1.19`*
+
+The `chars` method returns a list of the string’s characters:
+
+```js
+const chars = Str('Super').chars()
+// ['S', 'u', 'p', 'e', 'r']
+
+const chars = Str('Super 👍').chars()
+// ['S', 'u', 'p', 'e', 'r', ' ', '👍']
 ```
 
 
@@ -312,6 +334,24 @@ The `includes` method works the same way as the [`contains`](#contains) method. 
 ```
 
 
+#### includesAll
+- *added in version `1.16`*
+
+The `includesAll` method determines whether the given string contains all of the given needles:
+
+```js
+const includesAll = Str('Supercharge is awesome').includesAll('is', 'awesome')
+// true
+
+const includesAll = Str('Supercharge is awesome').includesAll('is', 'bad')
+// false
+```
+
+```info
+The `includesAll` method works the same way as the [`containsAll`](#containsall) method. They are basically just aliases for each other.
+```
+
+
 #### isEmpty
 - *added in version `1.1`*
 
@@ -374,12 +414,20 @@ const isString = Str.isString(123)
 
 #### kebab
 - *added in version `1.8`*
+- *updated in version `1.18` to allow a custom separator*
 
 The `kebab` method converts the given string to `kebab-case`:
 
 ```js
 const kebab = Str('Supercharge is SWEET').kebab().get()
 // 'supercharge-is-sweet'
+```
+
+You can use a custom separator as an argument to the `kebab` method:
+
+```js
+const kebab = Str('Supercharge is SWEET').kebab('.').get()
+// 'supercharge.is.sweet'
 ```
 
 
@@ -461,6 +509,38 @@ const notContains = Str('Supercharge is awesome').notContains('awesome')
 ```
 
 
+#### notEquals
+- *added in version `1.16`*
+
+The `notEquals` method determines whether the given string **does not** equal the candidate value:
+
+```js
+const notEquals = Str('Supercharge').notEquals('supercharge')
+// true
+
+const notEquals = Str('Supercharge').notEquals('Supercharge')
+// false
+```
+
+
+#### notIncludes
+- *added in version `1.16`*
+
+The `notIncludes` method determines whether the given string **does not** contain a given value:
+
+```js
+const notIncludes = Str('Supercharge is awesome').notIncludes('Marcus')
+// true
+
+const notIncludes = Str('Supercharge is awesome').notIncludes('awesome')
+// false
+```
+
+```info
+The `notIncludes` method works the same way as the [`notContains`](#notcontains) method. They are basically just aliases for each other.
+```
+
+
 #### pascal
 - *added in version `1.8`*
 
@@ -507,6 +587,37 @@ A space is used by default when you skip the character used to pad the string:
 ```js
 const padded = Str('$19.99').padRight(15, '.').get()
 // '$19.99         '
+```
+
+
+#### parseCallback
+- *added in version `1.17`*
+
+The `parseCallback` method parses a `Class[@]method` style string into an array with two items: the class and method name. By default, it uses the `@` symbol to split the given string:
+
+```js
+const [ClassName, methodName] = Str('Controller@index').parseCallback()
+// ['Controller', 'index']
+
+const [ClassName, methodName] = Str('Controller').parseCallback()
+// ['Controller', undefined]
+```
+
+You can adjust the separator to split the string by passing it as the first argument:
+
+```js
+const [ClassName, methodName] = Str('Controller.index').parseCallback('.')
+// ['Controller', 'index']
+```
+
+You may also pass a default value for the method name to use in case none is provided:
+
+```js
+const [ClassName, methodName] = Str('Controller').parseCallback('.', 'handle')
+// ['Controller', 'handle']
+
+const [ClassName, methodName] = Str('Controller.index').parseCallback('.', 'handle')
+// ['Controller', 'index']
 ```
 
 
@@ -609,6 +720,24 @@ const trimmed = Str('/supercharge/').rtrim('/').get()
 ```
 
 
+#### slug
+- *added in version `1.8`*
+
+The `slug` method converts the given string to a slug in kebab-case:
+
+```js
+const slug = Str('Supercharge is SWEET').slug().get()
+// 'supercharge-is-sweet'
+```
+
+You can use a custom separator as an argument to the `slug` method:
+
+```js
+const slug = Str('Supercharge is SWEET').slug('.').get()
+// 'supercharge.is.sweet'
+```
+
+
 #### snake
 - *added in version `1.8`*
 
@@ -702,6 +831,24 @@ const studly = Str('Supercharge is SWEET').studly().get()
 ```
 
 StudlyCase is like camelCase but the first symbol is in uppercase.
+
+
+#### substr
+The `substr` method returns a substring between a given `starting` index and an `ending` index or the end of the string.
+
+```js
+const substr = Str('Supercharge').substr(0, 5).get()
+// 'Super'
+
+const substr = Str('Supercharge').substr(5, 0).get()
+// 'Super'
+
+const substr = Str('Supercharge').substr(5).get()
+// 'charge'
+
+const substr = Str('Supercharge').substr().get()
+// 'Supercharge'
+```
 
 
 #### title

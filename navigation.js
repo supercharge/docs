@@ -17,20 +17,24 @@ module.exports = {
       'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
       Application: 'application',
+      // 'App Lifecycle': 'app-lifecycle',
       Development: 'development',
       Deployment: 'deployment',
       // Bootstrappers: 'bootstrappers'
     }
   },
 
-  Essentials: {
+  HTTP: {
     slug: 'essentials',
     sections: {
       Routing: 'routing',
+      Context: 'http-context',
+      Controllers: 'controllers',
+      Requests: 'requests',
+      Responses: 'responses',
       Middleware: 'middleware',
       'CSRF Protection': 'csrf-protection',
-      'App Lifecycle': 'app-lifecycle',
-      'Request Lifecycle': 'request-lifecycle',
+      // 'Request Lifecycle': 'request-lifecycle',
       // Authentication: 'authentication',
       // Authorization: 'authorization',
       // Validation: 'validation'
@@ -41,8 +45,6 @@ module.exports = {
     slug: 'amplifier',
     sections: {
       'Craft CLI': 'craft-cli',
-      Requests: 'requests',
-      Responses: 'responses',
       // Mailer: 'mailer',
       // Hashing: 'hashing',
       // Encryption: 'encryption',
@@ -50,6 +52,14 @@ module.exports = {
       Logger: 'logger',
       // Session: 'session',
       // Queues: 'queues'
+    }
+  },
+
+  Database: {
+    slug: 'database',
+    sections: {
+      Connectors: 'database-connectors',
+      // Pagination: 'pagination'
     }
   },
 
@@ -67,14 +77,6 @@ module.exports = {
     }
   },
 
-  Database: {
-    slug: 'database',
-    sections: {
-      Connectors: 'database-connectors',
-      // Pagination: 'pagination'
-    }
-  },
-
   Frontend: {
     slug: 'frontend',
     sections: {
@@ -85,14 +87,14 @@ module.exports = {
     }
   },
 
-  Testing: {
-    slug: 'testing',
-    sections: {
-      'Getting Started': 'testing',
-      // 'Create & Debug Tests': 'create-and-debug-tests',
-      // 'HTTP Tests': 'http-tests',
-      // Fakes: 'testing-fakes',
-      // Database: 'database-testing'
-    }
-  },
+  // Testing: {
+  //   slug: 'testing',
+  //   sections: {
+  //     'Getting Started': 'testing',
+  // 'Create & Debug Tests': 'create-and-debug-tests',
+  // 'HTTP Tests': 'http-tests',
+  // Fakes: 'testing-fakes',
+  // Database: 'database-testing'
+  // }
+  // },
 }
