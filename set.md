@@ -90,8 +90,9 @@ Here’s a list of available methods on a set instance:
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [map](#map)
-[toArray](#toarray)
 [of](#of)
+[size](#size)
+[toArray](#toarray)
 [values](#values)
 
 </div>
@@ -157,7 +158,7 @@ Calling `set.delete(value)` returns `true` if the given value is present in the 
 #### filter
 The `filter` method returns a set containing only items matching the given `predicate`.
 
-The predicate function will be called once for each entry in the set in insertion order. The `predicate` function receives the `value, set` arguments:
+The `predicate` function will be called once for each entry in the set in insertion order. The `predicate` function receives the `value, set` arguments:
 
 ```js
 const users = new Set()
@@ -195,9 +196,9 @@ const names = users.find((value, set) => {
 
 
 #### flatMap
-The `flatMap` method returns a new set instance containing the results of applying the given `transform` function and ultimately collapsing the result (one level deep).
+The `flatMap` method returns a new set instance, after applying the given `transform` function and collapsing the result (one level deep).
 
-The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
+The `transform` function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
 
 ```js
 const users = Set.of([ 'Marcus', ['Supercharge'] ])
@@ -210,8 +211,8 @@ const names = users.map((value, set) => {
 ```
 
 
-#### flattem
-The `flattem` method flatten the items in the set one level deep.
+#### flatten
+The `flatten` method flattens the items in the set at a depth of `1`.
 
 ```js
 const users = Set.of([ 'Marcus', ['Supercharge'] ]).flatten()
@@ -274,7 +275,7 @@ set.isEmpty()
 
 
 #### isNotEmpty
-The `isNotEmpty` method returns `true` if entries are present the map. Returns `false` if the set is empty:
+The `isNotEmpty` method returns `true` if entries are present in the set. Returns `false` if the set is empty:
 
 ```js
 const set = new Set()
@@ -292,10 +293,14 @@ set.isNotEmpty()
 #### map
 The `map` method returns a new set instance containing the results of the given `transform` function.
 
-The transform function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
+The `transform` function will be called once for each entry in the set, in order of insertion. The `transform` function receives the `value, set` arguments:
 
 ```js
-const users = Set.of(['Marcus', 'Supercharge'])
+const users = Set()
+
+users
+  .add('Marcus')
+  .add('Supercharge')
 
 const names = users.map((value, set) => {
   return value
@@ -328,7 +333,7 @@ const size = set.size()
 
 
 #### toArray
-The `toArray` method returns an array containing the items of the set.
+The `toArray` method returns an array containing the entries of the set.
 
 ```js
 const set = Set.of([1, 2, 3, 4])
@@ -340,7 +345,7 @@ const array = set.toArray()
 
 
 #### values
-The `values` method returns an iterator object containing the values present in the set (in insertion order):
+The `values` method returns an iterator object of the values present in the set (in insertion order):
 
 ```js
 const users = Set.of(['Marcus', 'Supercharge'])
@@ -354,7 +359,7 @@ valueIterator.next().value
 // 'Supercharge'
 ```
 
-You may also iterate through the values using a `for..of` or loop:
+You may also iterate through the values using a `for..of` loop:
 
 ```js
 const users = Set.of(['Marcus', 'Supercharge'])
