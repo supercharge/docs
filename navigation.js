@@ -21,6 +21,7 @@ module.exports = {
       Development: 'development',
       Deployment: 'deployment',
       // Bootstrappers: 'bootstrappers'
+      'Service Providers': 'service-providers'
     }
   },
 
@@ -29,9 +30,9 @@ module.exports = {
     sections: {
       Routing: 'routing',
       Context: 'http-context',
-      Controllers: 'controllers',
       Requests: 'requests',
       Responses: 'responses',
+      Controllers: 'controllers',
       Middleware: 'middleware',
       'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
