@@ -22,12 +22,28 @@ Wrapping a string is as simple as importing the `@supercharge/strings` package a
 ```js
 const Str = require('@supercharge/strings')
 
-const title = Str('  Supercharge is sweet! ').trim().title().get()
+const title = Str('  Supercharge is sweet! ')
+    .trim()
+    .title()
+    .get()
 
 // 'Supercharge Is Sweet!'
 ```
 
 For every method in the chain that would return a string, the package returns an instance of iteself. This way, you can chain further methods. Call `.get()` to retrieve the actual JavaScript string.
+
+
+**Works also with ES Modules and TypeScript**
+
+```js
+import Str from '@supercharge/strings'
+
+const title = Str('Supercharge is sweet!').
+    .title()
+    .get()
+
+// 'Supercharge Is Sweet!'
+```
 
 
 ## Available Methods
@@ -93,6 +109,7 @@ Here’s a list of available methods in the strings package:
 [start](#start)
 [startsWith](#startswith)
 [strip](#strip)
+[stripExtraSpaces](#stripextraspaces)
 [stripNums](#stripnums)
 [studly](#studly)
 [substr](#substr)
@@ -124,7 +141,10 @@ const str = Str('Supercharge is awesome').get()
 The `after` method returns the portion of the string after the first occurrence of the given `delimiter`:
 
 ```js
-const after = Str('Supercharge-is-awesome').after('-').get()
+const after = Str('Supercharge-is-awesome')
+    .after('-')
+    .get()
+
 // 'is-awesome'
 ```
 
@@ -135,7 +155,10 @@ const after = Str('Supercharge-is-awesome').after('-').get()
 The `afterLast` method returns the portion of the string after the last occurrence of the given `delimiter`:
 
 ```js
-const afterLast = Str('Supercharge-is-awesome').afterLast('-').get()
+const afterLast = Str('Supercharge-is-awesome')
+    .afterLast('-')
+    .get()
+
 // 'awesome'
 ```
 
@@ -146,14 +169,20 @@ const afterLast = Str('Supercharge-is-awesome').afterLast('-').get()
 The `append` method appends the given values to the string:
 
 ```js
-const after = Str('Supercharge').append(' is', ' awesome').get()
+const after = Str('Supercharge')
+    .append(' is', ' awesome')
+    .get()
+
 // 'Supercharge is awesome'
 ```
 
 You can also pass an array of strings to the `append` method:
 
 ```js
-const after = Str('Supercharge').append(' is', ' sweet').get()
+const after = Str('Supercharge')
+    .append([' is', ' sweet'])
+    .get()
+
 // 'Supercharge is sweet'
 ```
 
@@ -163,7 +192,10 @@ const after = Str('Supercharge').append(' is', ' sweet').get()
 The `before` method returns the portion of the string before the first occurrence of the given `delimiter`:
 
 ```js
-const before = Str('Supercharge-is-awesome').before('-').get()
+const before = Str('Supercharge-is-awesome')
+    .before('-')
+    .get()
+
 // 'Supercharge'
 ```
 
@@ -174,7 +206,10 @@ const before = Str('Supercharge-is-awesome').before('-').get()
 The `beforeLast` method returns the portion of the string before the last occurrence of the given `delimiter`:
 
 ```js
-const beforeLast = Str('Supercharge-is-awesome').beforeLast('-').get()
+const beforeLast = Str('Supercharge-is-awesome')
+    .beforeLast('-')
+    .get()
+
 // 'Supercharge-is'
 ```
 
@@ -183,7 +218,10 @@ const beforeLast = Str('Supercharge-is-awesome').beforeLast('-').get()
 The `camel` method returns the underlying string in camelCase:
 
 ```js
-const camel = Str('Supercharge is awesome').camel().get()
+const camel = Str('Supercharge is awesome')
+    .camel()
+    .get()
+
 // 'superchargeIsAwesome'
 ```
 
@@ -208,14 +246,20 @@ const chars = Str('Super 👍').chars()
 The `concat` method returns a string that contains the concatenation of two or more strings:
 
 ```js
-Str('Supercharge').concat('-is', '-great').get()
+Str('Supercharge')
+    .concat('-is', '-great')
+    .get()
+
 // 'Supercharge-is-great'
 ```
 
 You may also pass an array of strings as an argument to the `concat` method:
 
 ```js
-Str('Supercharge').concat([' has', ' style']).get()
+Str('Supercharge')
+    .concat([' has', ' style'])
+    .get()
+
 // 'Supercharge has style'
 ```
 
@@ -226,14 +270,18 @@ Str('Supercharge').concat([' has', ' style']).get()
 The `contains` method determines whether the given string contains a given value:
 
 ```js
-const contains = Str('Supercharge is awesome').contains('awesome')
+const contains = Str('Supercharge is awesome')
+    .contains('awesome')
+
 // true
 ```
 
 You can also pass an array of values to the `contains` method to determine whether the string contains any of the given values:
 
 ```js
-const contains = Str('Supercharge is awesome').contains(['awesome', 'sweet'])
+const contains = Str('Supercharge is awesome')
+    .contains(['awesome', 'sweet'])
+
 // true
 ```
 
@@ -248,14 +296,18 @@ The `contains` method works the same way as the [`includes`](#includes) method. 
 The `containsAll` method determines whether the given string contains all given values:
 
 ```js
-const containsAll = Str('Supercharge is awesome').containsAll('is', 'awesome')
+const containsAll = Str('Supercharge is awesome')
+    .containsAll('is', 'awesome')
+
 // true
 ```
 
 You can also pass an array of values to the `containsAll` method:
 
 ```js
-const containsAll = Str('Supercharge is awesome').containsAll(['is', 'bad'])
+const containsAll = Str('Supercharge is awesome')
+    .containsAll(['is', 'bad'])
+
 // false
 ```
 
@@ -275,7 +327,8 @@ Optionally, the `endsWith` method accepts a second argument `length` which is us
 ```js
 const endsWith = Str('Supercharge').endsWith('charge', 5)
 // false
-// -> because the length shortens the 'Supercharge' term to 5 letters ('Super') and compares it with 'charge'
+// -> because the length shortens the 'Supercharge'
+//    term to 5 letters ('Super') and compares it with 'charge'
 ```
 
 
@@ -303,20 +356,24 @@ const equals = Str('Supercharge').equals('supercharge')
 The `finish` method appends a single instance of the given `suffix` to the end of the string if it doesn’t already ends with the given suffix:
 
 ```js
-const start = Str('https://api.github.com').finish('/').get()
+const url = Str('https://api.github.com').finish('/').get()
 // 'https://api.github.com/'
 
-const start = Str('https://api.github.com/').finish('/').get()
+const url = Str('https://api.github.com/').finish('/').get()
 // 'https://api.github.com/'
 
-const start = Str('https://api.github.com///').finish('/').get()
+const url = Str('https://api.github.com///').finish('/').get()
 // 'https://api.github.com///'
 ```
 
 If you want to achieve to end a string with a single instance of a given value, you may combine the `finish` and `rtrim` methods:
 
 ```js
-const start = Str('https://api.github.com///').rtrim('/').finish('/').get()
+const url = Str('https://api.github.com///')
+    .rtrim('/')
+    .finish('/')
+    .get()
+
 // 'https://api.github.com/'
 ```
 
@@ -325,7 +382,9 @@ const start = Str('https://api.github.com///').rtrim('/').finish('/').get()
 The `includes` method determines whether the given string contains a given value:
 
 ```js
-const includes = Str('Supercharge is awesome').includes('awesome')
+const includes = Str('Supercharge is awesome')
+    .includes('awesome')
+
 // true
 ```
 
@@ -340,10 +399,14 @@ The `includes` method works the same way as the [`contains`](#contains) method. 
 The `includesAll` method determines whether the given string contains all of the given needles:
 
 ```js
-const includesAll = Str('Supercharge is awesome').includesAll('is', 'awesome')
+const includesAll = Str('Supercharge is awesome')
+    .includesAll('is', 'awesome')
+
 // true
 
-const includesAll = Str('Supercharge is awesome').includesAll('is', 'bad')
+const includesAll = Str('Supercharge is awesome')
+    .includesAll('is', 'bad')
+
 // false
 ```
 
@@ -419,14 +482,20 @@ const isString = Str.isString(123)
 The `kebab` method converts the given string to `kebab-case`:
 
 ```js
-const kebab = Str('Supercharge is SWEET').kebab().get()
+const kebab = Str('Supercharge is SWEET')
+    .kebab()
+    .get()
+
 // 'supercharge-is-sweet'
 ```
 
 You can use a custom separator as an argument to the `kebab` method:
 
 ```js
-const kebab = Str('Supercharge is SWEET').kebab('.').get()
+const kebab = Str('Supercharge is SWEET')
+    .kebab('.')
+    .get()
+
 // 'supercharge.is.sweet'
 ```
 
@@ -435,7 +504,10 @@ const kebab = Str('Supercharge is SWEET').kebab('.').get()
 The `lcFirst` method lowercases the first character. It won’t change other symbols in the given string:
 
 ```js
-const lcFirst = Str('Supercharge is SWEET!').lcFirst().get()
+const lcFirst = Str('Supercharge is SWEET!')
+    .lcFirst()
+    .get()
+
 // 'supercharge is SWEET!'
 ```
 
@@ -455,14 +527,20 @@ const length = Str('Supercharge').length()
 The `limit` method returns a limitted number of characters from the string:
 
 ```js
-const limit = Str('Supercharge is SWEET!').limit(5).get()
+const limit = Str('Supercharge is SWEET!')
+    .limit(5)
+    .get()
+
 // 'Super'
 ```
 
 You may also pass a second parameter to the `limit` method defining the ending characters. These `end` characters will be appended to the limitted string:
 
 ```js
-const limit = Str('Supercharge is SWEET!').limit(5, '…').get()
+const limit = Str('Supercharge is SWEET!')
+    .limit(5, '…')
+    .get()
+
 // 'Super…'
 ```
 
@@ -471,7 +549,10 @@ const limit = Str('Supercharge is SWEET!').limit(5, '…').get()
 The `lower` method lowercases the given string:
 
 ```js
-const lower = Str('Supercharge is SWEET!').lower().get()
+const lower = Str('Supercharge is SWEET!')
+    .lower()
+    .get()
+
 // 'supercharge is sweet!'
 ```
 
@@ -483,14 +564,20 @@ const lower = Str('Supercharge is SWEET!').lower().get()
 The `ltrim` method removes whitespace from the front of the string:
 
 ```js
-const trimmed = Str('   Supercharge is nice  ').ltrim().get()
+const trimmed = Str('   Supercharge is nice  ')
+    .ltrim()
+    .get()
+
 // 'Supercharge is nice  '
 ```
 
 You can trim specific characters from the front of the string:
 
 ```js
-const trimmed = Str('///supercharge/').ltrim('/').get()
+const trimmed = Str('///supercharge/')
+    .ltrim('/')
+    .get()
+
 // 'supercharge/'
 ```
 
@@ -501,10 +588,14 @@ const trimmed = Str('///supercharge/').ltrim('/').get()
 The `notContains` method determines whether the given string **does not** contain a given value:
 
 ```js
-const notContains = Str('Supercharge is awesome').notContains('Marcus')
+const notContains = Str('Supercharge is awesome')
+    .notContains('Marcus')
+
 // true
 
-const notContains = Str('Supercharge is awesome').notContains('awesome')
+const notContains = Str('Supercharge is awesome')
+    .notContains('awesome')
+
 // false
 ```
 
@@ -515,10 +606,14 @@ const notContains = Str('Supercharge is awesome').notContains('awesome')
 The `notEquals` method determines whether the given string **does not** equal the candidate value:
 
 ```js
-const notEquals = Str('Supercharge').notEquals('supercharge')
+const notEquals = Str('Supercharge')
+    .notEquals('supercharge')
+
 // true
 
-const notEquals = Str('Supercharge').notEquals('Supercharge')
+const notEquals = Str('Supercharge')
+    .notEquals('Supercharge')
+
 // false
 ```
 
@@ -529,10 +624,14 @@ const notEquals = Str('Supercharge').notEquals('Supercharge')
 The `notIncludes` method determines whether the given string **does not** contain a given value:
 
 ```js
-const notIncludes = Str('Supercharge is awesome').notIncludes('Marcus')
+const notIncludes = Str('Supercharge is awesome')
+    .notIncludes('Marcus')
+
 // true
 
-const notIncludes = Str('Supercharge is awesome').notIncludes('awesome')
+const notIncludes = Str('Supercharge is awesome')
+    .notIncludes('awesome')
+
 // false
 ```
 
@@ -547,7 +646,10 @@ The `notIncludes` method works the same way as the [`notContains`](#notcontains)
 The `pascal` method is an alias for [`.studly()`](#studly) transformingthe given string into `PascalCase` aka `StudlyCase`:
 
 ```js
-const pascal = Str('Supercharge is SWEET').pascal().get()
+const pascal = Str('Supercharge is SWEET')
+    .pascal()
+    .get()
+
 // 'SuperchargeIsSweet'
 ```
 
@@ -560,14 +662,20 @@ PascalCase is like camelCase with the first symbol in uppercase.
 The `padLeft` method pads the left side of the string with the given `pad` string (repeatedly if needed) so that the resulting string reaches a given `length`:
 
 ```js
-const padded = Str('$19.99').padLeft(15, '.').get()
+const padded = Str('$19.99')
+    .padLeft(15, '.')
+    .get()
+
 // '.........$19.99'
 ```
 
 A space is used by default when you skip the character used to pad the string:
 
 ```js
-const padded = Str('$19.99').padLeft(15, '.').get()
+const padded = Str('$19.99')
+    .padLeft(15, '.')
+    .get()
+
 // '         $19.99'
 ```
 
@@ -578,14 +686,20 @@ const padded = Str('$19.99').padLeft(15, '.').get()
 The `padRight` method pads the right side of the string with the given `pad` string (repeatedly if needed) so that the resulting string reaches a given `length`:
 
 ```js
-const padded = Str('$19.99').padRight(15, '.').get()
+const padded = Str('$19.99')
+    .padRight(15, '.')
+    .get()
+
 // '$19.99.........'
 ```
 
 A space is used by default when you skip the character used to pad the string:
 
 ```js
-const padded = Str('$19.99').padRight(15, '.').get()
+const padded = Str('$19.99')
+    .padRight(15)
+    .get()
+
 // '$19.99         '
 ```
 
@@ -614,6 +728,7 @@ You may also pass a default value for the method name to use in case none is pro
 
 ```js
 const [ClassName, methodName] = Str('Controller').parseCallback('.', 'handle')
+
 // ['Controller', 'handle']
 
 const [ClassName, methodName] = Str('Controller.index').parseCallback('.', 'handle')
@@ -627,14 +742,20 @@ const [ClassName, methodName] = Str('Controller.index').parseCallback('.', 'hand
 The `prepend` method prepends the given values to the string:
 
 ```js
-const after = Str('awesome').prepend('Supercharge ', 'is ').get()
+const after = Str('awesome')
+    .prepend('Supercharge ', 'is ')
+    .get()
+
 // 'Supercharge is awesome'
 ```
 
 You can also pass an array of strings to the `prepend` method:
 
 ```js
-const after = Str('sweet').prepend(['Supercharge ', 'is ']).get()
+const after = Str('sweet')
+    .prepend(['Supercharge ', 'is '])
+    .get()
+
 // 'Supercharge is sweet'
 ```
 
@@ -654,7 +775,10 @@ const random = Str.random()
 The `replace` method replaces the first occurrence of a given value in a string:
 
 ```js
-const replaced = Str('Supercharge-is-super-awesome').replace('-', '/').get()
+const replaced = Str('Supercharge-is-super-awesome')
+    .replace('-', '/')
+    .get()
+
 // 'Supercharge/is-super-awesome'
 ```
 
@@ -708,14 +832,20 @@ const reversed = Str('Hello')
 The `rtrim` method removes whitespace from the end of the string:
 
 ```js
-const trimmed = Str('   Supercharge is nice  ').rtrim().get()
+const trimmed = Str('   Supercharge is nice  ')
+    .rtrim()
+    .get()
+
 // '   Supercharge is nice'
 ```
 
 You can trim specific characters from the end of the string:
 
 ```js
-const trimmed = Str('/supercharge/').rtrim('/').get()
+const trimmed = Str('/supercharge/')
+    .rtrim('/')
+    .get()
+
 // '/supercharge'
 ```
 
@@ -726,14 +856,20 @@ const trimmed = Str('/supercharge/').rtrim('/').get()
 The `slug` method converts the given string to a slug in kebab-case:
 
 ```js
-const slug = Str('Supercharge is SWEET').slug().get()
+const slug = Str('Supercharge is SWEET')
+    .slug()
+    .get()
+
 // 'supercharge-is-sweet'
 ```
 
 You can use a custom separator as an argument to the `slug` method:
 
 ```js
-const slug = Str('Supercharge is SWEET').slug('.').get()
+const slug = Str('Supercharge is SWEET')
+    .slug('.')
+    .get()
+
 // 'supercharge.is.sweet'
 ```
 
@@ -744,7 +880,10 @@ const slug = Str('Supercharge is SWEET').slug('.').get()
 The `snake` method converts the given string to `snake_case`:
 
 ```js
-const snake = Str('Supercharge is SWEET').snake().get()
+const snake = Str('Supercharge is SWEET')
+    .snake()
+    .get()
+
 // 'supercharge_is_sweet'
 ```
 
@@ -766,20 +905,30 @@ const splitted = Str('Supercharge-is-sweet').split('-')
 The `start` method prepends a single instance of the given `prefix` to the start of the string if it doesn’t already starts with the given prefix:
 
 ```js
-const start = Str('repos/supercharge').start('/').get()
+const start = Str('repos/supercharge')
+    .start('/')
+    .get()
 // '/repos/supercharge'
 
-const start = Str('/repos/supercharge').start('/').get()
+const start = Str('/repos/supercharge')
+    .start('/')
+    .get()
 // '/repos/supercharge'
 
-const start = Str('///repos/supercharge').start('/').get()
+const start = Str('///repos/supercharge')
+    .start('/')
+    .get()
 // '///repos/supercharge'
 ```
 
 If you want to achieve to start a string with a single instance of a given value, you may combine the `start` and `ltrim` methods:
 
 ```js
-const start = Str('///repos/supercharge').ltrim('/').start('/').get()
+const start = Str('///repos/supercharge')
+    .ltrim('/')
+    .start('/')
+    .get()
+
 // '/repos/supercharge'
 ```
 
@@ -806,8 +955,25 @@ const startsWith = Str('Supercharge').startsWith('charge', 5)
 The `strip` method removes all whitespace from the given string, everywhere:
 
 ```js
-const stripped = Str('  Supercharge is SWEET').strip().get()
+const stripped = Str('  Supercharge is SWEET')
+    .strip()
+    .get()
+
 // 'SuperchargeisSWEET'
+```
+
+
+#### stripExtraSpaces
+- *added in version `1.20`*
+
+The `stripExtraSpaces` method removes all extra spaces from the given string and leaves a single space at the position:
+
+```js
+const strippedNums = Str('Supercharge   is   awesome')
+    .stripExtraSpaces()
+    .get()
+
+// 'Supercharge is awesome'
 ```
 
 
@@ -817,16 +983,23 @@ const stripped = Str('  Supercharge is SWEET').strip().get()
 The `stripNums` method removes all numbers from the given string, everywhere:
 
 ```js
-const strippedNums = Str('Supercharge 123 is awesome').stripNums().get()
+const strippedNums = Str('Supercharge 123 is awesome')
+    .stripNums()
+    .get()
+
 // 'Supercharge  is awesome'
 ```
+
+**Notice:** removing the numbers may leave extra spaces within the text. The example above contains two spaces between “Supercharge  is”. Use the [`stripExtraSpaces`](#stripextraspaces) method to replace extra spaces with a single one at the given position.
 
 
 #### studly
 The `studly` method transforms the given string into `StudlyCase`:
 
 ```js
-const studly = Str('Supercharge is SWEET').studly().get()
+const studly = Str('Supercharge is SWEET')
+    .studly()
+    .get()
 // 'SuperchargeIsSweet'
 ```
 
@@ -837,16 +1010,24 @@ StudlyCase is like camelCase but the first symbol is in uppercase.
 The `substr` method returns a substring between a given `starting` index and an `ending` index or the end of the string.
 
 ```js
-const substr = Str('Supercharge').substr(0, 5).get()
+const substr = Str('Supercharge')
+    .substr(0, 5)
+    .get()
 // 'Super'
 
-const substr = Str('Supercharge').substr(5, 0).get()
+const substr = Str('Supercharge')
+    .substr(5, 0)
+    .get()
 // 'Super'
 
-const substr = Str('Supercharge').substr(5).get()
+const substr = Str('Supercharge')
+    .substr(5)
+    .get()
 // 'charge'
 
-const substr = Str('Supercharge').substr().get()
+const substr = Str('Supercharge')
+    .substr()
+    .get()
 // 'Supercharge'
 ```
 
@@ -855,7 +1036,10 @@ const substr = Str('Supercharge').substr().get()
 The `title` method transforms the given string to `Title Case`:
 
 ```js
-const title = Str('A new Supercharge docs page would be nice').title().get()
+const title = Str('A new Supercharge docs page would be nice')
+    .title()
+    .get()
+
 // 'A new Supercharge Docs Page Would Be Nice'
 ```
 
@@ -866,14 +1050,20 @@ const title = Str('A new Supercharge docs page would be nice').title().get()
 The `trim` method removes all whitespace from the front and back of the given string:
 
 ```js
-const trimmed = Str('    Supercharge is sweet ').trim().get()
+const trimmed = Str('    Supercharge is sweet ')
+    .trim()
+    .get()
+
 // 'Supercharge is sweet'
 ```
 
 You can trim specific characters from the string:
 
 ```js
-const trimmed = Str('/supercharge/').trim('/').get()
+const trimmed = Str('/supercharge/')
+    .trim('/')
+    .get()
+
 // 'supercharge'
 ```
 
@@ -884,7 +1074,10 @@ const trimmed = Str('/supercharge/').trim('/').get()
 The `ucFirst` method uppercases the first character in the string:
 
 ```js
-const ucFirst = Str('superCHARGE').ucFirst().get()
+const ucFirst = Str('superCHARGE')
+    .ucFirst()
+    .get()
+
 // 'SuperCHARGE'
 ```
 
@@ -893,7 +1086,10 @@ const ucFirst = Str('superCHARGE').ucFirst().get()
 The `upper` method transforms the given string into uppercase:
 
 ```js
-const upper = Str('Supercharge is sweet').upper().get()
+const upper = Str('Supercharge is sweet')
+    .upper()
+    .get()
+
 // 'SUPERCHARGE IS SWEET'
 ```
 
