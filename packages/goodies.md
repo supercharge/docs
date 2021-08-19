@@ -21,12 +21,8 @@ The `@supercharge/goodies` package exports a handful methods that you can reach 
 
 ```js
 const { tap } = require('@supercharge/goodies')
-
 // or
-
-const Goodies = require('@supercharge/goodies')
-
-Goodies.tap(…)
+import { tap } from '@supercharge/goodies'
 ```
 
 
@@ -46,8 +42,13 @@ Here’s a list of available methods in the collections package:
 
 <div id="method-list" markdown="1">
 
+[esmRequire](#esmrequire)
+[esmResolve](#esmresolve)
 [ifNullish](#ifnullish)
 [isAsyncFunction](#isasyncfunction)
+[isFunction](#isfunction)
+[isNullish](#isnullish)
+[isNotNullish](#isnotnullish)
 [isPromise](#ispromise)
 [tap](#tap)
 [upon](#upon)
@@ -56,6 +57,39 @@ Here’s a list of available methods in the collections package:
 
 
 ## Methods
+
+
+#### esmRequire
+The `esmRequire` method `require`’s a given file `path` and returns the resolved ESM default exports or CommonJS exports. It uses [esmResolve](#esmresolve) to resolve the exports from the given file:
+
+```js
+const Path = require('path')
+const { esmResolve } = require('@supercharge/goodies')
+
+// cjs-file.js
+module.exports = { name: 'Supercharge' }
+const required = esmRequire('./cjs-file')
+// { name: 'Supercharge' }
+
+// esm-file.js
+export default { name: 'Supercharge' }
+const required = esmRequire('./esm-file')
+// { name: 'Supercharge' }
+```
+
+
+#### esmResolve
+The `esmResolve` method returns the resolved ESM default exports or CommonJS (module) exports:
+
+```js
+const { esmResolve } = require('@supercharge/goodies')
+
+esmResolve({ name: 'Supercharge' }))
+// { name: 'Supercharge' }
+
+esmResolve({ default: { name: 'Supercharge' } }))
+// { name: 'Supercharge' }
+```
 
 
 #### ifNullish
@@ -78,10 +112,65 @@ The `isAsyncFunction` method determines whether the given parameter is an async 
 ```js
 const { isAsyncFunction } = require('@supercharge/goodies')
 
-async function subscribe() { … }
-
-isAsyncFunction(subscribe)
+isAsyncFunction(async () => {})
+isAsyncFunction(async function () {})
 // true
+
+isAsyncFunction(() => {})
+// false
+```
+
+
+#### isFunction
+The `isFunction` method determines whether the given parameter is a function:
+
+```js
+const { isFunction } = require('@supercharge/goodies')
+
+isFunction(() => {})
+isFunction(function () {})
+isAsyncFunction(async () => {})
+// true
+
+isFunction(123)
+// false
+```
+
+
+#### isNullish
+The `isNullish` method determines whether a given input is `null` or `undefined`:
+
+```js
+const { isNullish } = require('@supercharge/goodies')
+
+isNullish()
+isNullish(null)
+isNullish(undefined)
+// true
+
+isNullish(0)
+isNullish('')
+isNullish('any-other-value')
+// false
+```
+
+
+#### isNotNullish
+The `isNotNullish` method determines whether a given input **is not** `null` or `undefined`:
+
+```js
+const { isNotNullish } = require('@supercharge/goodies')
+
+isNotNullish(0)
+isNotNullish('')
+isNotNullish('any-other-value')
+// true
+
+isNotNullish()
+isNotNullish(null)
+isNotNullish(undefined)
+// false
+
 ```
 
 
@@ -124,6 +213,7 @@ const user = await tap(User.findBy({ email }), async (user) => {
 
 // user = the found user for `email`
 ```
+
 
 #### upon
 The `upon` method invokes a callback passing the given value as an argument to the callback. It accepts two arguments, a `value` and a `callback`. Returns the result of the callback:
