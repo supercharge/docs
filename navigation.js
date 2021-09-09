@@ -56,13 +56,13 @@ module.exports = {
     }
   },
 
-  Database: {
-    slug: 'database',
-    sections: {
-      Connectors: 'database-connectors',
-      // Pagination: 'pagination'
-    }
-  },
+  // Database: {
+  //   slug: 'database',
+  //   sections: {
+  //     Connectors: 'database-connectors',
+  //     // Pagination: 'pagination'
+  //   }
+  // },
 
   Packages: {
     slug: 'packages',
