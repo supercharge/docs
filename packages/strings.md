@@ -312,6 +312,17 @@ const containsAll = Str('Supercharge is awesome')
 ```
 
 
+#### containsBom
+- *added in version `1.21`*
+
+The `containsBom` method determines whether the given string contains a byte-order-mark (BOM):
+
+```js
+const containsBom = Str('Supercharge').containsBom()
+// true
+```
+
+
 #### endsWith
 - *added in version `1.3`*
 
@@ -948,6 +959,17 @@ Optionally, the `startsWith` method accepts a second argument `position` definin
 ```js
 const startsWith = Str('Supercharge').startsWith('charge', 5)
 // true
+```
+
+
+#### startsWithBom
+- *added in version `1.21`*
+
+The `startsWithBom` method determines whether the given string starts with a byte-order-mark (BOM):
+
+```js
+const startsWithBom = Str('Supercharge').startsWithBom()
+// false
 ```
 
 
