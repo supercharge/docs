@@ -73,6 +73,7 @@ Here’s a list of available methods in the strings package:
 [concat](#concat)
 [contains](#contains)
 [containsAll](#containsall)
+[containsBom](#containsbom)
 [endsWith](#endswith)
 [equals](#equals)
 [finish](#finish)
@@ -108,6 +109,7 @@ Here’s a list of available methods in the strings package:
 [split](#split)
 [start](#start)
 [startsWith](#startswith)
+[startsWithBom](#startswithbom)
 [strip](#strip)
 [stripExtraSpaces](#stripextraspaces)
 [stripNums](#stripnums)
@@ -319,7 +321,7 @@ The `containsBom` method determines whether the given string contains a byte-ord
 
 ```js
 const containsBom = Str('Supercharge').containsBom()
-// true
+// false
 ```
 
 
