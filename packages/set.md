@@ -33,7 +33,7 @@ JavaScript aligned the `Set` and `Map` classes. Aligning sets and maps felt wron
 ```js
 const Set = require('@supercharge/set')
 
-const users = new Set()
+const users = Set.from([])
 
 users.isEmpty()
 // true
@@ -78,19 +78,35 @@ Here’s a list of available methods on a set instance:
 
 <div id="collection-method-list" markdown="1">
 
+[Set.from](#set.from)
+
 [add](#add)
+[all](#all)
+[any](#any)
+[at](#at)
 [clear](#clear)
+[concat](#concat)
+[count](#count)
 [delete](#delete)
 [filter](#filter)
 [find](#find)
+[findIndex](#findindex)
+[findLast](#findLast)
+[findLastIndex](#findlastindex)
+[first](#first)
 [flatMap](#flatmap)
 [flatten](#flatten)
 [forEach](#foreach)
 [has](#has)
+[includes](#includes)
+[intersect](#intersect)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
+[isMissing](#ismissing)
+[join](#join)
 [map](#map)
 [of](#of)
+[reduce](#reduce)
 [size](#size)
 [toArray](#toarray)
 [values](#values)
@@ -98,7 +114,21 @@ Here’s a list of available methods on a set instance:
 </div>
 
 
+#### Set.from
+The static `Set.from` method creates a new set instance for a given iterable:
+
+```js
+const numbers = Set.from([1, 2, 1, 2])
+
+numbers.toArray()
+// [1, 2]
+```
+
+
 #### add
+- update in `2.2.0` supporting multiple values (`set.add(1, 2, 3)`)
+- added in `1.0`
+
 The `add` method adds an item to the end of a set if it doesn’t already exists in the set:
 
 ```js
@@ -108,6 +138,17 @@ users
   .add('Marcus')
   .add('Supercharge')
   .add('Marcus')
+
+users.toArray()
+// ['Marcus', 'Supercharge']
+```
+
+Since version `2.2.0` you can add multiple values within a single call:
+
+```js
+const users = new Set()
+
+users.add('Marcus', 'Supercharge', 'Marcus')
 
 users.toArray()
 // ['Marcus', 'Supercharge']
@@ -311,6 +352,8 @@ const names = users.map((value, set) => {
 
 
 #### of
+- **deprecated** since version `2.1.0`. Please use [Set.from](#from) instead
+
 The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
 
 ```js
