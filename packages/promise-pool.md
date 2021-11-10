@@ -23,7 +23,9 @@ You can use the promise pool package with every project even if it’s not build
 Using the promise pool is pretty straightforward. The pacakge exposes a class and you can create a promise pool instance using the fluent interface. Here’s a working example:
 
 ```js
-const PromisePool = require('@supercharge/promise-pool')
+import { PromisePool } from '@supercharge/promise-pool'
+// or
+const { PromisePool } = require('@supercharge/promise-pool')
 
 const users = [
   { name: 'Marcus' },
@@ -82,10 +84,11 @@ const pool = PromisePool.for(users)
 ```
 
 
-#### `.process(async callback)`
+#### `.process(async (item, index, pool) => {})`
 Starts processing the promise pool by iterating over the items and passing each item to the async mapper function. Returns an object containing the results and errors.
 
 ```js
+
 const users = [
   { name: 'Marcus' },
   { name: 'Norman' },
@@ -94,7 +97,103 @@ const users = [
 
 const pool = PromisePool.withConcurrency(5).for(users)
 
-const { results, errors } = await pool.process(async (user) => {
+const { results, errors } = await pool.process(async (user, index, pool) => {
   await User.createIfNotExisting(user)
 })
+```
+
+#### `.handleError(async (item, index, pool) => {})`
+The promise pool allows you to provide a custom error handler. You can take over the error handling by providing a custom handler to the `.handleError(handler)` method.
+
+> **Notice**: if you provide an error handler, the promise pool doesn’t collect any errors. You must then collect errors yourself.
+
+Providing a custom error handler allows you to exit the promise pool early by throwing inside the error handler function. Throwing errors is in line with Node.js error handling using async/await.
+
+```js
+const { PromisePool } = require('@supercharge/promise-pool')
+
+const errors = []
+
+const { results } = await PromisePool
+  .for(users)
+  .withConcurrency(4)
+  .handleError(async (error, user) => {
+      // you must collect errors yourself
+    if (error instanceof ValidationError) {
+      return errors.push(error)
+    }
+
+    // Process error handling on specific errors
+    if (error instanceof ThrottleError) {
+      return await retryUser(user)
+    }
+  })
+  .process(async data => {
+    // the harder you work for something,
+    // the greater you’ll feel when you achieve it
+  })
+
+await handleCollected(errors) // this may throw
+
+return { results }
+```
+
+Providing a custom error handler allows you to exit the promise pool early by throwing inside the error handler function. Throwing errors is in line with Node.js error handling using async/await.
+
+```js
+const { PromisePool } = require('@supercharge/promise-pool')
+
+try {
+  const errors = []
+
+  const { results } = await PromisePool
+    .for(users)
+    .withConcurrency(4)
+    .handleError(async (error, user) => {
+      // throwing errors will stop PromisePool and you must catch them yourself
+      throw error
+    })
+    .process(async data => {})
+
+  await handleCollected(errors) // this may throw
+
+  return { results }
+} catch (error) {
+  await thisIsYourOwnErrorHandlerForThrown(error)
+}
+```
+
+
+### Manually Stop the Pool
+You can stop the processing of a promise pool using the `pool` instance provided to the `.process()` and `.handleError()` methods. Here’s an example how you can stop an active promise pool from within the `.process()` method:
+
+```js
+await PromisePool
+  .for(users)
+  .process(async (user, index, pool) => {
+    if (condition) {
+      return pool.stop()
+    }
+
+    // processes the `user` data
+  })
+```
+
+You may also stop the pool from within the `.handleError()` method in case you need to:
+
+```js
+const { PromisePool } = require('@supercharge/promise-pool')
+
+await PromisePool
+  .for(users)
+  .handleError(async (error, user, pool) => {
+    if (error instanceof SomethingBadHappenedError) {
+      return pool.stop()
+    }
+
+    // handle the given `error`
+  })
+  .process(async (user, index, pool) => {
+    // processes the `user` data
+  })
 ```
