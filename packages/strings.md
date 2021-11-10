@@ -73,6 +73,7 @@ Here’s a list of available methods in the strings package:
 [concat](#concat)
 [contains](#contains)
 [containsAll](#containsall)
+[containsBom](#containsbom)
 [endsWith](#endswith)
 [equals](#equals)
 [finish](#finish)
@@ -108,6 +109,7 @@ Here’s a list of available methods in the strings package:
 [split](#split)
 [start](#start)
 [startsWith](#startswith)
+[startsWithBom](#startswithbom)
 [strip](#strip)
 [stripExtraSpaces](#stripextraspaces)
 [stripNums](#stripnums)
@@ -308,6 +310,17 @@ You can also pass an array of values to the `containsAll` method:
 const containsAll = Str('Supercharge is awesome')
     .containsAll(['is', 'bad'])
 
+// false
+```
+
+
+#### containsBom
+- *added in version `1.21`*
+
+The `containsBom` method determines whether the given string contains a byte-order-mark (BOM):
+
+```js
+const containsBom = Str('Supercharge').containsBom()
 // false
 ```
 
@@ -948,6 +961,17 @@ Optionally, the `startsWith` method accepts a second argument `position` definin
 ```js
 const startsWith = Str('Supercharge').startsWith('charge', 5)
 // true
+```
+
+
+#### startsWithBom
+- *added in version `1.21`*
+
+The `startsWithBom` method determines whether the given string starts with a byte-order-mark (BOM):
+
+```js
+const startsWithBom = Str('Supercharge').startsWithBom()
+// false
 ```
 
 
