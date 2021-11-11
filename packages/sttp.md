@@ -261,27 +261,27 @@ const instance = await Sttp
 
 
 ## Error Handling
-Unlike axios’s default behavior of throwing errors on client or server errors (HTTP `400` and `500` level responses), Sttp always returns a response instance. You can still determine the type of a response using the `isSuccess`, `isRedirect`, `isError` methods:
+Unlike axios’s default behavior of throwing errors on respones with HTTP level `400` or `500`, Sttp always returns a response instance. You can still determine the type of a response using the `isSuccess`, `isRedirect`, `isError` methods:
 
 ```js
-// Determine if the status code is >= 200 and < 300
+// determine if the response status code is >= 200 and < 300
 response.isSuccess();
 
-// Determine if the status code is >= 300 and < 400
+// determine if the response status code is >= 300 and < 400
 response.isRedirect();
 
-// Determine if the status code is >= 400
+// determine if the response status code is >= 400
 response.isError();
 response.failed();
 ```
 
-In case of errors you may also determine the response’s error type using the `isClientError` or `isServerError` methods:
+Use the `isClientError` or `isServerError` methods if you want to determine the response’s error type.
 
 ```js
-// Determine if the status code is >= 400 and < 500
+// determine if the response status code is >= 400 and < 500
 response.isClientError();
 
-// Determine if the response status code is >= 500
+// determine if the response status code is >= 500
 response.isServerError();
 ```
 
