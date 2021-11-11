@@ -12,6 +12,7 @@ The [`@supercharge/sttp`](https://github.com/supercharge/sttp) package lives ind
 npm i @supercharge/sttp
 ```
 
+
 ```success
 You can use this package with every project even if it’s not build on Supercharge. Enjoy!
 ```
@@ -65,7 +66,7 @@ const response = await Sttp.options(url, queryParams)
 
 
 ### Request Data
-It’s common to send data with your requests when making requests. For example, you may attach query parameters to a `GET` request.
+It’s common to send data with your requests when making requests. For example, you may attach query parameters to a `GET` request or a payload to a `POST` request.
 
 
 #### Sending Request Payloads
@@ -91,7 +92,7 @@ const response = await Sttp.post('https://your-api.com/v2/users', {
 
 By default, Sttp sends your data using the `application/json` content type.
 
-**Notice:** request data passed as the second parameter to `Sttp.post(url, data)` takes precedences over  any previously set data using the `withPayload` method.
+**Notice:** request data passed as the second parameter to `Sttp.post(url, data)` overrides any previously added data using the `withPayload` method.
 
 
 #### Sending Query Parameters
