@@ -75,6 +75,7 @@ module.exports = {
       Set: 'set',
       Streams: 'streams',
       Strings: 'strings',
+      Sttp: 'sttp',
     }
   },
 
