@@ -218,6 +218,22 @@ users.any(user => {
 ```
 
 
+#### at
+- *added in `1.7`*
+
+The `at` method returns the item at a given `index` or `undefined` if the index exceeds the set’s size.
+
+```js
+const users = Set.from(['Marcus', 'Supercharge', 'Norman', 'Christian])
+
+users.at(2)
+// 'Norman'
+
+users.at(22)
+// undefined
+```
+
+
 #### clear
 - *added in `1.0`*
 
@@ -234,6 +250,37 @@ users.clear()
 users.size()
 // 0
 ```
+
+
+#### concat
+- *added in `1.4`*
+
+The `concat` method adds an array or individual values to the set.
+
+```js
+Set.from([1, 2]).concat([3, 4])
+// Set [1, 2, 3, 4]
+
+Set.from([1, 2]).concat(5, 6)
+// Set [1, 2, 5, 6]
+```
+
+
+#### count
+- *added in `1.4`*
+
+The `count` method returns the number of items matching the given `predicate` function.
+
+```js
+const set = Set.from([1, 2, 3, 4, 5])
+
+set.count(value => {
+  return value > 2
+})
+// 3
+```
+
+The `count` method returns the size of the set when not providing a predicate function.
 
 
 #### delete
@@ -355,6 +402,33 @@ const index = users.findLastIndex((value, set) => {
 ```
 
 
+#### first
+- *added in `1.7`*
+
+The `first` method returns the first item in the set or the first item matching the given `predicate` function:
+
+```js
+const users = Set.from([
+  { id: 1, name: 'Marcus' },
+  { id: 2, name: 'Supercharge' }
+  { id: 3, name: 'Albert' }
+])
+
+users.first()
+// { id: 1, name: 'Marcus' }
+
+users.first(user => {
+  return user.id > 1
+})
+// { id: 2, name: 'Supercharge' }
+
+users.first(user => {
+  return user.id > 22
+})
+// undefined
+```
+
+
 #### flatMap
 - *added in `1.3`*
 
@@ -421,6 +495,24 @@ users.has('not-existent')
 ```
 
 
+#### includes
+- *added in `1.5`*
+
+The `includes` method determines whether the set includes a given `value` or if it includes a value satisfying a given `predicate` function:
+
+```js
+const set = Set.from([1, 2, 3, 4, 5])
+
+set.includes(4)
+// true
+
+set.includes(num => {
+  return num > 3
+})
+// true
+```
+
+
 #### intersect
 - *added in `2.2`*
 
@@ -470,6 +562,41 @@ users.isMissing('not-existent')
 ```
 
 
+#### join
+- *updated in `1.9` to support a callback function to compose a seperator*
+- *updated in `1.8` to support an optional seperator*
+- *added in `1.0`*
+
+The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
+
+```js
+const set = Set.from(['Marcus', 'Supercharge'])
+
+set.join()
+// '1,2,3'
+```
+
+You can provide a separator that will then be used for concatenation:
+
+```js
+const set = Set.from(['Marcus', 'Supercharge'])
+
+set.join('; ')
+// '1; 2; 3'
+```
+
+You may also provide a callback function to compose a separator for each item:
+
+```js
+const set = Set.from(['Marcus', 'Supercharge'])
+
+set.join(name => {
+  return `${name} -> `
+})
+// '1 -> 2 -> 3 ->'
+```
+
+
 #### isNotEmpty
 - *added in `1.0`*
 
@@ -507,6 +634,32 @@ const names = users.map((value, set) => {
 })
 
 // Set ['Marcus', 'Supercharge']
+```
+
+
+#### reduce
+- *added in `1.6`*
+
+The `reduce` method invokes reducer function on each item in the set, passing the result of the previous iteration to the subsequent iteration. The result is a reduced set to a single value:
+
+```js
+const set = Set.from([1, 2, 3, 4, 5])
+
+set.reduce((sum, value) => {
+  return sum + value
+}, 0)
+// 15
+```
+
+The `reduce` method takes an initial value as a second argument. In the code snippet above, the initial value is `0`. Using `5` as the initial value returns a different result:
+
+```js
+const set = Set.from([1, 2, 3, 4, 5])
+
+set.reduce((sum, value) => {
+  return sum + value
+}, 5)
+// 20
 ```
 
 
