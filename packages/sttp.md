@@ -2,7 +2,7 @@
 
 
 ## Introduction
-The [`@supercharge/sttp`](https://github.com/supercharge/sttp) package provides TBA.
+The [`@supercharge/sttp`](https://github.com/supercharge/sttp) package is an elegant wrapper around the [`axios`](https://github.com/axios/axios) HTTP client. Sttp provides a fluent interface allowing you to create HTTP requests communicating with other web applications.
 
 
 ## Installation
@@ -16,16 +16,32 @@ npm i @supercharge/sttp
 You can use this package with every project even if it’s not build on Supercharge. Enjoy!
 ```
 
-Using `@supercharge/sttp` is pretty straightforward.
 
-Sttp provides a fluent interface allowing you to compose your request with chainable methods.
+## CommonJS, ESM, and TypeScript Support
+Sttp supports both module loaders, CommonJS and ESM, and also TypeScript. Import Sttp in your projects like this:
+
+```js
+// ESM and TypeScript
+import { Sttp } from '@supercharge/sttp'
+
+// CommonJS
+const { Sttp } = require('@supercharge/sttp')
+```
 
 
-### Requests
+## Sending Requests
+To send requests you may use the `get`, `post`, `put`, `patch`, `delete`, or `option` methods provided by Sttp. First, here’s an example how to send a basic GET request:
+
+```js
+import { Sttp } from '@supercharge/sttp'
+
+const response = await Sttp.get('https://your-api.com/v2/users')
+```
+
 You may send a POST request with query parameters, request headers, and payload like this:
 
 ```js
-const { Sttp } = require('@supercharge/sttp')
+import { Sttp } from '@supercharge/sttp'
 
 const response = await Sttp
   .withQueryParams({ page: 3 })
@@ -36,23 +52,77 @@ const response = await Sttp
 
 
 ### Request Methods
-Sttp provides methods for the following HTTP methods
-
-- `Sttp.get(url, queryParams)`
-- `Sttp.post(url, payload)`
-- `Sttp.put(url, payload)`
-- `Sttp.patch(url, payload)`
-- `Sttp.delete(url, queryParams)`
-- `Sttp.options(url, queryParams)`
-
-
-### Sending Form-URL-Encoded Requests
-
-`Sttp.asFormParams()`
-`application/x-www-form-urlencoded`
+Sttp provides the following HTTP methods:
 
 ```js
-const instance = await Sttp
+const response = await Sttp.get(url, queryParams)
+const response = await Sttp.post(url, payload)
+const response = await Sttp.put(url, payload)
+const response = await Sttp.patch(url, payload)
+const response = await Sttp.delete(url, queryParams)
+const response = await Sttp.options(url, queryParams)
+```
+
+
+### Request Data
+It’s common to send data with your requests when making requests. For example, you may attach query parameters to a `GET` request.
+
+
+#### Sending Request Payloads
+You may send request data along with your `POST`, `PUT`, or `PATCH` requests using the `withPayload` method:
+
+```js
+const response = await Sttp
+  .withPayload({
+    name: 'Supercharge,
+    role: 'admin'
+  })
+  .post('https://your-api.com/v2/users')
+```
+
+You can also pass the request data as the second parameter to the `Sttp.post` method:
+
+```js
+const response = await Sttp.post('https://your-api.com/v2/users', {
+    name: 'Supercharge,
+    role: 'admin'
+  })
+```
+
+By default, Sttp sends your data using the `application/json` content type.
+
+**Notice:** request data passed as the second parameter to `Sttp.post(url, data)` takes precedences over  any previously set data using the `withPayload` method.
+
+
+#### Sending Query Parameters
+You may send request input as query parameters in your `GET`, `DELETE`, or `OPTIONS` requests. You can do that by manually appending a query string directly to the request URL. Another option is to pass an object of key-value pairs to the fluent `withQueryParams` method:
+
+```js
+const response = await Sttp
+  .withQueryParams({
+    name: 'Supercharge',
+    page: 1
+  })
+  .get('https://your-api.com/v2/users')
+```
+
+You can also send query parameters with your requests by passing them as the second parameter to the `Sttp.get` (or `patch`/`delete`) method:
+
+```js
+const response = await Sttp.get('https://your-api.com/v2/users', {
+    name: 'Supercharge,
+    page: 1
+  })
+```
+
+**Notice:** Sttp merges the query parameters assigned using `withQueryParams` and passed as a second parameter to the `Sttp.get` methods.
+
+
+#### Sending Form Requests
+You should call the `asFormParams` method if you want to send request data using the `application/x-www-form-urlencoded` content type. Sttp automatically encodes the request data and sets the content type for you:
+
+```js
+const response = await Sttp
   .asFormParams()
   .post('https://your-api.com/v2/users', {
     name: 'Supercharge
@@ -60,8 +130,37 @@ const instance = await Sttp
 ```
 
 
+### Request Headers
+You can attach request headers using the `withHeaders` method. This method accepts an object of key-value pairs:
+
+```js
+const response = await Sttp
+  .withHeaders({
+    'X-Header-1': 'foo',
+    'X-Custom-2': 'bar'
+  })
+  .post('https://your-api.com/v2/users', {
+    name: 'Supercharge
+  })
+```
+
+Use the fluent `accept` method to set the `Accept` header defining the expected response content type of your request:
+
+```js
+const response = await Sttp
+  .accept('application/json')
+  .get('https://your-api.com/v2/users')
+```
+
+You may also use the descriptive and convenient `acceptJson` method defining that you expect the `application/json` content type in response to your request:
+
+```js
+const response = await Sttp.acceptJson().get('https://your-api.com/v2/users')
+```
+
+
 ### Responses
-Sttp comes with a response wrapper giving you access to response attributes:
+Outgoing requests from Sttp return an instance of `SttpResponse`. The Sttp response instance provides methods to interact with the response attributes or inspect the response itself:
 
 ```js
 const response = await Sttp
@@ -95,7 +194,7 @@ response.isServerError(): boolean
 
 
 ## Creating an Sttp Instance
-You can create an Sttp instance using the parameterless `Sttp.create()` method:
+You can create a reusable Sttp instance using the parameterless `Sttp.create()` method:
 
 ```js
 const instance = Sttp.create()
@@ -105,6 +204,7 @@ You may use the fluent Sttp interface to assign default values to that instance:
 
 ```js
 const instance = Sttp.create()
+  .withBaseUrl('https://your-api.com/v2/')
   .withHeaders({
     'X-Custom-Header': 'value'
   })
