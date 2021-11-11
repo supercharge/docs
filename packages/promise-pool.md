@@ -164,7 +164,7 @@ try {
 ```
 
 
-### Manually Stop the Pool
+## Manually Stop the Pool
 You can stop the processing of a promise pool using the `pool` instance provided to the `.process()` and `.handleError()` methods. Here’s an example how you can stop an active promise pool from within the `.process()` method:
 
 ```js
