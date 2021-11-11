@@ -79,6 +79,7 @@ Here’s a list of available methods on a set instance:
 <div id="collection-method-list" markdown="1">
 
 [Set.from](#set.from)
+[Set.of](#set.of) (deprecated)
 
 [add](#add)
 [all](#all)
@@ -115,7 +116,9 @@ Here’s a list of available methods on a set instance:
 
 
 #### Set.from
-The static `Set.from` method creates a new set instance for a given iterable:
+- *added in `2.1`*
+
+The static `Set.from` method creates a new set instance for a given iterable, like `Array.from`:
 
 ```js
 const numbers = Set.from([1, 2, 1, 2])
@@ -125,9 +128,23 @@ numbers.toArray()
 ```
 
 
+#### Set.of
+- ***deprecated** since version `2.1.0`. Please use [Set.from](#set.from) instead*
+- *added in `1.0`*
+
+The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
+
+```js
+const set = Set.of(['Marcus', 'Supercharge'])
+
+set.has('Marcus')
+// true
+```
+
+
 #### add
-- update in `2.2.0` supporting multiple values (`set.add(1, 2, 3)`)
-- added in `1.0`
+- *updated in `2.2.0` supporting multiple values (`set.add(1, 2, 3)`)*
+- *added in `1.0`*
 
 The `add` method adds an item to the end of a set if it doesn’t already exists in the set:
 
@@ -155,16 +172,59 @@ users.toArray()
 ```
 
 
+#### all
+- *added in `2.2`*
+
+The `all` method determines whether all of the values in the set match the given predicate function:
+
+```js
+const users = Set.from([
+  { id: 1, subscribed: false, name: 'Marcus' },
+  { id: 2, subscribed: true, name: 'Supercharge' }
+])
+
+users.all(user => {
+  return user.subscribed === true
+})
+// false
+
+users.all(user => {
+  return user.id > 0
+})
+// true
+```
+
+
+#### any
+- *added in `2.2`*
+
+The `any` method determines whether at least one of the values in the set matches the given predicate function:
+
+```js
+const users = Set.from([
+  { id: 1, subscribed: false, name: 'Marcus' },
+  { id: 2, subscribed: true, name: 'Supercharge' }
+])
+
+users.any(user => {
+  return user.subscribed === true
+})
+// true
+
+users.any(user => {
+  return user.id === 0
+})
+// false
+```
+
+
 #### clear
+- *added in `1.0`*
+
 The `clear` method removes all entries from the set:
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
-  .add('Marcus')
+const users = Set.from(['Marcus', 'Supercharge', 'Marcus'])
 
 users.size()
 // 2
@@ -177,14 +237,12 @@ users.size()
 
 
 #### delete
+- *added in `1.0`*
+
 The `delete` method removes the entry identified by the given `value`:
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
+const users = Set.from(['Marcus', 'Supercharge'])
 
 const removed = users.delete('Marcus')
 // true
@@ -197,17 +255,14 @@ Calling `set.delete(value)` returns `true` if the given value is present in the 
 
 
 #### filter
+- *added in `1.0`*
+
 The `filter` method returns a set containing only items matching the given `predicate`.
 
-The `predicate` function will be called once for each entry in the set in insertion order. The `predicate` function receives the `value, set` arguments:
+The `predicate` function will be called once for each entry in the set in insertion order.
 
 ```js
-const users = new Set()
-
-users
-  .add(1)
-  .add(2)
-  .add(3)
+const users = Set.from([1, 2, 3])
 
 const names = users.filter((value, set) => {
   return value > 1
@@ -218,12 +273,12 @@ const names = users.filter((value, set) => {
 
 
 #### find
+- *added in `1.0`*
+
 The `find` method returns the first item in the set matching the given `predicate`.
 
-The `predicate` function receives the `value, set` arguments:
-
 ```js
-const users = Set.of([
+const users = Set.from([
   { id: 1, name: 'Marcus' },
   { id: 2, name: 'Supercharge' }
 ])
@@ -236,44 +291,109 @@ const names = users.find((value, set) => {
 ```
 
 
+#### findIndex
+- *added in `2.0`*
+
+The `findIndex` method returns the index of the first item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
+
+```js
+const users = Set.from([
+  { id: 1, name: 'Marcus' },
+  { id: 2, name: 'Supercharge' }
+])
+
+const index = users.findIndex((value, set) => {
+  return value.name === 'Supercharge'
+})
+// 1
+
+const index = users.findIndex((value, set) => {
+  return value.name === 'Hello'
+})
+// -1
+```
+
+
+#### findLast
+- *added in `2.2`*
+
+The `findLast` method returns the last item in the set matching the given `predicate` function.
+
+```js
+const users = Set.from([
+  { subscribed: true, name: 'Marcus' },
+  { subscribed: true, name: 'Supercharge' }
+])
+
+const user = users.findLast(user => {
+  return user.subscribed === true
+})
+// { id: 2, name: 'Supercharge' }
+```
+
+
+#### findLastIndex
+- *added in `2.2`*
+
+The `findLastIndex` method returns the index of the last item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
+
+```js
+const users = Set.from([
+  { subscribed: true, name: 'Marcus' },
+  { subscribed: true, name: 'Supercharge' }
+])
+
+const index = users.findLastIndex(user => {
+  return user.subscribed === true
+)
+// 1
+
+const index = users.findLastIndex((value, set) => {
+  return value.name === 'Hello'
+})
+// -1
+```
+
+
 #### flatMap
+- *added in `1.3`*
+
 The `flatMap` method returns a new set instance, after applying the given `transform` function and collapsing the result (one level deep).
 
 The `transform` function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
 
 ```js
-const users = Set.of([ 'Marcus', ['Supercharge'] ])
+const users = Set.from([ 'Marcus', ['Supercharge'] ])
 
 const names = users.map((value, set) => {
   return value
 })
-
 // Set ['Marcus', 'Supercharge']
 ```
 
 
 #### flatten
+- *added in `1.3`*
+
 The `flatten` method flattens the items in the set at a depth of `1`.
 
 ```js
-const users = Set.of([ 'Marcus', ['Supercharge'] ]).flatten()
+const users = Set.from([ 'Marcus', ['Supercharge'] ]).flatten()
 
 // Set ['Marcus', 'Supercharge']
 ```
 
 
 #### forEach
+- *added in `1.0`*
+
 The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, set` arguments:
 
 ```js
-const users = new Set()
+const names = Set.from(['Marcus', 'Supercharge'])
 
-users
-  .add('Marcus')
-  .add('Supercharge')
-
-cache.forEach((value, set) => {
-  console.log(value)
+names.forEach(name => {
+  console.log(name)
 })
 
 // 'Marcus'
@@ -282,6 +402,8 @@ cache.forEach((value, set) => {
 
 
 #### has
+- *added in `1.0`*
+
 The `has` method returns `true` if the given `value` is present in the set, otherwise `false`:
 
 ```js
@@ -299,7 +421,24 @@ users.has('not-existent')
 ```
 
 
+#### intersect
+- *added in `2.2`*
+
+The `intersect` method returns a set containing all items that are contained in all collections:
+
+```js
+const ids = Set.from([1, 2, 3])
+
+const intersection = ids.intersect(
+  Set.from([2, 3]), [1, 3, 4, 5]
+)
+// Set [3]
+```
+
+
 #### isEmpty
+- *added in `1.0`*
+
 The `isEmpty` method returns `true` if the set has no entries. Returns `false` if entries are present in the set:
 
 ```js
@@ -315,7 +454,25 @@ set.isEmpty()
 ```
 
 
+#### isMissing
+- *added in `2.0`*
+
+The `isMissing` method returns `true` if the given `value` is not present in the set, otherwise `false`:
+
+```js
+const users = Set.from(['Marcus', 'Supercharge'])
+
+users.isMissing('Marcus')
+// false
+
+users.isMissing('not-existent')
+// true
+```
+
+
 #### isNotEmpty
+- *added in `1.0`*
+
 The `isNotEmpty` method returns `true` if entries are present in the set. Returns `false` if the set is empty:
 
 ```js
@@ -332,6 +489,8 @@ set.isNotEmpty()
 
 
 #### map
+- *added in `1.0`*
+
 The `map` method returns a new set instance containing the results of the given `transform` function.
 
 The `transform` function will be called once for each entry in the set, in order of insertion. The `transform` function receives the `value, set` arguments:
@@ -351,24 +510,13 @@ const names = users.map((value, set) => {
 ```
 
 
-#### of
-- **deprecated** since version `2.1.0`. Please use [Set.from](#from) instead
-
-The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
-
-```js
-const set = Set.of(['Marcus', 'Supercharge'])
-
-set.has('Marcus')
-// true
-```
-
-
 #### size
+- *added in `1.0`*
+
 The `size` method returns the number of entries in the set:
 
 ```js
-const set = Set.of(['Marcus', 'Supercharge'])
+const set = Set.from(['Marcus', 'Supercharge'])
 
 const size = set.size()
 // 2
@@ -376,10 +524,12 @@ const size = set.size()
 
 
 #### toArray
+- *added in `1.0`*
+
 The `toArray` method returns an array containing the entries of the set.
 
 ```js
-const set = Set.of([1, 2, 3, 4])
+const set = Set.from([1, 2, 3, 4])
 
 const array = set.toArray()
 // [1, 2, 3, 4]
@@ -388,10 +538,12 @@ const array = set.toArray()
 
 
 #### values
+- *added in `1.0`*
+
 The `values` method returns an iterator object of the values present in the set (in insertion order):
 
 ```js
-const users = Set.of(['Marcus', 'Supercharge'])
+const users = Set.from(['Marcus', 'Supercharge'])
 
 const valueIterator = users.values()
 
@@ -405,7 +557,7 @@ valueIterator.next().value
 You may also iterate through the values using a `for..of` loop:
 
 ```js
-const users = Set.of(['Marcus', 'Supercharge'])
+const users = Set.from(['Marcus', 'Supercharge'])
 
 for (const value of users.values()) {
   console.log(value)
