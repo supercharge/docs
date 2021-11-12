@@ -63,6 +63,7 @@ Here’s a list of available methods in the strings package:
 <div id="collection-method-list" markdown="1">
 
 [get](#get)
+[at](#at)
 [after](#after)
 [afterLast](#afterlast)
 [append](#append)
@@ -79,15 +80,18 @@ Here’s a list of available methods in the strings package:
 [finish](#finish)
 [includes](#includes)
 [includesAll](#includesall)
+[isUuid](#isuuid)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [isLower](#islower)
 [isString](#isstring)
+[isSymbol](#issymbol)
 [isUpper](#isupper)
 [kebab](#kebab)
 [lcFirst](#lcfirst)
 [length](#length)
 [limit](#limit)
+[lines](#lines)
 [lower](#lower)
 [ltrim](#ltrim)
 [notContains](#notcontains)
@@ -134,6 +138,23 @@ The `get` method returns the underlying plain string value:
 const str = Str('Supercharge is awesome').get()
 
 // 'Supercharge is awesome'
+```
+
+
+#### at
+- *added in version `1.22`*
+
+The `at` method returns the character at the given `index` or undefined if the index exceeds the string’s size:
+
+```js
+const at = Str('Supercharge').at(2)
+// 'p'
+
+const at = Str('Supercharge').at(-3)
+// 'r'
+
+const at = Str('Supercharge').at(50)
+// undefined
 ```
 
 
@@ -428,6 +449,23 @@ The `includesAll` method works the same way as the [`containsAll`](#containsall)
 ```
 
 
+#### isUuid
+- *added in version `1.22`*
+
+The `isUuid` method determines whether the given string is a UUID:
+
+```js
+const isUuid = Str('8f605bbe-be67-4dca-8e36-2f2f3715204f').isUuid()
+// true
+
+const isUuid = Str('randommm-inva-lidd-uuid').isUuid()
+// false
+
+const isUuid = Str('').isUuid()
+// false
+```
+
+
 #### isEmpty
 - *added in version `1.1`*
 
@@ -477,13 +515,27 @@ const isLower = Str('supercharge. sweet!').isLower()
 #### isString
 - *added in version `1.5`*
 
-The `isString` method determines the given input is a string.:
+The `isString` method determines the given input is a string:
 
 ```js
 const isString = Str.isString('Supercharge is awesome')
 // true
 
 const isString = Str.isString(123)
+// false
+```
+
+
+#### isSymbol
+- *added in version `1.22`*
+
+The `isSymbol` method determines the given input is a JavaScript symbol:
+
+```js
+const isSymbol = Str.isSymbol(Symbol.for('Supercharge'))
+// true
+
+const isSymbol = Str.isSymbol(123)
 // false
 ```
 
@@ -555,6 +607,20 @@ const limit = Str('Supercharge is SWEET!')
     .get()
 
 // 'Super…'
+```
+
+
+#### lines
+- *added in version `1.23`*
+
+The `lines` method breaks the string at the newline character and returns an array of lines:
+
+```js
+const lower = Str('Supercharge\n is cool').lines()
+// ['Supercharge', ' is cool']
+
+const lower = Str('Supercharge').lines()
+// ['Supercharge']
 ```
 
 
