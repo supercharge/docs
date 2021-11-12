@@ -273,7 +273,6 @@ response.isRedirect();
 
 // determine if the response status code is >= 400
 response.isError();
-response.failed();
 ```
 
 Use the `isClientError` or `isServerError` methods if you want to determine the response’s error type.
