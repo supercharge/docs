@@ -80,13 +80,14 @@ Here’s a list of available methods in the strings package:
 [finish](#finish)
 [includes](#includes)
 [includesAll](#includesall)
-[isUuid](#isuuid)
+[isCamel](#iscamel)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [isLower](#islower)
 [isString](#isstring)
 [isSymbol](#issymbol)
 [isUpper](#isupper)
+[isUuid](#isuuid)
 [kebab](#kebab)
 [lcFirst](#lcfirst)
 [length](#length)
@@ -124,6 +125,7 @@ Here’s a list of available methods in the strings package:
 [ucFirst](#ucfirst)
 [upper](#upper)
 [uuid](#uuid)
+[words](#words)
 
 </div>
 
@@ -462,6 +464,20 @@ const isUuid = Str('randommm-inva-lidd-uuid').isUuid()
 // false
 
 const isUuid = Str('').isUuid()
+// false
+```
+
+
+#### isCamel
+- *added in version `1.23`*
+
+The `isCamel` method determines whether the given string is in camelCasee format:
+
+```js
+const isCamel = Str('superCharge').isCamel()
+// true
+
+const isCamel = Str('Supercharge').isCamel()
 // false
 ```
 
@@ -1202,4 +1218,15 @@ The `uuid` method is a static method creating a UUID (version 4):
 ```js
 const uuid = Str.uuid()
 // '8f605bbe-be67-4dca-8e36-2f2f3715204f'
+```
+
+
+#### words
+- *added in version `1.23`*
+
+The `words` method returns the list of words of the given string:
+
+```js
+const uuid = Str('Supercharge is awesome').words()
+// ['Supercharge', 'is', 'awesome']
 ```
