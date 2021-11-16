@@ -109,6 +109,8 @@ Here’s a list of available methods in the strings package:
 [replaceLast](#replacelast)
 [reverse](#reverse)
 [rtrim](#rtrim)
+[shuffle](#shuffle)
+[slice](#slice)
 [slug](#slug)
 [snake](#snake)
 [split](#split)
@@ -116,6 +118,7 @@ Here’s a list of available methods in the strings package:
 [startsWith](#startswith)
 [startsWithBom](#startswithbom)
 [strip](#strip)
+[stripBom](#stripbom)
 [stripExtraSpaces](#stripextraspaces)
 [stripNums](#stripnums)
 [studly](#studly)
@@ -945,6 +948,34 @@ const trimmed = Str('/supercharge/')
 ```
 
 
+#### shuffle
+- *added in version `1.20`*
+
+The `shuffle` method randomly shuffles the characters of the string using the Fisher-Yates-Shuffle algorithm (also known as the Knuth-Shuffle).
+
+```js
+const shuffled = Str('Supercharge')
+    .shuffle()
+    .get()
+
+// 'ahgerSurpec'
+```
+
+
+#### slice
+- *added in version `1.20`*
+
+The `slice(start, end)` method returns a section of the string from `start` to `end`.
+
+```js
+const sliced = Str('Supercharge')
+    .slice(1, 3)
+    .get()
+
+// 'up'
+```
+
+
 #### slug
 - *added in version `1.8`*
 
@@ -1066,6 +1097,18 @@ const stripped = Str('  Supercharge is SWEET')
     .get()
 
 // 'SuperchargeisSWEET'
+```
+
+
+#### stripBom
+The `stripBom` method removes the byte order mark (BOM) from the beginning of the string:
+
+```js
+const stripped = Str('Supercharge')
+    .stripBom()
+    .get()
+
+// 'Supercharge'
 ```
 
 
