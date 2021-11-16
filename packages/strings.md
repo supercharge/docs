@@ -954,11 +954,11 @@ const trimmed = Str('/supercharge/')
 The `shuffle` method randomly shuffles the characters of the string using the Fisher-Yates-Shuffle algorithm (also known as the Knuth-Shuffle).
 
 ```js
-const shuffled = Str('Supercharge')
+const shuffled = Str('Hello Supercharge')
     .shuffle()
     .get()
 
-// 'ahgerSurpec'
+// 'alereHleh gcpuroS'
 ```
 
 
