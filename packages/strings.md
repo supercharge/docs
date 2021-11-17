@@ -77,6 +77,7 @@ Here’s a list of available methods in the strings package:
 [containsBom](#containsbom)
 [endsWith](#endswith)
 [equals](#equals)
+[equalsIgnoreCase](#equalsignorecase)
 [finish](#finish)
 [includes](#includes)
 [includesAll](#includesall)
@@ -98,6 +99,7 @@ Here’s a list of available methods in the strings package:
 [notContains](#notcontains)
 [notEquals](#notequals)
 [notIncludes](#notincludes)
+[padBoth](#padboth)
 [padLeft](#padleft)
 [padRight](#padright)
 [parseCallback](#parseCallback)
@@ -374,7 +376,7 @@ const endsWith = Str('Supercharge').endsWith('charge', 5)
 #### equals
 - *added in version `1.3`*
 
-The `equals` method determines whether the string equals the given `value`:
+The `equals` method determines whether the string equals a given `value`:
 
 ```js
 const equals = Str('Supercharge').equals('Supercharge')
@@ -385,6 +387,22 @@ The `equals` method is case sensitive. Strings must be written the same way to b
 
 ```js
 const equals = Str('Supercharge').equals('supercharge')
+// false
+```
+
+Use [equalsIgnoreCase](#equalsignorecase) to compare strings case insensitive.
+
+
+#### equalsIgnoreCase
+- *added in version `1.24`*
+
+The `equalsIgnoreCase` method determines whether the string equals a given `value`, comparing them case insensitive:
+
+```js
+const equals = Str('Supercharge').equalsIgnoreCase('supercharge')
+// true
+
+const equals = Str('Supercharge').equalsIgnoreCase('foo')
 // false
 ```
 
@@ -754,6 +772,30 @@ const pascal = Str('Supercharge is SWEET')
 PascalCase is like camelCase with the first symbol in uppercase.
 
 
+#### padBoth
+- *added in version `1.24`*
+
+The `padBoth` method pads both sides, left and right, of the string with the given `pad` string (repeatedly if needed) so that the resulting string reaches a given `length`:
+
+```js
+const padded = Str('$19.99')
+    .padBoth(15, '.')
+    .get()
+
+// '....$19.99.....'
+```
+
+A space is used by default when you skip the character used to pad the string:
+
+```js
+const padded = Str('$19.99')
+    .padBoth(15)
+    .get()
+
+// '    $19.99     '
+```
+
+
 #### padLeft
 - *added in version `1.14`*
 
@@ -771,7 +813,7 @@ A space is used by default when you skip the character used to pad the string:
 
 ```js
 const padded = Str('$19.99')
-    .padLeft(15, '.')
+    .padLeft(15)
     .get()
 
 // '         $19.99'
