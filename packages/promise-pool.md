@@ -1,12 +1,21 @@
 # Promise Pool
 
 
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Run Promises in Batches](#using-a-promise-pool)
+  - [Concurrency](#customize-the-concurrency)
+  - [Processing](#start-processing)
+- [Error Handling](#error-handling)
+  - [Accessing Failed Items](#access-the-failed-item)
+  - [Handle Errors](#manually-handle-errors)
+- [Manually Stop the Pool](#manually-stop-the-pool)
+
+
 ## Introduction
-Running an asynchronous function on a list of items in Node.js can be done in different ways: in sequence, in parallel, or in batches. The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package solves the problems of running a number of async operations in batches. It also ensures processing the maximum number of functions concurrently.
+The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package allows you to run a number of promises in batches. The promise pool ensures a maximum number of concurrently processed tasks.
 
-Imagine this example: you’re importing a list of 500 email addresses to your application and you want to create a user if it doesn’t exist. To reduce performance issues and database bottlenecks, you’re using a promise pool with a concurrency of 5. The concurrency describes how many items will be processed **at most** parallely.
-
-Each task in the promise pool is individual from the others, meaning that the pool starts processing the next task as soon as one finishes. This way it tries to ensure the parallel processing using the defined concurrency.
+Each task in the promise pool is individual from others, meaning that the pool starts processing the next task as soon as one finishes. This handling ensures the best batch-processing for your tasks.
 
 
 ## Installation
@@ -16,98 +25,101 @@ The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool)
 npm i @supercharge/promise-pool
 ```
 
-You can use the promise pool package with every project even if it’s not build on Supercharge. Enjoy!
-
+```success
+`@supercharge/promise-pool` is a standalone package and — of course — you can use it in all your projects.
+```
 
 ## Using a Promise Pool
-Using the promise pool is pretty straightforward. The pacakge exposes a class and you can create a promise pool instance using the fluent interface. Here’s a working example:
+The package exports a `PromisePool` class. This class provides a fluent interface to create a promise pool instance. Create an instance using the static `for` method that accepts the list of items you want to process.
+
+Here’s a working example on how to use the `PromisePool` class:
 
 ```js
 import { PromisePool } from '@supercharge/promise-pool'
 // or
 const { PromisePool } = require('@supercharge/promise-pool')
 
+const { results, errors } = await PromisePool
+  .for([1, 2, 3])
+  .process(async num => {
+    return num * 2
+  })
+// results: [2, 4, 6]
+// errors: []
+```
+
+This example outlines the creation and processing of a promise pool for a list of numbers.
+
+The return value for the promise pool is an object containing two properties: `results` and `errors`. The `resuls` property is a list of returned values from the `process` function. The `errors` property contains all errors thrown while running the processing callback. Find more details about errors in the [error handling section](#error-handling).
+
+
+### Customize the Concurrency
+You can configure the maximum number of tasks being processed in parallel using the `withConcurrency` method:
+
+```js
+const pool = PromisePool
+  .for(users)
+  .withConcurrency(100)
+```
+
+The default concurrency is `10`.
+
+
+### Start Processing
+The `process` method should be the last call in your method chain because it starts the promise pool processing. The `process` method accepts an async callback (function) defining the processing for each item:
+
+```js
 const users = [
   { name: 'Marcus' },
   { name: 'Norman' },
   { name: 'Christian' }
 ]
 
-const { results, errors } = await PromisePool
+await PromisePool
   .for(users)
   .withConcurrency(2)
-  .process(async data => {
-    const user = await User.createIfNotExisting(data)
-
-    return user
+  .process(async user => {
+    await User.createIfNotExisting(user)
   })
 ```
 
-The code describes the following: at first, create a new promise pool instance which then allows you to chain the `.for()`, `.withConcurrency()`, and `.process()` methods. The `.process()` method is an async function starting the actual processing. Be sure to call `.process()` as the last method in the chain.
+Depending in your use case it can be helpful to know the index of the currently processed item or you need to manually stop the pool. We’re passing three arguments to the callback function provided to `process`: the `item`, `index`, and `pool` instance:
 
-The return values for the promise pool is an object containing two properties: `results` and `errors`
+```js
+await PromisePool
+  .for(users)
+  .process(async (user, index, pool) => {
+    // …
+  })
+```
 
 
 ## Error Handling
-The promise pool won’t throw when running into an error while processing an item. It saves the error to be inspected later. You’ve access to the item causing the error using `error.item`.
+The promise pool won’t throw errors while processing the items. It collects all errors and returns them after processing all items. You may then inspect the errors and handle them individually.
 
 
-## API
+### Access the Failed Item
+The returned `errors` property contains a list of occured errors while processing the pool. Each error contains the related item causing this error. You may access that item via `error.item`:
 
-#### `new PromisePool({ concurrency?, items? })` constructor
-Creates a new promise pool. The constructor takes an optional `options` object allowing you to passing in the `concurrency` and `items`.
 
 ```js
-const pool = new PromisePool({ concurrency: 2, items: [1, 2, 3] })
-```
+const { errors } = await PromisePool
+  .for(users)
+  .process(async (user, index, pool) => {
+    // …
+  })
 
-
-#### static `.withConcurrency(amount)`
-Set the maximum number of functions to process in parallel. Default `concurrency: 10`. Returns the promise pool instance.
-
-```js
-const pool = PromisePool.withConcurrency(5)
-```
-
-
-#### static `.for(items)`
-Set the items to be processed in the promise pool. Returns the promise pool instance.
-
-```js
-const users = [
-  { name: 'Marcus' },
-  { name: 'Norman' },
-  { name: 'Christian' }
-]
-
-const pool = PromisePool.for(users)
-```
-
-
-#### `.process(async (item, index, pool) => {})`
-Starts processing the promise pool by iterating over the items and passing each item to the async mapper function. Returns an object containing the results and errors.
-
-```js
-
-const users = [
-  { name: 'Marcus' },
-  { name: 'Norman' },
-  { name: 'Christian' }
-]
-
-const pool = PromisePool.withConcurrency(5).for(users)
-
-const { results, errors } = await pool.process(async (user, index, pool) => {
-  await User.createIfNotExisting(user)
+errors.forEach(error => {
+  // `error.item` contains the field causing this error
 })
 ```
 
-#### `.handleError(async (item, index, pool) => {})`
-The promise pool allows you to provide a custom error handler. You can take over the error handling by providing a custom handler to the `.handleError(handler)` method.
 
-> **Notice**: if you provide an error handler, the promise pool doesn’t collect any errors. You must then collect errors yourself.
+### Manually Handle Errors
+You can attach a custom error handler to your promise pool. Use the `handleError` method and provide an async callback function that runs on each error.
 
-Providing a custom error handler allows you to exit the promise pool early by throwing inside the error handler function. Throwing errors is in line with Node.js error handling using async/await.
+**Notice**: when providing a custom error handler, you’re taking over the error handling. The default “collect all errors” handler doesn’t apply anymore. You must collect or handle errors yourself:
+
 
 ```js
 const { PromisePool } = require('@supercharge/promise-pool')
@@ -116,7 +128,6 @@ const errors = []
 
 const { results } = await PromisePool
   .for(users)
-  .withConcurrency(4)
   .handleError(async (error, user) => {
       // you must collect errors yourself
     if (error instanceof ValidationError) {
@@ -165,13 +176,15 @@ try {
 
 
 ## Manually Stop the Pool
-You can stop the processing of a promise pool using the `pool` instance provided to the `.process()` and `.handleError()` methods. Here’s an example how you can stop an active promise pool from within the `.process()` method:
+You can stop the processing of a promise pool using the `pool` instance provided to the `.process()` and `.handleError()` methods.
+
+Here’s an example on how to stop an active promise pool from within the `.process()` method:
 
 ```js
 await PromisePool
   .for(users)
   .process(async (user, index, pool) => {
-    if (condition) {
+    if (index > 100) {
       return pool.stop()
     }
 
@@ -182,8 +195,6 @@ await PromisePool
 You may also stop the pool from within the `.handleError()` method in case you need to:
 
 ```js
-const { PromisePool } = require('@supercharge/promise-pool')
-
 await PromisePool
   .for(users)
   .handleError(async (error, user, pool) => {
