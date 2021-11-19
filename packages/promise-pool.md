@@ -3,6 +3,7 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+- [CommonJS/ESM/TypeScript Support](#commonjs,-esm,-and-typescript-support)
 - [Run Promises in Batches](#using-a-promise-pool)
   - [Concurrency](#customize-the-concurrency)
   - [Processing](#start-processing)
@@ -13,13 +14,13 @@
 
 
 ## Introduction
-The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package allows you to run a number of promises in batches. The promise pool ensures a maximum number of concurrently processed tasks.
+The [@supercharge/promise-pool](https://github.com/superchargejs/promise-pool) package allows you to run a number of promises in batches. The promise pool ensures a maximum number of concurrently processed tasks.
 
 Each task in the promise pool is individual from others, meaning that the pool starts processing the next task as soon as one finishes. This handling ensures the best batch-processing for your tasks.
 
 
 ## Installation
-The [`@supercharge/promise-pool`](https://github.com/superchargejs/promise-pool) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
+The [@supercharge/promise-pool](https://github.com/superchargejs/promise-pool) package lives independently from the Supercharge framework. Using it in your application requires you to install it as a project dependency:
 
 ```bash
 npm i @supercharge/promise-pool
@@ -29,6 +30,21 @@ npm i @supercharge/promise-pool
 `@supercharge/promise-pool` is a standalone package and — of course — you can use it in all your projects.
 ```
 
+
+## CommonJS, ESM, and TypeScript Support
+The `@supercharge/promise-pool` package supports both module loaders, CommonJS and ESM, and also TypeScript. Import the `PromisePool` class in your projects like this:
+
+```js
+// ESM and TypeScript
+import { PromisePool } from '@supercharge/promise-pool'
+
+// CommonJS
+const { PromisePool } = require('@supercharge/promise-pool')
+```
+
+We’re using ESM imports in the upcoming examples. They’re interchangeable with CommonJS imports.
+
+
 ## Using a Promise Pool
 The package exports a `PromisePool` class. This class provides a fluent interface to create a promise pool instance. Create an instance using the static `for` method that accepts the list of items you want to process.
 
@@ -36,8 +52,6 @@ Here’s a working example on how to use the `PromisePool` class:
 
 ```js
 import { PromisePool } from '@supercharge/promise-pool'
-// or
-const { PromisePool } = require('@supercharge/promise-pool')
 
 const { results, errors } = await PromisePool
   .for([1, 2, 3])
@@ -122,7 +136,7 @@ You can attach a custom error handler to your promise pool. Use the `handleError
 
 
 ```js
-const { PromisePool } = require('@supercharge/promise-pool')
+import { PromisePool } from '@supercharge/promise-pool'
 
 const errors = []
 
@@ -152,7 +166,7 @@ return { results }
 Providing a custom error handler allows you to exit the promise pool early by throwing inside the error handler function. Throwing errors is in line with Node.js error handling using async/await.
 
 ```js
-const { PromisePool } = require('@supercharge/promise-pool')
+import { PromisePool } from '@supercharge/promise-pool'
 
 try {
   const errors = []
