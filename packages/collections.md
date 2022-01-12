@@ -67,6 +67,10 @@ console.log(await mapped)
 ```
 
 
+### Looking for a Sync Collection?
+[@supercharge/arrays](https://superchargejs.com/docs/arrays)
+
+
 ## Creating Collections
 Creating a collection is as simple as importing the `@supercharge/collections` package and passing an array to the imported function:
 
