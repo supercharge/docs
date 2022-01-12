@@ -2,9 +2,7 @@
 
 
 ## Introduction
-Node.js is an event-driven platform, handling most of its processing asynchronously. The JavaScript Array class has no built-in support for asynchronous operations. That’s one reason working with arrays in Node.js can be cumbersome.
-
-The [`@supercharge/collections`](https://github.com/supercharge/collections) package fills this gap. This package provides a fluent interface for working with JavaScript arrays. Create a new collection instance based on an array and run the items through a pipeline of operations.
+The [`@supercharge/collections`](https://github.com/supercharge/collections) package is an async array implementation. It provides a fluent interface to work with JavaScript arrays supporting async callbacks in methods like `map`, `find`, `filter`, `reduce`, and so on.
 
 The following example takes an array of IDs and fetches the related users from the database to filter them based on a user’s name:
 
@@ -13,20 +11,17 @@ import { Collect } from '@supercharge/collections'
 
 await Collect([ 1, 2, 3, 4, 5 ])
   .map(async id => {
-    return User.findById(id)
+    return await User.findById(id)
   })
-  .filter(user => {
-    return user.name === 'supercharge'
+  .filter(async user => {
+    return await user.notSubscribedToNewsletter()
   })
-
-// [{
-//   id: 1,
-//   name: 'supercharge',
-//   description: 'Full-stack Node.js framework — not just a web-framework'
-// }]
+  .forEach(user => {
+    await user.subscribe()
+  })
 ```
 
-You can chain methods for fluent processing, like mapping and filtering of the underlying array. Typically, the collection methods are immutable and return a new collection instance without changing the original input array.
+You can fluently chain methods. Typically, the collection methods are immutable and return a new collection instance without changing the original array.
 
 
 ## Installation
@@ -36,8 +31,9 @@ The `@supercharge/collections` package lives independently from the Supercharge 
 npm i @supercharge/collections
 ```
 
+```success
 You can use this collections package with every project even if it’s not build on Supercharge. Enjoy!
-
+```
 
 ## CommonJS, ESM, and TypeScript Support
 The collections package supports both module loaders: CommonJS and ESM, and also TypeScript. Import `@supercharge/collections` in your projects like this:
@@ -67,8 +63,10 @@ console.log(await mapped)
 ```
 
 
-### Looking for a Sync Collection?
-[@supercharge/arrays](https://superchargejs.com/docs/arrays)
+### Looking for Synchronous Collections?
+Check out [@supercharge/arrays](https://superchargejs.com/docs/arrays) if you’re looking for a synchronous collections pendant. `@supercharge/arrays` is a wrapper around JavaScript arrays providing dozens of useful methods that are not available in native JavaScript arrays. Have a look!
+
+- 👉 [@supercharge/arrays](https://superchargejs.com/docs/arrays)
 
 
 ## Creating Collections
