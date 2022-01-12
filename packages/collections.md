@@ -9,6 +9,8 @@ The [`@supercharge/collections`](https://github.com/supercharge/collections) pac
 The following example takes an array of IDs and fetches the related users from the database to filter them based on a user’s name:
 
 ```js
+import { Collect } from '@supercharge/collections'
+
 await Collect([ 1, 2, 3, 4, 5 ])
   .map(async id => {
     return User.findById(id)
@@ -37,11 +39,39 @@ npm i @supercharge/collections
 You can use this collections package with every project even if it’s not build on Supercharge. Enjoy!
 
 
+## CommonJS, ESM, and TypeScript Support
+The collections package supports both module loaders: CommonJS and ESM, and also TypeScript. Import `@supercharge/collections` in your projects like this:
+
+```js
+// ESM and TypeScript
+import { Collect } from '@supercharge/collections'
+
+// CommonJS
+const { Collect } = require('@supercharge/collections')
+```
+
+
+## Fully Async
+All methods provided by `@supercharge/collections` (like `map`, `filter`, `reduce`, …) are async. You **must** await their result, even though you’re not passing an async callback function:
+
+```js
+const mapped = Collect([1, 2, 3]).map(num => {
+  return num * 2
+  })
+
+console.log(mapped)
+// Promise<Collection { values: 1, 2, 3, callChain: [method: 'map', handler: [function]] }>
+
+console.log(await mapped)
+// [2, 4, 6]
+```
+
+
 ## Creating Collections
 Creating a collection is as simple as importing the `@supercharge/collections` package and passing an array to the imported function:
 
 ```js
-const Collect = require('@supercharge/collections')
+const { Collect } = require('@supercharge/collections')
 
 const collection = Collect([ 'Supercharge', 'Collection' ])
 ```
@@ -144,7 +174,7 @@ await Collect([1, 2, 3])
 #### any
 - *added in version `1.12`*
 
-The `any` method determines whether at least one item from the collection satisfies the (async) testing function. It’s an alias for [some](#some):
+The `any` method determines whether at least one item from the collection satisfies the async testing function. It’s an alias for [some](#some):
 
 ```js
 await Collect([1, 2, 3]).any(item => {
@@ -239,7 +269,7 @@ await collection
 #### count
 - *added in version `2.1`*
 
-The `count` method counts all items in the collection satisfying the (async) testing function. Count behaves like `.size()` when not providing a callback function.
+The `count` method counts all items in the collection satisfying the async testing function. Count behaves like `.size()` when not providing a callback function.
 
 ```js
 await Collect([1, 2, 3]).count()
@@ -293,7 +323,7 @@ await Collect([1, 2, 3]).every(async id => {
 #### filter
 - *added in version `1.0`*
 
-The `filter` method keeps all items in the collection satisfying the (async) testing function:
+The `filter` method keeps all items in the collection satisfying the async testing function:
 
 ```js
 await Collect([1, 2, 3]).filter(async id => {
@@ -313,7 +343,7 @@ See the [`reject`](#reject) method for the inverse of `filter`.
 #### filterIf
 - *added in version `2.2`*
 
-The `filterIf` method keeps all items in the collection satisfying the (async) testing function if the given `condition` is `true`:
+The `filterIf` method keeps all items in the collection satisfying the async testing function if the given `condition` is `true`:
 
 ```js
 await Collect([1, 2, 3]).filterIf(condition, async id => {
@@ -331,7 +361,7 @@ The `filterIf` method returns returns all items (it doesn’t filter) if the giv
 #### find
 - *added in version `1.0`*
 
-The `find` method returns the first item in the collection that satisfies the (async) testing function, `undefined` otherwise:
+The `find` method returns the first item in the collection that satisfies the async testing function, `undefined` otherwise:
 
 ```js
 const usernames = ['marcus', 'norman', 'christian']
@@ -364,7 +394,7 @@ await Collect([ 1, 2, 3 ]).first()
 // 1
 ```
 
-You can also pass an (async) testing function as a parameter to the `first` method:
+You can also pass an async testing function as a parameter to the `first` method:
 
 ```js
 await Collect([
@@ -381,7 +411,7 @@ await Collect([
 #### flatMap
 - *added in version `1.0`*
 
-The `flatMap` method invokes the (async) callback on each collection item. The callback can modify and return the item resulting in a new collection of modified items. Ultimately, `flatMap` flattens the mapped results:
+The `flatMap` method invokes the async callback on each collection item. The callback can modify and return the item resulting in a new collection of modified items. Ultimately, `flatMap` flattens the mapped results:
 
 ```js
 await Collect([1, 2, 3]).flatMap(async item => {
@@ -407,7 +437,7 @@ await Collect([[1, [2]], [3], 22]).collapse()
 #### forEach
 - *added in version `1.0`*
 
-The `forEach` method invokes the (async) callback on each collection item. This method has no return value.
+The `forEach` method invokes the async callback on each collection item. This method has no return value.
 
 ```js
 await Collect(await queue.getActive()).forEach(async job => {
@@ -561,7 +591,7 @@ await Collect([ 1, 2, 3 ]).last()
 // 3
 ```
 
-You can also pass an (async) testing function as a parameter to the `last` method:
+You can also pass an async testing function as a parameter to the `last` method:
 
 ```js
 await Collect([
@@ -579,7 +609,7 @@ await Collect([
 #### map
 - *added in version `1.0`*
 
-The `map` method invokes the (async) callback on each collection item and returns an array of transformed items. Because `map` returns a collection instance, you could chain further operations:
+The `map` method invokes the async callback on each collection item and returns an array of transformed items. Because `map` returns a collection instance, you could chain further operations:
 
 ```js
 await Collect([1, 2, 3]).map(async item => {
@@ -751,7 +781,7 @@ The `reduceRight` method takes the initial value as a second argument.
 #### reject
 - *added in version `1.1`*
 
-The `reject` method removes all items from the collection satisfying the (async) testing function:
+The `reject` method removes all items from the collection satisfying the async testing function:
 
 ```js
 await Collect([1, 2, 3, 4, 5]).reject(async item => {
@@ -890,7 +920,7 @@ await collection
 #### some
 - *added in version `1.0`*
 
-The `some` method determines whether at least one item from the collection satisfies the (async) testing function:
+The `some` method determines whether at least one item from the collection satisfies the async testing function:
 
 ```js
 await Collect([1, 2, 3]).some(item => {
