@@ -19,7 +19,7 @@ await Collect([ 1, 2, 3, 4, 5 ])
     return user.name === 'supercharge'
   })
 
-// result: [{
+// [{
 //   id: 1,
 //   name: 'supercharge',
 //   description: 'Full-stack Node.js framework — not just a web-framework'
