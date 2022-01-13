@@ -67,6 +67,7 @@ module.exports = {
   Packages: {
     slug: 'packages',
     sections: {
+      Arrays: 'arrays',
       Collections: 'collections',
       Filesystem: 'filesystem',
       Goodies: 'goodies',
