@@ -4,7 +4,7 @@
 ## Introduction
 The [`@supercharge/arrays`](https://github.com/supercharge/arrays) package is an extended array class with helpful methods like `.isEmpty()`, `last()` and `.findLast()`, `.flatMap(callback)`, and many more.
 
-`@supercharge/arrays` is a wrapper around JavaScript arrays providing dozens of useful and convenient methods that are not available in native JavaScript arrays
+`@supercharge/arrays` is a wrapper around JavaScript arrays providing dozens of useful and convenient methods that are not available in native JavaScript arrays.
 
 
 ## Installation
@@ -55,25 +55,24 @@ users.isEmpty()
 // true
 
 users
-  .add({ id: 1, name: 'Marcus' })
-  .add({ id: 2, name: 'Norman' })
-  .add({ id: 3, name: 'Christian' })
+  .push({ id: 1, name: 'Marcus' })
+  .push({ id: 2, name: 'Norman' })
+  .push({ id: 3, name: 'Christian' })
 
 users.isNotEmpty()
 // true
 
-const usernamesArray = users
-  .map(user => {
-    return user.name
-  })
-  .toArray()
+users.length()
+// 3
 
+const usernamesArray = users
+  .map(user => user.name)
+  .toArray()
 // [ 'Marcus', 'Norman', 'Christian' ]
 
 const marcus = users.find(user => {
   return user.name === 'Marcus'
 })
-
 // { id: 1, name: 'Marcus' }
 ```
 
@@ -94,148 +93,91 @@ Here’s a list of available methods on a set instance:
 
 <div id="collection-method-list" markdown="1">
 
-[Set.from](#set.from)
-[Set.of](#set.of) (deprecated)
+[Arr.from](#arr.from)
+[Arr.isArray](#arr.isarray)
+[Arr.isNotArray](#arr.isnotarray)
 
-[add](#add)
-[all](#all)
-[any](#any)
 [at](#at)
-[clear](#clear)
+[collapse](#collapse)
+[compact](#compact)
 [concat](#concat)
-[count](#count)
-[delete](#delete)
+[chunk](#chunk)
+[diff](#chunk)
 [filter](#filter)
 [find](#find)
 [findIndex](#findindex)
-[findLast](#findLast)
-[findLastIndex](#findlastindex)
-[first](#first)
-[flatMap](#flatmap)
-[flatten](#flatten)
-[forEach](#foreach)
-[has](#has)
-[includes](#includes)
+[findLast](#findlast)
 [intersect](#intersect)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
-[isMissing](#ismissing)
 [join](#join)
-[map](#map)
-[of](#of)
-[reduce](#reduce)
+[last](#last)
+[length](#length)
+[max](#max)
+[median](#median)
+[min](#min)
+[pop](#pop)
+[push](#push)
+[removeNullish](#removenullish)
+[reverse](#reverse)
+[shift](#shift)
 [size](#size)
+[slice](#slice)
+[splice](#splice)
+[sort](#sort)
+[takeAndRemove](#takeandremove)
 [toArray](#toarray)
-[values](#values)
-
+[unshift](#unshift)
 </div>
 
+```success
+Please feel free to [submit a pull request on GitHub](https://github.com/supercharge/arrays) if you want to see a new function added to this package. I appreciate your support!
+```
 
-#### Set.from
-- *added in `2.1`*
 
-The static `Set.from` method creates a new set instance for a given iterable, like `Array.from`:
+#### Arr.from
+- *added in `1.2`*
+
+The static `Arr.from` method creates a new `Arr` instance for a given iterable:
 
 ```js
-const numbers = Set.from([1, 2, 1, 2])
+const numbers = Arr.from([1, 2])
 
 numbers.toArray()
 // [1, 2]
 ```
 
 
-#### Set.of
-- ***deprecated** since version `2.1.0`. Please use [Set.from](#set.from) instead*
+#### Arr.isArray
 - *added in `1.0`*
 
-The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
+The static `Arr.isArray` method determines whether a given input is an array:
 
 ```js
-const set = Set.of(['Marcus', 'Supercharge'])
-
-set.has('Marcus')
+Arr.isArray([1, 2])
 // true
+
+Arr.isArray('[1, 2]')
+// false
 ```
 
 
-#### add
-- *updated in `2.2.0` supporting multiple values (`set.add(1, 2, 3)`)*
+#### Arr.isNotArray
 - *added in `1.0`*
 
-The `add` method adds an item to the end of a set if it doesn’t already exists in the set:
+The static `Arr.isNotArray` method determines whether a given input is **not** an array:
 
 ```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
-  .add('Marcus')
-
-users.toArray()
-// ['Marcus', 'Supercharge']
-```
-
-Since version `2.2.0` you can add multiple values within a single call:
-
-```js
-const users = new Set()
-
-users.add('Marcus', 'Supercharge', 'Marcus')
-
-users.toArray()
-// ['Marcus', 'Supercharge']
-```
-
-
-#### all
-- *added in `2.2`*
-
-The `all` method determines whether all of the values in the set match the given predicate function:
-
-```js
-const users = Set.from([
-  { id: 1, subscribed: false, name: 'Marcus' },
-  { id: 2, subscribed: true, name: 'Supercharge' }
-])
-
-users.all(user => {
-  return user.subscribed === true
-})
+Arr.isNotArray([1, 2])
 // false
 
-users.all(user => {
-  return user.id > 0
-})
+Arr.isNotArray('1, 2')
 // true
-```
-
-
-#### any
-- *added in `2.2`*
-
-The `any` method determines whether at least one of the values in the set matches the given predicate function:
-
-```js
-const users = Set.from([
-  { id: 1, subscribed: false, name: 'Marcus' },
-  { id: 2, subscribed: true, name: 'Supercharge' }
-])
-
-users.any(user => {
-  return user.subscribed === true
-})
-// true
-
-users.any(user => {
-  return user.id === 0
-})
-// false
 ```
 
 
 #### at
-- *added in `1.7`*
+- *added in `1.1`*
 
 The `at` method returns the item at a given `index` or `undefined` if the index exceeds the set’s size.
 
@@ -250,103 +192,116 @@ users.at(22)
 ```
 
 
-#### clear
+#### collapse
 - *added in `1.0`*
 
-The `clear` method removes all entries from the set:
+The `collapse` method collapses the array one level deep into a single, flat array:
 
 ```js
-const users = Set.from(['Marcus', 'Supercharge', 'Marcus'])
+Arr
+  .from([[1], [{}, 'Marcus', true], [22]])
+  .collapse()
+  .toArray()
 
-users.size()
-// 2
+// [1, {}, 'Marcus', true, 22]
+```
 
-users.clear()
 
-users.size()
-// 0
+#### compact
+- *added in `1.0`*
+
+The `compact` method removes all falsy values from the array. For example, falsy values are `null`, `undefined`, `''`, `false`, `0`, `NaN`:
+
+```js
+Arr
+  .from([0, null, undefined, 1, false, 2, '', 3, NaN])
+  .compact()
+  .toArray()
+
+// [1, 2, 3]
 ```
 
 
 #### concat
-- *added in `1.4`*
+- *added in `1.0`*
 
 The `concat` method adds an array or individual values to the set.
 
 ```js
-Set.from([1, 2]).concat([3, 4])
-// Set [1, 2, 3, 4]
+Arr.from([1, 2]).concat([3, 4])
+// Arr [1, 2, 3, 4]
 
-Set.from([1, 2]).concat(5, 6)
-// Set [1, 2, 5, 6]
+Arr.from([1, 2]).concat(5, 6)
+// Arr [1, 2, 5, 6]
 ```
 
 
-#### count
-- *added in `1.4`*
 
-The `count` method returns the number of items matching the given `predicate` function.
+
+#### chunk
+- *added in version `1.0`*
+
+The `chunk` method splits the array into multiple, smaller arrays of a given size:
 
 ```js
-const set = Set.from([1, 2, 3, 4, 5])
+const chunks = Arr
+  .from([1, 2, 3, 4, 5, 6, 7, 8])
+  .chunk(3)
+  .toArray()
 
-set.count(value => {
-  return value > 2
-})
-// 3
+// [
+//   [1, 2, 3],
+//   [4, 5, 6],
+//   [7, 8]
+// ]
 ```
 
-The `count` method returns the size of the set when not providing a predicate function.
 
+#### diff
+- *added in version `1.0`*
 
-#### delete
-- *added in `1.0`*
-
-The `delete` method removes the entry identified by the given `value`:
+The `diff` method removes all values from the array that are present in the given `candidate`.
 
 ```js
-const users = Set.from(['Marcus', 'Supercharge'])
+Arr
+  .from([1, 2, 3])
+  .diff([2, 3, 4, 5])
+  .toArray()
 
-const removed = users.delete('Marcus')
-// true
-
-users.has('Marcus')
-// false
+// [1]
 ```
-
-Calling `set.delete(value)` returns `true` if the given value is present in the set and has been removed. Returns `false` if the value isn’t present in the set.
 
 
 #### filter
 - *added in `1.0`*
 
-The `filter` method returns a set containing only items matching the given `predicate`.
+The `filter` method returns an array containing only items matching the given `predicate` function.
 
-The `predicate` function will be called once for each entry in the set in insertion order.
+The `predicate` function will be called once for each entry in the set in insertion order:
 
 ```js
-const users = Set.from([1, 2, 3])
+const users = Arr.from([1, 2, 3])
 
-const names = users.filter((value, set) => {
+const names = users.filter((value, index) => {
   return value > 1
 })
 
-// Set [2, 3]
+// Arr [2, 3]
 ```
 
 
 #### find
-- *added in `1.0`*
+- *added in `1.1`*
 
-The `find` method returns the first item in the set matching the given `predicate`.
+The `find` method returns the first item in the array matching the given `predicate`:
 
 ```js
-const users = Set.from([
+const users = Arr.from([
   { id: 1, name: 'Marcus' },
   { id: 2, name: 'Supercharge' }
 ])
 
-const names = users.find((value, set) => {
+const user = users.find((value, set) => {
   return value.name === 'Supercharge'
 })
 
@@ -355,12 +310,12 @@ const names = users.find((value, set) => {
 
 
 #### findIndex
-- *added in `2.0`*
+- *added in `1.1`*
 
-The `findIndex` method returns the index of the first item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
+The `findIndex` method returns the index of the first item in the array satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function:
 
 ```js
-const users = Set.from([
+const users = Arr.from([
   { id: 1, name: 'Marcus' },
   { id: 2, name: 'Supercharge' }
 ])
@@ -378,12 +333,12 @@ const index = users.findIndex((value, set) => {
 
 
 #### findLast
-- *added in `2.2`*
+- *added in `1.1`*
 
-The `findLast` method returns the last item in the set matching the given `predicate` function.
+The `findLast` method returns the last item in the array matching the given `predicate` function:
 
 ```js
-const users = Set.from([
+const users = Arr.from([
   { subscribed: true, name: 'Marcus' },
   { subscribed: true, name: 'Supercharge' }
 ])
@@ -395,343 +350,344 @@ const user = users.findLast(user => {
 ```
 
 
-#### findLastIndex
-- *added in `2.2`*
-
-The `findLastIndex` method returns the index of the last item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
-
-```js
-const users = Set.from([
-  { subscribed: true, name: 'Marcus' },
-  { subscribed: true, name: 'Supercharge' }
-])
-
-const index = users.findLastIndex(user => {
-  return user.subscribed === true
-)
-// 1
-
-const index = users.findLastIndex((value, set) => {
-  return value.name === 'Hello'
-})
-// -1
-```
-
-
-#### first
-- *added in `1.7`*
-
-The `first` method returns the first item in the set or the first item matching the given `predicate` function:
-
-```js
-const users = Set.from([
-  { id: 1, name: 'Marcus' },
-  { id: 2, name: 'Supercharge' }
-  { id: 3, name: 'Albert' }
-])
-
-users.first()
-// { id: 1, name: 'Marcus' }
-
-users.first(user => {
-  return user.id > 1
-})
-// { id: 2, name: 'Supercharge' }
-
-users.first(user => {
-  return user.id > 22
-})
-// undefined
-```
-
-
-#### flatMap
-- *added in `1.3`*
-
-The `flatMap` method returns a new set instance, after applying the given `transform` function and collapsing the result (one level deep).
-
-The `transform` function will be called once for each entry in the set in insertion order. The `transform` function receives the `value, set` arguments:
-
-```js
-const users = Set.from([ 'Marcus', ['Supercharge'] ])
-
-const names = users.map((value, set) => {
-  return value
-})
-// Set ['Marcus', 'Supercharge']
-```
-
-
-#### flatten
-- *added in `1.3`*
-
-The `flatten` method flattens the items in the set at a depth of `1`.
-
-```js
-const users = Set.from([ 'Marcus', ['Supercharge'] ]).flatten()
-
-// Set ['Marcus', 'Supercharge']
-```
-
-
-#### forEach
-- *added in `1.0`*
-
-The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, set` arguments:
-
-```js
-const names = Set.from(['Marcus', 'Supercharge'])
-
-names.forEach(name => {
-  console.log(name)
-})
-
-// 'Marcus'
-// 'Supercharge'
-```
-
-
-#### has
-- *added in `1.0`*
-
-The `has` method returns `true` if the given `value` is present in the set, otherwise `false`:
-
-```js
-const users = new Set()
-
-users
-  .add('Marcus')
-  .add('Supercharge')
-
-users.has('Marcus')
-// true
-
-users.has('not-existent')
-// false
-```
-
-
-#### includes
-- *added in `1.5`*
-
-The `includes` method determines whether the set includes a given `value` or if it includes a value satisfying a given `predicate` function:
-
-```js
-const set = Set.from([1, 2, 3, 4, 5])
-
-set.includes(4)
-// true
-
-set.includes(num => {
-  return num > 3
-})
-// true
-```
-
-
 #### intersect
-- *added in `2.2`*
+- *added in `1.0`*
 
-The `intersect` method returns a set containing all items that are contained in all collections:
+The `intersect` method returns an array containing all items that are contained in all collections:
 
 ```js
-const ids = Set.from([1, 2, 3])
+const ids = Arr.from([1, 2, 3])
 
 const intersection = ids.intersect(
-  Set.from([2, 3]), [1, 3, 4, 5]
+  [2, 3], [1, 3, 4, 5]
 )
-// Set [3]
+// Arr [3]
 ```
 
 
 #### isEmpty
 - *added in `1.0`*
 
-The `isEmpty` method returns `true` if the set has no entries. Returns `false` if entries are present in the set:
+The `isEmpty` method returns `true` if the array has no entries. Returns `false` if entries are present in the array:
 
 ```js
-const set = new Set()
+const items = Arr()
 
-set.isEmpty()
+items.isEmpty()
 // true
 
-set.add('Marcus')
+items.push('Marcus')
 
-set.isEmpty()
+items.isEmpty()
 // false
-```
-
-
-#### isMissing
-- *added in `2.0`*
-
-The `isMissing` method returns `true` if the given `value` is not present in the set, otherwise `false`:
-
-```js
-const users = Set.from(['Marcus', 'Supercharge'])
-
-users.isMissing('Marcus')
-// false
-
-users.isMissing('not-existent')
-// true
-```
-
-
-#### join
-- *updated in `1.9` to support a callback function to compose a seperator*
-- *updated in `1.8` to support an optional seperator*
-- *added in `1.0`*
-
-The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
-
-```js
-const set = Set.from(['Marcus', 'Supercharge'])
-
-set.join()
-// '1,2,3'
-```
-
-You can provide a separator that will then be used for concatenation:
-
-```js
-const set = Set.from(['Marcus', 'Supercharge'])
-
-set.join('; ')
-// '1; 2; 3'
-```
-
-You may also provide a callback function to compose a separator for each item:
-
-```js
-const set = Set.from(['Marcus', 'Supercharge'])
-
-set.join(name => {
-  return `${name} -> `
-})
-// '1 -> 2 -> 3 ->'
 ```
 
 
 #### isNotEmpty
 - *added in `1.0`*
 
-The `isNotEmpty` method returns `true` if entries are present in the set. Returns `false` if the set is empty:
+The `isNotEmpty` method returns `true` if entries are present in the array. Returns `false` if the array is empty:
 
 ```js
-const set = new Set()
+const items = Arr()
 
-set.isNotEmpty()
+items.isNotEmpty()
 // false
 
-set.add('Marcus')
+items.push('Marcus')
 
-set.isNotEmpty()
+items.isNotEmpty()
 // true
 ```
 
 
-#### map
+#### join
 - *added in `1.0`*
 
-The `map` method returns a new set instance containing the results of the given `transform` function.
-
-The `transform` function will be called once for each entry in the set, in order of insertion. The `transform` function receives the `value, set` arguments:
+The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
 
 ```js
-const users = Set()
+const names = Arr.from([1, 2, 3])
 
-users
-  .add('Marcus')
-  .add('Supercharge')
+names.join()
+// '1,2,3'
+```
 
-const names = users.map((value, set) => {
-  return value
-})
+You can provide a separator that will then be used for concatenation:
 
-// Set ['Marcus', 'Supercharge']
+```js
+const names = Arr.from([1, 2, 3])
+
+names.join()
+// '1; 2; 3'
 ```
 
 
-#### reduce
-- *added in `1.6`*
+#### last
+- *added in version `1.1`*
 
-The `reduce` method invokes reducer function on each item in the set, passing the result of the previous iteration to the subsequent iteration. The result is a reduced set to a single value:
+The `last` method returns the last item in the array. Returns `undefined` if the array is empty. It won’t remove the returned item from the array:
 
 ```js
-const set = Set.from([1, 2, 3, 4, 5])
+Arr
+  .from([1, 2, 3])
+  .last()
 
-set.reduce((sum, value) => {
-  return sum + value
-}, 0)
-// 15
+// 3
 ```
 
-The `reduce` method takes an initial value as a second argument. In the code snippet above, the initial value is `0`. Using `5` as the initial value returns a different result:
+You can also pass a predicate function as a parameter to the `last` method:
 
 ```js
-const set = Set.from([1, 2, 3, 4, 5])
+Arr
+  .from([1, 2, 3, 4, 5])
+  .last(num => {
+    return num > 2
+  })
 
-set.reduce((sum, value) => {
-  return sum + value
-}, 5)
-// 20
+// 5
+```
+
+The `last` method behaves like [`findLast`](#findlast) when using a predicate function.
+
+
+#### length
+- *added in version `1.0`*
+
+The `length` method returns the number of items in the array:
+
+```js
+Arr
+  .from([1, 2, 3])
+  .length()
+
+// 3
+```
+
+
+#### max
+- *added in version `1.0`*
+
+The `max` method returns the max value in the array:
+
+```js
+Arr.from([1, 2, 3]).max()
+// 3
+```
+
+
+#### median
+- *added in version `1.0`*
+
+The `median` method returns the [median](https://en.wikipedia.org/wiki/Median) value of the array:
+
+```js
+Arr
+  .from([1, 2, 3, 4, 5, 6])
+  .median()
+
+// 3.5
+```
+
+
+#### min
+- *added in version `1.0`*
+
+The `min` method returns the min value in the array:
+
+```js
+Arr.from([1, 2, 3]).min()
+// 1
+```
+
+
+#### pop
+- *added in version `1.0`*
+
+The `pop` method removes and returns the last item from the array:
+
+```js
+const items = Arr.from([1])
+
+items.pop()
+// 1
+
+items.pop()
+// undefined
+```
+
+
+#### push
+- *added in version `1.0`*
+
+The `push` method appends one or more items to the end of the array:
+
+```js
+Arr
+  .from([1])
+  .push(2, 3)
+  .toArray()
+
+// [1, 2, 3]
+```
+
+
+#### removeNullish
+- *added in `1.0`*
+
+The `removeNullish` method removes all `null` and `undefined` values from the array:
+
+```js
+Arr
+  .from([1, null, undefined, '', false])
+  .removeNullush()
+  .toArray()
+
+// [1, '', false]
+```
+
+
+#### reverse
+- *added in version `1.0`*
+
+The `reverse` method reverses the array. The first item becomes the last one, the second item becomes the second to last, and so on:
+
+```js
+Arr
+  .from([1, 2, 3])
+  .reverse()
+
+// Arr [3, 2, 1]
+```
+
+
+#### shift
+- *added in version `1.0`*
+
+The `shift` method removes and returns the first item from the array. It changes the original array:
+
+```js
+const items = Arr.from([1, 2, 3])
+
+items.shift()
+// 1
+
+items.toArray()
+// [2, 3]
 ```
 
 
 #### size
 - *added in `1.0`*
 
-The `size` method returns the number of entries in the set:
+The `size` method is an alias for the [length](#length) method:
 
 ```js
-const set = Set.from(['Marcus', 'Supercharge'])
+const names = Arr.from(['Marcus', 'Supercharge'])
 
-const size = set.size()
+const size = names.size()
 // 2
 ```
 
 
+#### slice
+- *added in version `1.0`*
+
+The `slice` method returns a slice of the array starting at the given index:
+
+```js
+const arr = Arr.from([1, 2, 3, 4, 5])
+
+const chunk = arr.slice(2)
+// [3, 4, 5]
+```
+
+You can limit the size of the slice by passing a second argument to the `slice` method:
+
+```js
+const arr = Arr.from([1, 2, 3, 4, 5])
+const chunk = arr.slice(2, 2)
+// [3, 4]
+```
+
+
+#### splice
+- *added in version `1.0`*
+
+The `splice` method removes abd returns a slice of items from the array starting at the given index:
+
+```js
+const arr = Arr.from([1, 2, 3, 4, 5])
+
+const chunk = arr.splice(2)
+// [3, 4, 5]
+```
+
+You can limit the size of the slice by passing a second argument:
+
+```js
+const arr = Arr.from([1, 2, 3, 4, 5])
+
+const chunk = arr.splice(2, 2)
+// [3, 4]
+```
+
+You can replace the removed items by passing an array as the third argument:
+
+```js
+const arr = Arr.from([1, 2, 3, 4, 5])
+
+const chunk = arr.splice(2, 2, [10, 11])
+// [3, 4]
+
+arr.toArray()
+// [1, 2, 10, 11, 5]
+```
+
+#### sort
+- *added in version `1.0`*
+
+The `sort` method returns the sorted array:
+
+```js
+const sorted = Arr.from([4, 1, 37, 2, 1]).sort()
+
+// [1, 1, 2, 4, 37]
+```
+
+The `sort` method accepts an optional comparator for custom sort operations:
+
+```js
+await Collect([4, 1, 37, 2, 1]).sort((a, b) => {
+  return b - a
+})
+
+// [37, 4, 2, 1, 1]
+```
+
+
 #### toArray
-- *added in `1.0`*
+- *added in `1.1`*
 
-The `toArray` method returns an array containing the entries of the set.
+The `toArray` method returns a native JavaScript array:
 
 ```js
-const set = Set.from([1, 2, 3, 4])
+const arr = Arr.from([1, 2, 3, 4])
 
-const array = set.toArray()
+const array = arr.toArray()
 // [1, 2, 3, 4]
-
 ```
 
 
-#### values
+#### unshift
 - *added in `1.0`*
 
-The `values` method returns an iterator object of the values present in the set (in insertion order):
+The `unshift` method adds one or more items to the beginning of the array:
 
 ```js
-const users = Set.from(['Marcus', 'Supercharge'])
+const arr = Arr
+  .from([1, 2, 3])
+  .unshift(5, 6)
 
-const valueIterator = users.values()
-
-valueIterator.next().value
-// 'Marcus'
-
-valueIterator.next().value
-// 'Supercharge'
-```
-
-You may also iterate through the values using a `for..of` loop:
-
-```js
-const users = Set.from(['Marcus', 'Supercharge'])
-
-for (const value of users.values()) {
-  console.log(value)
-}
-
-// 'Marcus'
-// 'Supercharge'
+// [5, 6, 1, 2, 3]
 ```
