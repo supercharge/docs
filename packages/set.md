@@ -570,7 +570,7 @@ users.isMissing('not-existent')
 The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
 
 ```js
-const set = Set.from(['Marcus', 'Supercharge'])
+const set = Set.from([1, 2, 3])
 
 set.join()
 // '1,2,3'
@@ -579,7 +579,7 @@ set.join()
 You can provide a separator that will then be used for concatenation:
 
 ```js
-const set = Set.from(['Marcus', 'Supercharge'])
+const set = Set.from([1, 2, 3])
 
 set.join('; ')
 // '1; 2; 3'
@@ -588,7 +588,7 @@ set.join('; ')
 You may also provide a callback function to compose a separator for each item:
 
 ```js
-const set = Set.from(['Marcus', 'Supercharge'])
+const set = Set.from([1, 2, 3])
 
 set.join(name => {
   return `${name} -> `
