@@ -1,5 +1,5 @@
 # Contribute to Supercharge
-We highly value your contribution to Supercharge. Don’t hesitate to send in feature requests, open bug reports or pull requests. Any collaboration is welcome in the project.
+We highly value your contribution to Supercharge. Please send any feature request, bug report, or pull requests in the [`supercharge/framework` GitHub repository](https://github.com/supercharge/framework). We welcome any collaboration and support to the project 🙏
 
 
 ## Bug Reports
@@ -10,7 +10,7 @@ A way to report a bug is sending a failing test that outlines the problem. Even 
 Supercharge’s source code is managed and hosted on GitHub:
 
 - [Supercharge Application](https://github.com/supercharge/supercharge)
-- [Supercharge Installer](https://github.com/supercharge/installer)
+- [Supercharge Installer](https://github.com/supercharge/create-app)
 - [Supercharge Framework](https://github.com/supercharge/framework)
 - [Supercharge Documentation](https://github.com/supercharge/docs)
 - [Supercharge Website](https://github.com/supercharge/superchargejs.com)
