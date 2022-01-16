@@ -4,38 +4,42 @@
 ## System Requirements
 The Supercharge framework has some system requirements. Ensure that your system has the following dependencies installed:
 
-- Node.js `>= 8.12.0`
+- Node.js `>= 12`
 - NPM or Yarn for package management
 
-Version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
-
-
-## Installing Supercharge
-Supercharge has a convenient installer to scaffold a new application. Install the Supercharge installer on your system to quickly create a new project:
+Check your installed Node.js version using this command:
 
 ```bash
-npm install -g @supercharge/installer
+node -v
+# v12.22.9
 ```
 
-The installer will add the `supercharge` command to your system. Scaffold a new application like this:
+If you don’t have Node.js 12.x (or higher) installed, you can download the latest version on the official [nodejs.org](https://nodejs.org/en/download/) website.
+
+Also, version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
+
+
+## Creating a new Supercharge App
+Supercharge provides a convenient app scaffolder to create a new application. You can run the scaffolding using [npm init](https://docs.npmjs.com/cli/v8/commands/npm-init). The following command creates a new Supercharge app in the `hello-supercharge` directory:
 
 ```bash
-supercharge new blog
+npm init @supercharge/app@latest hello-supercharge
 ```
 
-The Supercharge installer will create a `.env` file in your project and automatically generate an application key.
-
-## Application Key
-When building your applicatin with Supercharge, you should set an application key in your `.env` file to a random string. If you installed Supercharge with the installer, the key is already set for you.
-
-If you want to set an app key manually, use the `node craft key:generate` command.
+The app creation process may take some seconds. You’ll continuously see updates what’s currently happening when creating your app.
 
 
-## Running Supercharge
+### Create a `.env` File
+You must create a `.env` file after creating a new application. We provide a `.env.example` file that you can copy and rename.
+
+At this point, it’s not necessary to adjust the values in the `.env` file. You can do that later.
+
+
+### Running the Supercharge Server
 Starting your Supercharge server is as simple as this:
 
 ```bash
-node server.js
+npm run dev
 ```
 
-This will run Supercharge’s HTTP server on the port that is defined in your `.env` file. The default port is `3000`.
+This will run Supercharge’s HTTP server on the port that is defined in your `.env` file. The default port is `3000`. Once started, you can visit your new app on [localhost:3000](https://localhost:3000).
