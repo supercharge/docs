@@ -14,8 +14,8 @@ module.exports = {
     slug: 'getting-started',
     sections: {
       Installation: 'installation',
-      'Configuration & Env': 'configuration',
       'Directory Structure': 'directory-structure',
+      'Configuration & Env': 'configuration',
       Application: 'application',
       // 'App Lifecycle': 'app-lifecycle',
       Development: 'development',
