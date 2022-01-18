@@ -2,62 +2,60 @@
 
 
 ## Introduction
-All your Supercharge configuration files are stored in the `config` directory.
+All your Supercharge configuration files are stored in the `config` directory. Your Supercharge application and the framework core follow these configuration files. You can adjust and tweak the app’s behavior using different values for individual options.
 
-In most application you’ll find configurations spread across files. For example, the mailing configuration lives directly in the mailer and the database settings are tightly couppled with the database connection.
+We highly recommend putting all configuration files into the `config` directory because these files are automatically loaded when starting your application.
 
-This is different in Supercharge because the `config` directory acts as a central place for all your configurations.
+Here’s a preview how Supercharge recommends the usage of environment variables to configure your app:
 
 ![How to use Supercharge Config and Env](/images/docs/config-env.png)
 
 
 ## Retrieving Configuration Values
-Supercharge loads all your configuration values into memory when starting the Node.js server. You can access the config values anywhere in your application using the `Config` class.
+Supercharge loads all your configuration values into memory when starting the application’s Node.js server. You can access the config values anywhere in your application using the `Config` facade.
 
-Access individual values using the “dot” syntax. The dot syntax starts with the configuration file name and follows the object path:
+Use the `Config.get` method to retrieve configuration values. All configurations start with the configuration file name followed by a defined key. You may also retrieve nested config values using the “dot” syntax. The dot notation starts with the configuration file name followed by the nested object path:
 
-```js
-const Config = require('@supercharge/framework/config')
+```ts
+import { Config } from '@supercharge/facades'
 
 const appName = Config.get('app.name', 'My Supercharge App')
 ```
 
-The second argument passed to `Config.get()` is the default value. The framework will use the default value if no configuration value exists for the given key.
+You may also provide a default value as the second argument when retrieving a config value. This default value is used when no config value exists for the provided key:
+
+```ts
+const appName = Config.get('app.name', 'My Supercharge App')
+```
 
 
 ## Retrieving Environment Values
-All variables in your `.env` file are loaded into the global [`process.env`](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_env) environment object. For convenient access, you should use the framework’s `Env` class:
+All variables in your `.env` file are loaded into the global [`process.env`](https://nodejs.org/docs/latest-v16.x/api/process.html#process_process_env) environment object.
+
+We recommend using environment variables to configure your application. This approach follows the concept of [the 12 factor app](https://12factor.net/). The framework provides a `Env` facade to access the values of environment variables:
 
 ```js
-const Env = require('@supercharge/framework/env')
+import { Env } from '@supercharge/facades'
 
+const appName = Env.get('APP_NAME')
+```
+
+The `Env` facade accepts a default value as the second argument when retrieving the value of an environment variable. This is useful to provide thoughtful default values for your application:
+
+```ts
 const appName = Env.get('APP_NAME', 'Supercharge')
 ```
 
-Retrieve values from environment variables by using the `Env.get()` method. The second argument passed to `Env.get()` is the default value. Supercharge will use the default value if no environment variable exists for the given key.
-
 ```info
-The idea in Supercharge is to feed your configuration from environment variables. We recommend to use the `Env` class in your config files and not directly in any application logic.
+The idea in Supercharge is to feed your configuration from environment variables. We recommend to use the `Env` facade in your config files and not directly in any application logic.
 ```
 
 
 ## Environment Variables
-Applications run in different environments with a custom configuration. While in development, you may want a different mailing driver than in production or testing.
+Applications run in different environments with a custom configuration. For example, while in development you may want a different mailing driver than in production or testing.
 
-Supercharge uses the [dotenv](https://github.com/motdotla/dotenv) library to load environment variables from a `.env` file. A new Supercharge application contains a `.env.example` file.
-
-The Supercharge installer automatically copies it over to `.env` during the setup. In case you didn’t use the installer, you may rename the file manually.
+Supercharge loads all environment variables configured in a `.env` file when starting your application. A new Supercharge application contains a `.env.example` file. You may copy the `.env.example` file and rename the copy to `.env` for new applications.
 
 ```warning
-You should not commit your application’s `.env` file to your source control repository. Each developer in your team may require a different configuration. Also, exposing the `.env` file to your source control may leak sensitive data in case attackers gain access to the repository.
-```
-
-
-### Expanding Environment Variables
-Supercharge uses [dotenv-expand](https://github.com/motdotla/dotenv-expand) to expand environment variables in your `.env` file. You can compose environment variables out of other variables like this:
-
-```bash
-MONGODB_USER=super
-MONGODB_PASSWORD=charge
-MONGODB_AUTH=${MONGODB_USER}:${MONGODB_PASSWORD}
+You should not commit your application’s `.env` file to your source control repository. Each developer in your team may require a different configuration. Also, exposing the `.env` file to your source control may leak sensitive credentials in case attackers gain access to the repository.
 ```
