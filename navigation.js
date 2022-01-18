@@ -18,7 +18,7 @@ module.exports = {
       'Configuration & Env': 'configuration',
       Application: 'application',
       // 'App Lifecycle': 'app-lifecycle',
-      Development: 'development',
+      // Development: 'development',
       Deployment: 'deployment',
       // Bootstrappers: 'bootstrappers'
       'Service Providers': 'service-providers'
