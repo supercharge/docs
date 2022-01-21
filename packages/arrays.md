@@ -107,12 +107,15 @@ Here’s a list of available methods on a set instance:
 [find](#find)
 [findIndex](#findindex)
 [findLast](#findlast)
+[flatMap](#flatmap)
+[has](#has)
 [intersect](#intersect)
 [isEmpty](#isempty)
 [isNotEmpty](#isnotempty)
 [join](#join)
 [last](#last)
 [length](#length)
+[map](#map)
 [max](#max)
 [median](#median)
 [min](#min)
@@ -350,6 +353,36 @@ const user = users.findLast(user => {
 ```
 
 
+#### flatMap
+- *added in version `2.0`*
+
+The `flatMap` method invokes the callback function on each array item. The callback can modify and return the item resulting in a new array of modified items. Ultimately, `flatMap` flattens the mapped results one level deep:
+
+```js
+Arr.from([1, 2, 3]).flatMap(item => {
+  return [item, item]
+})
+
+// [1, 1, 2, 2, 3, 3]
+```
+
+
+#### has
+- *added in `2.0`*
+
+The `has` method returns `true` if the given `value` is present in the array, otherwise `false`:
+
+```js
+const users = Arr.from(['Marcus', 'Supercharge'])
+
+users.has('Marcus')
+// true
+
+users.has('not-existent')
+// false
+```
+
+
 #### intersect
 - *added in `1.0`*
 
@@ -371,7 +404,7 @@ const intersection = ids.intersect(
 The `isEmpty` method returns `true` if the array has no entries. Returns `false` if entries are present in the array:
 
 ```js
-const items = Arr()
+const items = Arr.from([])
 
 items.isEmpty()
 // true
@@ -383,13 +416,29 @@ items.isEmpty()
 ```
 
 
+#### isMissing
+- *added in `2.0`*
+
+The `isMissing` method returns `true` if the given `value` is not present in the array, otherwise `false`:
+
+```js
+const users = Arr.from(['Marcus', 'Supercharge'])
+
+users.isMissing('Marcus')
+// false
+
+users.isMissing('not-existent')
+// true
+```
+
+
 #### isNotEmpty
 - *added in `1.0`*
 
 The `isNotEmpty` method returns `true` if entries are present in the array. Returns `false` if the array is empty:
 
 ```js
-const items = Arr()
+const items = Arr.from([])
 
 items.isNotEmpty()
 // false
@@ -462,6 +511,19 @@ Arr
   .length()
 
 // 3
+```
+
+
+#### map
+- *added in version `2.0`*
+
+The `map` method invokes the callback function on each array item and returns an array of transformed items. Because `map` returns an `Arr` instance, you could chain further operations:
+
+```js
+Arr.from([1, 2, 3]).map(item => {
+  return item * 10
+})
+// [ 10, 20, 30 ]
 ```
 
 
