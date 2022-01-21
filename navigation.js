@@ -21,7 +21,8 @@ module.exports = {
       // Development: 'development',
       Deployment: 'deployment',
       // Bootstrappers: 'bootstrappers'
-      'Service Providers': 'service-providers'
+      'Service Container': 'service-container',
+      'Service Providers': 'service-providers',
     }
   },
 

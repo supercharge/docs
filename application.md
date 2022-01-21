@@ -11,10 +11,9 @@ You’ll find bootstrapping files for HTTP and console applications inside of th
 
 
 ## IoC Container
-Supercharge’s `Application` class is also an IoC container used to manage class dependencies. This allows apps to follow the concept of dependency injection. Well, dependency injection is a funky term that basically describes “injecting” dependencies into a class.
+Supercharge’s `Application` class is also an [IoC container](/docs/service-container) used to manage class dependencies. This allows apps to follow the concept of dependency injection.
 
-Injecting dependencies instead of letting classes resolve them on their own has the benefit of controlling the dependencies instead of relying on existing setups. Controlling dependencies is especially helpful during testing.
-
+👉 [IoC Container docs](/docs/service-container)
 
 ## Start a Web Application
 The `server.ts` file in your root directory contains the logic to serve a Supercharge web app. It creates a new application and starts the HTTP server. Serving an HTTP server is as simple as invoking the `server.ts` file with Node.js to start a web application:
