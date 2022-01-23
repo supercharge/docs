@@ -75,7 +75,7 @@ You may send request data along with your `POST`, `PUT`, or `PATCH` requests usi
 ```js
 const response = await Sttp
   .withPayload({
-    name: 'Supercharge,
+    name: 'Supercharge',
     role: 'admin'
   })
   .post('https://your-api.com/v2/users')
@@ -85,7 +85,7 @@ You can also pass the request data as the second parameter to the `Sttp.post` me
 
 ```js
 const response = await Sttp.post('https://your-api.com/v2/users', {
-    name: 'Supercharge,
+    name: 'Supercharge',
     role: 'admin'
   })
 ```
@@ -111,7 +111,7 @@ You can also send query parameters with your requests by passing them as the sec
 
 ```js
 const response = await Sttp.get('https://your-api.com/v2/users', {
-    name: 'Supercharge,
+    name: 'Supercharge',
     page: 1
   })
 ```
@@ -126,7 +126,7 @@ You should call the `asFormParams` method if you want to send request data using
 const response = await Sttp
   .asFormParams()
   .post('https://your-api.com/v2/users', {
-    name: 'Supercharge
+    name: 'Supercharge'
   })
 ```
 
@@ -141,7 +141,7 @@ const response = await Sttp
     'X-Custom-2': 'bar'
   })
   .post('https://your-api.com/v2/users', {
-    name: 'Supercharge
+    name: 'Supercharge'
   })
 ```
 
