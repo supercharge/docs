@@ -100,4 +100,16 @@ export class MarkdownServiceProvider extends ServiceProvider {
 
 
 ## Registering Providers
-tba.
+All service providers are registered through the `bootstrap/providers.ts` file. This file must export a `providers` property. The value of this property is an array of service providers. You’ll find a handful of default service providers, for example the route service provider.
+
+Add service providers from community packages or your own modules to this list:
+
+```ts
+import { MarkdownServiceProvider } from '../app/modules/markdown'
+
+export const providers: ServiceProviderCtor[] = [
+  // other service providers
+
+  MarkdownServiceProvider,
+]
+```
