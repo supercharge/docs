@@ -25,6 +25,7 @@ Here’s a sample PM2 configuration which you could save as `pm2.json` in your a
   "apps": [
     {
       name: 'superchargejs.com',
+      script: './node_modules/ts-node/dist/bin.js',
       args: 'server.ts',
       exec_mode: 'cluster',
       instances: 2,
