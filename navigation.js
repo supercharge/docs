@@ -43,14 +43,14 @@ module.exports = {
     }
   },
 
-  Amplifier: {
-    slug: 'amplifier',
+  Techniques: {
+    slug: 'techniques',
     sections: {
       'Craft CLI': 'craft-cli',
       // Mailer: 'mailer',
       // Hashing: 'hashing',
       // Encryption: 'encryption',
-      Events: 'events',
+      // Events: 'events',
       Logger: 'logger',
       // Session: 'session',
       // Queues: 'queues'
