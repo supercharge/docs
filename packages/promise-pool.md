@@ -1,18 +1,6 @@
 # Promise Pool
 
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [CommonJS/ESM/TypeScript Support](#commonjs,-esm,-and-typescript-support)
-- [Run Promises in Batches](#using-a-promise-pool)
-  - [Concurrency](#customize-the-concurrency)
-  - [Processing](#start-processing)
-- [Error Handling](#error-handling)
-  - [Accessing Failed Items](#access-the-failed-item)
-  - [Handle Errors](#manually-handle-errors)
-- [Manually Stop the Pool](#manually-stop-the-pool)
-
-
 ## Introduction
 The [@supercharge/promise-pool](https://github.com/superchargejs/promise-pool) package allows you to run a number of promises in batches. The promise pool ensures a maximum number of concurrently processed tasks.
 
