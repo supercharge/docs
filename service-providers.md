@@ -1,14 +1,6 @@
 # Service Providers
 
 
-- [Introduction](#introduction)
-- [Creating Service Providers](#creating-service-providers)
-  - [The Register method](#the-register-method)
-  - [The Boot method](#the-boot-method)
-- [Registering Providers](#registering-providers)
-
-
-
 ## Introduction
 Service providers are essential when bootstrapping your application. The Supercharge framework uses service providers to load core functionalities and your application should use them as well.
 

@@ -1,5 +1,6 @@
 # Introduction to Supercharge
 
+
 ## Philosophy
 Supercharge is a full-stack Node.js framework. It differs from a typical Node.js “web” framework in ways that it provides much more structure on how to build solid applications. Supercharge comes with a well-conceived application architecture to build scalable, testable, and maintainable apps.
 

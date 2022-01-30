@@ -1,15 +1,6 @@
 # Service Container (IoC Container)
 
 
-- [Introduction](#introduction)
-- [Resolving Dependencies](#resolving-dependencies)
-- [When to Use The Container](#when-to-use-the-container)
-- [Binding](#binding)
-  - [Singleton Bindings](#singleton-bindings)
-- [Resolving](#resolving)
-
-
-
 ## Introduction
 Supercharge uses a service container to manage dependencies. The container allows you to register dependencies and retrieve them when needed. This setup supports dependency injection in your application. Well, dependency injection is a funky term that basically describes “injecting” dependencies into a class (or function).
 
