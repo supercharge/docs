@@ -18,14 +18,14 @@ class RedisCache implements CacheContract {
     /**
      * Create a new instance.
      */
-    constructor(redis: Redis) {
+    constructor (redis: Redis) {
         this.redis = redis
     }
 
     /**
      * Determine whether the cache stores an item for the given `key`.
      */
-    has(key: string): boolean {
+    has (key: string): boolean {
         return await this.redis.exists(key)
     }
 }
