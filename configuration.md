@@ -89,13 +89,13 @@ const appName = Config.get('app.name', 'My Supercharge App')
 
 
 ### Ensure Configuration Values
-You may need to ensure a configuration value while building an application or community package. For example, a file cache driver requires a caching directory that you need to configure. In such situations, you may use the `Config.ensure` method to require a
+You may need to ensure a configuration value while building an application or community package. For example, a file cache requires a configured caching directory. In case the file cache driver doesn’t receive the configuration value for a cache directory, you may want to stop further processing.
+
+You can require a configuration value using the `Config.ensure` method:
 
 ```js
 import { Config } from '@supercharge/facades'
 
-Config.ensure('cache.location')
+Config.ensure('cache.file.directory')
 // throws if the configuration for `cache.location` is missing
 ```
-
-
