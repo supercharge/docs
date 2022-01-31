@@ -79,7 +79,6 @@ Here’s a list of available methods on a set instance:
 <div id="collection-method-list" markdown="1">
 
 [Set.from](#set.from)
-[Set.of](#set.of) (deprecated)
 
 [add](#add)
 [all](#all)
