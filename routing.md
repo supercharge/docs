@@ -37,7 +37,7 @@ Tba.
 
 
 ## Accessing the Current Route
-You can retrieve route information using the [request](/docs/request) instance. At this point you can’t access the route instance used by Supercharge.
+You can retrieve route information using the [request](/docs/requests) instance. At this point you can’t access the route instance used by Supercharge.
 
 
 ## Cross-Origin Resource Sharing (CORS)
