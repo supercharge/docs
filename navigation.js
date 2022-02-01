@@ -35,7 +35,7 @@ module.exports = {
       Responses: 'responses',
       Controllers: 'controllers',
       Middleware: 'middleware',
-      'CSRF Protection': 'csrf-protection',
+      // 'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
       // Authentication: 'authentication',
       // Authorization: 'authorization',
