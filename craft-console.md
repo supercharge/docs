@@ -1,4 +1,4 @@
-# Craft CLI
+# Craft Console
 
 
 ## Introduction

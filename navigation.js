@@ -46,7 +46,7 @@ module.exports = {
   Techniques: {
     slug: 'techniques',
     sections: {
-      'Craft CLI': 'craft-cli',
+      'Craft Console': 'craft-console',
       // Mailer: 'mailer',
       // Hashing: 'hashing',
       // Encryption: 'encryption',
