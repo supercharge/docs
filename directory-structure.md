@@ -9,7 +9,7 @@ Of course, you’re free to modify the application structure. Make sure to updat
 Supercharge’s directory structure is inspired by the [Laravel](https://laravel.com) PHP framework. We find this directory structure provides a predictable and extensible architecture that is a joy to work with.
 
 ```info
-New Supercharge applications contain only the needed folders by default. Not adding all folders reduce the project’s noise. Required folders and files are created when extending your application by scaffolding files with the [Craft CLI](/docs/{{version}}/craft-cli).
+New Supercharge applications contain only the needed folders by default. Not adding all folders reduce the project’s noise. Required folders and files are created when extending your application by scaffolding files with the [Craft CLI](/docs/{{version}}/craft-console).
 ```
 
 ## Application Directories

@@ -6,7 +6,7 @@ Supercharge provides you a handy event dispatcher implementing a publish/subscri
 
 For example, a user registers for your application and you want to send a welcome mail. The route handler shouldn’t wait for the mailer to send the mail. Instead, you can dispatch a `UserRegistered` event to kick off a listener sending the mail.
 
-You should put your event classes in the `app/events` directory and listeners into `app/listeners`. Supercharge will automatically pick up events and listeners when your server starts. Both directories may not exist in your application. You can go ahead and create them on your own or let the [Craft CLI](/docs/{{version}}/craft-cli) create them when scaffolding events and listeners.
+You should put your event classes in the `app/events` directory and listeners into `app/listeners`. Supercharge will automatically pick up events and listeners when your server starts. Both directories may not exist in your application. You can go ahead and create them on your own or let the [Craft CLI](/docs/{{version}}/craft-console) create them when scaffolding events and listeners.
 
 
 ## Defining Events

@@ -7,7 +7,7 @@ Every Supercharge application (HTTP and console) relies on an `Application`. The
 You’ll find bootstrapping files for HTTP and console applications inside of the `bootstrap` directory. Both bootstrapping files are used by the `server.ts` and `craft.ts` files (they are in the root of your app directory). Both files then start one of the following apps:
 
 1. **HTTP Server:** start a web application using an HTTP server
-2. **Console:** start a console application using the [Craft CLI](/docs/{{version}}/craft-cli)
+2. **Console:** start a console application using the [Craft CLI](/docs/{{version}}/craft-console)
 
 
 ## IoC Container
