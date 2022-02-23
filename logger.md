@@ -7,7 +7,7 @@ Logging allows you to provide transparency in your application. If you want to l
 Supercharge comes with a built-in logger. The logger is configurable making it seamless for you logging to different destinations, like the console or a log file.
 
 
-## Configuraiton
+## Configuration
 All of the logger’s configuration options are inside of the `config/logging.ts` configuration file. The config file allows you to customize the default logging driver and channel-specific configuration.
 
 By default, Supercharg uses the `console` driver printing all log messages to the terminal. When using the `file` driver, you may adjust the log file name. The default log file points to the `storage/logs/app.log` file.
