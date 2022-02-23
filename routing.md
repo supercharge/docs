@@ -111,7 +111,7 @@ The Supercharge router also supports nested route groups. Attributes for nested 
 
 
 ### Middleware
-You can assign [middlware](/docs/{{version}}/middleware) to a route group using the `middleware` method before defining the group. Pass the defined middleware names as the parameter to the route group’s `middleware` method:
+You can assign [middleware](/docs/{{version}}/middleware) to a route group using the `middleware` method before defining the group. Pass the defined middleware names as the parameter to the route group’s `middleware` method:
 
 ```ts
 Route.middleware(['first', 'second']).group(() => {
