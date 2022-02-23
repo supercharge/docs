@@ -65,34 +65,79 @@ Route.get('/user', HelloController)
 
 
 ## Route Parameters
-Route parameters represent segments in the route’s URI. For example, you may want to capture a user’s ID from the URI. You can do that by using route parameters. Route parameters
+Route parameters represent segments in the route’s URI. For example, you may want to capture a user’s ID from the URI. You can do that by using route parameters.
 
-
-### Required Route Parameters
-
+Route parameters start with a colon, like `:userId`. The route parameter name follows after the colon and should consist of alphabetic characters. You can also use underscores (`_`) in route parameter names:
 
 ```ts
-Route.get('/:page', ShowDocs)
+Route.get('/hello/:name', ({ request }) => {
+    const name = request.param('name')
+
+    return `Hello ${name}`
+})
 ```
 
 
-### Optional Route Parameters
+### Required Path Parameters
+Required path parameters end with their name. The router matches only requests providing a name as the second URI segment:
 
 ```ts
-Route.get('/:page?', ShowDocs)
+Route.get('/hello/:name', ({ request }) => {
+    const name = request.param('name')
+
+    return `Hello ${name}`
+})
 ```
+
+
+### Optional Path Parameters
+Sometimes it’s useful to define a path parameter that isn’t required to be present on a URI. You can specify optional path parameters by putting a `?` mark at the end of the parameter name:
+
+```ts
+Route.get('/hello/:name?', ({ request }) => {
+    const name = request.params().get('name', 'Supercharge')
+
+    return `Hello ${name}`
+})
+```
+
+You’ve access to the path parameters on the [request](/docs/{{version}}/requests) instance. The `request` instance allows you to fetch path parameters and assign a default value in case no parameter value is present on the URI.
 
 
 ## Route Groups
-Tba.
+Route groups share attributes, like middleware or URI prefixes, across a number of routes without needing to assign these attributes on each route individually.
+
+The Supercharge router also supports nested route groups. Attributes for nested route groups are merged with their parents. Middleware between route groups are merged. Path prefixes are appended and slashes will be added automatically to properly resolve route paths.
 
 
 ### Middleware
-Tba.
+You can assign [middlware](/docs/{{version}}/middleware) to a route group using the `middleware` method before defining the group. Pass the defined middleware names as the parameter to the route group’s `middleware` method:
+
+```ts
+Route.middleware(['first', 'second']).group(() => {
+    // `first` and `second` middleware run for all routes defined in this group
+
+    Route.get('/', () => {
+        // …
+    })
+})
+```
 
 
 ### Prefixes
-Tba.
+You can assign URI prefixes to a route group using the `prefix` method. Each route in that group receives the provided prefix. For nested route groups with prefixes, Supercharge appends the prefixes from parents:
+
+```ts
+Route.prefix('/admin').group(() => {
+    Route.get('/', () => {
+        // resolves to route path `/admin`
+    })
+
+    Route.get('/users', () => {
+        // resolves to route path `/admin/users`
+    })
+})
+```
 
 
 ## Accessing the Current Route
@@ -100,6 +145,6 @@ You can retrieve route information using the [request](/docs/requests) instance.
 
 
 ## Cross-Origin Resource Sharing (CORS)
-Tba.
+A Supercharge applications comes with a CORS middleware. This CORS middleware is enabled by default for new applications and configured in `middleware` method of the HTTP kernel. You can find the HTTP kernel in `app/http/kernel.ts`. All CORS settings are adjustable in the `config/cors.ts` configuration file.
 
 
