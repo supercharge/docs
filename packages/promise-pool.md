@@ -96,6 +96,82 @@ await PromisePool
 ```
 
 
+### Run Callbacks when a Task Starts
+You may use the `onTaskStarted` method to run a callback function as soon as an item in the promise pool started processing. The callback function receives two arguments:
+
+1. the `item` for which the pool finished a task
+2. the `pool` instance allowing you to retrieve statistics
+
+Here’s an `onTaskStarted` usage example:
+
+```js
+const pool = PromisePool
+  .for(users)
+  .onTaskStarted((user, pool) => {
+    // retrieve the number of currently active tasks in the pool
+    pool.activeTaskCount()
+
+    // retrieve the percentage of processed tasks in the pool
+    pool.processedPercentage()
+  })
+```
+
+You can add multiple callbacks by chaining the `onTaskStarted` calls. This allows you to separate the concerns of each function when you’re doing different things:
+
+```js
+const pool = PromisePool
+  .for(users)
+  .onTaskStarted((user, pool) => {
+    // update the progress bar with the processed using `pool.processedPercentage()`
+  })
+  .onTaskStarted((user, pool) => {
+    // log the amount of currently processed items using pool.activeTaskCount()
+  })
+```
+
+```info
+**Notice:** the `onTaskStarted` callbacks don’t support async functions.
+```
+
+
+### Run Callbacks when a Task Finished
+You may use the `onTaskFinished` method to run a callback function as soon as an item in the pool finished processing. The callback function receives two arguments:
+
+1. the `item` for which the pool finished a task
+2. the `pool` instance allowing you to retrieve statistics
+
+Here’s an `onTaskFinished` usage example:
+
+```js
+const pool = PromisePool
+  .for(users)
+  .onTaskFinished((user, pool) => {
+    // retrieve the number of currently active tasks in the pool
+    pool.activeTaskCount()
+
+    // retrieve the percentage of processed tasks in the pool
+    pool.processedPercentage()
+  })
+```
+
+You can add multiple callbacks by chaining the `onTaskFinished` calls. This allows you to separate the concerns of each function when you’re doing different things:
+
+```js
+const pool = PromisePool
+  .for(users)
+  .onTaskFinished((user, pool) => {
+    // update the progress bar with the processed using `pool.processedPercentage()`
+  })
+  .onTaskFinished((user, pool) => {
+    // log the amount of currently processed items using pool.activeTaskCount()
+  })
+```
+
+```info
+**Notice:** the `onTaskFinished` callbacks don’t support async functions.
+```
+
+
 ## Error Handling
 The promise pool won’t throw errors while processing the items. It collects all errors and returns them after processing all items. You may then inspect the errors and handle them individually.
 
