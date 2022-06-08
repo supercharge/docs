@@ -67,6 +67,25 @@ const pool = PromisePool
 The default concurrency is `10`.
 
 
+#### Adjust the Concurrency of a Running Pool
+- *Added in `2.3.0`*
+
+You can adjust the concurrency while processing tasks. You may use the `pool.useConcurrency(<num>)` method to increase or decrease the previously configured concurrency of a promise pool instance.
+
+```js
+const pool = PromisePool
+  .for(users)
+  .withConcurrency(10)
+  .process(async (user, index, pool) => {
+    if (condition) {
+      pool.useConcurrency(200)
+    }
+
+    await User.createIfNotExisting(user)
+  })
+```
+
+
 ### Start Processing
 The `process` method should be the last call in your method chain because it starts the promise pool processing. The `process` method accepts an async callback (function) defining the processing for each item:
 
