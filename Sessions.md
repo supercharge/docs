@@ -1,6 +1,0 @@
-# HTTP Sessions
-
-
-## Overview
-Tba.
-
