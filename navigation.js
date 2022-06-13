@@ -72,6 +72,7 @@ module.exports = {
       Collections: 'collections',
       Filesystem: 'filesystem',
       Goodies: 'goodies',
+      Macroable: 'macroable',
       Map: 'map',
       'Promise Pool': 'promise-pool',
       Set: 'set',

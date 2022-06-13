@@ -1,7 +1,7 @@
 # Strings
 
 
-## Introduction
+## Overview
 The [`@supercharge/strings`](https://github.com/supercharge/strings) package provides chainable string utilities for Node.js and JavaScript. It’s a wrapper around JavaScript’s global `String` class providing a handful of useful methods.
 
 
@@ -50,14 +50,18 @@ const title = Str('Supercharge is sweet!').
 Here’s a list of available methods in the strings package:
 
 <style>
-    #collection-method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#collection-method-list>p {
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+    -webkit-column-gap: 2rem;
+}
 
-    #collection-method-list a {
-        display: block;
-    }
+#collection-method-list a {
+    display: block;
+}
 </style>
 
 <div id="collection-method-list" markdown="1">

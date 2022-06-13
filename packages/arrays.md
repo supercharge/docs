@@ -1,7 +1,7 @@
 # Arrays
 
 
-## Introduction
+## Overview
 The [`@supercharge/arrays`](https://github.com/supercharge/arrays) package is an extended array class with helpful methods like `.isEmpty()`, `last()` and `.findLast()`, `.flatMap(callback)`, and many more.
 
 `@supercharge/arrays` is a wrapper around JavaScript arrays providing dozens of useful and convenient methods that are not available in native JavaScript arrays.
@@ -81,14 +81,18 @@ const marcus = users.find(user => {
 Here’s a list of available methods on a set instance:
 
 <style>
-    #collection-method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#collection-method-list>p {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  -webkit-column-gap: 2rem;
+}
 
-    #collection-method-list a {
-        display: block;
-    }
+#collection-method-list a {
+  display: block;
+}
 </style>
 
 <div id="collection-method-list" markdown="1">

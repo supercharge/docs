@@ -1,7 +1,7 @@
 # Collections
 
 
-## Introduction
+## Overview
 The [`@supercharge/collections`](https://github.com/supercharge/collections) package is an async array implementation. It provides a fluent interface to work with JavaScript arrays supporting async callbacks in methods like `map`, `find`, `filter`, `reduce`, and so on.
 
 The following example takes an array of IDs and fetches the related users from the database to filter them based on a user’s name:
@@ -84,14 +84,18 @@ const collection = Collect([ 'Supercharge', 'Collection' ])
 Here’s a list of available methods in the collections package:
 
 <style>
-    #collection-method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#collection-method-list>p {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  -webkit-column-gap: 2rem;
+}
 
-    #collection-method-list a {
-        display: block;
-    }
+#collection-method-list a {
+  display: block;
+}
 </style>
 
 <div id="collection-method-list" markdown="1">

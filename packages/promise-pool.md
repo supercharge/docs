@@ -1,7 +1,7 @@
 # Promise Pool
 
 
-## Introduction
+## Overview
 The [@supercharge/promise-pool](https://github.com/superchargejs/promise-pool) package allows you to run a number of promises in batches. The promise pool ensures a maximum number of concurrently processed tasks.
 
 Each task in the promise pool is individual from others, meaning that the pool starts processing the next task as soon as one finishes. This handling ensures the best batch-processing for your tasks.

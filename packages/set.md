@@ -1,7 +1,7 @@
 # Set
 
 
-## Introduction
+## Overview
 The [`@supercharge/set`](https://github.com/supercharge/set) package provides a Set class with helpful methods like `.isEmpty()`, `.find(callback)`, `.map(callback)`, `.filter(callback)`, and many more.
 
 You already know methods like `.map()` from arrays and having them available on sets improves your development experience. It’s also convenient to avoid all the `for..of` loops in your code.
@@ -66,14 +66,18 @@ const marcus = users.find(user => {
 Here’s a list of available methods on a set instance:
 
 <style>
-    #collection-method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#collection-method-list>p {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  -webkit-column-gap: 2rem;
+}
 
-    #collection-method-list a {
-        display: block;
-    }
+#collection-method-list a {
+  display: block;
+}
 </style>
 
 <div id="collection-method-list" markdown="1">

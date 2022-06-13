@@ -1,7 +1,7 @@
 # Streams
 
 
-## Introduction
+## Overview
 The native Node.js stream implementation is based on event emitters. It’s hard to manage the control flow in your application when using events. If you want to actively wait for a stream to finish, you must wrap it into a promise.
 
 That’s where [`@supercharge/streams`](https://github.com/superchargejs/streams) comes handy. It wraps Node.js streams into promises to make them `async/await`-ready.

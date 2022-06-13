@@ -1,7 +1,7 @@
 # Goodies
 
 
-## Introduction
+## Overview
 The [`@supercharge/goodies`](https://github.com/supercharge/goodies) package provides a handful of useful helper functions for Node.js and JavaScript, like an async `tap` function.
 
 
@@ -30,14 +30,18 @@ import { tap } from '@supercharge/goodies'
 Here’s a list of available methods in the collections package:
 
 <style>
-    #method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#method-list>p {
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+    -webkit-column-gap: 2rem;
+}
 
-    #method-list a {
-        display: block;
-    }
+#method-list a {
+    display: block;
+}
 </style>
 
 <div id="method-list" markdown="1">

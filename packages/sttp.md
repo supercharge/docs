@@ -1,7 +1,7 @@
 # Sttp
 
 
-## Introduction
+## Overview
 The [`@supercharge/sttp`](https://github.com/supercharge/sttp) package is an elegant wrapper around the [`axios`](https://github.com/axios/axios) HTTP client. Sttp provides a fluent interface allowing you to create HTTP requests communicating with other web applications.
 
 

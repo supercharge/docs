@@ -1,7 +1,7 @@
 # Map
 
 
-## Introduction
+## Overview
 The [`@supercharge/map`](https://github.com/supercharge/map) package provides an extended JavaScript `Map ` class. It comes with additional methods like `.isEmpty()`, `.map(callback)`, `.filter(callback)`, and many more.
 
 You already know methods like `.map()` from arrays and having them available on maps improves your development experience and makes your code more readable.
@@ -56,14 +56,18 @@ const users = cache.map((key, value, map) => {
 Here’s a list of available methods in the package:
 
 <style>
-    #collection-method-list > p {
-        column-count: 2; -moz-column-count: 2; -webkit-column-count: 2;
-        column-gap: 2rem; -moz-column-gap: 2rem; -webkit-column-gap: 2rem;
-    }
+#collection-method-list>p {
+  column-count: 2;
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  -webkit-column-gap: 2rem;
+}
 
-    #collection-method-list a {
-        display: block;
-    }
+#collection-method-list a {
+  display: block;
+}
 </style>
 
 <div id="collection-method-list" markdown="1">

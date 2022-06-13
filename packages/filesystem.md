@@ -1,7 +1,7 @@
 # Filesystem
 
 
-## Introduction
+## Overview
 Working with the filesystem in Node.js can be cumbersome, especially in combination with asynchronous operations using `async/await`. That’s the reason Supercharge provides you a handy filesystem abstraction via the [`@supercharge/filesystem`](https://github.com/supercharge/filesystem) package.
 
 Supercharge’s `filesystem` package is fully async. Every method in the Supercharge filesystem package returns a promise to keep the consistency.
