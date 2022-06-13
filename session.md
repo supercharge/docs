@@ -2,4 +2,4 @@
 
 
 ## Introduction
-Sessions are not yet available in Supercharge v2.
+HTTP sessions are available since Supercharge v3.
