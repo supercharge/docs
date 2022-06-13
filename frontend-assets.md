@@ -1,7 +1,7 @@
 # Frontend Assets
 
 
-## Introduction
+## Overview
 A new Supercharge applications ships with routes to serve assets. All asset-related routes are located in the `app/routes/assets.js` file.
 
 The routes defined in the `app/routes/assets.js` file have static references to the `public` directory to serve these assets publicly. The Supercharge application boilerplate has predefined folders and files to make it as seamless as possible for you to add your public assets.

@@ -1,7 +1,7 @@
 # Views
 
 
-## Introduction
+## Overview
 Views separate the presentation logic from application logic and represent the web views. In your application, views are served as HTML by your server to the browser. In Supercharge, all views are located in the `resources/views` directory and its subfolders.
 
 Supercharge uses the [@hapi/vision](https://github.com/hapijs/vision) library to support template rendering. The framework is configured to use [Handlebars](/docs/{{version}}/handlebars) as the view rendering engine. Find more details on Handlebars in the linked documentation.

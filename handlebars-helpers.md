@@ -1,7 +1,7 @@
 # Handlebars Helpers
 
 
-## Introduction
+## Overview
 The Supercharge frameworks ships with built-in [support for view rendering using Handebars templates](/docs/{{version}}/handlebars). Also, Supercharge provides you a handful of convenient helpers which are automatically registered when starting your application. You can use all helpers in your Handlebars templates without extra configuration.
 
 

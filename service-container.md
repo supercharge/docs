@@ -1,7 +1,7 @@
 # Service Container (IoC Container)
 
 
-## Introduction
+## Overview
 Supercharge uses a service container to manage dependencies. The container allows you to register dependencies and retrieve them when needed. This setup supports dependency injection in your application. Well, dependency injection is a funky term that basically describes “injecting” dependencies into a class (or function).
 
 Injecting dependencies instead of letting classes resolve them on their own has the benefit of controlling the dependencies. Controlling dependencies is especially helpful during testing because you can inject mock objects or fake data and run assertions on them.

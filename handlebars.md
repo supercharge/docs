@@ -1,7 +1,7 @@
 # Handlebars
 
 
-## Introduction
+## Overview
 Supercharge uses the [Handlebars](https://handlebarsjs.com/) template rendering engine to translate your views into HTML. Handlebars is extensible by default allows you to build complex layouts. Starting from a base layout, you may add partial views to ultimately compose the final HTML.
 
 Supercharge supports Handlbars files using the `.hbs` file extension and automatically picks up all the view files located in the `resources/views` directory.

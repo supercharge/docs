@@ -1,7 +1,7 @@
 # Request Lifecycle
 
 
-## Introduction
+## Overview
 Starting a Supercharge application via the `server.js` file serves an HTTP server. This HTTP server handles web requests. Each HTTP request to your application goes through a predefined lifecycle.
 
 It’s important to understand the request lifecycle. Supercharge uses the [hapi](https://hapijs.com) Node.js framework as its HTTP layer. A benefit of using hapi: a granular request lifecycle with extension points at individual lifecycle steps.

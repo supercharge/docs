@@ -1,5 +1,5 @@
 # Encryption
 
 
-## Introduction
+## Overview
 Encryption is not yet available in Supercharge v2.

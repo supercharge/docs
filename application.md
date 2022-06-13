@@ -1,7 +1,7 @@
 # Application
 
 
-## Introduction
+## Overview
 Every Supercharge application (HTTP and console) relies on an `Application`. The `Application` instance in Supercharge is the central place holding your app together. Each app requires a “base path” defining the app’s root directory path. This base path tells the framework from where to boot your Supercharge app.
 
 You’ll find bootstrapping files for HTTP and console applications inside of the `bootstrap` directory. Both bootstrapping files are used by the `server.ts` and `craft.ts` files (they are in the root of your app directory). Both files then start one of the following apps:

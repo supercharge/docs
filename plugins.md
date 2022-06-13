@@ -1,7 +1,7 @@
 # Plugins
 
 
-## Introduction
+## Overview
 Supercharge supports [hapi’s](https://hapijs.com/tutorials/plugins) powerful plugin system. A plugin isolates functionality into a reusable utility. A plugin provides access to the HTTP server instance. Make use of plugins if you want to extend the HTTP server.
 
 Plugins in Supercharge are located in the `app/plugins` directory. This directory already exists in a default app installation.

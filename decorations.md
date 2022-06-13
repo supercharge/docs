@@ -1,7 +1,7 @@
 # Decorations
 
 
-## Introduction
+## Overview
 Decorations in Supercharge describe custom functionality extending the HTTP core. You’re essentially adding your own properties or methods to the core. It’s a controlled and safe way to extend three core objects in your application:
 
 - `server`: the HTTP server instance

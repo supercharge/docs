@@ -1,7 +1,7 @@
 # CSRF Protection
 
 
-## Introduction
+## Overview
 Supercharge has support for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) protection. A cross-site request forgery is a malicious exploit where unauthorized commands are transmitted on behalf of an authenticated user.
 
 Supercharge ships with CSRF protection out-of-the-box. It generates a “CSRF token” for active user sessions. To use CSRF protection, you must register the session [bootstrapper](/docs/{{version}}/bootstrappers).

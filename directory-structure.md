@@ -1,7 +1,7 @@
 # Directory Structure
 
 
-## Introduction
+## Overview
 Supercharge gives you a default directory structure that should work well for small and large applications. The Supercharge framework tightly integrates with the given application structure by loading files from directories in your `app` folder.
 
 Of course, you’re free to modify the application structure. Make sure to update the corresponding Node.js imports when renaming folders or moving files.

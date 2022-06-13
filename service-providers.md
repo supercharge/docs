@@ -1,7 +1,7 @@
 # Service Providers
 
 
-## Introduction
+## Overview
 Service providers are essential when bootstrapping your application. The Supercharge framework uses service providers to load core functionalities and your application should use them as well.
 
 You may ask what “bootstrapping” actually means? In the context of a Supercharge application, it means composing your application: registering services into the container, loading routes and binding controllers, loading events and binding listeners. Service providers are a central place for your application.

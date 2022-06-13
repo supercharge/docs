@@ -1,7 +1,7 @@
 # Logging
 
 
-## Introduction
+## Overview
 Logging allows you to provide transparency in your application. If you want to learn more about the processing and details of your application parts, logging is a good way. Supercharge provides a solid logger using the [Winston](https://github.com/winstonjs/winston) logging library.
 
 Supercharge comes with a built-in logger. The logger is configurable making it seamless for you logging to different destinations, like the console or a log file.

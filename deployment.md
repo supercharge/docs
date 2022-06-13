@@ -1,7 +1,7 @@
 # Deployment
 
 
-## Introduction
+## Overview
 At some point you want to deploy your Supercharge application to production. You want to serve your application as best as possible to your audience when going live. This documentation page will point you to different deployment ideas.
 
 

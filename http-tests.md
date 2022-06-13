@@ -1,7 +1,7 @@
 # HTTP Tests
 
 
-## Introduction
+## Overview
 Supercharge’s `base-test` utility provides a convenient interface to inject HTTP requests to your application. Each injected request returns a response object for further evaluation. Injecting HTTP requests is a great way to run integration tests in your application.
 
 The following code snippet outlines a basic HTTP test:

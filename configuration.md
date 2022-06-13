@@ -1,7 +1,7 @@
 # Configuration and Environment
 
 
-## Introduction
+## Overview
 All your Supercharge configuration files are stored in the `config` directory. Your Supercharge application and the framework core follow these configuration files. You can adjust and tweak the app’s behavior using different values for individual options.
 
 

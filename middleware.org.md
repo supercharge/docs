@@ -1,7 +1,7 @@
 # Middleware
 
 
-## Introduction
+## Overview
 Middlewares are an essential mechanism in your application to filter HTTP requests. A common example is an authentication middleware letting requests proceed the request lifecycle which meet the authentication requirements. In contrast, a request that is unauthenticated will be redirected to the login screen.
 
 Based on certain conditions, requests may proceed or terminate early in the request lifecycle.

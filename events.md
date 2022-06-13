@@ -1,7 +1,7 @@
 # Events
 
 
-## Introduction
+## Overview
 Supercharge provides you a handy event dispatcher implementing a publish/subscribe model for events occuring in your application. Events are a great way to decouple logic in your application, for example from route handlers.
 
 For example, a user registers for your application and you want to send a welcome mail. The route handler shouldn’t wait for the mailer to send the mail. Instead, you can dispatch a `UserRegistered` event to kick off a listener sending the mail.

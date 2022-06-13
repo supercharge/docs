@@ -1,7 +1,7 @@
 # Routing
 
 
-## Introduction
+## Overview
 Routes in Supercharge are JavaScript objects consisting of three basic elements:
 
 1. the HTTP `method`

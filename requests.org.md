@@ -1,7 +1,7 @@
 # HTTP Requests
 
 
-## Introduction
+## Overview
 Supercharge uses the [hapi web framework](https://hapijs.com) as the core for routing and request handling. Hapi comes with a solid HTTP core and the handy feature of decorating the request object. Decorations allow you to add your own properties or functions on the `request` object.
 
 Supercharge comes with dozens of request utilities provided by the [`hapi-request-utilities`](https://github.com/futurestudio/hapi-request-utilities) package. This package is available for everyone on GitHub and NPM. Feel free to install it in your app:
