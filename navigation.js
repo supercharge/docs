@@ -35,6 +35,7 @@ module.exports = {
       Responses: 'responses',
       Controllers: 'controllers',
       Middleware: 'middleware',
+      // Session: 'session',
       // 'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
       // Authentication: 'authentication',
@@ -52,7 +53,6 @@ module.exports = {
       // Encryption: 'encryption',
       // Events: 'events',
       Logger: 'logger',
-      // Session: 'session',
       // Queues: 'queues'
     }
   },
