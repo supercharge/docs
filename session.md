@@ -16,7 +16,7 @@ Supercharge ships with different session backends. All session backends are acce
 
 | Session Driver   | Description                                  |
 |----------------  |--------------------------------------------- |
-| `memory`         | Stores session in memory, useful for testing |
+| `memory`         | Stores session data in memory. Forgets all session data when restarting the server. Useful for testing |
 | `cookie`         | Stores the session data in a cookie          |
 
 We welcome every contribution for new session drivers. You can submit a pull request adding a new driver or you may ask for an implementation by creating an issue [in the framework’s GitHub repository](https://github.com/supercharge/framework).
