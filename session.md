@@ -24,15 +24,94 @@ We welcome every contribution for new session drivers. You can submit a pull req
 
 
 ## Interacting with the Session
-Tba.
+The session is available on the `request` instance. The request is part of the HTTP context which is available as the first parameter in all routes, route controllers, and middleware.
 
 
 ### Retrieving Data
-Tba.
+Here’s an example how to retrieve an item from the session using a given identifer:
+
+```ts
+import { Controller } from '@supercharge/http'
+import { HttpContext } from '@supercharge/contracts'
+
+export class UserLoginController extends Controller {
+  /**
+   * Handle the request.
+   */
+  handle ({ request }: HttpContext): HttpRedirect {
+    const value = request.session().get('key')
+
+    // …
+  }
+}
+```
+
+You may also pass a default value as the second argument of the `session.get(key, defaultValue)` method. The default value will be returned if the given `key` is not stored in the session or the related value is `null` or `undefined`:
+
+```ts
+const value = request.session().get('key', 'default')
+```
+
+The default value can be of any type. It doesn’t need to be a string value.
+
+
+#### Retrieving All Session Data
+You may retrieve the full session data object instead of single keys by using the `all` method:
+
+```ts
+const sessionObject = request.session().all()
+```
+
+
+#### Retrieving and Deleting an Item
+Sometimes it’s useful to retrieve and item from the session and delete it in a single operation. Use the `pull` method to fetch a session item and remove it immediately:
+
+```ts
+const value = request.session().pull('key')
+```
+
+The `pull` method returns `undefined` if no session item is present for the given key.
+
+You may also pass a default value as the second argument:
+
+```ts
+const value = request.session().pull('key', 'default')
+```
+
+
+#### Determine If the Session Contains an Item
+Determine if an a given `key` exist in the session by using the `has` method. The `has` method returns a boolean value. It returns `true` if the session has an item for the given key and it’s value is not `null` or `undefined`:
+
+```ts
+const hasKey = request.session().has('key')
+// true
+```
 
 
 ### Storing Data
-Tba.
+Store data in the session using the `set` method. The `set` method accepts a key-value-pair as two separate parameters:
+
+```ts
+request.session().set('key', 'value')
+```
+
+You can also pass an object as a single argument assigning multiple key-value-pairs at once:
+
+```ts
+request.session().set({
+  key: 'value',
+  name: 'Supercharge'
+})
+```
+
+The `set` method returns the session instance. This allows you to chain further operations when using `set`:
+
+```ts
+const data = request.session()
+  .set('key', 'value')
+  .set('name', 'Supercharge')
+  .all()
+```
 
 
 ### Deleting Data
