@@ -14,9 +14,9 @@ By default, Supercharge uses the `cookie` driver to store session data.
 ### Available Session Drivers
 Supercharge ships with different session backends. All session backends are access in a driver-based approach exposing the same interface. Following the same interface allows you to switch from one session backend to another by changing a single line of configuration:
 
-| Session Driver   | Description                                  |
+| Driver           | Description                                  |
 |----------------  |--------------------------------------------- |
-| `memory`         | Stores session data in memory. Forgets all session data when restarting the server. Useful for testing |
+| `memory` &nbsp;  | Stores session data in memory. Forgets all session data when restarting the server. Useful for testing |
 | `cookie`         | Stores the session data in a cookie          |
 
 We welcome every contribution for new session drivers. You can submit a pull request adding a new driver or you may ask for an implementation by creating an issue [in the framework’s GitHub repository](https://github.com/supercharge/framework).
@@ -115,14 +115,35 @@ const data = request.session()
 
 
 ### Deleting Data
-Tba.
+Delete items from the session using the `delete` method. The `delete` method accepts a single `key` or a list of keys that should be removed from the session:
+
+```ts
+request.session().delete('key')
+
+// delete multiple keys
+request.session().delete('key', 'name', 'other')
+```
+
+You can also delete all session data by using the `clear` method:
+
+```ts
+request.session().clear()
+```
 
 
 ### Regenerating the Session ID
-Tba.
+Generating a new session ID is a usual security operation. For example, you’re protecting your users against [session fixation attacks](https://owasp.org/www-community/attacks/Session_fixation) by regenerating a session ID.
+
+Use the `regenerate` method in case you need to manually regenerate the session ID:
+
+```ts
+request.session().regenerate()
+```
 
 
 ### Invalidating the Session
-Tba.
+You can combine the operations to generate a new session ID and clear all existing session data using the `invalidate` method:
 
-
+```ts
+request.session().invalidate()
+```
