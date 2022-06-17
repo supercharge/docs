@@ -4,17 +4,17 @@
 ## System Requirements
 The Supercharge framework has some system requirements. Ensure that your system has the following dependencies installed:
 
-- Node.js `>= 12`
+- `Node.js v16` or higher
 - NPM or Yarn for package management
 
 Check your installed Node.js version using this command:
 
 ```bash
 node -v
-# v12.22.9
+# v16.15.1
 ```
 
-If you don’t have Node.js 12.x (or higher) installed, you can download the latest version on the official [nodejs.org](https://nodejs.org/en/download/) website.
+If you don’t have Node.js 16.x (or higher) installed, you can download the latest version on the official [nodejs.org](https://nodejs.org/en/download/) website.
 
 Also, version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
 
