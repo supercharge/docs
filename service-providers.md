@@ -70,7 +70,6 @@ export class MarkdownServiceProvider extends ServiceProvider {
 The `register` method binds an implementation of the `MarkdownRenderer` into the container. Please find more details about [the container and bindings](/docs/service-container) in its documentation.
 
 
-
 ### The Boot Method
 The `boot` method is called after all service providers have been registered. Here, you have access to all services in the container. The `boot` method runs asynchronously and can return a promise. Use this method to boot your application services.
 
@@ -86,6 +85,29 @@ export class MarkdownServiceProvider extends ServiceProvider {
    */
   override async boot (): Promise<void> {
     await this.app().make(MarkdownRenderer).boot()
+  }
+}
+```
+
+
+### The Shutdown Method
+The `shutdown` method of all registered services providers runs when the Node.js process receives one of the following signals:
+
+- `SIGINT`
+- `SIGTERM`
+
+The `shutdown` method is a way to stop services, like database connections. For example, let’s say the markdown renderer needs to properly close a connection. The `shutdown` method is the correct to do that:
+
+```ts
+import { ServiceProvider } from '@supercharge/support'
+import { MarkdownRenderer } from './markdown-renderer'
+
+export class MarkdownServiceProvider extends ServiceProvider {
+  /**
+   * Shutdown application services.
+   */
+  override async shutdown (): Promise<void> {
+    await this.app().make(MarkdownRenderer).stop()
   }
 }
 ```
