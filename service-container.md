@@ -97,6 +97,25 @@ this.app().singleton(MarkdownRenderer, (app: Application) => {
 ```
 
 
+### Aliases
+The container supports `alias` bindings. Aliases describe alternative keys pointing to a specific binding.
+
+For example, the Supercharge HTTP server binding uses the `server` namespace. This `server` name is not specific, it could be any kind of HTTP server, websocket server, DNS server, and so on.
+
+To be more specific what server instance will be resolved, we added the `http.server` alias for the `server` binding. Here’s the code used in the HTTP service provider:
+
+```ts
+import { Server } from '@supercharge/http'
+
+this.app()
+  .singleton('server', () => new Server(this.app()))
+  .alias('server', 'http.server')
+  .alias('server', Server)
+```
+
+Like bindings, aliases support class constructors as well. You may create an alias pointing from a string namespace to a class namespace (`app.alias('server', Server)`).
+
+
 ## Resolving
 You can resolve class instances from the container using the `make` method. The `make` method accepts a string or class you wish to resolve:
 
