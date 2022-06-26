@@ -88,14 +88,54 @@ const appName = Config.get('app.name', 'My Supercharge App')
 ```
 
 
+### Detecting Empty Configuration Values
+You may validate configuration values in your application code. For example, your code may check for empty values to throw a custom exception.
+
+You can detect an empty config using the `isEmpty(key)` method:
+
+```ts
+config.isEmpty() // true
+config.isEmpty(null) // true
+config.isEmpty([]) // true
+config.isEmpty({}) // true
+config.isEmpty('') // true
+
+config.isEmpty(0) // false
+```
+
+In contrast, you could check for non-empty values using the `isNotEmpty(key)` method:
+
+```ts
+config.isNotEmpty() // false
+config.isNotEmpty(null) // false
+config.isNotEmpty([]) // false
+config.isNotEmpty({}) // false
+config.isNotEmpty('') // false
+
+config.isNotEmpty(0) // true
+```
+
+
 ### Ensure Configuration Values
 You may need to ensure a configuration value while building an application or community package. For example, a file cache requires a configured caching directory. In case the file cache driver doesn’t receive the configuration value for a cache directory, you may want to stop further processing.
 
 You can require a configuration value using the `Config.ensure` method:
 
-```js
+```ts
 import { Config } from '@supercharge/facades'
 
 Config.ensure('cache.file.directory')
 // throws if the configuration for `cache.location` is missing
+```
+
+You can be more specific to ensure a non-empty configuration value using the `ensureNotEmpty(key)` method. The difference between the `ensure` and `ensureNotEmpty` methods:
+
+- `ensure(key)`: throws if the `key` is not present in the config store
+- `ensureNotEmpty(key)`: throws if the `key` is present in the store but has an empty value
+
+```ts
+import { Config } from '@supercharge/facades'
+
+Config.ensureNotEmpty('cache.file.directory')
+// throws if the configuration for `cache.location` exists but is empty
 ```
