@@ -16,10 +16,10 @@ By default, Supercharg uses the `console` driver printing all log messages to th
 ### Available Log Drivers
 Supercharge uses a driver-based approach for logging. A driver represents a single channel or multiple channels. A channel itself describes the destiation for log messages. Here’s a list of available log drivers and the related log channels:
 
-| Channel Driver   	| Description 	                               |
-|-----------------	|--------------------------------------------- |
-| `console`        	| Logging all messages to the terminal         |
-| `file`           	| Logging all messages to a dedicated log file |
+| Channel Driver   | Description                                 |
+|----------------- |--------------------------------------------- |
+| `console`        | Logging all messages to the terminal         |
+| `file`           | Logging all messages to a dedicated log file |
 
 
 ```info
