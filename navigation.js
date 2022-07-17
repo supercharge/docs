@@ -65,6 +65,14 @@ module.exports = {
   //   }
   // },
 
+  Security: {
+    slug: 'security',
+    sections: {
+      Encryption: 'encryption',
+      // Hashing: 'hashing',
+    }
+  },
+
   Packages: {
     slug: 'packages',
     sections: {
