@@ -69,7 +69,7 @@ module.exports = {
     slug: 'security',
     sections: {
       Encryption: 'encryption',
-      // Hashing: 'hashing',
+      Hashing: 'hashing',
     }
   },
 
