@@ -96,7 +96,8 @@ module.exports = {
       Views: 'views',
       Assets: 'frontend-assets',
       Handlebars: 'handlebars',
-      'Built-in Helpers': 'handlebars-helpers'
+      'Built-in Helpers': 'handlebars-helpers',
+      Inertia: 'inertia'
     }
   },
 
