@@ -117,7 +117,7 @@ Like bindings, aliases support class constructors as well. You may create an ali
 
 
 ### Remove Bindings
-*added in version `3.15`*
+- *added in version `3.15`*
 
 Sometimes you need to remove a bound singleton binding instance and let the container create a new one. Use the `forgetInstance` method to remove a singleton binding from the container’s cache and let it freshly resolve a new instance:
 
