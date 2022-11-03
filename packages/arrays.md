@@ -97,9 +97,10 @@ Here’s a list of available methods on a set instance:
 
 <div id="collection-method-list" markdown="1">
 
-[Arr.from](#arr.from)
-[Arr.isArray](#arr.isarray)
-[Arr.isNotArray](#arr.isnotarray)
+[Arr.from](#arrfrom)
+[Arr.isArray](#arrisarray)
+[Arr.isNotArray](#arrisnotarray)
+[Arr.isIterable](#arrisiterable)
 
 [at](#at)
 [collapse](#collapse)
@@ -126,6 +127,7 @@ Here’s a list of available methods on a set instance:
 [pop](#pop)
 [push](#push)
 [removeNullish](#removenullish)
+[reject](#reject)
 [reverse](#reverse)
 [shift](#shift)
 [size](#size)
@@ -134,6 +136,8 @@ Here’s a list of available methods on a set instance:
 [sort](#sort)
 [takeAndRemove](#takeandremove)
 [toArray](#toarray)
+[unique](#unique)
+[uniqueBy](#uniqueby)
 [unshift](#unshift)
 </div>
 
@@ -180,6 +184,24 @@ Arr.isNotArray([1, 2])
 
 Arr.isNotArray('1, 2')
 // true
+```
+
+
+
+#### Arr.isIterable
+- *added in `4.1`*
+
+The static `Arr.isIterable` method determines whether a given input is iterable meaning that it implements a [Symbol.iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) function:
+
+```js
+Arr.isIterable([1, 2])
+// true
+
+Arr.isIterable('1, 2')
+// true
+
+Arr.isIterable(null)
+// false
 ```
 
 
@@ -284,7 +306,7 @@ Arr
 
 The `filter` method returns an array containing only items matching the given `predicate` function.
 
-The `predicate` function will be called once for each entry in the set in insertion order:
+The `predicate` function will be called once for each entry in the array:
 
 ```js
 const users = Arr.from([1, 2, 3])
@@ -613,6 +635,24 @@ Arr
 ```
 
 
+#### reject
+- *added in `4.1`*
+
+The `reject` method is the inverse operation of [filter](#filter). It returns an array containing only items **not** matching the given `predicate` function.
+
+The `predicate` function will be called once for each entry in the array:
+
+```js
+const users = Arr.from([1, 2, 3, 4])
+
+const names = users.reject((value, index) => {
+  return value > 2
+})
+
+// Arr [1, 2]
+```
+
+
 #### reverse
 - *added in version `1.0`*
 
@@ -724,7 +764,7 @@ const sorted = Arr.from([4, 1, 37, 2, 1]).sort()
 The `sort` method accepts an optional comparator for custom sort operations:
 
 ```js
-await Collect([4, 1, 37, 2, 1]).sort((a, b) => {
+Arr.from([4, 1, 37, 2, 1]).sort((a, b) => {
   return b - a
 })
 
@@ -742,6 +782,44 @@ const arr = Arr.from([1, 2, 3, 4])
 
 const array = arr.toArray()
 // [1, 2, 3, 4]
+```
+
+
+#### unique
+- *added in version `4.1`*
+
+The `unique` method returns all unique values in the array:
+
+```js
+Arr.from([1, 2, 2, 3, 4, 4, 4, 5]).unique()
+
+// [1, 2, 3, 4, 5]
+```
+
+In real-world scenarios, you’re likely to work with more complex data structures like objects. Please use the [uniqueBy](#uniqueby) method which accepts a callback function as an argument.
+
+
+#### uniqueBy
+- *added in version `4.1`*
+
+In real-world scenarios, you’re likely to work with more complex data structures like objects. Please use the `uniqueBy` method which accepts a callback function as an argument:
+
+```js
+Arr.from([
+  { name: 'Marcus' },
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+])
+  .uniqueBy(user => {
+    return user.name
+  })
+
+/*
+[
+  { name: 'Marcus' },
+  { name: 'Supercharge' }
+]
+*/
 ```
 
 
