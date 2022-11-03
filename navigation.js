@@ -18,6 +18,7 @@ module.exports = {
       'Configuration & Env': 'configuration',
       Application: 'application',
       // 'App Lifecycle': 'app-lifecycle',
+      'Error Handling': 'error-handling',
       // Development: 'development',
       Deployment: 'deployment',
       // Bootstrappers: 'bootstrappers'
