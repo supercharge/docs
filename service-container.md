@@ -116,6 +116,20 @@ this.app()
 Like bindings, aliases support class constructors as well. You may create an alias pointing from a string namespace to a class namespace (`app.alias('server', Server)`).
 
 
+### Remove Bindings
+*added in version `3.15`*
+
+Sometimes you need to remove a bound singleton binding instance and let the container create a new one. Use the `forgetInstance` method to remove a singleton binding from the container’s cache and let it freshly resolve a new instance:
+
+```ts
+import { Application } from '@supercharge/contracts'
+import { DocsRenderer } from './services/docs-renderer'
+
+this.app().forgetInstance('binding.name')
+this.app().forgetInstance(BoundClass)
+```
+
+
 ## Resolving
 You can resolve class instances from the container using the `make` method. The `make` method accepts a string or class you wish to resolve:
 
