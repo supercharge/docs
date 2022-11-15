@@ -93,6 +93,15 @@ Store data in the session using the `set` method. The `set` method accepts a key
 
 ```ts
 request.session().set('key', 'value')
+
+// or use the `put` alias method
+request.session().put('key', 'value')
+```
+
+```info
+We provide a `request.session().put(key, value)` method as an alias to `set`. Both work the same way.
+
+Please use the method that fits your naming needs the best.
 ```
 
 You can also pass an object as a single argument assigning multiple key-value-pairs at once:
@@ -111,6 +120,34 @@ const data = request.session()
   .set('key', 'value')
   .set('name', 'Supercharge')
   .all()
+```
+
+
+### Flash Data
+- *added in version 3.15*
+
+Sometimes you want to store session items only for the next request. The `flash` method is doing that for you. Flash messages are used for short-lived data, like a success or error message. Flash data is only available to the subsequent request and deleted from the session store after that:
+
+```ts
+request.session().flash('successmessage', 'You’ve completed the task.')
+```
+
+
+#### Keeping Flash Data
+In some situations you need to persist flash messages across multiple requests. Use the `reflash` method to keep flash messages for an additional request:
+
+```ts
+// keep all flash data for another request
+request.session().reflash()
+```
+
+You can selectively keep flash data for the next request by providing the keys to the `reflash` method:
+
+```ts
+request.session().reflash('username', 'email')
+
+// or use an array
+request.session().reflash(['username', 'email'])
 ```
 
 
