@@ -478,6 +478,7 @@ items.isNotEmpty()
 
 #### join
 - *added in `1.0`*
+- *updated in `4.2`*
 
 The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
 
@@ -493,8 +494,28 @@ You can provide a separator that will then be used for concatenation:
 ```js
 const names = Arr.from([1, 2, 3])
 
-names.join()
+names.join('; ')
 // '1; 2; 3'
+```
+
+Since version `4.2` you can provide a second argument defining how to append the last item:
+
+```js
+const names = Arr.from([1, 2, 3])
+
+names.join(', ', ', and')
+// '1, 2, and 3'
+```
+
+Since version `4.2` you may also provide a callback function that returns the value that will be joined into the resulting string value:
+
+```js
+const names = Arr.from([1, 2, 3])
+
+names.join((value, index, arr) => {
+  return `${value} --> `
+})
+// '1 --> 2 --> 3 --> '
 ```
 
 
