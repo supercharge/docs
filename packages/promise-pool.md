@@ -191,6 +191,74 @@ const pool = PromisePool
 ```
 
 
+### Correspond Source Items and Their Results
+- *added in version `2.4`*
+
+Sometimes you want the position of processed results to align with your source items. The resulting items should have the same position in the `results` array as their related source items in the source array.
+
+Use the `useCorrespondingResults` method to apply this behavior:
+
+```js
+import { setTimeout } from 'node:timers/promises'
+import { PromisePool } from '@supercharge/promise-pool'
+
+const { results } = await PromisePool
+  .for([1, 2, 3])
+  .withConcurrency(5)
+  .useCorrespondingResults()
+  .process(async (number, index) => {
+    const value = number * 2
+
+    return await setTimeout(10 - index, value)
+  })
+
+/**
+ * source array: [1, 2, 3]
+ * result array: [2, 4 ,6]
+ * --> result values match the position of their source items
+ */
+```
+
+For example, you have three items you want to process. Using corresponding results ensures that the processed result for the first item from the source array is located at the first position in the result array (at index `0`). The result for the second item from the source array is placed at the second position in the result array (at index `1`), and so on …
+
+
+#### Return Values When Using Corresponding Results
+The `results` array returned by the promise pool after processing has a mixed return type. Each returned item is one of this type:
+
+- the actual value type: for results that successfully finished processing
+- `Symbol('notRun')`: for tasks that didn’t run
+- `Symbol('failed')`: for tasks that failed processing
+
+The `PromisePool` exposes both symbols and you may access them using
+
+- `Symbol('notRun')`: exposed as `PromisePool.notRun`
+- `Symbol('failed')`: exposed as `PromisePool.failed`
+
+You may repeat processing for all tasks that didn’t run or failed:
+
+```js
+import { PromisePool } from '@supercharge/promise-pool'
+
+const { results, errors } = await PromisePool
+  .for([1, 2, 3])
+  .withConcurrency(5)
+  .useCorrespondingResults()
+  .process(async (number) => {
+    // …
+  })
+
+const itemsNotRun = results.filter(result => {
+  return result === PromisePool.notRun
+})
+
+const failedItems = results.filter(result => {
+  return result === PromisePool.failed
+})
+```
+
+When using corresponding results, you need to go through the `errors` array yourself. The default error handling (collect errors) stays the same and you can follow the described error handling section below.
+
+
 ## Error Handling
 The promise pool won’t throw errors while processing the items. It collects all errors and returns them after processing all items. You may then inspect the errors and handle them individually.
 
