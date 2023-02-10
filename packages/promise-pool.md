@@ -191,6 +191,28 @@ const pool = PromisePool
 ```
 
 
+### Task Timeouts
+- *added in version `2.4`*
+
+Sometimes it’s useful to configure a timeout in which a task must finish processing. A task that times out is marked as failed. You may use the `withTaskTimeout(<milliseconds>)` method to configure a task’s timeout:
+
+
+```js
+import { PromisePool } from '@supercharge/promise-pool'
+
+await PromisePool
+  .for(users)
+  .withTaskTimeout(2000) // milliseconds
+  .process(async (user, index, pool) => {
+    // processes the `user` data
+  })
+```
+
+```info
+**Notice:** a configured timeout is configured for each task, not for the whole pool. The example configures a 2-second timeout for each task in the pool.
+```
+
+
 ### Correspond Source Items and Their Results
 - *added in version `2.4`*
 
