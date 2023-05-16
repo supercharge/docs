@@ -112,6 +112,7 @@ Here’s a list of available methods on a set instance:
 [of](#of)
 [reduce](#reduce)
 [size](#size)
+[sort](#sort)
 [toArray](#toarray)
 [values](#values)
 
@@ -119,7 +120,7 @@ Here’s a list of available methods on a set instance:
 
 
 #### Set.from
-- *added in `2.1`*
+- *added in version `2.1`*
 
 The static `Set.from` method creates a new set instance for a given iterable, like `Array.from`:
 
@@ -133,7 +134,7 @@ numbers.toArray()
 
 #### Set.of
 - ***deprecated** since version `2.1.0`. Please use [Set.from](#set.from) instead*
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The static `of` method creates a new set instance of the given values. It’s basically a shortcut for `new Set(entries)`:
 
@@ -147,7 +148,7 @@ set.has('Marcus')
 
 #### add
 - *updated in `2.2.0` supporting multiple values (`set.add(1, 2, 3)`)*
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `add` method adds an item to the end of a set if it doesn’t already exists in the set:
 
@@ -176,7 +177,7 @@ users.toArray()
 
 
 #### all
-- *added in `2.2`*
+- *added in version `2.2`*
 
 The `all` method determines whether all of the values in the set match the given predicate function:
 
@@ -199,7 +200,7 @@ users.all(user => {
 
 
 #### any
-- *added in `2.2`*
+- *added in version `2.2`*
 
 The `any` method determines whether at least one of the values in the set matches the given predicate function:
 
@@ -222,7 +223,7 @@ users.any(user => {
 
 
 #### at
-- *added in `1.7`*
+- *added in version `1.7`*
 
 The `at` method returns the item at a given `index` or `undefined` if the index exceeds the set’s size.
 
@@ -238,7 +239,7 @@ users.at(22)
 
 
 #### clear
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `clear` method removes all entries from the set:
 
@@ -256,7 +257,7 @@ users.size()
 
 
 #### concat
-- *added in `1.4`*
+- *added in version `1.4`*
 
 The `concat` method adds an array or individual values to the set.
 
@@ -270,7 +271,7 @@ Set.from([1, 2]).concat(5, 6)
 
 
 #### count
-- *added in `1.4`*
+- *added in version `1.4`*
 
 The `count` method returns the number of items matching the given `predicate` function.
 
@@ -287,7 +288,7 @@ The `count` method returns the size of the set when not providing a predicate fu
 
 
 #### delete
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `delete` method removes the entry identified by the given `value`:
 
@@ -305,7 +306,7 @@ Calling `set.delete(value)` returns `true` if the given value is present in the 
 
 
 #### filter
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `filter` method returns a set containing only items matching the given `predicate`.
 
@@ -323,7 +324,7 @@ const names = users.filter((value, set) => {
 
 
 #### find
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `find` method returns the first item in the set matching the given `predicate`.
 
@@ -342,7 +343,7 @@ const names = users.find((value, set) => {
 
 
 #### findIndex
-- *added in `2.0`*
+- *added in version `2.0`*
 
 The `findIndex` method returns the index of the first item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
 
@@ -365,7 +366,7 @@ const index = users.findIndex((value, set) => {
 
 
 #### findLast
-- *added in `2.2`*
+- *added in version `2.2`*
 
 The `findLast` method returns the last item in the set matching the given `predicate` function.
 
@@ -383,7 +384,7 @@ const user = users.findLast(user => {
 
 
 #### findLastIndex
-- *added in `2.2`*
+- *added in version `2.2`*
 
 The `findLastIndex` method returns the index of the last item in the set satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function.
 
@@ -406,7 +407,7 @@ const index = users.findLastIndex((value, set) => {
 
 
 #### first
-- *added in `1.7`*
+- *added in version `1.7`*
 
 The `first` method returns the first item in the set or the first item matching the given `predicate` function:
 
@@ -433,7 +434,7 @@ users.first(user => {
 
 
 #### flatMap
-- *added in `1.3`*
+- *added in version `1.3`*
 
 The `flatMap` method returns a new set instance, after applying the given `transform` function and collapsing the result (one level deep).
 
@@ -450,7 +451,7 @@ const names = users.map((value, set) => {
 
 
 #### flatten
-- *added in `1.3`*
+- *added in version `1.3`*
 
 The `flatten` method flattens the items in the set at a depth of `1`.
 
@@ -462,7 +463,7 @@ const users = Set.from([ 'Marcus', ['Supercharge'] ]).flatten()
 
 
 #### forEach
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `forEach` method processes a given `callback` function once for each entry in the set in insertion order. The `callback` function receives the `value, set` arguments:
 
@@ -479,7 +480,7 @@ names.forEach(name => {
 
 
 #### has
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `has` method returns `true` if the given `value` is present in the set, otherwise `false`:
 
@@ -499,7 +500,7 @@ users.has('not-existent')
 
 
 #### includes
-- *added in `1.5`*
+- *added in version `1.5`*
 
 The `includes` method determines whether the set includes a given `value` or if it includes a value satisfying a given `predicate` function:
 
@@ -517,7 +518,7 @@ set.includes(num => {
 
 
 #### intersect
-- *added in `2.2`*
+- *added in version `2.2`*
 
 The `intersect` method returns a set containing all items that are contained in all collections:
 
@@ -532,7 +533,7 @@ const intersection = ids.intersect(
 
 
 #### isEmpty
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `isEmpty` method returns `true` if the set has no entries. Returns `false` if entries are present in the set:
 
@@ -550,7 +551,7 @@ set.isEmpty()
 
 
 #### isMissing
-- *added in `2.0`*
+- *added in version `2.0`*
 
 The `isMissing` method returns `true` if the given `value` is not present in the set, otherwise `false`:
 
@@ -568,7 +569,7 @@ users.isMissing('not-existent')
 #### join
 - *updated in `1.9` to support a callback function to compose a seperator*
 - *updated in `1.8` to support an optional seperator*
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
 
@@ -601,7 +602,7 @@ set.join(name => {
 
 
 #### isNotEmpty
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `isNotEmpty` method returns `true` if entries are present in the set. Returns `false` if the set is empty:
 
@@ -619,7 +620,7 @@ set.isNotEmpty()
 
 
 #### map
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `map` method returns a new set instance containing the results of the given `transform` function.
 
@@ -641,7 +642,7 @@ const names = users.map((value, set) => {
 
 
 #### reduce
-- *added in `1.6`*
+- *added in version `1.6`*
 
 The `reduce` method invokes reducer function on each item in the set, passing the result of the previous iteration to the subsequent iteration. The result is a reduced set to a single value:
 
@@ -667,7 +668,7 @@ set.reduce((sum, value) => {
 
 
 #### size
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `size` method returns the number of entries in the set:
 
@@ -679,8 +680,34 @@ const size = set.size()
 ```
 
 
+#### sort
+- *added in version `3.0`*
+
+The `sort` method returns the sorted set. You can sort a set containing only primitive values without a compare function:
+
+```js
+const sorted = Set.from([4, 1, 37, 2, 1]).sort()
+// [1, 1, 2, 4, 37]
+```
+
+The `sort` method accepts an optional compare function for custom sort operations. You’re receiving two elements in the compare function. The compare function determines the resulting order of items by it’s return value:
+
+- a negative value if the first argument is less than second argument
+- zero if they're equal
+- a positive value if the second argument is larger than the first argument
+
+The elements are sorted in ascending order when omitting the `compareFn`:
+
+```js
+Set.from([4, 1, 37, 2, 1]).sort((a, b) => {
+  return b - a
+})
+// [37, 4, 2, 1, 1]
+```
+
+
 #### toArray
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `toArray` method returns an array containing the entries of the set.
 
@@ -689,12 +716,11 @@ const set = Set.from([1, 2, 3, 4])
 
 const array = set.toArray()
 // [1, 2, 3, 4]
-
 ```
 
 
 #### values
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `values` method returns an iterator object of the values present in the set (in insertion order):
 
