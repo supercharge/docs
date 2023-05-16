@@ -147,7 +147,7 @@ Please feel free to [submit a pull request on GitHub](https://github.com/superch
 
 
 #### Arr.from
-- *added in `1.2`*
+- *added in version `1.2`*
 
 The static `Arr.from` method creates a new `Arr` instance for a given iterable:
 
@@ -160,7 +160,7 @@ numbers.toArray()
 
 
 #### Arr.isArray
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The static `Arr.isArray` method determines whether a given input is an array:
 
@@ -174,7 +174,7 @@ Arr.isArray('[1, 2]')
 
 
 #### Arr.isNotArray
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The static `Arr.isNotArray` method determines whether a given input is **not** an array:
 
@@ -189,7 +189,7 @@ Arr.isNotArray('1, 2')
 
 
 #### Arr.isIterable
-- *added in `4.1`*
+- *added in version `4.1`*
 
 The static `Arr.isIterable` method determines whether a given input is iterable meaning that it implements a [Symbol.iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) function:
 
@@ -206,7 +206,7 @@ Arr.isIterable(null)
 
 
 #### at
-- *added in `1.1`*
+- *added in version `1.1`*
 
 The `at` method returns the item at a given `index` or `undefined` if the index exceeds the set’s size.
 
@@ -222,7 +222,7 @@ users.at(22)
 
 
 #### collapse
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `collapse` method collapses the array one level deep into a single, flat array:
 
@@ -237,7 +237,7 @@ Arr
 
 
 #### compact
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `compact` method removes all falsy values from the array. For example, falsy values are `null`, `undefined`, `''`, `false`, `0`, `NaN`:
 
@@ -252,7 +252,7 @@ Arr
 
 
 #### concat
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `concat` method adds an array or individual values to the set.
 
@@ -302,7 +302,7 @@ Arr
 
 
 #### filter
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `filter` method returns an array containing only items matching the given `predicate` function.
 
@@ -320,7 +320,7 @@ const names = users.filter((value, index) => {
 
 
 #### find
-- *added in `1.1`*
+- *added in version `1.1`*
 
 The `find` method returns the first item in the array matching the given `predicate`:
 
@@ -339,7 +339,7 @@ const user = users.find((value, set) => {
 
 
 #### findIndex
-- *added in `1.1`*
+- *added in version `1.1`*
 
 The `findIndex` method returns the index of the first item in the array satisfying the given `predicate` function. Returns `-1` if no item matches the predicate function:
 
@@ -362,7 +362,7 @@ const index = users.findIndex((value, set) => {
 
 
 #### findLast
-- *added in `1.1`*
+- *added in version `1.1`*
 
 The `findLast` method returns the last item in the array matching the given `predicate` function:
 
@@ -394,7 +394,7 @@ Arr.from([1, 2, 3]).flatMap(item => {
 
 
 #### has
-- *added in `2.0`*
+- *added in version `2.0`*
 
 The `has` method returns `true` if the given `value` is present in the array, otherwise `false`:
 
@@ -410,7 +410,7 @@ users.has('not-existent')
 
 
 #### intersect
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `intersect` method returns an array containing all items that are contained in all collections:
 
@@ -425,7 +425,7 @@ const intersection = ids.intersect(
 
 
 #### isEmpty
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `isEmpty` method returns `true` if the array has no entries. Returns `false` if entries are present in the array:
 
@@ -443,7 +443,7 @@ items.isEmpty()
 
 
 #### isMissing
-- *added in `2.0`*
+- *added in version `2.0`*
 
 The `isMissing` method returns `true` if the given `value` is not present in the array, otherwise `false`:
 
@@ -459,7 +459,7 @@ users.isMissing('not-existent')
 
 
 #### isNotEmpty
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `isNotEmpty` method returns `true` if entries are present in the array. Returns `false` if the array is empty:
 
@@ -477,7 +477,7 @@ items.isNotEmpty()
 
 
 #### join
-- *added in `1.0`*
+- *added in version `1.0`*
 - *updated in `4.2`*
 
 The `join` method returns a string of all items concatenated. By default, it uses a comma `,` for concatenation:
@@ -642,7 +642,7 @@ Arr
 
 
 #### removeNullish
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `removeNullish` method removes all `null` and `undefined` values from the array:
 
@@ -657,7 +657,7 @@ Arr
 
 
 #### reject
-- *added in `4.1`*
+- *added in version `4.1`*
 
 The `reject` method is the inverse operation of [filter](#filter). It returns an array containing only items **not** matching the given `predicate` function.
 
@@ -705,7 +705,7 @@ items.toArray()
 
 
 #### size
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `size` method is an alias for the [length](#length) method:
 
@@ -794,7 +794,7 @@ Arr.from([4, 1, 37, 2, 1]).sort((a, b) => {
 
 
 #### toArray
-- *added in `1.1`*
+- *added in version `1.1`*
 
 The `toArray` method returns a native JavaScript array:
 
@@ -845,7 +845,7 @@ Arr.from([
 
 
 #### unshift
-- *added in `1.0`*
+- *added in version `1.0`*
 
 The `unshift` method adds one or more items to the beginning of the array:
 
