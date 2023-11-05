@@ -5,8 +5,8 @@ module.exports = {
     slug: 'introduction',
     sections: {
       'About Supercharge': 'about-supercharge',
-      Contribute: 'contribute'
-      // 'Upgrade Guide': 'upgrade'
+      Contribute: 'contribute',
+      'Migration from 3.x': 'migration-from-v3',
     }
   },
 
@@ -37,7 +37,7 @@ module.exports = {
       Controllers: 'controllers',
       Middleware: 'middleware',
       Session: 'session',
-      // 'CSRF Protection': 'csrf-protection',
+      'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
       // Authentication: 'authentication',
       // Authorization: 'authorization',
