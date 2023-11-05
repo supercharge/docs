@@ -8,7 +8,7 @@ Sessions provide a way to transition HTTP application from being stateless to st
 ## Configuration
 Your application’s session options are stored in the `config/session.ts` configuration file. This config file allows you to customize the default session driver and driver-specific configuration.
 
-By default, Supercharge uses the `cookie` driver to store session data.
+By default, Supercharge uses the `file` driver to store session data.
 
 
 ### Available Session Drivers
@@ -18,6 +18,7 @@ Supercharge ships with different session backends. All session backends are acce
 |----------------  |--------------------------------------------- |
 | `memory` &nbsp;  | Stores session data in memory. Forgets all session data when restarting the server. Useful for testing |
 | `cookie`         | Stores the session data in a cookie          |
+| `file`           | Stores the session data in a file. Session files are stored in the `storage/framework/session` directory |
 
 We welcome every contribution for new session drivers. You can submit a pull request adding a new driver or you may ask for an implementation by creating an issue [in the framework’s GitHub repository](https://github.com/supercharge/framework).
 
