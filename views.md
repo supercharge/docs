@@ -2,9 +2,39 @@
 
 
 ## Overview
-Views separate the presentation logic from application logic and represent the web views. In your application, views are served as HTML by your server to the browser. In Supercharge, all views are located in the `resources/views` directory and its subfolders.
+Views separate the presentation logic from application logic and represent the web views. In your application, views are served as HTML by your server to the browser. In Supercharge, all views are located within the `resources/views` directory and its subfolders.
 
-Supercharge uses the [@hapi/vision](https://github.com/hapijs/vision) library to support template rendering. The framework is configured to use [Handlebars](/docs/{{version}}/handlebars) as the view rendering engine. Find more details on Handlebars in the linked documentation.
+
+## Configuration
+The view configuration file is located at `config/view.ts`. The configuration file includes the default view driver and the corresponding view driver settings.
+
+
+### Required Package Dependencies
+Supercharge requires the `@supercharge/view` package to support view rendering. This package registers the `response.view` macro on the HTTP response instance allowing you to render views from responses.
+
+The Supercharge application boilerplate contains this package by default. You may double-check if `@supercharge/view` is a dependency in project and that the `ViewServiceProvider` is registered in the `bootstrap/providers.ts` file:
+
+```ts
+import { ViewServiceProvider } from '@supercharge/view'
+import { ServiceProviderCtor } from '@supercharge/contracts'
+
+export const providers: ServiceProviderCtor[] = [
+  /**
+   * All listed providers will be registered and booted while starting your
+   * application. You may add your own providers to this list registering
+   * custom functionality to your application. In alphabetical sorting.
+   */
+  // …
+  ViewServiceProvider,
+]
+```
+
+### Available View Drivers
+Supercharge views use a driver-based approach for template rendering. A driver represents a given rendering engine. At this point, we’re supporting only the [Handlebars](https://handlebarsjs.com/) view engine.
+
+| View Driver    | Description                                  |
+|--------------- |--------------------------------------------- |
+| `handlebars`   | Uses the [Handlebars](https://handlebarsjs.com/) view rendering engine |
 
 
 ## Creating Views
@@ -12,93 +42,84 @@ A very basic view may look like this:
 
 ```handlebars
 <div>
-  <h1>Hej, great to see you {{name}}</h1>
+  <h1>Hey, great to see you {{name}}</h1>
 </div>
 ```
 
 You may store this view template in `resources/views/welcome.hbs` and serve it when sending a request to a route like this:
 
-```js
-{
-  method: 'GET',
-  path: '/welcome',
-  handler: (request, h) => {
-    return h.view('welcome', { name: 'Marcus' })
-  }
-}
+```ts
+import { Route } from '@supercharge/facades'
+import { HttpContext } from '@supercharge/contracts'
+
+Route.get('/', ({ response }: HttpContext) => {
+  return response.view('welcome', { name: Supercharge })
+})
 ```
 
-To render a view and send it as a response from your route handler, use the `h.view()` method. As you can see, `h.view` expects the view’s name as the first parameter. The second parameter is a data object that should be a available in the view context.
+Use the `response.view` method to send a rendered view file a response from your route handler. The `response.view` method expects the view’s file name as the first parameter. The second parameter is a data object available in the view context to dynamically replace their related placeholders. The example above provides the `{ name: 'Supercharge' }` object allowing you to inject a name into a `{{name}}` view placeholder.
 
-If you’re storing views in subdirectories, like `resources/views/auth/login.hbs`, you can serve them like this:
+If you’re storing view files in subdirectories, like `resources/views/auth/login.hbs`, you can serve them like this:
 
-```js
-{
-  method: 'GET',
-  path: '/welcome',
-  handler: (request, h) => {
-    return h.view('auth/login')
-  }
-}
+```ts
+import { Route } from '@supercharge/facades'
+import { HttpContext } from '@supercharge/contracts'
+
+Route.get('/', ({ response }: HttpContext) => {
+  return response.view('auth/login')
+})
 ```
 
-Serving views located in subdirectories is no problem. Use a path-like structure with forward slashes when defining them in `h.view`.
+Serving views from subdirectories is no problem. Use a path-like structure with forward slashes when defining them in the `response.view` call.
 
 
 ## Pass Data to Views
-Passing data to your views is pretty straightforward, pass an object as the second parameter to `h.view`:
+You can pass to your views by providing an object as the second parameter to `response.view`:
 
-```js
-{
-  method: 'GET',
-  path: '/welcome',
-  handler: (request, h) => {
-    return h.view('welcome', { name: 'Marcus' })
-  }
-}
+```ts
+import { Route } from '@supercharge/facades'
+import { HttpContext } from '@supercharge/contracts'
+
+Route.get('/', ({ response }: HttpContext) => {
+  return response.view('startpage', { name: 'Supercharge '})
+})
 ```
 
 You’ll typically pass data to views as key-value pairs. You can then access each key in the related view and render its value into the HTML by wrapping it in curly brackets, for example `{{name}}`.
 
 
-### Data Available to All Views
-Supercharge appends the following object to all views:
+### Sharing Data to All Views
+Sometimes you need to share data with all views, for example your application’s name. You can share view data across different requests using the `View` facade. A good place for shared data is a service provider, specifically the `boot` method. For example, you could use the `AppServiceProvider` within `app/providers/app-service-provider.ts`:
 
-```js
-{
-  request, // the request object
-  user, // the authenticated user
-  title, // the app title from config/app.js
-  description // the app description from config/app.js
-}
-```
+```ts
+import { View } from '@supercharge/facades'
 
-You can override each key from your route handler response. For example, if you want to use a `title` property on a web view, you may override it like this:
+export default class AppServiceProvider {
+  /**
+   * Register application services to the container.
+   */
+  public register (): void {
+    //
+  }
 
-```js
-{
-  method: 'GET',
-  path: '/welcome',
-  handler: (request, h) => {
-    return h.view('checkout', { title: 'Thank you for your purchase!' })
+  /**
+   * Boot application services.
+   */
+  async boot (): Promise<void> {
+    View.share('appName', 'Your Application Name')
   }
 }
 ```
-
-You route view context overrides the default context and the `title` property from your route handler precedes the default `title`.
 
 
 ## Use Different Layouts
-The `h.view` method supports a third argument: the view manager configuration. You can adjust the view manager for individual responses, for example to use a different base layout. Here’s an example using a landing page layout layout for the startpage:
+The `response.view` method supports a third argument: the view response configuration. You can adjust the view rendering for individual responses, for example to use a different base layout. Here’s an example using a landing page layout for the startpage:
 
-```js
-{
-  method: 'GET',
-  path: '/welcome',
-  handler: (request, h) => {
-    return h.view('startpage', null, { layout: 'landing-page' })
-  }
-}
+```ts
+import { Route } from '@supercharge/facades'
+import { HttpContext } from '@supercharge/contracts'
+
+Route.get('/', ({ response }: HttpContext) => {
+  return response.view('startpage', undefined, { layout: 'landing-page' })
+})
 ```
-
-Please head over to the `@hapi/vision` documentation for all allowed [view manager configuration options](https://github.com/hapijs/vision/blob/master/API.md#views-manager).
