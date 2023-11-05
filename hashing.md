@@ -50,3 +50,107 @@ if (Hash.needsRehash(hashedValue)) {
     const newHashedValue = await Hash.make('plain-value')
 }
 ```
+
+
+## Creating Hashes
+You can also create hash values based on different algorithms besides just making and checking hashes. All hash drivers provide convenient methods to create hashes.
+
+
+### Create Custom Hash Values
+The Node.js `crypto` core module comes with a `createHash` function. The Supercharge framework hashers provide a similar `createHash` method, too. This method exist so that you can use the framework’s hasher in all places instead of mixing the hasher and Node.js’ `createHash` in your code:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const hash = Hash.createHash(algorithm, input, inputEncoding)
+// `hash` is an instance of the Node.js `Hash` class
+```
+
+Supercharge’s `createHash` method returns a native Node.js [`Hash`](https://nodejs.org/api/crypto.html#class-hash) instance.
+
+
+### MD5 Hashing
+The Supercharge hasher provides the convenient `md5` method calculating the hash value of a given input using the MD5 hash algorithm. The returned value is the hash value as a string:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const md5 = Hash.md5('supercharge')
+// `md5` is the hash string: N8rEn6b+F6Dh7AEZ0YiLaA==
+```
+
+By default, the output encoding is `base64`.
+
+You can create a Node.js `Hash` instance by providing an input encoding as the second argument:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const md5 = Hash.md5('supercharge', 'utf8')
+// `md5` is a Node.js `Hash` instance
+```
+
+You may also use a [hash builder callback function](#using-a-hash-builder-function) to customize the hash value being created.
+
+
+### SHA256 Hashing
+The Supercharge hasher provides a convenient `sha256` method calculating the hash value of a given input using the SHA-256 (SHA-2) hash algorithm:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const sha256 = Hash.sha256('supercharge')
+```
+
+By default, the output encoding is `base64`.
+
+You can create a Node.js `Hash` instance by providing an input encoding as the second argument:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const sha256 = Hash.sha256('supercharge', 'utf8')
+// `sha256` is a Node.js `Hash` instance
+```
+
+You may also use a [hash builder callback function](#using-a-hash-builder-function) to customize the hash value being created.
+
+
+### SHA512 Hashing
+The Supercharge hasher provides a convenient `sha512` method calculating the hash value of a given input using the SHA-512 (SHA-2) hash algorithm:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const sha512 = Hash.sha512('supercharge')
+```
+
+By default, the output encoding is `base64`.
+
+You can create a Node.js `Hash` instance by providing an input encoding as the second argument:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const sha512 = Hash.sha512('supercharge', 'utf8')
+// `sha512` is a Node.js `Hash` instance
+```
+
+You may also use a [hash builder callback function](#using-a-hash-builder-function) to customize the hash value being created.
+
+
+
+
+### Using a Hash Builder Function
+The MD5, SHA-256, SHA-512 hash functions support a hash builder callback function as the second argument:
+
+```ts
+import { Hash } from '@supercharge/facades'
+
+const md5 = Hash.sha256('supercharge', hash => {
+    hash.inputEncoding('utf8').toString('hex')
+})
+// `md5` is the hash string: 37cac49fa6fe17a0e1ec0119d1888b68
+```
+
+The hash builder provides a fluent interface to provide the value’s input encoding and the resulting output encoding. The default output encoding is `base64`. Pass your desired output encoding the the `toString` method, like `hex` or other output formats, when needed.
