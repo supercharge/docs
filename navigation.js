@@ -96,6 +96,7 @@ module.exports = {
     sections: {
       Views: 'views',
       Assets: 'frontend-assets',
+      Vite: 'vite',
       Handlebars: 'handlebars',
       'Built-in Helpers': 'handlebars-helpers',
       Inertia: 'inertia'
