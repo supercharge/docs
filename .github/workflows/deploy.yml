@@ -1,0 +1,26 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    name: Node ${{ matrix.node-version }}
+
+    steps:
+    - name: Running deployment script on server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SUPERCHARGE_DEPLOY_SSH_HOST }}
+        username: ${{ secrets.SUPERCHARGE_DEPLOY_SSH_USER }}
+        port: ${{ secrets.SUPERCHARGE_DEPLOY_SSH_PORT }}
+        key: ${{ secrets.SUPERCHARGE_DEPLOY_SSH_PRIVATE_KEY }}
+        script: /home/launch/scripts/deploy-supercharge-docs.sh
