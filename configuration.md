@@ -43,6 +43,26 @@ const appKey = Env.getOrFail('APP_KEY')
 ```
 
 
+### Casting Environment Values
+All environment variables loaded from a `.env` file are strings. They are not automatically casted to a different data type. The `Env` facade provides methods like `Env.number` and `Env.boolean` that cast the value of the related environment variable for you:
+
+```ts
+import { Env } from '@supercharge/facades'
+
+const sessionLifetimeInSeconds = Env.number('SESSION_LIFETIME_IN_SECONDS')
+const isSecure = Env.boolean('SESSION_COOKIE_IS_SECURE')
+```
+
+All casting methods support a default value as the second argument:
+
+```ts
+import { Env } from '@supercharge/facades'
+
+const sessionLifetimeInSeconds = Env.number('SESSION_LIFETIME_IN_SECONDS', 3600)
+const isSecure = Env.boolean('SESSION_COOKIE_IS_SECURE', false)
+```
+
+
 ### Determine the Current Environment
 You may want to determine the current application environment. The `Env` facade provides convenience methods to detect the current environment. It compares the `NODE_ENV` environment variable against a given value:
 
