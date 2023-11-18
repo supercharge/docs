@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = {
+export default {
   Introduction: {
     slug: 'introduction',
     sections: {
@@ -35,6 +35,7 @@ module.exports = {
       Responses: 'responses',
       Controllers: 'controllers',
       Middleware: 'middleware',
+      'File Uploads': 'file-uploads',
       Session: 'session',
       'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
