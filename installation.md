@@ -12,7 +12,7 @@ Each package provides a specific functionality, like the application instance, a
 
 Every release of the framework’s core packages have the same version number. Using the same version for core packages reduces the cognitive load in your application because you can bump all packages to the same version without worrying if releases work together or if you need to bump another package, too.
 
-Here’s an example: when we tag a release version `3.8.0` for `@supercharge/core`, you’ll find the same `3.8.0` release for all other core packages (like `@supercharge/http`, `@supercharge/session`, `@supercharge/view`, and so on) as well.
+Here’s an example: when we tag a release version `4.0.0` for `@supercharge/core`, you’ll find the same `4.0.0` release for all other core packages (like `@supercharge/http`, `@supercharge/session`, `@supercharge/view`, and so on) as well.
 
 
 ### Using TypeScript
@@ -26,23 +26,23 @@ We’re striving to provide a delicious developer experience. You’ll notice th
 ## System Requirements
 The Supercharge framework has some system requirements. Ensure that your system has the following dependencies installed:
 
-- `Node.js v16` or higher
-- NPM or Yarn for package management
+- `Node.js v20` or higher
+- a package manager, like NPM or Yarn, for package management
 
 Check your installed Node.js version using this command:
 
 ```bash
 node -v
-# v16.15.1
+# v20.9.0
 ```
 
-If you don’t have Node.js 16.x (or higher) installed, you can download the latest version on the official [nodejs.org](https://nodejs.org/en/download/) website.
+If you don’t have Node.js 20.x (or higher) installed, you can download the latest version on the official [nodejs.org](https://nodejs.org/en/download/) website.
 
 Also, version managers like [n](https://github.com/tj/n) or [nvm](https://github.com/creationix/nvm) help you to install and manage different Node.js versions on your machine.
 
 
 ## Creating a new Supercharge App
-Supercharge provides a convenient app scaffolder to create a new application. You can run the scaffolding using [npm init](https://docs.npmjs.com/cli/v8/commands/npm-init). The following command creates a new Supercharge app in the `hello-supercharge` directory:
+Supercharge provides a convenient app scaffolder to create a new application. You can run the scaffolding using [npm init](https://docs.npmjs.com/cli/commands/npm-init). The following command creates a new Supercharge app in the `hello-supercharge` directory:
 
 ```bash
 npm init @supercharge/app@latest hello-supercharge
