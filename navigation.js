@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = {
+export default {
   Introduction: {
     slug: 'introduction',
     sections: {
@@ -37,7 +37,7 @@ module.exports = {
       Controllers: 'controllers',
       Middleware: 'middleware',
       Session: 'session',
-      // 'CSRF Protection': 'csrf-protection',
+      'CSRF Protection': 'csrf-protection',
       // 'Request Lifecycle': 'request-lifecycle',
       // Authentication: 'authentication',
       // Authorization: 'authorization',
