@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = {
+export default {
   Introduction: {
     slug: 'introduction',
     sections: {
