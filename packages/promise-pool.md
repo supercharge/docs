@@ -86,6 +86,34 @@ const pool = PromisePool
 ```
 
 
+### Create a Promise Pool from an Async Iterable
+You may also create a promise pool from an async iterable. The package detects whether you’re passing an array or an iterable and handles both.
+
+```js
+const iterable = {
+  async * [Symbol.asyncIterator] () {
+    const items = [10, 20, 30]
+
+    for (const item of items) {
+      await new Promise(resolve => setTimeout(resolve(item), item))
+      yield item
+    }
+  }
+}
+
+const pool = await PromisePool
+  .for(iterable)
+  .withConcurrency(5)
+  .process(item => {
+    // …
+  })
+```
+
+```info
+**Notice:** you can’t use [corresponding results](#correspond-source-items-and-their-results) in combination with iterables, because the pool doesn’t know the final number of items.
+```
+
+
 ### Start Processing
 The `process` method should be the last call in your method chain because it starts the promise pool processing. The `process` method accepts an async callback (function) defining the processing for each item:
 
