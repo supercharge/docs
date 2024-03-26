@@ -86,6 +86,34 @@ const pool = PromisePool
 ```
 
 
+### Create a Promise Pool from an Async Iterable
+You may also create a promise pool from an async iterable. The package detects whether you’re passing an array or an iterable and handles both.
+
+```js
+const iterable = {
+  async * [Symbol.asyncIterator] () {
+    const items = [10, 20, 30]
+
+    for (const item of items) {
+      await new Promise(resolve => setTimeout(resolve(item), item))
+      yield item
+    }
+  }
+}
+
+const pool = await PromisePool
+  .for(iterable)
+  .withConcurrency(5)
+  .process(item => {
+    // …
+  })
+```
+
+```info
+**Notice:** you can’t use [corresponding results](#correspond-source-items-and-their-results) in combination with iterables, because the pool doesn’t know the final number of items.
+```
+
+
 ### Start Processing
 The `process` method should be the last call in your method chain because it starts the promise pool processing. The `process` method accepts an async callback (function) defining the processing for each item:
 
@@ -189,6 +217,96 @@ const pool = PromisePool
 ```info
 **Notice:** the `onTaskFinished` callbacks don’t support async functions.
 ```
+
+
+### Task Timeouts
+- *added in version `2.4`*
+
+Sometimes it’s useful to configure a timeout in which a task must finish processing. A task that times out is marked as failed. You may use the `withTaskTimeout(<milliseconds>)` method to configure a task’s timeout:
+
+
+```js
+import { PromisePool } from '@supercharge/promise-pool'
+
+await PromisePool
+  .for(users)
+  .withTaskTimeout(2000) // milliseconds
+  .process(async (user, index, pool) => {
+    // processes the `user` data
+  })
+```
+
+```info
+**Notice:** a configured timeout is configured for each task, not for the whole pool. The example configures a 2-second timeout for each task in the pool.
+```
+
+
+### Correspond Source Items and Their Results
+- *added in version `2.4`*
+
+Sometimes you want the position of processed results to align with your source items. The resulting items should have the same position in the `results` array as their related source items in the source array.
+
+Use the `useCorrespondingResults` method to apply this behavior:
+
+```js
+import { setTimeout } from 'node:timers/promises'
+import { PromisePool } from '@supercharge/promise-pool'
+
+const { results } = await PromisePool
+  .for([1, 2, 3])
+  .withConcurrency(5)
+  .useCorrespondingResults()
+  .process(async (number, index) => {
+    const value = number * 2
+
+    return await setTimeout(10 - index, value)
+  })
+
+/**
+ * source array: [1, 2, 3]
+ * result array: [2, 4 ,6]
+ * --> result values match the position of their source items
+ */
+```
+
+For example, you have three items you want to process. Using corresponding results ensures that the processed result for the first item from the source array is located at the first position in the result array (at index `0`). The result for the second item from the source array is placed at the second position in the result array (at index `1`), and so on …
+
+
+#### Return Values When Using Corresponding Results
+The `results` array returned by the promise pool after processing has a mixed return type. Each returned item is one of this type:
+
+- the actual value type: for results that successfully finished processing
+- `Symbol('notRun')`: for tasks that didn’t run
+- `Symbol('failed')`: for tasks that failed processing
+
+The `PromisePool` exposes both symbols and you may access them using
+
+- `Symbol('notRun')`: exposed as `PromisePool.notRun`
+- `Symbol('failed')`: exposed as `PromisePool.failed`
+
+You may repeat processing for all tasks that didn’t run or failed:
+
+```js
+import { PromisePool } from '@supercharge/promise-pool'
+
+const { results, errors } = await PromisePool
+  .for([1, 2, 3])
+  .withConcurrency(5)
+  .useCorrespondingResults()
+  .process(async (number) => {
+    // …
+  })
+
+const itemsNotRun = results.filter(result => {
+  return result === PromisePool.notRun
+})
+
+const failedItems = results.filter(result => {
+  return result === PromisePool.failed
+})
+```
+
+When using corresponding results, you need to go through the `errors` array yourself. The default error handling (collect errors) stays the same and you can follow the described error handling section below.
 
 
 ## Error Handling
