@@ -52,7 +52,7 @@ const { results, errors } = await PromisePool
 
 This example outlines the creation and processing of a promise pool for a list of numbers.
 
-The return value for the promise pool is an object containing two properties: `results` and `errors`. The `resuls` property is a list of returned values from the `process` function. The `errors` property contains all errors thrown while running the processing callback. Find more details about errors in the [error handling section](#error-handling).
+The return value for the promise pool is an object containing two properties: `results` and `errors`. The `results` property is a list of returned values from the `process` function. The `errors` property contains all errors thrown while running the processing callback. Find more details about errors in the [error handling section](#error-handling).
 
 
 ### Customize the Concurrency
